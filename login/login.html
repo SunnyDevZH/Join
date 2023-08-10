@@ -21,16 +21,16 @@
         <div class="alignItems">
             <div class="loginContainer">
                 <h1>Log in</h1>
-                <div>
-                    <input type="text" placeholder="Email">
-                    <input type="text" placeholder="Password">
-                </div>
+                <form onsubmit="register(); return false;">
+                    <input required type="email" id="email" placeholder="Email">
+                    <input required type="password" id="password" placeholder="Password">
+                  </form>
                 <div>
                     <input type="checkbox" name="Remember" id="remember"><label for="remember">Remember me</label>
                     <a href="#">I forgot my password</a>
                 </div>
                 <div>
-                    <button>Log in</button>
+                    <button id="registerBtn">Log in</button>
                     <button>Guest Log in</button>
                 </div>
             </div>
