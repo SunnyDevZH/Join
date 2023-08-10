@@ -1,0 +1,33 @@
+let users = []; // Array Users
+
+
+async function init(){
+    loadUsers();
+}
+
+async function loadUsers(){ // User laden
+    try {
+        users = JSON.parse(await getItem('users')); // Items als json laden
+    } catch(e){
+        console.error('Loading error:', e); // Falls Users nicht gefunden
+    }
+}
+
+
+async function register() { // Registrieren
+    registerBtn.disabled = true; // Button aus
+    users.push({ // email und passwort in Array user pushen
+        email: email.value,
+        password: password.value,
+    });
+    await setItem('users', JSON.stringify(users)); // Daten von Users auf Server laden 
+    window.location.href = 'login.html?msg= Du hast dich erfolgreich registriert' // Weiterleitung zum Login
+    resetForm();
+    
+}
+
+function resetForm() {
+    email.value = ''; // Feld leeren
+    password.value = ''; // Feld leeren
+    registerBtn.disabled = false; // Button an
+}

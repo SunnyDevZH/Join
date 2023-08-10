@@ -17,18 +17,18 @@
         <div class="alignItems">
             <div class="signUpContainer">
                 <h1>Sign up</h1>
-                <div class="flexdirection">
+                <form class="flexdirection" onsubmit="register(); return false;"></form>
                     <input type="text" placeholder="Name">
-                    <input type="text" placeholder="Email">
-                    <input type="text" placeholder="Password">
+                    <input required type="email" id="email" placeholder="Email"> 
+                    <input required type="password" id="password" placeholder="Password">
                     <input type="text" placeholder="Confirm Password">
-                </div>
+                </form>
                 <div>
                     <input type="checkbox" name="Remember" id="remember"><label for="remember">I accept the</label>
                     <a href="#">Privacy policy</a>
                 </div>
                 <div>
-                    <button>Sign up</button>
+                    <button id="registerBtn">Sign up</button>
                 </div>
             </div>
         </div>

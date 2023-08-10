@@ -5,11 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
-    <script src="login.js"></script>
     <link rel="stylesheet" href="login.css">
     <link rel="shortcut icon" type="image/x-icon" href="/img/logo_favicon.png"> 
 </head>
-<body>
+<body onload="init()">
     <div class="background">
         <header class="loginHeader">
             <img src="/img/logo.svg" alt="Logo">
@@ -21,25 +20,27 @@
         <div class="alignItems">
             <div class="loginContainer">
                 <h1>Log in</h1>
-                <form onsubmit="register(); return false;">
-                    <input required type="email" id="email" placeholder="Email">
+                <form onsubmit="login(); return false;">
+                    <input required type="email" id="email" placeholder="Email"> 
                     <input required type="password" id="password" placeholder="Password">
-                  </form>
+                </form>
+                <div id="msgBox"></div>
                 <div>
                     <input type="checkbox" name="Remember" id="remember"><label for="remember">Remember me</label>
                     <a href="#">I forgot my password</a>
                 </div>
-                <div>
-                    <button id="registerBtn">Log in</button>
+                <form>
+                    <button>Log in</button>
                     <button>Guest Log in</button>
-                </div>
+                </form>
             </div>
         </div>
-        
         <footer>
             <p>Privacy Policy</p>
             <p>Legal notice</p>
         </footer>
     </div>
+    <script src="storage.js"></script>
+    <script src="register.js"></script>
 </body>
 </html>
