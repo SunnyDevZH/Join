@@ -7,25 +7,20 @@ body{
     padding: 30px; /* Welche Grösse? */
 }
 
-.displayFlex{
-    display: flex;
-}
-
-
 .alignItems{
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-.loginHeader{
+.signUpHeader{
     display: flex;
     justify-content: space-between;
     padding: 30px; /* Welche Grösse? */
     align-items: center;
 }
 
-.loginContainer{
+.signUpContainer{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,6 +32,15 @@ body{
     gap: 30px; /* Welche Grösse? */
     padding: 10px; /* Welche Grösse? */
 }
+
+.flexdirection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px; /* Welche Grösse? */
+}
+
 button{
     cursor: pointer;
     /* Design */
