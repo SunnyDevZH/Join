@@ -1,4 +1,4 @@
 git pull
 git add .
-git commite -m "$*"
+git commit -m "$*"
 git push

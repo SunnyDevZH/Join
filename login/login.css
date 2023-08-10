@@ -1,0 +1,52 @@
+body{
+    margin: 0;
+}
+.background{
+    background-color: rgb(246,247,248);
+    height: 100vh;
+    padding: 30px; /* Welche Grösse? */
+}
+
+.displayFlex{
+    display: flex;
+}
+
+
+.alignItems{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loginHeader{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px; /* Welche Grösse? */
+    align-items: center;
+}
+
+.loginContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(255,255,255);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; /* Welchen Style? */
+    border-radius: 30px;/* Welche Grösse? */
+    width: 400px; /* Welche Grösse? */
+    gap: 30px; /* Welche Grösse? */
+    padding: 10px; /* Welche Grösse? */
+}
+.loginFooter{
+    display: flex;
+    gap: 30px; /* Welche Grösse? */
+}
+button{
+    cursor: pointer;
+    /* Design */
+}
+footer{
+    display: flex;
+    justify-content: center;
+    padding: 10px; /* Welche Grösse? */
+}
