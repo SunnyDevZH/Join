@@ -1,0 +1,62 @@
+.input-table {
+    display: flex;
+    justify-content: center;
+}
+
+.left-column {
+    width: 50%;
+}
+
+.right-column {
+    width: 50%;
+}
+
+.line {
+    width: 0.5px;
+    background-color:  #888;
+}
+.input-form {
+    display: flex;
+    flex-direction: column; 
+    margin: 24px; 
+}
+input {
+    border-radius: 16px;
+    border: 1px solid lightgrey;
+    margin: 5px 0 5px 0;
+    border-radius: 10px;
+    padding: 13px 21px 13px 21px;
+}
+select {
+    border-radius: 16px;
+    border: 1px solid lightgrey;
+    margin: 5px 0 5px 0;
+    border-radius: 10px;
+    padding: 13px 21px 13px 21px; 
+}
+button {
+    background-color: white;
+    padding: 10px 10px 10px 10px;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    display: flex;
+    align-items: center;
+    width: 130px; 
+}
+.prio-buttons {
+    display: flex;
+    gap: 8px; 
+}
+.submit-buttons {
+    display: flex; 
+    justify-content: flex-end;
+    margin-top: 24px;
+    gap: 8px; 
+}
+textarea {
+    border-radius: 16px;
+    border: 1px solid lightgrey;
+    margin: 5px 0 5px 0;
+    border-radius: 10px;
+    padding: 10px 2px 40px 23px;
+}

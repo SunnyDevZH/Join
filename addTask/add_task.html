@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <script src="../script.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <script src="add_task.js"></script>
+    <link rel="stylesheet" href="add_task.css">
+</head>
+
+<body>
+    <h1>Add Task</h1>
+    <form>
+        <div class="input-table">
+            <div class="left-column">
+                <div class="input-form"><span>Title</span><input required placeholder="Enter a Title"></div>
+                <div class="input-form"><span>Description</span><textarea required placeholder="Enter a Description"></textarea></div>
+                <div class="input-form"><span>Assigned to</span>
+                    <select>
+                        <option>Select contacts to Assign</option>
+                        <option></option>
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="right-column">
+                <div class="input-form"><span>Due date</span><input required placeholder="dd/mm/yyyy"></div>
+                <div class="input-form"><span>Prio</span>
+                    <div class="prio-buttons">
+                        <button>URGENT<img src="../icons/priority_urgent.svg"></button>
+                        <button>MEDIUM<img src="../icons/priority_medium.svg"></button>
+                        <button>LOW<img src="../icons/priority_low.svg"></button>
+                    </div>
+                </div>
+                <div class="input-form"><span>Category</span>
+                    <select>
+                        <option>Select task category</option>
+                        <option>Marketing</option>
+                        <option>User Stories</option> class="input-form"
+                        <option>Technical Task</option>
+                    </select>
+                </div>
+                <div class="input-form"><span>Subtasks</span><input required placeholder="Add new subtask"></div>
+            </div>
+        </div>
+        <div class="submit-buttons"><button>Clear</button><button>Create Task</button></div>
+    </form>
+
+</body>
+
+</html>
