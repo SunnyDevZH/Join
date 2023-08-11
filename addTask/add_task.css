@@ -41,6 +41,7 @@ button {
     border: 1px solid lightgrey;
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 130px; 
 }
 .prio-buttons {
@@ -59,4 +60,14 @@ textarea {
     margin: 5px 0 5px 0;
     border-radius: 10px;
     padding: 10px 2px 40px 23px;
+}
+#calendar {
+    background-image: url('../icons/calendar.svg');
+    background-position: right center; 
+    background-repeat: no-repeat;
+}
+#subtask {
+    background-image: url('../icons/plus.svg');
+    background-position: right center; 
+    background-repeat: no-repeat; 
 }

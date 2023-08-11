@@ -17,7 +17,8 @@
         <div class="input-table">
             <div class="left-column">
                 <div class="input-form"><span>Title</span><input required placeholder="Enter a Title"></div>
-                <div class="input-form"><span>Description</span><textarea required placeholder="Enter a Description"></textarea></div>
+                <div class="input-form"><span>Description</span><textarea required
+                        placeholder="Enter a Description"></textarea></div>
                 <div class="input-form"><span>Assigned to</span>
                     <select>
                         <option>Select contacts to Assign</option>
@@ -28,7 +29,11 @@
             </div>
             <div class="line"></div>
             <div class="right-column">
-                <div class="input-form"><span>Due date</span><input required placeholder="dd/mm/yyyy"></div>
+                <div class="input-form"><span>Due date</span>
+                    <div>
+                        <input id="calendar" required placeholder="dd/mm/yyyy">
+                    </div>
+                </div>
                 <div class="input-form"><span>Prio</span>
                     <div class="prio-buttons">
                         <button>URGENT<img src="../icons/priority_urgent.svg"></button>
@@ -44,10 +49,13 @@
                         <option>Technical Task</option>
                     </select>
                 </div>
-                <div class="input-form"><span>Subtasks</span><input required placeholder="Add new subtask"></div>
+                <div class="input-form"><span>Subtasks</span><input id="subtask" required placeholder="Add new subtask">
+                </div>
             </div>
         </div>
-        <div class="submit-buttons"><button>Clear</button><button>Create Task</button></div>
+        <div class="submit-buttons"><button>Clear<img src="../icons/cross.svg"></button>
+            <button>Create Task<img src="../icons/correct.svg"></button>
+        </div>
     </form>
 
 </body>
