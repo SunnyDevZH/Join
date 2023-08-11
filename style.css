@@ -12,6 +12,29 @@ body {
 }
 
 #main-logo {
-  width: auto;
-  height: 30%;
+  position: absolute;
+
+  left: calc(100vw - 50% - 101px);
+  top: calc(100vh - 50% - 122px);
+  width: 202px;
+  height: 244px;
+
+  animation: logo-start 1.5s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+}
+
+@keyframes logo-start {
+  0% {
+    left: calc(100vw - 50% - 101px);
+    top: calc(100vh - 50% - 122px);
+    width: 202px;
+    height: 244px;
+  }
+  100% {
+    left: 50px;
+    top: 50px;
+    width: 101px;
+    height: 122px;
+  }
 }
