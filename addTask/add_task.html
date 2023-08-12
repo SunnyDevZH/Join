@@ -30,9 +30,7 @@
             <div class="line"></div>
             <div class="right-column">
                 <div class="input-form"><span>Due date</span>
-                    <div>
-                        <input id="calendar" required placeholder="dd/mm/yyyy">
-                    </div>
+                        <input type="date" id="calendar" required placeholder="dd/mm/yyyy">
                 </div>
                 <div class="input-form"><span>Prio</span>
                     <div class="prio-buttons">
@@ -45,11 +43,15 @@
                     <select>
                         <option>Select task category</option>
                         <option>Marketing</option>
-                        <option>User Stories</option> class="input-form"
+                        <option>User Stories</option> 
                         <option>Technical Task</option>
                     </select>
                 </div>
-                <div class="input-form"><span>Subtasks</span><input id="subtask" required placeholder="Add new subtask">
+                <div>
+                    <div class="input-form subtask"><span>Subtasks</span>
+                        <input id="subtask" required placeholder="Add new subtask">
+                        <img src="../icons/plus.svg">
+                    </div>
                 </div>
             </div>
         </div>
