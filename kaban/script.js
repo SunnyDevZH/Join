@@ -4,17 +4,20 @@ let todos = [
   {
     id: 0,
     title: "Aufgabe 1",
-    category: "col-01",
+    step: "col-01",
+    category: "User Story",
   },
   {
     id: 1,
     title: "Aufgabe 2",
-    category: "col-01",
+    step: "col-01",
+    category: "User Story",
   },
   {
     id: 2,
     title: "Aufgabe 3",
-    category: "col-01",
+    step: "col-01",
+    category: "Technical Task",
   },
 ];
 
@@ -25,16 +28,28 @@ function init() {
 }
 
 function updateHTML() {
-  let todo_list = todos.filter((t) => t["category"] == "col-01");
-  let progress_list = todos.filter((t) => t["category"] == "col-02");
-  let await_list = todos.filter((t) => t["category"] == "col-03");
-  let feedback_list = todos.filter((t) => t["category"] == "col-04");
+  let todo_list = todos.filter((t) => t["step"] == "col-01");
+  let progress_list = todos.filter((t) => t["step"] == "col-02");
+  let await_list = todos.filter((t) => t["step"] == "col-03");
+  let feedback_list = todos.filter((t) => t["step"] == "col-04");
 
   document.getElementById("col-01").innerHTML = "";
   document.getElementById("col-02").innerHTML = "";
   document.getElementById("col-03").innerHTML = "";
   document.getElementById("col-04").innerHTML = "";
 
+  if (todo_list.length == 0) {
+    document.getElementById("col-01").innerHTML = generateEmptyTodo();
+  }
+  if (progress_list.length == 0) {
+    document.getElementById("col-02").innerHTML = generateEmptyTodo();
+  }
+  if (await_list.length == 0) {
+    document.getElementById("col-03").innerHTML = generateEmptyTodo();
+  }
+  if (feedback_list.length == 0) {
+    document.getElementById("col-04").innerHTML = generateEmptyTodo();
+  }
   todo_list.forEach((todo) => {
     const element = todo;
     document.getElementById("col-01").innerHTML += generateTodo(element);
@@ -54,9 +69,30 @@ function updateHTML() {
 }
 
 function generateTodo(element) {
+  let categoryColor = "#d6d6d6";
+  if (element["category"] == "User Story") {
+    categoryColor = "#0038ff";
+  } else if (element["category"] == "Technical Task") {
+    categoryColor = "#1FD7C1";
+  }
+
   return `
   <div draggable='true' ondragstart='startDragging(${element["id"]})' class='todo'>
-  <h3>${element["title"]}</h3>
+    <div class="todo-category" style="background-color:${categoryColor}">${element["category"]}</div>
+    <div class="todo-title">${element["title"]}</div>
+    <div class="todo-content">Content</div>
+    <div class="todo-avatar-container">
+      <div class="todo-avatar" style="background-color: #ff7a00;">DS</div>  
+      <div class="todo-avatar" style="background-color: #9327FF">DS</div>  
+    </div>
+    </div>
+    `;
+}
+
+function generateEmptyTodo() {
+  return `
+  <div class='emptyTodo'>
+  <p>No Todos</p>
   </div>
     `;
 }
@@ -70,7 +106,7 @@ function allowDrop(ev) {
 }
 
 function moveTo(category) {
-  todos[currentDraggedElement]["category"] = category;
+  todos[currentDraggedElement]["step"] = category;
   updateHTML();
 }
 

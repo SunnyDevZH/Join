@@ -3,62 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="board.css" />
+    <link rel="stylesheet" href="../style.css" />
   </head>
   <body onload="init()">
-    <h1>Board Test</h1>
-
-    <div class="board">
-      <div class="col col-01">
-        <h2>To Do</h2>
-        <div
-          id="col-01"
-          class="todo-list"
-          ondrop="moveTo('col-01'); removeHighlight('col-01')"
-          ondragleave="removeHighlight('col-01')"
-          ondragover="allowDrop(event); highlight('col-01')"
-        >
-          <!-- todolist -->
-          <!-- <div draggable="true" ondragstart="startDragging()" class="todo">
-          <h3>User Story</h3>
-        </div> -->
+    <div id="kanban-board">
+      <h1>Board</h1>
+      <div class="board">
+        <div class="col col-01">
+          <h3>To Do</h3>
+          <div
+            id="col-01"
+            class="todo-list"
+            ondrop="moveTo('col-01'); removeHighlight('col-01')"
+            ondragleave="removeHighlight('col-01')"
+            ondragover="allowDrop(event); highlight('col-01')"
+          >
+            <!-- <div>
+              <p>title</p>
+            </div> -->
+          </div>
         </div>
-      </div>
-      <div class="col col-02">
-        <h2>In Progress</h2>
-        <div
-          id="col-02"
-          class="todo-list"
-          ondrop="moveTo('col-02'); removeHighlight('col-02')"
-          ondragleave="removeHighlight('col-02')"
-          ondragover="allowDrop(event); highlight('col-02')"
-        >
-          <!-- todolist -->
+        <div class="col col-02">
+          <h3>In Progress</h3>
+          <div
+            id="col-02"
+            class="todo-list"
+            ondrop="moveTo('col-02'); removeHighlight('col-02')"
+            ondragleave="removeHighlight('col-02')"
+            ondragover="allowDrop(event); highlight('col-02')"
+          >
+            <!-- todolist -->
+          </div>
         </div>
-      </div>
-      <div class="col col-03">
-        <h2>Await Feedback</h2>
-        <div
-          id="col-03"
-          class="todo-list"
-          ondrop="moveTo('col-03'); removeHighlight('col-03')"
-          ondragleave="removeHighlight('col-03')"
-          ondragover="allowDrop(event); highlight('col-03')"
-        >
-          <!-- todolist -->
+        <div class="col col-03">
+          <h3>Await Feedback</h3>
+          <div
+            id="col-03"
+            class="todo-list"
+            ondrop="moveTo('col-03'); removeHighlight('col-03')"
+            ondragleave="removeHighlight('col-03')"
+            ondragover="allowDrop(event); highlight('col-03')"
+          >
+            <!-- todolist -->
+          </div>
         </div>
-      </div>
-      <div class="col col-04">
-        <h2>Done</h2>
-        <div
-          id="col-04"
-          class="todo-list"
-          ondrop="moveTo('col-04'); removeHighlight('col-04')"
-          ondragleave="removeHighlight('col-04')"
-          ondragover="allowDrop(event); highlight('col-04')"
-        >
-          <!-- todolist -->
+        <div class="col col-04">
+          <h3>Done</h3>
+          <div
+            id="col-04"
+            class="todo-list"
+            ondrop="moveTo('col-04'); removeHighlight('col-04')"
+            ondragleave="removeHighlight('col-04')"
+            ondragover="allowDrop(event); highlight('col-04')"
+          >
+            <!-- todolist -->
+          </div>
         </div>
       </div>
     </div>
