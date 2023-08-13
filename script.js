@@ -1,5 +1,5 @@
 function init() {
-  setTimeout(renderLogin, 1500);
+  setTimeout(renderLogin, 1300);
 }
 
 function renderLogin() {

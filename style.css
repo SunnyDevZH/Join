@@ -67,9 +67,9 @@ h1 {
   width: 202px;
   height: 244px;
 
-  animation: logo-start 1.5s ease-in-out;
+  animation: logo-start 1s ease-in-out;
   animation-fill-mode: forwards;
-  animation-delay: 1s;
+  animation-delay: 0.5s;
 }
 
 @keyframes logo-start {
