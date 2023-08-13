@@ -16,9 +16,14 @@
     <form>
         <div class="input-table">
             <div class="left-column">
-                <div class="input-form"><span>Title</span><input required placeholder="Enter a Title"></div>
-                <div class="input-form"><span>Description</span><textarea required
-                        placeholder="Enter a Description"></textarea></div>
+                <div class="input-form">
+                    <span>Title</span>
+                    <input id="title" required placeholder="Enter a Title">
+                </div>
+                <div class="input-form">
+                    <span>Description</span>
+                    <textarea id="Description" required placeholder="Enter a Description"></textarea>
+                </div>
                 <div class="input-form"><span>Assigned to</span>
                     <select>
                         <option>Select contacts to Assign</option>
@@ -30,20 +35,20 @@
             <div class="line"></div>
             <div class="right-column">
                 <div class="input-form"><span>Due date</span>
-                        <input type="date" id="calendar" required placeholder="dd/mm/yyyy">
+                    <input type="date" id="calendar" required placeholder="dd/mm/yyyy">
                 </div>
                 <div class="input-form"><span>Prio</span>
                     <div class="prio-buttons">
-                        <button>URGENT<img src="../icons/priority_urgent.svg"></button>
-                        <button>MEDIUM<img src="../icons/priority_medium.svg"></button>
-                        <button>LOW<img src="../icons/priority_low.svg"></button>
+                        <button onclick="addPrio('urgent')">URGENT<img src="../icons/priority_urgent.svg"></button>
+                        <button onclick="addPrio('medium')">MEDIUM<img src="../icons/priority_medium.svg"></button>
+                        <button onclick="addPrio('low')">LOW<img src="../icons/priority_low.svg"></button>
                     </div>
                 </div>
                 <div class="input-form"><span>Category</span>
                     <select>
                         <option>Select task category</option>
                         <option>Marketing</option>
-                        <option>User Stories</option> 
+                        <option>User Stories</option>
                         <option>Technical Task</option>
                     </select>
                 </div>
@@ -56,7 +61,7 @@
             </div>
         </div>
         <div class="submit-buttons"><button>Clear<img src="../icons/cross.svg"></button>
-            <button>Create Task<img src="../icons/correct.svg"></button>
+            <button onclick="addTask()">Create Task<img src="../icons/correct.svg"></button>
         </div>
     </form>
 
