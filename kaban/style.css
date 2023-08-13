@@ -1,0 +1,52 @@
+h1 {
+  font-size: 24px;
+  color: blue;
+}
+
+.board {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 20%;
+  min-width: 200px;
+  min-height: 200px;
+
+  margin: 12px;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+
+  width: 90%;
+
+  padding: 12px;
+
+  background-color: aliceblue;
+  border: 2px solid black;
+}
+
+.col-highlight {
+  background-color: rgb(180, 255, 255);
+}
+
+.todo {
+  width: 65%;
+  min-height: 50px;
+
+  margin: 8px 0;
+  padding: 0 24px;
+
+  background-color: rgb(226, 226, 226);
+  border: 2px solid black;
+  border-radius: 16px;
+}
