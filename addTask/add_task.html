@@ -24,12 +24,12 @@
                     <span>Description</span>
                     <textarea id="Description" required placeholder="Enter a Description"></textarea>
                 </div>
-                <div class="input-form"><span>Assigned to</span>
-                    <select>
-                        <option>Select contacts to Assign</option>
-                        <option></option>
-                        <option></option>
-                    </select>
+                <div class="input-form">
+                    <span>Assigned to</span>
+                    <div class="input-with-button">
+                        <input placeholder="Select Contacts to Assign">
+                        <button><img src="../icons/dropdown.svg"></button>
+                    </div>
                 </div>
             </div>
             <div class="line"></div>
@@ -37,7 +37,8 @@
                 <div class="input-form"><span>Due date</span>
                     <input type="date" id="calendar" required placeholder="dd/mm/yyyy">
                 </div>
-                <div class="input-form"><span>Prio</span>
+                <div class="input-form">
+                    <span>Prio</span>
                     <div class="prio-buttons">
                         <button onclick="addPrio('urgent')">URGENT<img src="../icons/priority_urgent.svg"></button>
                         <button onclick="addPrio('medium')">MEDIUM<img src="../icons/priority_medium.svg"></button>
@@ -45,20 +46,24 @@
                     </div>
                 </div>
                 <div class="input-form"><span>Category</span>
-                    <select>
-                        <option>Select task category</option>
-                        <option>Marketing</option>
-                        <option>User Stories</option>
-                        <option>Technical Task</option>
-                    </select>
+                    <div class="input-with-button">
+                        <input id="categoryInput" placeholder="Select task category">
+                        <button onclick="renderCategories()"><img src="../icons/dropdown.svg"></button>
+                    </div>
+                    <div id="contentCategories" class="list d-none"></div>
                 </div>
                 <div>
-                    <div class="input-form subtask"><span>Subtasks</span>
-                        <input id="subtask" required placeholder="Add new subtask">
-                        <img src="../icons/plus.svg">
+                    <div class="input-form">
+                        <span>Subtasks</span>
+                        <div class="input-with-button">
+                            <input id="subtask" placeholder="Add new subtask">
+                            <button><img src="../icons/plus.svg"></button>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
         <div class="submit-buttons"><button>Clear<img src="../icons/cross.svg"></button>
             <button onclick="addTask()">Create Task<img src="../icons/correct.svg"></button>

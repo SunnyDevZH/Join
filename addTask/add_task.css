@@ -13,28 +13,32 @@
 
 .line {
     width: 0.5px;
-    background-color:  #888;
+    background-color: #888;
 }
+
 .input-form {
     display: flex;
-    flex-direction: column; 
-    margin: 24px; 
-    width: 300px; 
+    flex-direction: column;
+    margin: 24px;
+    width: 300px;
 }
+
 input {
     border: 1px solid lightgrey;
     margin: 5px 0 5px 0;
     border-radius: 10px;
     padding: 13px 21px 13px 21px;
-   
+
 }
+
 select {
     border-radius: 16px;
     border: 1px solid lightgrey;
     margin: 5px 0 5px 0;
     border-radius: 10px;
-    padding: 13px 21px 13px 21px; 
+    padding: 13px 21px 13px 21px;
 }
+
 button {
     background-color: white;
     padding: 10px 10px 10px 10px;
@@ -43,18 +47,26 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 130px; 
+    width: 130px;
 }
+
+button img {
+    width: 18px;
+    margin-left: 12px;
+}
+
 .prio-buttons {
     display: flex;
-    gap: 8px; 
+    gap: 8px;
 }
+
 .submit-buttons {
-    display: flex; 
+    display: flex;
     justify-content: flex-end;
     margin-top: 24px;
-    gap: 8px; 
+    gap: 8px;
 }
+
 textarea {
     border-radius: 16px;
     border: 1px solid lightgrey;
@@ -63,12 +75,53 @@ textarea {
     padding: 10px 2px 40px 23px;
 }
 
-.subtask img {
-    width: 18px; 
-    position: absolute;
-    top: 58%;
-    right: 5%;
+.input-with-button img {
+    width: 18px;
 }
-.marketing {
-    background-image: url('../icons/circle_orange.svg');
+
+.input-with-button {
+    display: flex;
+    align-items: center;
+}
+
+.input-with-button button {
+    border-left: white;
+    height: 43.6px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    justify-content: flex-end;
+}
+
+.input-with-button input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: white;
+}
+
+.list {
+    background-color: white;
+    margin-top: -13px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid lightgrey;
+    padding: 10px;
+    border-top: white;
+    font-size: 16px;
+}
+
+.option {
+    padding: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.d-none {
+    display: none;
+}
+
+img:hover {
+    cursor: pointer;
+}
+button:hover {
+    cursor: pointer;
 }
