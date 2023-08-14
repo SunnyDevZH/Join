@@ -30,8 +30,8 @@ function addTask() {
         'subtasks': assignedSubtasks,
     }
     allTasks.push(task);
-    saveTask(); 
-    
+    saveTask();
+
 }
 async function saveTask() {
     await setItem("allTasks", JSON.stringify(allTasks));
@@ -63,6 +63,13 @@ function clearAll() {
     description.value = '';
     date.value = '';
     subtask.value = '';
+    assignedPrio = [];
+    assignedCategory = '';
+    assignedCategoryColor ='';
+    assignedContacts = [];
+    let subtaskContent = document.getElementById('subtaskContent');
+    subtaskContent.innerHTML = ''; 
+    assignedSubtasks = [];
 }
 //**funtion to renderCategories onclick */
 function renderCategories() {
