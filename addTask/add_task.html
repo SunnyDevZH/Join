@@ -8,12 +8,14 @@
     <script src="../script.js"></script>
     <link rel="stylesheet" href="../style.css">
     <script src="add_task.js"></script>
+    <script src="../signUp/storage.js"></script>
     <link rel="stylesheet" href="add_task.css">
+
 </head>
 
 <body>
     <h1>Add Task</h1>
-    <form>
+    <form onsubmit="addTask(); return false">
         <div class="input-table">
             <div class="left-column">
                 <div class="input-form">
@@ -22,14 +24,15 @@
                 </div>
                 <div class="input-form">
                     <span>Description</span>
-                    <textarea id="Description" required placeholder="Enter a Description"></textarea>
+                    <textarea id="description" required placeholder="Enter a Description"></textarea>
                 </div>
                 <div class="input-form">
                     <span>Assigned to</span>
                     <div class="input-with-button">
-                        <input placeholder="Select Contacts to Assign">
-                        <button><img src="../icons/dropdown.svg"></button>
+                        <input disabled placeholder="Select Contacts to Assign">
+                        <button type="button" onclick="renderContactList()"><img src="../icons/dropdown.svg"></button>
                     </div>
+                    <div class="list d-none" id="contactList"></div>
                 </div>
             </div>
             <div class="line"></div>
@@ -40,33 +43,30 @@
                 <div class="input-form">
                     <span>Prio</span>
                     <div class="prio-buttons">
-                        <button onclick="addPrio('urgent')">URGENT<img src="../icons/priority_urgent.svg"></button>
-                        <button onclick="addPrio('medium')">MEDIUM<img src="../icons/priority_medium.svg"></button>
-                        <button onclick="addPrio('low')">LOW<img src="../icons/priority_low.svg"></button>
+                        <button type="button" onclick="addPrio('urgent')">URGENT<img src="../icons/priority_urgent.svg"></button>
+                        <button type="button" onclick="addPrio('medium')">MEDIUM<img src="../icons/priority_medium.svg"></button>
+                        <button type="button" onclick="addPrio('low')">LOW<img src="../icons/priority_low.svg"></button>
                     </div>
                 </div>
                 <div class="input-form"><span>Category</span>
                     <div class="input-with-button">
-                        <input id="categoryInput" placeholder="Select task category">
-                        <button onclick="renderCategories()"><img src="../icons/dropdown.svg"></button>
+                        <input id="categoryInput" disabled placeholder="Select task category">
+                        <button type="button" onclick="renderCategories()"><img src="../icons/dropdown.svg"></button>
                     </div>
                     <div id="contentCategories" class="list d-none"></div>
                 </div>
-                <div>
-                    <div class="input-form">
-                        <span>Subtasks</span>
-                        <div class="input-with-button">
-                            <input id="subtask" placeholder="Add new subtask">
-                            <button><img src="../icons/plus.svg"></button>
-                        </div>
+                <div class="input-form">
+                    <span>Subtasks</span>
+                    <div class="input-with-button">
+                        <input id="subtask" minlength="3" placeholder="Add new subtask">
+                        <button type="button" onclick="addSubtask()"><img src="../icons/plus.svg"></button>
                     </div>
+                    <div id="subtaskContent"></div>
                 </div>
             </div>
         </div>
-        </div>
-        </div>
-        <div class="submit-buttons"><button>Clear<img src="../icons/cross.svg"></button>
-            <button onclick="addTask()">Create Task<img src="../icons/correct.svg"></button>
+        <div class="submit-buttons"><button type="button">Clear<img src="../icons/cross.svg"></button>
+            <button type="submit">Create Task<img src="../icons/correct.svg"></button>
         </div>
     </form>
 

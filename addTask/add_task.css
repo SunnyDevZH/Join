@@ -96,6 +96,7 @@ textarea {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right: white;
+    background-color: white;
 }
 
 .list {
@@ -122,6 +123,11 @@ textarea {
 img:hover {
     cursor: pointer;
 }
+
 button:hover {
+    cursor: pointer;
+}
+
+.option:hover {
     cursor: pointer;
 }
