@@ -5,17 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo_favicon.png">
     <script src="../script.js"></script>
     <link rel="stylesheet" href="../style.css">
     <script src="add_task.js"></script>
     <script src="../signUp/storage.js"></script>
     <link rel="stylesheet" href="add_task.css">
+    <link rel="stylesheet" href="fonts.css">
 
 </head>
 
 <body onload="init()">
     <h1>Add Task</h1>
-    <form onsubmit="addTask(); return false">
+    <form onsubmit="addTask();return false">
         <div class="input-table">
             <div class="left-column">
                 <div class="input-form">
@@ -50,19 +52,24 @@
                         <button type="button" id="low" onclick="addPrio('low')">LOW
                             <img src="../icons/priority_low.svg"></button>
                     </div>
+                    <div id="priorityAlert"></div>
                 </div>
                 <div class="input-form"><span>Category</span>
                     <div class="input-with-button">
                         <input id="categoryInput" disabled placeholder="Select task category">
-                        <button type="button" onclick="renderCategories()"><img src="../icons/dropdown.svg"></button>
+                        <button type="button" onclick="renderCategories()">
+                            <img src="../icons/dropdown.svg"></button>
                     </div>
                     <div id="contentCategories" class="list d-none"></div>
+                    <div id="categoryAlert"></div>
                 </div>
+
                 <div class="input-form">
                     <span>Subtasks</span>
                     <div class="input-with-button">
                         <input id="subtask" minlength="3" placeholder="Add new subtask">
-                        <button id="addSubtaskButton" type="button" onclick="addSubtask()"><img src="../icons/plus.svg"></button>
+                        <button id="addSubtaskButton" type="button" onclick="addSubtask()">
+                            <img src="../icons/plus.svg"></button>
                     </div>
                     <div id="subtaskContent"></div>
                 </div>

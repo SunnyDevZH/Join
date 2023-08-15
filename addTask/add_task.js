@@ -2,6 +2,7 @@ let allTasks = [];
 let taskCategories = ['Marketing', 'User Stories', 'Technical Task'];
 let taskColors = ['#F3C774', '#5E3FD8', '#26AB6A'];
 let contacts = ['Hermine Granger', 'Harry Potter', 'Ron Weasley'];
+let contactColors = ['#17D264', '#3043F0', '#496F70'];
 let colors = [];
 
 let isClicked = false;
@@ -12,6 +13,7 @@ let assignedCategory;
 let assignedCategoryColor;
 let assignedContacts = [];
 let assignedSubtasks = [];
+let assignedContactColor = [];
 
 function init() {
     getNewDate();
@@ -19,13 +21,22 @@ function init() {
 
 //* function to get all values from all inputfields and to push it in an JSON, and then in an array
 function addTask() {
+
     let title = document.getElementById('title').value;
     let description = document.getElementById('description').value;
     let date = document.getElementById('calendar').value;
+    if (!requirePrio()) {
+        return; // Stops the function when the prio was not chosen
+    }
+    if (!requireCategory()) {
+        return;
+    }
     let task = {
+        'step': 'col-01',
         'title': title,
         'description': description,
         'assignedContact': assignedContacts,
+        'contactColor': assignedContactColor,
         'date': date,
         'prio': assignedPrio,
         'category': assignedCategory,
@@ -35,6 +46,31 @@ function addTask() {
     allTasks.push(task);
     saveTask();
 
+}
+//* checks if the Prio was chosen, if not there is an alert. 
+function requirePrio() {
+
+    let alertArea = document.getElementById('priorityAlert');
+    alertArea.classList.add('d-none');
+
+    if (assignedPrio.length === 0) {
+        alertArea.textContent = 'Please choose a Priority.';
+        alertArea.classList.remove('d-none');
+        return false;
+    }
+    return true;
+}
+//* checks if the Category was chosen, if not there is an alert
+function requireCategory() {
+    let alertArea = document.getElementById('categoryAlert');
+    alertArea.classList.add('d-none');
+
+    if (!assignedCategory) {
+        alertArea.textContent = 'Please choose a Category.';
+        alertArea.classList.remove('d-none');
+        return false;
+    }
+    return true;
 }
 //* saves the tasks to the server
 async function saveTask() {
@@ -47,6 +83,8 @@ function getNewDate() {
 }
 //* function to check which prio is clicked
 function addPrio(clickedTab) {
+    let alertArea = document.getElementById('priorityAlert');
+    alertArea.classList.add('d-none');
     let priority;
     let image;
     if (clickedTab === 'urgent') {
@@ -130,7 +168,8 @@ function renderContactList() {
         contactList.classList.remove('d-none');
         for (i = 0; i < contacts.length; i++) {
             let contact = contacts[i];
-            contactList.innerHTML += renderContactHTML(contact, i);
+            let contactColor = contactColors[i];
+            contactList.innerHTML += renderContactHTML(contact, contactColor, i);
         }
         isClicked2 = true;
     }
@@ -143,17 +182,17 @@ function renderContactList() {
 }
 //* choses the category and shows only this category in the Inputfield
 function chooseCategory(i) {
+    let alertArea = document.getElementById('categoryAlert');
+    alertArea.classList.add('d-none');
 
-    const categoryInput = document.getElementById('categoryInput');
     const selectedCategoryElement = document.getElementById(`category${i}`);
-
     const selectedCategory = selectedCategoryElement.innerText;
-    categoryInput.value = selectedCategory;
     const selectedColor = selectedCategoryElement.querySelector("circle").getAttribute("fill");
-    categoryInput.style.backgroundColor = selectedColor;
 
-    assignedCategory = selectedCategory;
-    assignedCategoryColor = selectedColor;
+    categoryInput.value = assignedCategory = selectedCategory;
+    categoryInput.style.backgroundColor = assignedCategoryColor = selectedColor;
+    categoryInput.style.color = 'white';
+    categoryInput.style.fontWeight = 'bold';
     hideCategoryList();
 }
 //* resets chosen category
@@ -175,15 +214,13 @@ function addContactToTask(i) {
     let chosenContact = document.getElementById(`contact${i}`);
     if (chosenContact.style.backgroundColor !== 'lightgrey') {
         chosenContact.style.backgroundColor = 'lightgrey';
-        let assignedContact = chosenContact.innerText;
-        assignedContacts.push(assignedContact);
-    } else if (chosenContact.style.backgroundColor === 'lightgrey') {
+        assignedContacts.push(chosenContact.innerText);
+    }
+    else {
         chosenContact.style.backgroundColor = 'white';
         let assignedContact = chosenContact.innerText;
         let index = assignedContacts.indexOf(assignedContact);
-        if (index > -1) {
-            assignedContacts.splice(index, 1);
-        }
+        if (index > -1) { assignedContacts.splice(index, 1); }
     }
 }
 //* resets the Contacts
@@ -192,6 +229,7 @@ function resetContact() {
     let contactList = document.getElementById('contactList');
     contactList.classList.add('d-none');
     assignedContacts = [];
+    assignedContactColor = [];
     let contacts = document.querySelectorAll('[id^="contact"]');
     contacts.forEach(contact => {
         contact.style.backgroundColor = 'white';
@@ -205,10 +243,10 @@ function addSubtask() {
     let addButton = document.getElementById('addSubtaskButton');
 
     if (newSubtaskValue.length < 3) {
-        addButton.disabled = true;
+        addButton.disabled;
     }
     else if (newSubtaskValue.length >= 3) {
-        addButton.disabled = false;
+        addButton.enabled;
         assignedSubtasks.push(newSubtaskValue)
         subtaskContent.innerHTML += `<div class="option">${newSubtaskValue}</div>`;
     }
@@ -249,8 +287,8 @@ function renderCategoryHTML(taskCategory, taskColor, i) {
             </div>
             </div>`;
 }
-function renderContactHTML(contact, i) {
+function renderContactHTML(contact, contactColor, i) {
     return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})"> 
-    ${contact}
+    ${contact}  ${renderSVG(contactColor)}
     </div>`
 }
