@@ -1,4 +1,7 @@
-/* basic styling */
+.testcontainer {
+  margin: 30px auto;
+  max-width: 800px;
+}
 
 /* inter-regular - latin */
 @font-face {
@@ -51,7 +54,7 @@ h1 {
 button {
   min-width: 80px;
 
-  padding: 10px;
+  padding: 8px 16px;
 
   border: 2px solid black;
   border-radius: 8px;
@@ -62,47 +65,25 @@ button {
   color: white;
 }
 
+.btn-black:hover {
+  background-color: white;
+  color: black;
+}
+
 .btn-light {
   background-color: white;
   color: black;
 }
 
-/* basic styling END */
-
-.start-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 100vh;
+.btn-light:hover {
+  background-color: black;
+  color: white;
 }
 
-/* Logo with animation */
+.container {
+  padding: 12px 24px;
 
-#main-logo {
-  position: absolute;
-
-  left: calc(100vw - 50% - 101px);
-  top: calc(100vh - 50% - 122px);
-  width: 202px;
-  height: 244px;
-
-  animation: logo-start 1s ease-in-out;
-  animation-fill-mode: forwards;
-  animation-delay: 0.5s;
-}
-
-@keyframes logo-start {
-  0% {
-    left: calc(100vw - 50% - 101px);
-    top: calc(100vh - 50% - 122px);
-    width: 202px;
-    height: 244px;
-  }
-  100% {
-    left: 50px;
-    top: 50px;
-    width: 101px;
-    height: 122px;
-  }
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
