@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body onload="init()">
     <h1>Add Task</h1>
     <form onsubmit="addTask(); return false">
         <div class="input-table">
@@ -43,9 +43,12 @@
                 <div class="input-form">
                     <span>Prio</span>
                     <div class="prio-buttons">
-                        <button type="button" onclick="addPrio('urgent')">URGENT<img src="../icons/priority_urgent.svg"></button>
-                        <button type="button" onclick="addPrio('medium')">MEDIUM<img src="../icons/priority_medium.svg"></button>
-                        <button type="button" onclick="addPrio('low')">LOW<img src="../icons/priority_low.svg"></button>
+                        <button type="button" id="urgent" onclick="addPrio('urgent')">URGENT
+                            <img src="../icons/priority_urgent.svg"></button>
+                        <button type="button" id="medium" onclick="addPrio('medium')">MEDIUM
+                            <img src="../icons/priority_medium.svg"></button>
+                        <button type="button" id="low" onclick="addPrio('low')">LOW
+                            <img src="../icons/priority_low.svg"></button>
                     </div>
                 </div>
                 <div class="input-form"><span>Category</span>
@@ -65,7 +68,8 @@
                 </div>
             </div>
         </div>
-        <div class="submit-buttons"><button onclick="clearAll()" type="button">Clear<img src="../icons/cross.svg"></button>
+        <div class="submit-buttons"><button onclick="clearAll()" type="button">Clear<img
+                    src="../icons/cross.svg"></button>
             <button type="submit">Create Task<img src="../icons/correct.svg"></button>
         </div>
     </form>
