@@ -202,7 +202,6 @@ function addSubtask() {
 
     let subtaskContent = document.getElementById('subtaskContent');
     let newSubtask = document.getElementById('subtask');
-
     let newSubtaskValue = newSubtask.value;
     assignedSubtasks.push(newSubtaskValue)
     subtaskContent.innerHTML += `<div class="option">${newSubtaskValue}</div>`;
