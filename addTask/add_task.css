@@ -73,6 +73,7 @@ textarea {
     margin: 5px 0 5px 0;
     border-radius: 10px;
     padding: 10px 2px 40px 23px;
+    font-family: "Inter", Helvetica, sans-serif;
 }
 
 .input-with-button img {
@@ -130,4 +131,10 @@ button:hover {
 
 .option:hover {
     cursor: pointer;
+}
+input::placeholder {
+    font-family: "Inter", Helvetica, sans-serif;
+}
+input {
+    font-family: "Inter", Helvetica, sans-serif;
 }
