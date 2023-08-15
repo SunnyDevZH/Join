@@ -199,12 +199,20 @@ function resetContact() {
 }
 //* this function adds subtasks to the mainTask and pushes it in the array
 function addSubtask() {
-
     let subtaskContent = document.getElementById('subtaskContent');
     let newSubtask = document.getElementById('subtask');
     let newSubtaskValue = newSubtask.value;
-    assignedSubtasks.push(newSubtaskValue)
-    subtaskContent.innerHTML += `<div class="option">${newSubtaskValue}</div>`;
+    let addButton = document.getElementById('addSubtaskButton');
+
+    if (newSubtaskValue.length < 3) {
+        addButton.disabled = true;
+    }
+    else if (newSubtaskValue.length >= 3) {
+        addButton.disabled = false;
+        assignedSubtasks.push(newSubtaskValue)
+        subtaskContent.innerHTML += `<div class="option">${newSubtaskValue}</div>`;
+    }
+
     newSubtask.value = '';
 }
 //* resets ALL Subtasks
