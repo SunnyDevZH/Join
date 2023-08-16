@@ -201,5 +201,40 @@ button {
   margin-top: 32px;
 }
 
-.nav-img {
+@media (max-width: 768px) {
+  .logo-menu {
+    display: none;
+  }
+  .nav-legal-notice {
+    display: none;
+  }
+
+  .sidebar {
+    top: auto;
+
+    flex-direction: row;
+
+    height: 80px;
+    width: 100%;
+
+    padding: 0px;
+    z-index: 90;
+  }
+
+  .menu-container {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    margin: 0px;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    padding: 8px 0;
+
+    height: 80px;
+  }
 }
