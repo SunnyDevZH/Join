@@ -60,6 +60,10 @@ button {
   border-radius: 8px;
 }
 
+input {
+  border-radius: 8px;
+}
+
 .btn-black {
   background-color: black;
   color: white;

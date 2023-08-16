@@ -24,10 +24,14 @@ function renderLogin() {
                 </div>
                 <div>
                     <button id="registerBtn">Log in</button>
-                    <button>Guest Log in</button>
+                    <button onclick="guestLogin()">Guest Log in</button>
                 </div>
             </div>
         </div>
     </div>
     `;
+}
+
+function guestLogin() {
+  window.location.href = "./summary.html";
 }
