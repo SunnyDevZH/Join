@@ -15,6 +15,9 @@ function init() {
 async function loadTodos() {
   let newTodos = await getItem("allTasks");
   todos = JSON.parse(newTodos);
+  for (let i = 0; i < todos.length; i++) {
+    todos[i].id = i;
+  }
   console.log(todos);
   updateHTML();
 }
@@ -84,15 +87,14 @@ function generateTodo(element) {
 function generateContacts(element) {
   let contactList = "";
   if (element["assignedContact"].length > 0) {
-    element["assignedContact"].forEach((contact) => {
-      let initials = contact.split(" ");
+    for (let i = 0; i < element["assignedContact"].length; i++) {
+      let initials = element["assignedContact"][i].split(" ");
       initials = initials[0][0] + initials[1][0];
-      let contactColor = "#ff7a00";
-      if (element[contactColor] != null) {
-        contactColor = element[contactColor];
-      }
-      contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; ">${initials}</div>`;
-    });
+      contactColor = element["contactColor"][i];
+      contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; left:${
+        i * 30
+      }px">${initials}</div>`;
+    }
     return contactList;
   } else {
     return `<div class="no-avatar" style="background-color: #FF4646;">No Contacts</div>`;

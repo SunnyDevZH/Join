@@ -28,18 +28,30 @@
           <p>Contacts</p>
         </a>
         <div class="nav-legal-notice">
-          <a class="nav-item" href="#">Privacy Policy</a>
-          <a class="nav-item" href="#">Legal Notice</a>
+          <a class="nav-item" href="./privacyPolicy.html">Privacy Policy</a>
+          <a class="nav-item" href="./legalNotice.html">Legal Notice</a>
         </div>
       </div>
     </nav>
 
     <div class="container">
       <div id="kanban-board">
-        <h1>Board</h1>
+        <div class="board-header">
+          <h1>Board</h1>
+          <div class="board-header-left">
+            <div class="searchbar">
+              <input type="text" placeholder="Find Task" />
+              <img class="btn-search" src="./icons/icon_search.svg" alt="" />
+            </div>
+            <button class="btn-black fs-24">Add Task +</button>
+          </div>
+        </div>
         <div class="board">
           <div class="col col-01">
-            <h3>To Do</h3>
+            <div class="col-header">
+              <h3>To Do</h3>
+              <img class="btn-add" src="./icons/plus.svg" alt="+" />
+            </div>
             <div
               id="col-01"
               class="todo-list"
@@ -53,7 +65,10 @@
             </div>
           </div>
           <div class="col col-02">
-            <h3>In Progress</h3>
+            <div class="col-header">
+              <h3>In Progress</h3>
+              <img class="btn-add" src="./icons/plus.svg" alt="+" />
+            </div>
             <div
               id="col-02"
               class="todo-list"
@@ -65,7 +80,10 @@
             </div>
           </div>
           <div class="col col-03">
-            <h3>Await Feedback</h3>
+            <div class="col-header">
+              <h3>Await Feedback</h3>
+              <img class="btn-add" src="./icons/plus.svg" alt="+" />
+            </div>
             <div
               id="col-03"
               class="todo-list"
@@ -77,7 +95,10 @@
             </div>
           </div>
           <div class="col col-04">
-            <h3>Done</h3>
+            <div class="col-header">
+              <h3>Done</h3>
+              <img class="btn-add" src="./icons/plus.svg" alt="+" />
+            </div>
             <div
               id="col-04"
               class="todo-list"
