@@ -14,33 +14,35 @@
             <img src="/img/logo.svg" alt="Logo">
             <div class="displayFlex">
                 <p>Not a Join user?</p>
-                <button>Sign Up</button>
+                <button onclick="window.location.href='../signUp/signUp.html'">Sign Up</button> 
             </div>
         </header>
         <div class="alignItems">
             <div class="loginContainer">
                 <h1>Log in</h1>
-                <form onsubmit="login(); return false;">
-                    <input required type="email" id="email" placeholder="Email"> 
-                    <input required type="password" id="password" placeholder="Password">
+                <form class="flexdirection" onsubmit="login(); return false;">
+                    <div>
+                        <input required type="email" id="email" placeholder="Email"> 
+                        <input required type="password" id="password" placeholder="Password">
+                    </div>
+                    <div>
+                        <input type="checkbox" name="Remember" id="remember"><label for="remember">Remember me</label>
+                        <a href="../forgotSend/forgotSend.html">I forgot my password</a>
+                    </div>
+                    <div>
+                        <button on>Log in</button>
+                        <button onclick="window.location.href= '../summary.html';">Guest Log in</button>
+                    </div>
                 </form>
-                <div id="msgBox"></div>
-                <div>
-                    <input type="checkbox" name="Remember" id="remember"><label for="remember">Remember me</label>
-                    <a href="#">I forgot my password</a>
-                </div>
-                <form>
-                    <button>Log in</button>
-                    <button>Guest Log in</button>
-                </form>
+                <div id="msgBox"></div> <!-- Falsches Passwort-->
             </div>
         </div>
         <footer>
-            <p>Privacy Policy</p>
-            <p>Legal notice</p>
+            <a href="../privacyPolicy.html">Privacy Policy</a>
+            <a href="../legalNotice.html">Legal notice</a>
         </footer>
     </div>
-    <script src="storage.js"></script>
-    <script src="register.js"></script>
+    <script src="../storage.js"></script>
+    <script src="../register.js"></script>
 </body>
 </html>
