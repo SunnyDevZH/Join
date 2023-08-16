@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
-    <script src="forgotSend.js"></script>
     <link rel="stylesheet" href="forgotSend.css">
     <link rel="shortcut icon" type="image/x-icon" href="/img/logo_favicon.png"> 
 </head>
@@ -14,18 +13,18 @@
         <header class="forgotSendHeader">
             <img src="/img/logo.svg" alt="Logo">
         </header>
-        <div class="alignItems">
+        <form class="alignItems">
             <div class="forgotSendContainer">
                 <h1>I forgot my password</h1>
                 <div class="flexdirection">
                     <p>Don't worry! We will send you an email with the instructions to reset your Password.</p>
-                    <input type="text" placeholder="Email" id="email">
+                    <input required type="email" placeholder="Email" id="email">
                 </div>
                 <div>
                     <button onclick="window.location.href= '../forgotSend/success.html';">Send me the email</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 </html>

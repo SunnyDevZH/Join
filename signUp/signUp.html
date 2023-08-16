@@ -5,8 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
+
     <script src="storage.js"></script>
     <script src="register.js"></script>
+
     <link rel="stylesheet" href="signUp.css">
     <link rel="shortcut icon" type="image/x-icon" href="/img/logo_favicon.png"> 
 </head>
@@ -18,11 +20,11 @@
         <div class="alignItems">
             <div class="signUpContainer">
                 <h1>Sign up</h1>
-                <form class="flexdirection" onsubmit="register(); return false;"></form>
+                <form class="flexdirection" onsubmit="register(); return false;">
                     <input type="text" placeholder="Name">
                     <input required type="email" id="email" placeholder="Email"> 
                     <input required type="password" id="password" placeholder="Password">
-                    <input type="text" placeholder="Confirm Password">
+                    <input required type="password" placeholder="Confirm Password">
                     <div>
                         <input type="checkbox" name="Remember" id="remember"><label for="remember">I accept the</label>
                         <a href="#">Privacy policy</a>
@@ -37,8 +39,8 @@
         </div>
         
         <footer>
-            <p>Privacy Policy</p>
-            <p>Legal notice</p>
+            <a href="../privacyPolicy.html">Privacy Policy</a>
+            <a href="../legalNotice.html">Legal notice</a>
         </footer>
     </div>
 </body>

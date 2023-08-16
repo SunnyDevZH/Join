@@ -5,28 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
+
     <script src="forgotReset.js"></script>
+    <script src="../signUp/storage.js"></script>
+    <script src="../signUp/register.js"></script>
+
     <link rel="stylesheet" href="forgotReset.css">
     <link rel="shortcut icon" type="image/x-icon" href="/img/logo_favicon.png"> 
+
 </head>
 <body>
     <div class="background">
         <header class="forgotResetHeader">
             <img src="/img/logo.svg" alt="Logo">
         </header>
-        <div class="alignItems">
-            <div class="forgotResetContainer">
-                <h1>Reset your password</h1>
-                <div class="flexdirection">
-                    <p>Change your accoount password</p>
-                    <input type="text" placeholder="New password">
-                    <input type="text" placeholder="Confirm password">
-                </div>
-                <div>
-                    <button>Continue</button>
+
+        <form class="flexdirection" onsubmit="newRegister(); return false;">
+            <div class="alignItems">
+                <div class="forgotResetContainer">
+                    <h1>Reset your password</h1>
+                    <div class="flexdirection">
+                        <p>Change your Accoount password</p>
+                        <input required type="password" id="password" placeholder="New password">
+                        <input required type="password" id="password" placeholder="Confirm password">
+                    </div>
+                    <div>
+                        <button onclick="window.location.href= '../login/login.html';">Continue</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 </html>
