@@ -1,5 +1,3 @@
-// drag and drop logic
-
 let todos = [
   {
     id: 0,
@@ -24,7 +22,18 @@ let todos = [
   },
 ];
 
+const icon_prio_low = "./icons/priority_low.svg";
+const icon_prio_med = "./icons/priority_medium.svg";
+const icon_prio_urg = "./icons/priority_urgent.svg";
+
 let currentDraggedElement;
+
+async function loadTodos() {
+  let newTodos = await getItem("allTasks");
+  todos = JSON.parse(newTodos);
+  console.log(todos);
+  updateHTML();
+}
 
 function init() {
   updateHTML();
@@ -105,13 +114,13 @@ function setCategoryColor(element) {
 // return the icon for the priority
 function setPriorityIcon(element) {
   if (element["priority"] == "low") {
-    return "../icons/priority_low.svg";
+    return icon_prio_low;
   } else if (element["priority"] == "medium") {
-    return "../icons/priority_medium.svg";
+    return icon_prio_med;
   } else if (element["priority"] == "urgent") {
-    return "../icons/priority_urgent.svg";
+    return icon_prio_urg;
   } else {
-    return "../icons/priority_medium.svg";
+    return icon_prio_med;
   }
 }
 
@@ -133,6 +142,7 @@ function allowDrop(ev) {
 
 function moveTo(category) {
   todos[currentDraggedElement]["step"] = category;
+
   updateHTML();
 }
 

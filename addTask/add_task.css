@@ -1,6 +1,7 @@
 body {
     font-family: "Inter", Helvetica, sans-serif;
 }
+
 .input-table {
     display: flex;
     justify-content: center;
@@ -51,7 +52,8 @@ button {
     align-items: center;
     justify-content: center;
     width: 130px;
-    font-family: "Inter", Helvetica, sans-serif;;
+    font-family: "Inter", Helvetica, sans-serif;
+    ;
 }
 
 button img {
@@ -82,13 +84,14 @@ textarea {
 
 .input-with-button img {
     width: 18px;
-    
+
 }
 
 .input-with-button {
     display: flex;
     align-items: center;
-   
+
+
 }
 
 .input-with-button button {
@@ -116,7 +119,8 @@ textarea {
     padding: 10px;
     border-top: white;
     font-size: 16px;
-    width: 94%; 
+    width: 94%;
+
 }
 
 .option {
@@ -140,9 +144,11 @@ button:hover {
 .option:hover {
     cursor: pointer;
 }
+
 input::placeholder {
     font-family: "Inter", Helvetica, sans-serif;
 }
+
 input {
     font-family: "Inter", Helvetica, sans-serif;
 }
