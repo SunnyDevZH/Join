@@ -10,6 +10,7 @@ async function loadUsers(){ // User laden
         users = JSON.parse(await getItem('users')); // Items als json laden
     } catch(e){
         console.error('Loading error:', e); // Falls Users nicht gefunden
+        alert('Benutzer nicht gefunden')
     }
 }
 

@@ -37,6 +37,15 @@ body{
     gap: 30px; /* Welche Grösse? */
     padding: 10px; /* Welche Grösse? */
 }
+
+.flexdirection {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 30px; /* Welche Grösse? */
+}
+
 button{
     cursor: pointer;
     /* Design */
