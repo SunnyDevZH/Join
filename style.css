@@ -63,12 +63,14 @@ button {
   cursor: pointer;
 }
 
-.btn-black {
+.btn-black,
+.btn-light:hover {
   background-color: #2a3647;
   color: white;
 }
 
-.btn-light {
+.btn-light,
+.btn-black:hover {
   background-color: white;
   color: #2a3647;
 }
