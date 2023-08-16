@@ -1,7 +1,60 @@
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.board-header-left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.searchbar {
+  display: flex;
+  align-items: center;
+
+  width: 260px;
+  height: 40px;
+
+  margin: 10px 0;
+}
+
+.searchbar input {
+  margin-right: -40px;
+
+  padding: 0 12px;
+
+  height: 40px;
+
+  border-radius: 12px;
+  font-size: 18px;
+}
+
+.btn-search {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
 .board {
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
+}
+
+.col-header {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.btn-add {
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  filter: drop-shadow(0 0 8px black);
 }
 
 .col {
@@ -99,7 +152,8 @@
 }
 
 .todo-avatar-container {
-  display: relative;
+  position: relative;
+  display: flex;
 }
 
 .todo-avatar {
