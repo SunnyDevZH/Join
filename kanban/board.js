@@ -1,6 +1,3 @@
-const STORAGE_TOKEN = "dhe983uguehtuwhe5tnenh";
-const STORAGE_URL = "https://remote-storage.developerakademie.org/item";
-
 let todos = [
   {
     id: 0,
@@ -30,6 +27,13 @@ const icon_prio_med = "./icons/priority_medium.svg";
 const icon_prio_urg = "./icons/priority_urgent.svg";
 
 let currentDraggedElement;
+
+async function loadTodos() {
+  let newTodos = await getItem("allTasks");
+  todos = JSON.parse(newTodos);
+  console.log(todos);
+  updateHTML();
+}
 
 function init() {
   updateHTML();
