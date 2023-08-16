@@ -11,7 +11,9 @@ let assignedPrio = [];
 let assignedCategory;
 let assignedCategoryColor;
 let assignedContacts = [];
+let assignedContactColor = [];
 let assignedSubtasks = [];
+let assignedSubtasksCheckbox = [];
 
 
 async function init() {
@@ -84,6 +86,7 @@ async function load() {
     try {
         taskCategories = JSON.parse(await getItem("taskCategories"));
         taskColors = JSON.parse(await getItem("taskColors"));
+        allTasks = JSON.parse(await getItem("allTasks"));
     } catch (e) {
         console.error("Loading error:", e);
     }
@@ -267,7 +270,8 @@ function addContactToTask(i) {
         chosenContact.style.backgroundColor = 'lightgrey';
         let contact = chosenContact.innerText;
         let contactColor = contactColors[i];
-        assignedContacts.push({ contact, contactColor });
+        assignedContacts.push(contact)
+        assignedContactColor.push(contactColor);
     }
     else {
         chosenContact.style.backgroundColor = 'white';
