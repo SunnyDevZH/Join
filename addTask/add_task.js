@@ -3,7 +3,6 @@ let taskCategories = ['Marketing', 'User Stories', 'Technical Task'];
 let taskColors = ['#F3C774', '#5E3FD8', '#26AB6A'];
 let contacts = ['Hermine Granger', 'Harry Potter', 'Ron Weasley'];
 let contactColors = ['#17D264', '#3043F0', '#496F70'];
-let colors = [];
 
 let isClicked = false;
 let isClicked2 = false;
@@ -13,10 +12,11 @@ let assignedCategory;
 let assignedCategoryColor;
 let assignedContacts = [];
 let assignedSubtasks = [];
-let assignedContactColor = [];
 
-function init() {
+
+async function init() {
     getNewDate();
+    await load();
 }
 
 //* function to get all values from all inputfields and to push it in an JSON, and then in an array
@@ -75,6 +75,18 @@ function requireCategory() {
 //* saves the tasks to the server
 async function saveTask() {
     await setItem("allTasks", JSON.stringify(allTasks));
+}
+async function saveCategory() {
+    await setItem('taskCategories', JSON.stringify(taskCategories));
+    await setItem('taskColors', JSON.stringify(taskColors));
+}
+async function load() {
+    try {
+        taskCategories = JSON.parse(await getItem("taskCategories"));
+        taskColors = JSON.parse(await getItem("taskColors"));
+    } catch (e) {
+        console.error("Loading error:", e);
+    }
 }
 //* gets the date of today, so the user cannot chose previous dates
 function getNewDate() {
@@ -143,6 +155,7 @@ function renderCategories() {
     let contentList = document.getElementById('contentCategories');
     if (isClicked == false) {
         contentList.classList.remove('d-none');
+        contentList.innerHTML += renderNewCategoryHTML();
         for (i = 0; i < taskCategories.length; i++) {
             let taskCategory = taskCategories[i];
             let taskColor = taskColors[i];
@@ -155,6 +168,44 @@ function renderCategories() {
         contentList.innerHTML = '';
         isClicked = false;
     }
+}
+function addNewCategory() {
+    let input = document.getElementById('categoryInput');
+    let addButton = document.getElementById('addCategoryButton');
+    addButton.classList.add('d-none');
+    let addNewButton = document.getElementById('addNewCategoryButton');
+    addNewButton.classList.remove('d-none');
+    input.disabled = false;
+    resetCategory();
+    input.placeholder = 'Add New Category';
+    input.style.color = 'black';
+    hideCategoryList();
+}
+function pushNewCategory() {
+    let input = document.getElementById('categoryInput');
+    let newInput = input.value;
+    newInput = newInput.charAt(0).toUpperCase() + newInput.slice(1);
+    let newColor = getRandomColor();
+    if (newInput.length >= 3 && !taskCategories.includes(newInput)) {
+        taskCategories.push(newInput);
+        taskColors.push(newColor);
+        resetCategoryInput();
+        saveCategory();
+    }
+    else {
+        resetCategoryInput();
+        let alert = document.getElementById('categoryAlert');
+        alert.innerHTML = 'Please add new Category';
+    }
+
+}
+function resetCategoryInput() {
+    let input = document.getElementById('categoryInput');
+    document.getElementById('addCategoryButton').classList.remove('d-none');
+    document.getElementById('addNewCategoryButton').classList.add('d-none');
+    input.value = '';
+    input.disabled = true;
+    input.placeholder = 'Select Task Category';
 }
 //* hides the categoryList if a category is chosen
 function hideCategoryList() {
@@ -178,7 +229,6 @@ function renderContactList() {
         contactList.innerHTML = '';
         isClicked2 = false;
     }
-
 }
 //* choses the category and shows only this category in the Inputfield
 function chooseCategory(i) {
@@ -194,6 +244,7 @@ function chooseCategory(i) {
     categoryInput.style.color = 'white';
     categoryInput.style.fontWeight = 'bold';
     hideCategoryList();
+    document.getElementById('categoryAlert').classList.add('d-none');
 }
 //* resets chosen category
 function resetCategory() {
@@ -214,12 +265,14 @@ function addContactToTask(i) {
     let chosenContact = document.getElementById(`contact${i}`);
     if (chosenContact.style.backgroundColor !== 'lightgrey') {
         chosenContact.style.backgroundColor = 'lightgrey';
-        assignedContacts.push(chosenContact.innerText);
+        let contact = chosenContact.innerText;
+        let contactColor = contactColors[i];
+        assignedContacts.push({ contact, contactColor });
     }
     else {
         chosenContact.style.backgroundColor = 'white';
         let assignedContact = chosenContact.innerText;
-        let index = assignedContacts.indexOf(assignedContact);
+        let index = assignedContacts.findIndex(obj => obj.contact === assignedContact);
         if (index > -1) { assignedContacts.splice(index, 1); }
     }
 }
@@ -229,7 +282,6 @@ function resetContact() {
     let contactList = document.getElementById('contactList');
     contactList.classList.add('d-none');
     assignedContacts = [];
-    assignedContactColor = [];
     let contacts = document.querySelectorAll('[id^="contact"]');
     contacts.forEach(contact => {
         contact.style.backgroundColor = 'white';
@@ -247,12 +299,27 @@ function addSubtask() {
     }
     else if (newSubtaskValue.length >= 3) {
         addButton.enabled;
-        assignedSubtasks.push(newSubtaskValue)
-        subtaskContent.innerHTML += `<div class="option">${newSubtaskValue}</div>`;
+        let subtaskObj = {
+            value: newSubtaskValue,
+            imageSrc: '../icons/checkbutton_default.svg'
+        };
+        assignedSubtasks.push(subtaskObj);
+        subtaskContent.innerHTML += renderSubtaskHTML(subtaskObj, assignedSubtasks.length - 1);
     }
 
     newSubtask.value = '';
 }
+function checkSubtask(i) {
+    let checkbox = document.getElementById(`subtaskImage${i}`);
+    if (checkbox.src.includes('checkbutton_checked')) {
+        checkbox.src = '../icons/checkbutton_default.svg';
+        assignedSubtasks[i].imageSrc = '../icons/checkbutton_default.svg';
+    } else {
+        checkbox.src = '../icons/checkbutton_checked.svg';
+        assignedSubtasks[i].imageSrc = '../icons/checkbutton_checked.svg';
+    }
+}
+
 //* resets ALL Subtasks
 function resetSubtasks() {
     let subtaskContent = document.getElementById('subtaskContent');
@@ -268,19 +335,14 @@ function getRandomColor() {
     }
     return color;
 }
-//** function to get a colorCode */
-function getColors() {
-    for (i = 0; i < 10; i++) {
-        let color = getRandomColor();
-        colors.push(color);
-    }
-}
 function renderSVG(taskColor) {
     return `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
     <circle cx="10" cy="10.5" r="9" fill="${taskColor}" stroke="white" stroke-width="2"></circle>
     </svg>`
 }
-
+function renderNewCategoryHTML() {
+    return `<div class="option" id="newCategory" onclick="addNewCategory()">Add New Category</div>`;
+}
 function renderCategoryHTML(taskCategory, taskColor, i) {
     return `<div class="option">
             <div id="category${i}" onclick="chooseCategory(${i})">${taskCategory} ${renderSVG(taskColor)}
@@ -291,4 +353,9 @@ function renderContactHTML(contact, contactColor, i) {
     return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})"> 
     ${contact}  ${renderSVG(contactColor)}
     </div>`
+}
+function renderSubtaskHTML(subtaskObj, i) {
+    return `<div class="option">${subtaskObj.value} 
+    <img id="subtaskImage${i}" onclick="checkSubtask(${i})" src="${subtaskObj.imageSrc}">
+    </div>`;
 }

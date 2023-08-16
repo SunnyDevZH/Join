@@ -57,8 +57,11 @@
                 <div class="input-form"><span>Category</span>
                     <div class="input-with-button">
                         <input id="categoryInput" disabled placeholder="Select task category">
-                        <button type="button" onclick="renderCategories()">
+                        <button id="addCategoryButton" type="button" onclick="renderCategories()">
                             <img src="../icons/dropdown.svg"></button>
+                        <button id="addNewCategoryButton" class="d-none" type="button" onclick="pushNewCategory()">
+                            <img src="../icons/correct.svg">
+                        </button>
                     </div>
                     <div id="contentCategories" class="list d-none"></div>
                     <div id="categoryAlert"></div>
