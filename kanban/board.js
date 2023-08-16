@@ -1,26 +1,5 @@
-let todos = [
-  {
-    id: 0,
-    title: "Aufgabe 1",
-    step: "col-01",
-    category: "User Story",
-    priority: "low",
-  },
-  {
-    id: 1,
-    title: "Aufgabe 2",
-    step: "col-01",
-    category: "User Story",
-    priority: "medium",
-  },
-  {
-    id: 2,
-    title: "Aufgabe 3",
-    step: "col-01",
-    category: "Technical Task",
-    priority: "urgent",
-  },
-];
+// for testing
+let todos = [];
 
 const icon_prio_low = "./icons/priority_low.svg";
 const icon_prio_med = "./icons/priority_medium.svg";
@@ -28,14 +7,15 @@ const icon_prio_urg = "./icons/priority_urgent.svg";
 
 let currentDraggedElement;
 
+function init() {
+  loadTodos();
+  updateHTML();
+}
+
 async function loadTodos() {
   let newTodos = await getItem("allTasks");
   todos = JSON.parse(newTodos);
   console.log(todos);
-  updateHTML();
-}
-
-function init() {
   updateHTML();
 }
 
@@ -81,47 +61,50 @@ function updateHTML() {
 }
 
 function generateTodo(element) {
-  let categoryColor = setCategoryColor(element);
-  let priorityIcon = setPriorityIcon(element);
-
   return `
-  <div draggable='true' ondragstart='startDragging(${element["id"]})' class='todo'>
-    <div class="todo-category" style="background-color:${categoryColor}">${element["category"]}</div>
+  <div draggable='true' ondragstart='startDragging(${
+    element["id"]
+  })' class='todo'>
+    <div class="todo-category" style="background-color:${
+      element["categoryColor"]
+    }">${element["category"]}</div>
     <div class="todo-title">${element["title"]}</div>
-    <div class="todo-content">Content</div>
+    <div class="todo-content">${element["description"]}</div>
+    ${generateSubtasks()}
     <div class="todo-footer">
       <div class="todo-avatar-container">
-        <div class="todo-avatar" style="background-color: #ff7a00;">DS</div>  
-        <div class="todo-avatar" style="background-color: #9327FF">DS</div>  
+      ${generateContacts(element)}
       </div>
-      <img src="${priorityIcon}">
+      <img src="${element["prio"][1]}">
     </div>
   </div>
     `;
 }
 
-// return the color for the category
-function setCategoryColor(element) {
-  if (element["category"] == "User Story") {
-    return "#0038ff";
-  } else if (element["category"] == "Technical Task") {
-    return "#1FD7C1";
+function generateContacts(element) {
+  let contactList = "";
+  if (element["assignedContact"].length > 0) {
+    element["assignedContact"].forEach((contact) => {
+      let initials = contact.split(" ");
+      initials = initials[0][0] + initials[1][0];
+      let contactColor = "#ff7a00";
+      if (element[contactColor] != null) {
+        contactColor = element[contactColor];
+      }
+      contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; ">${initials}</div>`;
+    });
+    return contactList;
   } else {
-    return "#d6d6d6";
+    return `<div class="no-avatar" style="background-color: #FF4646;">No Contacts</div>`;
   }
 }
 
-// return the icon for the priority
-function setPriorityIcon(element) {
-  if (element["priority"] == "low") {
-    return icon_prio_low;
-  } else if (element["priority"] == "medium") {
-    return icon_prio_med;
-  } else if (element["priority"] == "urgent") {
-    return icon_prio_urg;
-  } else {
-    return icon_prio_med;
-  }
+function generateSubtasks() {
+  return `<div class="todo-subtasks">
+  <div class="status-bar">
+    <div class="status-progress"></div>
+  </div>
+  1/2 Subtasks</div>`;
 }
 
 function generateEmptyTodo() {
