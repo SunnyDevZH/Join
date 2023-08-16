@@ -6,7 +6,7 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/inter-v12-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("./fonts/inter-v12-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* inter-600 - latin */
@@ -15,7 +15,7 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
-  src: url("../fonts/inter-v12-latin-600.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("./fonts/inter-v12-latin-600.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* inter-900 - latin */
@@ -24,7 +24,7 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 900;
-  src: url("../fonts/inter-v12-latin-900.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("./fonts/inter-v12-latin-900.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 body {
@@ -105,4 +105,85 @@ button {
     width: 101px;
     height: 122px;
   }
+}
+
+.container {
+  margin-left: 230px;
+  padding: 30px;
+}
+
+/* Summary */
+
+.sidebar {
+  box-sizing: border-box;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 230px;
+
+  background-color: #2a3647;
+}
+
+.logo-menu {
+  padding-top: 50px;
+  padding-left: 50px;
+
+  width: 101px;
+  height: 122px;
+
+  color: white;
+}
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 15px;
+
+  margin-top: 80px;
+  padding: 0;
+
+  width: 100%;
+}
+
+.nav-item {
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+
+  padding: 12px 24px;
+
+  width: 100%;
+
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background-color: #0919317c;
+}
+
+.nav-item:focus {
+  background-color: #091931;
+}
+
+.nav-legal-notice {
+  width: 100%;
+
+  margin-top: 32px;
+}
+
+.nav-img {
 }

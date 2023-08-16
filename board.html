@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="./kanban/board.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body onload="init()">
+    <nav class="sidebar">
+      <img class="logo-menu" src="./img/logo_light.svg" alt="JOIN" />
+      <div class="menu-container">
+        <a class="nav-item" href="./summary.html">
+          <img src="./icons/icons_summary.svg" alt="Summary" />
+          <p>Summary</p>
+        </a>
+        <a class="nav-item" href="./board.html">
+          <img src="./icons/icons_board.svg" alt="Board" />
+          <p>Board</p>
+        </a>
+        <a class="nav-item" href="./addTask/add_task.html">
+          <img src="./icons/icons_add_task.svg" alt="Add Task" />
+          <p>Add Task</p>
+        </a>
+        <a class="nav-item" href="./contacts.html">
+          <img src="./icons/icons_contacts.svg" alt="Contacts" />
+          <p>Contacts</p>
+        </a>
+        <div class="nav-legal-notice">
+          <a class="nav-item" href="#">Privacy Policy</a>
+          <a class="nav-item" href="#">Legal Notice</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div id="kanban-board">
+        <h1>Board</h1>
+        <div class="board">
+          <div class="col col-01">
+            <h3>To Do</h3>
+            <div
+              id="col-01"
+              class="todo-list"
+              ondrop="moveTo('col-01'); removeHighlight('col-01')"
+              ondragleave="removeHighlight('col-01')"
+              ondragover="allowDrop(event); highlight('col-01')"
+            >
+              <!-- <div>
+                <p>title</p>
+              </div> -->
+            </div>
+          </div>
+          <div class="col col-02">
+            <h3>In Progress</h3>
+            <div
+              id="col-02"
+              class="todo-list"
+              ondrop="moveTo('col-02'); removeHighlight('col-02')"
+              ondragleave="removeHighlight('col-02')"
+              ondragover="allowDrop(event); highlight('col-02')"
+            >
+              <!-- todolist -->
+            </div>
+          </div>
+          <div class="col col-03">
+            <h3>Await Feedback</h3>
+            <div
+              id="col-03"
+              class="todo-list"
+              ondrop="moveTo('col-03'); removeHighlight('col-03')"
+              ondragleave="removeHighlight('col-03')"
+              ondragover="allowDrop(event); highlight('col-03')"
+            >
+              <!-- todolist -->
+            </div>
+          </div>
+          <div class="col col-04">
+            <h3>Done</h3>
+            <div
+              id="col-04"
+              class="todo-list"
+              ondrop="moveTo('col-04'); removeHighlight('col-04')"
+              ondragleave="removeHighlight('col-04')"
+              ondragover="allowDrop(event); highlight('col-04')"
+            >
+              <!-- todolist -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./kanban/board.js"></script>
+  </body>
+</html>
