@@ -42,7 +42,7 @@ function generateTodo(element) {
   return `
   <div draggable='true' ondragstart='startDragging(${
     element["id"]
-  })' class='todo'>
+  })' class='todo' onclick="openOverlay()">
     <div class="todo-category" style="background-color:${
       element["categoryColor"]
     }">${element["category"]}</div>
@@ -115,3 +115,15 @@ function removeHighlight(id) {
 }
 
 // drag and drop logic END
+
+// overlay logic
+
+function openOverlay() {
+  document.getElementById("overlay-container").classList.remove("d-none");
+}
+
+function closeOverlay() {
+  document.getElementById("overlay-container").classList.add("d-none");
+}
+
+// overlay logic END
