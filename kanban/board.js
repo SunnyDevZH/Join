@@ -23,44 +23,19 @@ async function loadTodos() {
 }
 
 function updateHTML() {
-  let todo_list = todos.filter((t) => t["step"] == "col-01");
-  let progress_list = todos.filter((t) => t["step"] == "col-02");
-  let await_list = todos.filter((t) => t["step"] == "col-03");
-  let feedback_list = todos.filter((t) => t["step"] == "col-04");
+  let col = [];
 
-  document.getElementById("col-01").innerHTML = "";
-  document.getElementById("col-02").innerHTML = "";
-  document.getElementById("col-03").innerHTML = "";
-  document.getElementById("col-04").innerHTML = "";
-
-  if (todo_list.length == 0) {
-    document.getElementById("col-01").innerHTML = generateEmptyTodo();
+  for (let i = 1; i <= 4; i++) {
+    col[i - 1] = todos.filter((t) => t["step"] == "col-0" + i);
+    document.getElementById("col-0" + i).innerHTML = "";
+    if (col[i - 1].length == 0) {
+      document.getElementById("col-0" + i).innerHTML = generateEmptyTodo();
+    }
+    col[i - 1].forEach((todo) => {
+      const element = todo;
+      document.getElementById("col-0" + i).innerHTML += generateTodo(element);
+    });
   }
-  if (progress_list.length == 0) {
-    document.getElementById("col-02").innerHTML = generateEmptyTodo();
-  }
-  if (await_list.length == 0) {
-    document.getElementById("col-03").innerHTML = generateEmptyTodo();
-  }
-  if (feedback_list.length == 0) {
-    document.getElementById("col-04").innerHTML = generateEmptyTodo();
-  }
-  todo_list.forEach((todo) => {
-    const element = todo;
-    document.getElementById("col-01").innerHTML += generateTodo(element);
-  });
-  progress_list.forEach((todo) => {
-    const element = todo;
-    document.getElementById("col-02").innerHTML += generateTodo(element);
-  });
-  await_list.forEach((todo) => {
-    const element = todo;
-    document.getElementById("col-03").innerHTML += generateTodo(element);
-  });
-  feedback_list.forEach((todo) => {
-    const element = todo;
-    document.getElementById("col-04").innerHTML += generateTodo(element);
-  });
 }
 
 function generateTodo(element) {
