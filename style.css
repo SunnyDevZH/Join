@@ -36,6 +36,10 @@ body {
   font-size: 18px;
 }
 
+a {
+  text-decoration: none;
+}
+
 h1,
 h2,
 h3,
@@ -64,6 +68,10 @@ button {
   cursor: pointer;
 }
 
+.container {
+  padding: 32px;
+}
+
 .btn-black,
 .btn-light:hover {
   background-color: #2a3647;
@@ -73,6 +81,16 @@ button {
 .btn-light,
 .btn-black:hover {
   background-color: white;
+  color: #2a3647;
+}
+
+.btn-black a,
+.btn-light:hover a {
+  color: white;
+}
+
+.btn-light a,
+.btn-black:hover a {
   color: #2a3647;
 }
 
@@ -160,8 +178,6 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
-
-  min-height: 480px;
 
   margin-top: 32px;
 }
