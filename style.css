@@ -81,7 +81,15 @@ button {
 }
 
 .fs-32 {
-  font-size: 24px;
+  font-size: 32px;
+}
+
+.fs-48 {
+  font-size: 48px;
+}
+
+.fs-b {
+  font-weight: 600;
 }
 
 .d-none {
@@ -129,6 +137,69 @@ button {
 }
 
 /* Summary */
+
+.sum-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.sum-title {
+  margin-right: 20px;
+  padding-right: 20px;
+
+  border-right: 4px solid #29abe2;
+}
+
+.sum-main {
+  display: flex;
+  gap: 48px;
+}
+
+.sum-tasks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  margin-top: 32px;
+}
+
+.sum-task-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+
+  height: 100px;
+  width: 100px;
+
+  padding: 24px;
+
+  background-color: white;
+  border-radius: 24px;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+}
+
+.sum-task-container:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.sum-greeting {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sum-name {
+  color: #29abe2;
+  font-size: 48px;
+  font-weight: 600;
+}
+
+/* sidebar */
 
 .sidebar {
   box-sizing: border-box;
@@ -200,6 +271,8 @@ button {
 
   margin-top: 32px;
 }
+
+/* sidebar END */
 
 @media (max-width: 768px) {
   body {
