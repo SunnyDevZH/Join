@@ -13,7 +13,6 @@ let assignedCategoryColor;
 let assignedContacts = [];
 let assignedContactColor = [];
 let assignedSubtasks = [];
-let assignedSubtasksCheckbox = [];
 
 
 async function init() {
@@ -309,7 +308,8 @@ function addSubtask() {
         addButton.enabled;
         let subtaskObj = {
             value: newSubtaskValue,
-            imageSrc: '../icons/checkbutton_default.svg'
+            imageSrc: '../icons/checkbutton_default.svg',
+            status: false
         };
         assignedSubtasks.push(subtaskObj);
         subtaskContent.innerHTML += renderSubtaskHTML(subtaskObj, assignedSubtasks.length - 1);
@@ -322,9 +322,11 @@ function checkSubtask(i) {
     if (checkbox.src.includes('checkbutton_checked')) {
         checkbox.src = '../icons/checkbutton_default.svg';
         assignedSubtasks[i].imageSrc = '../icons/checkbutton_default.svg';
+        assignedSubtasks[i].status = false;
     } else {
         checkbox.src = '../icons/checkbutton_checked.svg';
         assignedSubtasks[i].imageSrc = '../icons/checkbutton_checked.svg';
+        assignedSubtasks[i].status = true;
     }
 }
 
