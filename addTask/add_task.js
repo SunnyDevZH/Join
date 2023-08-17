@@ -22,7 +22,7 @@ async function init() {
 }
 
 //* function to get all values from all inputfields and to push it in an JSON, and then in an array
-function addTask() {
+async function addTask() {
 
     let title = document.getElementById('title').value;
     let description = document.getElementById('description').value;
@@ -46,7 +46,9 @@ function addTask() {
         'subtasks': assignedSubtasks,
     }
     allTasks.push(task);
-    saveTask();
+    await saveTask();
+    clearAll();
+    window.location.href = "../board.html";
 
 }
 //* checks if the Prio was chosen, if not there is an alert. 
@@ -266,10 +268,10 @@ function resetCategory() {
 //adds the chosen contacts to the task and sets a highlight to the background
 function addContactToTask(i) {
     let chosenContact = document.getElementById(`contact${i}`);
-
+    let contact = chosenContact.innerText;
     if (chosenContact.style.backgroundColor !== 'lightgrey') {
         chosenContact.style.backgroundColor = 'lightgrey';
-        let contact = chosenContact.innerText;
+
         let contactColor = contactColors[i];
         if (!assignedContacts.includes(contact)) {
             assignedContacts.push(contact)
@@ -278,8 +280,7 @@ function addContactToTask(i) {
     }
     else {
         chosenContact.style.backgroundColor = 'white';
-        let assignedContact = chosenContact.innerText;
-        let index = assignedContacts.indexOf(assignedContact);
+        let index = assignedContacts.indexOf(contact);
         if (index > -1) { assignedContacts.splice(index, 1); }
     }
 }
