@@ -266,17 +266,20 @@ function resetCategory() {
 //adds the chosen contacts to the task and sets a highlight to the background
 function addContactToTask(i) {
     let chosenContact = document.getElementById(`contact${i}`);
+
     if (chosenContact.style.backgroundColor !== 'lightgrey') {
         chosenContact.style.backgroundColor = 'lightgrey';
         let contact = chosenContact.innerText;
         let contactColor = contactColors[i];
-        assignedContacts.push(contact)
-        assignedContactColor.push(contactColor);
+        if (!assignedContacts.includes(contact)) {
+            assignedContacts.push(contact)
+            assignedContactColor.push(contactColor);
+        }
     }
     else {
         chosenContact.style.backgroundColor = 'white';
         let assignedContact = chosenContact.innerText;
-        let index = assignedContacts.findIndex(obj => obj.contact === assignedContact);
+        let index = assignedContacts.indexOf(assignedContact);
         if (index > -1) { assignedContacts.splice(index, 1); }
     }
 }
