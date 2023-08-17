@@ -154,6 +154,8 @@
 .todo-avatar-container {
   position: relative;
   display: flex;
+
+  z-index: 10;
 }
 
 .todo-avatar {
@@ -221,6 +223,8 @@
 
   width: 100%;
   height: 100%;
+
+  z-index: 120;
 }
 
 .overlay-background {
