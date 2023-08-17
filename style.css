@@ -153,13 +153,15 @@ button {
 
 .sum-main {
   display: flex;
-  gap: 48px;
+  gap: 64px;
 }
 
 .sum-tasks {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+
+  min-height: 480px;
 
   margin-top: 32px;
 }
@@ -169,10 +171,8 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
 
-  height: 100px;
-  width: 100px;
+  height: 80px;
 
   padding: 24px;
 
