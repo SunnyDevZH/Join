@@ -84,9 +84,6 @@
   padding: 12px;
 
   border-radius: 24px;
-
-  /* background-color: aliceblue;
-  border: 2px solid black; */
 }
 
 .col-highlight {
@@ -204,3 +201,61 @@
   height: 10px;
   background-color: #4589ff;
 }
+
+/* status bar END */
+
+/* overlay container */
+
+#overlay-container {
+  width: 100vw;
+
+  z-index: 100;
+}
+
+.overlay-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+.overlay-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+  z-index: 900;
+}
+
+.main-card {
+  width: 80%;
+  min-height: 500px;
+
+  padding: 24px 32px;
+
+  background-color: #fff;
+  border-radius: 32px;
+
+  z-index: 999;
+}
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-close {
+  cursor: pointer;
+}
+
+/* overlay container END */

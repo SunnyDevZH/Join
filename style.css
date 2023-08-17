@@ -84,6 +84,10 @@ button {
   font-size: 24px;
 }
 
+.d-none {
+  display: none;
+}
+
 /* basic styling END */
 
 .start-page {
