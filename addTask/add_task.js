@@ -268,10 +268,9 @@ function resetCategory() {
 function addContactToTask(i) {
     let chosenContact = document.getElementById(`contact${i}`);
     let contact = chosenContact.innerText;
+    let contactColor = contactColors[i];
     if (chosenContact.style.backgroundColor !== 'lightgrey') {
         chosenContact.style.backgroundColor = 'lightgrey';
-
-        let contactColor = contactColors[i];
         if (!assignedContacts.includes(contact)) {
             assignedContacts.push(contact)
             assignedContactColor.push(contactColor);
@@ -280,7 +279,11 @@ function addContactToTask(i) {
     else {
         chosenContact.style.backgroundColor = 'white';
         let index = assignedContacts.indexOf(contact);
-        if (index > -1) { assignedContacts.splice(index, 1); }
+        let colorIndex = assignedContactColor.indexOf(contactColor);
+        if (index > -1 || colorIndex > -1) { 
+            assignedContacts.splice(index, 1);
+            assignedContactColor.splice(colorIndex, 1) 
+        }
     }
 }
 //* resets the Contacts
