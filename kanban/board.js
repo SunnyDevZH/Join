@@ -48,7 +48,7 @@ function generateTodo(element) {
     }">${element["category"]}</div>
     <div class="todo-title">${element["title"]}</div>
     <div class="todo-content">${element["description"]}</div>
-    ${generateSubtasks()}
+    ${generateSubtasks(element)}
     <div class="todo-footer">
       <div class="todo-avatar-container">
       ${generateContacts(element)}
@@ -76,12 +76,18 @@ function generateContacts(element) {
   }
 }
 
-function generateSubtasks() {
-  return `<div class="todo-subtasks">
-  <div class="status-bar">
-    <div class="status-progress"></div>
-  </div>
-  1/2 Subtasks</div>`;
+function generateSubtasks(element) {
+  if (element["subtasks"].length > 0) {
+    let finishedTasks = 0;
+    let progress = (100 / element["subtasks"].length) * finishedTasks;
+    return `<div class="todo-subtasks">
+    <div class="status-bar">
+      <div class="status-progress" style="width: ${progress}"></div>
+    </div>
+    ${finishedTasks}/${element["subtasks"].length} Subtasks</div>`;
+  } else {
+    return "";
+  }
 }
 
 function generateEmptyTodo() {
@@ -102,8 +108,8 @@ function allowDrop(ev) {
 
 function moveTo(category) {
   todos[currentDraggedElement]["step"] = category;
-
   updateHTML();
+  saveBoard();
 }
 
 function highlight(id) {
@@ -112,6 +118,10 @@ function highlight(id) {
 
 function removeHighlight(id) {
   document.getElementById(id).classList.remove("col-highlight");
+}
+
+async function saveBoard() {
+  await setItem("allTasks", JSON.stringify(todos));
 }
 
 // drag and drop logic END

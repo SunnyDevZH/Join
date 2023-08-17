@@ -130,6 +130,20 @@ button {
 
 /* Summary */
 
+.summary-header {
+  display: flex;
+  align-items: center;
+}
+
+.summary-title {
+  margin-right: 20px;
+  padding-right: 20px;
+
+  border-right: 4px solid #29abe2;
+}
+
+/* sidebar */
+
 .sidebar {
   box-sizing: border-box;
 
@@ -200,6 +214,8 @@ button {
 
   margin-top: 32px;
 }
+
+/* sidebar END */
 
 @media (max-width: 768px) {
   body {
