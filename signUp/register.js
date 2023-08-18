@@ -10,7 +10,7 @@ async function loadUsers(){ // User laden
         users = JSON.parse(await getItem('users')); // Items als json laden
     } catch(e){
         console.error('Loading error:', e); // Falls Users nicht gefunden
-        alert('Benutzer nicht gefunden')
+        alert('User nicht gefunden')
     }
 }
 
@@ -22,7 +22,7 @@ async function register() { // Registrieren
         password: password.value,
     });
     await setItem('users', JSON.stringify(users)); // Daten von Users auf Server laden 
-    window.location.href = 'login.html?msg= Du hast dich erfolgreich registriert' // Weiterleitung zum Login
+    window.location.href = '../login/login.html?msg= Du hast dich erfolgreich registriert' // Weiterleitung zum Login
     resetForm();
     
 }

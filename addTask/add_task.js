@@ -13,7 +13,6 @@ let assignedCategoryColor;
 let assignedContacts = [];
 let assignedContactColor = [];
 let assignedSubtasks = [];
-let assignedSubtasksCheckbox = [];
 
 
 async function init() {
@@ -22,7 +21,7 @@ async function init() {
 }
 
 //* function to get all values from all inputfields and to push it in an JSON, and then in an array
-function addTask() {
+async function addTask() {
 
     let title = document.getElementById('title').value;
     let description = document.getElementById('description').value;
@@ -46,7 +45,9 @@ function addTask() {
         'subtasks': assignedSubtasks,
     }
     allTasks.push(task);
-    saveTask();
+    await saveTask();
+    clearAll();
+    window.location.href = "../board.html";
 
 }
 //* checks if the Prio was chosen, if not there is an alert. 
@@ -266,18 +267,23 @@ function resetCategory() {
 //adds the chosen contacts to the task and sets a highlight to the background
 function addContactToTask(i) {
     let chosenContact = document.getElementById(`contact${i}`);
+    let contact = chosenContact.innerText;
+    let contactColor = contactColors[i];
     if (chosenContact.style.backgroundColor !== 'lightgrey') {
         chosenContact.style.backgroundColor = 'lightgrey';
-        let contact = chosenContact.innerText;
-        let contactColor = contactColors[i];
-        assignedContacts.push(contact)
-        assignedContactColor.push(contactColor);
+        if (!assignedContacts.includes(contact)) {
+            assignedContacts.push(contact)
+            assignedContactColor.push(contactColor);
+        }
     }
     else {
         chosenContact.style.backgroundColor = 'white';
-        let assignedContact = chosenContact.innerText;
-        let index = assignedContacts.findIndex(obj => obj.contact === assignedContact);
-        if (index > -1) { assignedContacts.splice(index, 1); }
+        let index = assignedContacts.indexOf(contact);
+        let colorIndex = assignedContactColor.indexOf(contactColor);
+        if (index > -1 || colorIndex > -1) { 
+            assignedContacts.splice(index, 1);
+            assignedContactColor.splice(colorIndex, 1) 
+        }
     }
 }
 //* resets the Contacts
@@ -305,7 +311,8 @@ function addSubtask() {
         addButton.enabled;
         let subtaskObj = {
             value: newSubtaskValue,
-            imageSrc: '../icons/checkbutton_default.svg'
+            imageSrc: '../icons/checkbutton_default.svg',
+            status: false
         };
         assignedSubtasks.push(subtaskObj);
         subtaskContent.innerHTML += renderSubtaskHTML(subtaskObj, assignedSubtasks.length - 1);
@@ -318,9 +325,11 @@ function checkSubtask(i) {
     if (checkbox.src.includes('checkbutton_checked')) {
         checkbox.src = '../icons/checkbutton_default.svg';
         assignedSubtasks[i].imageSrc = '../icons/checkbutton_default.svg';
+        assignedSubtasks[i].status = false;
     } else {
         checkbox.src = '../icons/checkbutton_checked.svg';
         assignedSubtasks[i].imageSrc = '../icons/checkbutton_checked.svg';
+        assignedSubtasks[i].status = true;
     }
 }
 

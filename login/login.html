@@ -7,6 +7,11 @@
     <title>Join</title>
     <link rel="stylesheet" href="login.css">
     <link rel="shortcut icon" type="image/x-icon" href="/img/logo_favicon.png"> 
+
+    <script src="../signUp/storage.js"></script>
+    <script src="../signUp/register.js"></script>
+    <script src="login.js"></script>
+    
 </head>
 <body onload="init()">
     <div class="background">
@@ -26,7 +31,7 @@
                         <input required type="password" id="password" placeholder="Password">
                     </div>
                     <div>
-                        <input type="checkbox" name="Remember" id="remember"><label for="remember">Remember me</label>
+                        <input type="checkbox" onclick="save()" name="Remember" id="remember"><label for="remember">Remember me</label>
                         <a href="../forgotSend/forgotSend.html">I forgot my password</a>
                     </div>
                     <div>
@@ -42,7 +47,5 @@
             <a href="../legalNotice.html">Legal notice</a>
         </footer>
     </div>
-    <script src="../storage.js"></script>
-    <script src="../register.js"></script>
 </body>
 </html>
