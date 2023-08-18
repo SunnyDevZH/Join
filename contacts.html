@@ -8,15 +8,17 @@
     <link rel="icon" type="image/x-icon" href="./img/logo_favicon.png" />
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
+  <body onload="load()">
     <div w3-include-html="navbar.html"></div>
 
     <div class="container">
       <h1>Conacts</h1>
+      <button onclick="window.location.href= './contactForm.html';">Add new contact +</button>
       <div class="myposts" id="myposts"></div>
     
     </div>
-
+    <script src="./contacts.js"></script>
     <script src="./js/include.js"></script>
+    
   </body>
 </html>

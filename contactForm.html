@@ -6,20 +6,32 @@
     <title>Contacts</title>
 
     <link rel="icon" type="image/x-icon" href="./img/logo_favicon.png" />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./contact.css"/>
   </head>
-  <body onload="load()">
-    <div w3-include-html="navbar.html"></div>
-
+  <body>
     <div class="container">
-      <h1>Conacts</h1>
-      <div class="notebox">
-        <input id="thema" placeholder="Thema" type="text" />
-        <textarea placeholder="Deine Notiz" name="" id="notiz" cols="30" rows="10"></textarea>
-        <button onclick="addNotiz()">Speichern</button>
-      </div>
+        <h1>
+            Add contact
+            
+        </h1>
+        <div class="displayflex">
+            <div>
+                <img src="" alt="X">
+            </div>
+            <div class="input">
+                <div class="input">
+                    <input id="thema" placeholder="Name" type="text" />
+                    <input id="thema" placeholder="Email" type="text" />
+                    <input id="thema" placeholder="Phone" type="text" />
+                </div>
+                <div>
+                    <button onclick="window.location.href= './contacts.html';">Cancel X</button>
+                    <button onclick="addNotiz()">Create contact</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script src="./js/include.js"></script>
+    <script src="./contacts.js"></script>
   </body>
 </html>
