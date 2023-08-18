@@ -8,13 +8,16 @@
     <link rel="icon" type="image/x-icon" href="./img/logo_favicon.png" />
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
+  <body onload="load()">
     <div w3-include-html="navbar.html"></div>
 
     <div class="container">
       <h1>Conacts</h1>
-      <div class="myposts" id="myposts"></div>
-    
+      <div class="notebox">
+        <input id="thema" placeholder="Thema" type="text" />
+        <textarea placeholder="Deine Notiz" name="" id="notiz" cols="30" rows="10"></textarea>
+        <button onclick="addNotiz()">Speichern</button>
+      </div>
     </div>
 
     <script src="./js/include.js"></script>

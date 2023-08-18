@@ -1,0 +1,88 @@
+h1{
+    display: flex;
+    justify-content: center;
+}
+h2 {
+    display: flex;
+    justify-content: center;
+
+}
+.headline{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.options{
+    display: flex;
+    flex-direction: column;
+}
+.notebox{
+    width: 400px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    
+
+}  
+input {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-style: none;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    text-align: center;
+    
+}
+textarea{
+    background-color: rgba(0, 0, 0, 0.1);
+    border-style: none;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    
+}
+.links{
+    text-decoration: none;
+    text-align: center;
+    margin: 10px;
+    color: black;
+    border-width: 1px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 40px;
+    width: 100px;
+}
+.links:hover {
+    box-shadow: 10px 20px 15px silver;
+}
+button{
+    border-style: none;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    height: 50px;
+    
+}
+.post{
+    display: flex;
+    justify-content: center;
+    width: 250px;
+    height: 150px;
+    padding: 8px;
+    background-color: rgb(252, 234, 115);
+    border-radius: 10px;
+    margin-right: 5px;
+    margin-left: 30px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.myposts{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 30px;
+}
+.text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
