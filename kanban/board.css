@@ -247,7 +247,7 @@
 
   background-color: #fff;
   border-radius: 32px;
-
+  gap: 12px;
   z-index: 999;
 }
 
@@ -258,6 +258,7 @@
 
 .btn-close {
   cursor: pointer;
+
 }
 
 /* overlay container END */
