@@ -8,31 +8,7 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body onload="init()">
-    <nav class="sidebar">
-      <img class="logo-menu" src="./img/logo_light.svg" alt="JOIN" />
-      <div class="menu-container">
-        <a class="nav-item" href="./summary.html">
-          <img src="./icons/icons_summary.svg" alt="Summary" />
-          <p>Summary</p>
-        </a>
-        <a class="nav-item" href="./board.html">
-          <img src="./icons/icons_board.svg" alt="Board" />
-          <p>Board</p>
-        </a>
-        <a class="nav-item" href="./addTask/add_task.html">
-          <img src="./icons/icons_add_task.svg" alt="Add Task" />
-          <p>Add Task</p>
-        </a>
-        <a class="nav-item" href="./contacts.html">
-          <img src="./icons/icons_contacts.svg" alt="Contacts" />
-          <p>Contacts</p>
-        </a>
-        <div class="nav-legal-notice">
-          <a class="nav-item" href="./privacyPolicy.html">Privacy Policy</a>
-          <a class="nav-item" href="./legalNotice.html">Legal Notice</a>
-        </div>
-      </div>
-    </nav>
+    <div w3-include-html="navbar.html"></div>
 
     <div id="overlay-container" class="d-none">
       <div class="overlay-card">
@@ -132,5 +108,6 @@
 
     <script src="./kanban/board.js"></script>
     <script src="./signUp/storage.js"></script>
+    <script src="./js/include.js"></script>
   </body>
 </html>
