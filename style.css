@@ -334,3 +334,67 @@ button {
     font-size: 16px;
   }
 }
+/* CSS for Detail */
+.detail-buttons button {
+  border-color: white !important;
+  padding: 0;
+  background-color: white;
+}
+
+.detail-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.height {
+  height: 40px;
+}
+
+.contact-circle {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detailContact {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  margin: 8px;
+}
+
+.detailSubtask {
+  margin: 8px;
+}
+
+.width {
+  width: 40%;
+}
+
+.detail-close {
+  display: flex;
+  justify-content: flex-end;
+}
+.violett {
+  color: rgb(103 70 154) !important; 
+}
+.margin-top {
+  margin-top: 8px; 
+}
+.detailAlign {
+  display: flex; 
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 8px; 
+}
+.line {
+  width: 0.5px;
+  background-color: #888;
+}

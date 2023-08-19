@@ -1,35 +1,30 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kanban Board</title>
-    <link rel="stylesheet" href="./kanban/board.css" />
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body onload="init()">
-    <div w3-include-html="navbar.html"></div>
 
-    <div id="overlay-container" class="d-none">
-      <div class="overlay-card">
-        <div class="overlay-background" onclick="closeOverlay()"></div>
-        <div class="main-card">
-          <div class="top-nav">
-            <h2>Edit Task</h2>
-            <img
-              class="btn-close"
-              src="./icons/icon_cross.svg"
-              alt=""
-              onclick="closeOverlay()"
-            />            
-          </div>        
-          <!-- Content here -->        
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kanban Board</title>
+  <link rel="stylesheet" href="./kanban/board.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body onload="init()">
+  <div w3-include-html="navbar.html"></div>
+
+  <div id="overlay-container" class="d-none">
+    <div class="overlay-card">
+      <div class="overlay-background" onclick="closeOverlay()"></div>
+      <div class="main-card">
+        <div class="detail-close"><img class="btn-close" src="./icons/icon_cross.svg" alt="" onclick="closeOverlay()" />
         </div>
+        <div id="showDetailTask"></div>
       </div>
     </div>
+  </div>
 
-    <div class="container">
+
+  <div class="container">
     <div id="kanban-board">
       <div class="board-header">
         <h1>Board</h1>
@@ -47,13 +42,8 @@
             <h3>To Do</h3>
             <img class="btn-add" src="./icons/plus.svg" alt="+" />
           </div>
-          <div
-            id="col-01"
-            class="todo-list"
-            ondrop="moveTo('col-01'); removeHighlight('col-01')"
-            ondragleave="removeHighlight('col-01')"
-            ondragover="allowDrop(event); highlight('col-01')"
-          >
+          <div id="col-01" class="todo-list" ondrop="moveTo('col-01'); removeHighlight('col-01')"
+            ondragleave="removeHighlight('col-01')" ondragover="allowDrop(event); highlight('col-01')">
             <!-- <div>
                 <p>title</p>
               </div> -->
@@ -64,13 +54,8 @@
             <h3>In Progress</h3>
             <img class="btn-add" src="./icons/plus.svg" alt="+" />
           </div>
-          <div
-            id="col-02"
-            class="todo-list"
-            ondrop="moveTo('col-02'); removeHighlight('col-02')"
-            ondragleave="removeHighlight('col-02')"
-            ondragover="allowDrop(event); highlight('col-02')"
-          >
+          <div id="col-02" class="todo-list" ondrop="moveTo('col-02'); removeHighlight('col-02')"
+            ondragleave="removeHighlight('col-02')" ondragover="allowDrop(event); highlight('col-02')">
             <!-- todolist -->
           </div>
         </div>
@@ -79,13 +64,8 @@
             <h3>Await Feedback</h3>
             <img class="btn-add" src="./icons/plus.svg" alt="+" />
           </div>
-          <div
-            id="col-03"
-            class="todo-list"
-            ondrop="moveTo('col-03'); removeHighlight('col-03')"
-            ondragleave="removeHighlight('col-03')"
-            ondragover="allowDrop(event); highlight('col-03')"
-          >
+          <div id="col-03" class="todo-list" ondrop="moveTo('col-03'); removeHighlight('col-03')"
+            ondragleave="removeHighlight('col-03')" ondragover="allowDrop(event); highlight('col-03')">
             <!-- todolist -->
           </div>
         </div>
@@ -94,13 +74,8 @@
             <h3>Done</h3>
             <img class="btn-add" src="./icons/plus.svg" alt="+" />
           </div>
-          <div
-            id="col-04"
-            class="todo-list"
-            ondrop="moveTo('col-04'); removeHighlight('col-04')"
-            ondragleave="removeHighlight('col-04')"
-            ondragover="allowDrop(event); highlight('col-04')"
-          >
+          <div id="col-04" class="todo-list" ondrop="moveTo('col-04'); removeHighlight('col-04')"
+            ondragleave="removeHighlight('col-04')" ondragover="allowDrop(event); highlight('col-04')">
             <!-- todolist -->
           </div>
         </div>
@@ -108,8 +83,9 @@
     </div>
   </div>
 
-    <script src="./kanban/board.js"></script>
-    <script src="./signUp/storage.js"></script>
-    <script src="./js/include.js"></script>
-  </body>
+  <script src="./kanban/board.js"></script>
+  <script src="./signUp/storage.js"></script>
+  <script src="./js/include.js"></script>
+</body>
+
 </html>
