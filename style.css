@@ -171,7 +171,6 @@ button {
 
 .sum-main {
   display: flex;
-  gap: 64px;
 }
 
 .sum-tasks {
@@ -207,6 +206,11 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
+
+  min-width: 300px;
+
+  padding-left: 64px;
 }
 
 .sum-name {
@@ -214,6 +218,8 @@ button {
   font-size: 48px;
   font-weight: 600;
 }
+
+/* summary END */
 
 /* sidebar */
 
@@ -290,6 +296,8 @@ button {
 
 /* sidebar END */
 
+/* RESPONSIVE */
+
 @media (max-width: 768px) {
   body {
     margin: 0;
@@ -333,7 +341,16 @@ button {
 
     font-size: 16px;
   }
+
+  .sum-greeting {
+    min-width: 200px;
+
+    padding-left: 32px;
+  }
 }
+
+/* RESPONSIVE END */
+
 /* CSS for Detail */
 .detail-buttons button {
   border-color: white !important;
@@ -382,17 +399,17 @@ button {
   justify-content: flex-end;
 }
 .violett {
-  color: rgb(103 70 154) !important; 
+  color: rgb(103 70 154) !important;
 }
 .margin-top {
-  margin-top: 8px; 
+  margin-top: 8px;
 }
 .detailAlign {
-  display: flex; 
+  display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: flex-start;
-  margin-top: 8px; 
+  margin-top: 8px;
 }
 .line {
   width: 0.5px;
