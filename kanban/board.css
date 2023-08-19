@@ -240,7 +240,7 @@
 }
 
 .main-card {
-  width: 80%;
+  min-width: 400px;
   min-height: 500px;
 
   padding: 24px 32px;
@@ -258,7 +258,12 @@
 
 .btn-close {
   cursor: pointer;
-
 }
 
 /* overlay container END */
+
+@media (max-width: 768px) {
+  .main-card {
+    width: 80%;
+  }
+}
