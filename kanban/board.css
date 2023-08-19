@@ -243,6 +243,7 @@
   min-width: 400px;
   min-height: 500px;
 
+  margin-left: 230px;
   padding: 24px 32px;
 
   background-color: #fff;
@@ -265,5 +266,7 @@
 @media (max-width: 768px) {
   .main-card {
     width: 80%;
+
+    margin: 0;
   }
 }
