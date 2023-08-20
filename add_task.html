@@ -5,14 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
-    <link rel="icon" type="image/x-icon" href="../img/logo_favicon.png">
-    <script src="../script.js"></script>
-    <link rel="stylesheet" href="../style.css">
-    <script src="add_task.js"></script>
-    <script src="../signUp/storage.js"></script>
-    <script src="../js/include.js"></script>
-    <link rel="stylesheet" href="add_task.css">
-    <link rel="stylesheet" href="fonts.css">
+    <link rel="icon" type="image/x-icon" href="./img/logo_favicon.png">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="./addTask/add_task.css">
+    <link rel="stylesheet" href="./font/fonts.css">
 
 </head>
 
@@ -34,7 +32,7 @@
                     <span>Assigned to</span>
                     <div class="input-with-button">
                         <input disabled placeholder="Select Contacts to Assign">
-                        <button type="button" onclick="renderContactList()"><img src="../icons/dropdown.svg"></button>
+                        <button type="button" onclick="renderContactList()"><img src="./icons/dropdown.svg"></button>
                     </div>
                     <div class="list d-none" id="contactList"></div>
                 </div>
@@ -48,11 +46,11 @@
                     <span>Prio</span>
                     <div class="prio-buttons">
                         <button type="button" id="urgent" onclick="addPrio('urgent')">URGENT
-                            <img src="../icons/priority_urgent.svg"></button>
+                            <img src="./icons/priority_urgent.svg"></button>
                         <button type="button" id="medium" onclick="addPrio('medium')">MEDIUM
-                            <img src="../icons/priority_medium.svg"></button>
+                            <img src="./icons/priority_medium.svg"></button>
                         <button type="button" id="low" onclick="addPrio('low')">LOW
-                            <img src="../icons/priority_low.svg"></button>
+                            <img src="./icons/priority_low.svg"></button>
                     </div>
                     <div id="priorityAlert"></div>
                 </div>
@@ -60,9 +58,9 @@
                     <div class="input-with-button">
                         <input id="categoryInput" disabled placeholder="Select task category">
                         <button id="addCategoryButton" type="button" onclick="renderCategories()">
-                            <img src="../icons/dropdown.svg"></button>
+                            <img src="./icons/dropdown.svg"></button>
                         <button id="addNewCategoryButton" class="d-none" type="button" onclick="pushNewCategory()">
-                            <img src="../icons/correct.svg">
+                            <img src="./icons/correct.svg">
                         </button>
                     </div>
                     <div id="contentCategories" class="list d-none"></div>
@@ -74,18 +72,21 @@
                     <div class="input-with-button">
                         <input id="subtask" minlength="3" placeholder="Add new subtask">
                         <button id="addSubtaskButton" type="button" onclick="addSubtask()">
-                            <img src="../icons/plus.svg"></button>
+                            <img src="./icons/plus.svg"></button>
                     </div>
                     <div id="subtaskContent"></div>
                 </div>
             </div>
         </div>
         <div class="submit-buttons"><button onclick="clearAll()" type="button">Clear<img
-                    src="../icons/cross.svg"></button>
-            <button type="submit">Create Task<img src="../icons/correct.svg"></button>
+                    src="./icons/cross.svg"></button>
+            <button type="submit">Create Task<img src="./icons/correct.svg"></button>
         </div>
     </form>
-
+    <script src="./script.js"></script>
+    <script src="./addTask/add_task.js"></script>
+    <script src="./signUp/storage.js"></script>
+    <script src="./js/include.js"></script>
 </body>
 
 </html>

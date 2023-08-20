@@ -47,7 +47,7 @@ async function addTask() {
     allTasks.push(task);
     await saveTask();
     clearAll();
-    window.location.href = "../board.html";
+    window.location.href = "./board.html";
 
 }
 //* checks if the Prio was chosen, if not there is an alert. 
@@ -106,15 +106,15 @@ function addPrio(clickedTab) {
     if (clickedTab === 'urgent') {
         checkPrio(clickedTab);
         priority = 'URGENT';
-        image = '../icons/priority_urgent.svg';
+        image = './icons/priority_urgent.svg';
     } else if (clickedTab === 'medium') {
         checkPrio(clickedTab);
         priority = 'MEDIUM';
-        image = '../icons/priority_medium.svg';
+        image = './icons/priority_medium.svg';
     } else if (clickedTab === 'low') {
         checkPrio(clickedTab);
         priority = 'LOW';
-        image = '../icons/priority_low.svg';
+        image = './icons/priority_low.svg';
     }
     assignedPrio.push(priority, image);
 }
@@ -311,7 +311,7 @@ function addSubtask() {
         addButton.enabled;
         let subtaskObj = {
             value: newSubtaskValue,
-            imageSrc: '../icons/checkbutton_default.svg',
+            imageSrc: './icons/checkbutton_default.svg',
             status: false
         };
         assignedSubtasks.push(subtaskObj);
@@ -323,12 +323,12 @@ function addSubtask() {
 function checkSubtask(i) {
     let checkbox = document.getElementById(`subtaskImage${i}`);
     if (checkbox.src.includes('checkbutton_checked')) {
-        checkbox.src = '../icons/checkbutton_default.svg';
-        assignedSubtasks[i].imageSrc = '../icons/checkbutton_default.svg';
+        checkbox.src = './icons/checkbutton_default.svg';
+        assignedSubtasks[i].imageSrc = './icons/checkbutton_default.svg';
         assignedSubtasks[i].status = false;
     } else {
-        checkbox.src = '../icons/checkbutton_checked.svg';
-        assignedSubtasks[i].imageSrc = '../icons/checkbutton_checked.svg';
+        checkbox.src = './icons/checkbutton_checked.svg';
+        assignedSubtasks[i].imageSrc = './icons/checkbutton_checked.svg';
         assignedSubtasks[i].status = true;
     }
 }
