@@ -250,7 +250,7 @@ function showContactList() {
 }
 
 function renderContactHTML(contact, contactColor, i, task) {
-  let backgroundColor = task['assignedContact'].includes(contact) ? 'grey' : '';
+  let backgroundColor = task['assignedContact'].includes(contact) ? 'lightgrey' : '';
   return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})" style="background-color: ${backgroundColor};">
   ${contact}  ${renderSVG(contactColor)}
   </div>`;
