@@ -7,6 +7,7 @@
   <title>Kanban Board</title>
   <link rel="stylesheet" href="./kanban/board.css" />
   <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./addTask/add_task.css"> 
 </head>
 
 <body onload="init()">
@@ -19,6 +20,74 @@
         <div class="detail-close"><img class="btn-close" src="./icons/icon_cross.svg" alt="" onclick="closeOverlay()" />
         </div>
         <div id="showDetailTask"></div>
+        <div id="showEditTask" class="d-none">
+          <form onsubmit="editDetailTask();return false">
+            <div class="input-table">
+                <div class="left-column">
+                    <div class="input-form">
+                        <span>Title</span>
+                        <input id="title" required placeholder="Enter a Title">
+                    </div>
+                    <div class="input-form">
+                        <span>Description</span>
+                        <textarea id="description" required placeholder="Enter a Description"></textarea>
+                    </div>
+                    <div class="input-form">
+                        <span>Assigned to</span>
+                        <div class="input-with-button">
+                            <input disabled placeholder="Select Contacts to Assign">
+                            <button type="button" onclick="renderContactList()"><img src="./icons/dropdown.svg"></button>
+                        </div>
+                        <div class="list d-none" id="contactList"></div>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="right-column">
+                    <div class="input-form"><span>Due date</span>
+                        <input type="date" id="calendar" required placeholder="dd/mm/yyyy">
+                    </div>
+                    <div class="input-form">
+                        <span>Prio</span>
+                        <div class="prio-buttons">
+                            <button type="button" id="urgent" onclick="addPrio('urgent')">URGENT
+                                <img src="./icons/priority_urgent.svg"></button>
+                            <button type="button" id="medium" onclick="addPrio('medium')">MEDIUM
+                                <img src="./icons/priority_medium.svg"></button>
+                            <button type="button" id="low" onclick="addPrio('low')">LOW
+                                <img src="./icons/priority_low.svg"></button>
+                        </div>
+                        <div id="priorityAlert"></div>
+                    </div>
+                    <div class="input-form"><span>Category</span>
+                        <div class="input-with-button">
+                            <input id="categoryInput" disabled placeholder="Select task category">
+                            <button id="addCategoryButton" type="button" onclick="renderCategories()">
+                                <img src="./icons/dropdown.svg"></button>
+                            <button id="addNewCategoryButton" class="d-none" type="button" onclick="pushNewCategory()">
+                                <img src="./icons/correct.svg">
+                            </button>
+                        </div>
+                        <div id="contentCategories" class="list d-none"></div>
+                        <div id="categoryAlert"></div>
+                    </div>
+          
+                    <div class="input-form">
+                        <span>Subtasks</span>
+                        <div class="input-with-button">
+                            <input id="subtask" minlength="3" placeholder="Add new subtask">
+                            <button id="addSubtaskButton" type="button" onclick="addSubtask()">
+                                <img src="./icons/plus.svg"></button>
+                        </div>
+                        <div id="subtaskContent"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="submit-buttons"><button onclick="clearAll()" type="button">Clear<img
+                        src="./icons/cross.svg"></button>
+                <button type="submit">Create Task<img src="./icons/correct.svg"></button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

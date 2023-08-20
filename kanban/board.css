@@ -262,7 +262,9 @@
 .btn-close {
   cursor: pointer;
 }
-
+form {
+  width: 100%; 
+}
 /* overlay container END */
 
 @media (max-width: 768px) {

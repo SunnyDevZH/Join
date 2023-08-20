@@ -197,7 +197,7 @@ function renderDetailTask(task) {
     </div>
     <div class="line height"></div>
     <div id="edit-btn">
-    <button class="detail-btn"><img src="./icons/icon_edit.svg">Edit</button>
+    <button onclick="editTask(${task['id']})" class="detail-btn"><img src="./icons/icon_edit.svg">Edit</button>
     </div>`;
 }
 async function deleteTask(taskId) {
@@ -208,6 +208,19 @@ async function deleteTask(taskId) {
   document.getElementById("overlay-container").classList.add("d-none");
   await saveBoard();
   updateHTML();
+}
+function editTask(i) {
+  document.getElementById('showDetailTask').classList.add('d-none');
+  document.getElementById('showEditTask').classList.remove('d-none'); 
+  const task = todos[i];
+  showEditedTask(task); 
+}
+function showEditedTask(task) {
+  document.getElementById('title').value = task['title']; 
+  document.getElementById('description').value = task['description']; 
+  document.getElementById('calendar').value = task['date']; 
+  document.getElementById('categoryInput').value = task['category']; 
+ 
 }
 function closeOverlay() {
   document.getElementById("overlay-container").classList.add("d-none");
