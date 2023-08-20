@@ -169,7 +169,6 @@ function generateDetailSubtasks(task) {
   let detailSubtaskList = '';
   let subtasks = task['subtasks'];
   for (i = 0; i < subtasks.length; i++) {
-    let subtask = task['subtasks'][i]['value'];
     let subtaskCheckBox = task['subtasks'][i]['imageSrc'];
     detailSubtaskList += `<div class="detailSubtask">
         <img src="${subtaskCheckBox}">&nbsp${subtaskUpperCase(i, task)}
@@ -275,6 +274,35 @@ function displayPrio(task) {
     button.style.backgroundColor = 'green';
   }
 }
+function addPrio(clickedTab) {
+  let alertArea = document.getElementById('priorityAlert');
+  alertArea.classList.add('d-none');
+  let priority;
+  let image;
+  if (clickedTab === 'urgent') {
+      checkPrio(clickedTab);
+      priority = 'URGENT';
+      image = './icons/priority_urgent.svg';
+  } else if (clickedTab === 'medium') {
+      checkPrio(clickedTab);
+      priority = 'MEDIUM';
+      image = './icons/priority_medium.svg';
+  } else if (clickedTab === 'low') {
+      checkPrio(clickedTab);
+      priority = 'LOW';
+      image = './icons/priority_low.svg';
+  }
+}
+function checkPrio(clickedTab) {
+  assignedPrio = [];
+  const tabs = ['urgent', 'medium', 'low'];
+  const colors = ['#f55d42', '#f5da42', 'green'];
+
+  tabs.forEach((tab, index) => {
+      const backgroundColor = clickedTab === tab ? colors[index] : 'white';
+      document.getElementById(tab).style.backgroundColor = backgroundColor;
+  });
+}
 function displayCategory(task) {
   let category = task['category'];
   let categoryColor = task['categoryColor'];
@@ -288,7 +316,7 @@ function displayCategory(task) {
 function renderCategories() {
   let contentList = document.getElementById('contentCategories');
   contentList.classList.add('d-none');
-  contentList.innerHTML =''; 
+  contentList.innerHTML = '';
   contentList.innerHTML += renderNewCategoryHTML();
   let existingCategories = [];
   for (i = 0; i < todos.length; i++) {
@@ -323,11 +351,24 @@ function showEditedSubtasks(task) {
     let subtask = task['subtasks'][i]['value'];
     let subtaskCheckBox = task['subtasks'][i]['imageSrc'];
     subtaskElement.innerHTML += `<div class="detailSubtask">
-        <img src="${subtaskCheckBox}">${subtask}
+        <img id="unchecked${i}" onclick="changeCheckbox(${i})" src="${subtaskCheckBox}">${subtask}
         </div>`;
   }
 }
-
+function editSubtask() {
+  let subtaskElement = document.getElementById('subtaskContent');
+  let newSubtask = document.getElementById('subtask').value;
+  subtaskElement.innerHTML += `<div class="detailSubtask">
+  <img id="unchecked${i}" onclick="changeCheckbox(${i})" src="./icons/checkbutton_default.svg">${newSubtask}
+  </div>`;
+}
+function changeCheckbox(i) {
+  let checkBox = document.getElementById(`unchecked${i}`);
+  if (checkBox.src.includes('checkbutton_default')) {
+    checkBox.src = './icons/checkbutton_checked.svg';
+  }
+  else { checkBox.src = './icons/checkbutton_default.svg' }
+}
 
 function closeOverlay() {
   document.getElementById("overlay-container").classList.add("d-none");

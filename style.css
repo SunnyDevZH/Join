@@ -415,3 +415,6 @@ button {
   width: 0.5px;
   background-color: #888;
 }
+.detailSubtask img:hover {
+  cursor: auto; 
+}
