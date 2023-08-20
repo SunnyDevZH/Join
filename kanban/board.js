@@ -1,5 +1,7 @@
 // for testing
 let todos = [];
+let contacts = ['Hermine Granger', 'Harry Potter', 'Ron Weasley'];
+let contactColors = ['#17D264', '#3043F0', '#496F70'];
 
 // const icon_prio_low = "./icons/priority_low.svg";
 // const icon_prio_med = "./icons/priority_medium.svg";
@@ -10,6 +12,7 @@ let currentDraggedElement;
 function init() {
   loadTodos();
   updateHTML();
+  getNewDate();
 }
 
 async function loadTodos() {
@@ -209,19 +212,123 @@ async function deleteTask(taskId) {
   await saveBoard();
   updateHTML();
 }
+function getNewDate() {
+  let today = new Date().toISOString().split('T')[0];
+  document.getElementById('calendar').setAttribute('min', today);
+}
 function editTask(i) {
   document.getElementById('showDetailTask').classList.add('d-none');
-  document.getElementById('showEditTask').classList.remove('d-none'); 
+  document.getElementById('showEditTask').classList.remove('d-none');
   const task = todos[i];
-  showEditedTask(task); 
+  showEditedTask(task);
 }
 function showEditedTask(task) {
-  document.getElementById('title').value = task['title']; 
-  document.getElementById('description').value = task['description']; 
-  document.getElementById('calendar').value = task['date']; 
-  document.getElementById('categoryInput').value = task['category']; 
- 
+  document.getElementById('title').value = task['title'];
+  document.getElementById('description').value = task['description'];
+  document.getElementById('calendar').value = task['date'];
+  displayContacts(task);
+  displayPrio(task);
+  displayCategory(task);
+  showEditedSubtasks(task);
+
 }
+function displayContacts(task) {
+  let contactContent = document.getElementById('contactList');
+  contactContent.classList.remove('d-none');
+  for (i = 0; i < contacts.length; i++) {
+    let contact = contacts[i];
+    let contactColor = contactColors[i];
+    contactContent.innerHTML += renderContactHTML(contact, contactColor, i, task);
+  }
+}
+function showContactList() {
+  let contactContent = document.getElementById('contactList');
+  if (contactContent.classList.contains('d-none')) {
+    contactContent.classList.remove('d-none');
+  } else {
+    contactContent.classList.add('d-none');
+  }
+}
+
+function renderContactHTML(contact, contactColor, i, task) {
+  let backgroundColor = task['assignedContact'].includes(contact) ? 'grey' : '';
+  return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})" style="background-color: ${backgroundColor};">
+  ${contact}  ${renderSVG(contactColor)}
+  </div>`;
+}
+function renderSVG(taskColor) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+  <circle cx="10" cy="10.5" r="9" fill="${taskColor}" stroke="white" stroke-width="2"></circle>
+  </svg>`
+}
+function displayPrio(task) {
+  let prio = task.prio[0];
+  let button;
+  if (prio === 'URGENT') {
+    button = document.getElementById('urgent');
+    button.style.backgroundColor = '#f55d42';
+  } else if (prio === 'MEDIUM') {
+    button = document.getElementById('medium');
+    button.style.backgroundColor = '#f5da42';
+  } else if (prio === 'LOW') {
+    button = document.getElementById('low');
+    button.style.backgroundColor = 'green';
+  }
+}
+function displayCategory(task) {
+  let category = task['category'];
+  let categoryColor = task['categoryColor'];
+  const categoryElement = document.getElementById('categoryInput');
+
+  categoryElement.value = category;
+  categoryElement.style.backgroundColor = categoryColor;
+  categoryElement.style.color = 'white';
+  renderCategories(task);
+}
+function renderCategories() {
+  let contentList = document.getElementById('contentCategories');
+  contentList.classList.add('d-none');
+  contentList.innerHTML =''; 
+  contentList.innerHTML += renderNewCategoryHTML();
+  let existingCategories = [];
+  for (i = 0; i < todos.length; i++) {
+    let taskCategory = todos[i]['category'];
+    let taskColor = todos[i]['categoryColor'];
+    if (!existingCategories.includes(taskCategory)) {
+      contentList.innerHTML += renderCategoryHTML(taskCategory, taskColor, i);
+      existingCategories.push(taskCategory);
+    }
+  }
+}
+function showAllCategories() {
+  document.getElementById('contentCategories').classList.remove('d-none');
+}
+function hideCategoryList() {
+  let contentList = document.getElementById('contentCategories');
+  contentList.classList.add('d-none');
+}
+function renderNewCategoryHTML() {
+  return `<div class="option" id="newCategory" onclick="addNewCategory()">Add New Category</div>`;
+}
+function renderCategoryHTML(taskCategory, taskColor, i) {
+  return `<div class="option">
+          <div id="category${i}" onclick="chooseCategory(${i})">${taskCategory} ${renderSVG(taskColor)}
+          </div>
+          </div>`;
+}
+function showEditedSubtasks(task) {
+  let subtaskElement = document.getElementById('subtaskContent');
+  let subtasks = task['subtasks'];
+  for (i = 0; i < subtasks.length; i++) {
+    let subtask = task['subtasks'][i]['value'];
+    let subtaskCheckBox = task['subtasks'][i]['imageSrc'];
+    subtaskElement.innerHTML += `<div class="detailSubtask">
+        <img src="${subtaskCheckBox}">${subtask}
+        </div>`;
+  }
+}
+
+
 function closeOverlay() {
   document.getElementById("overlay-container").classList.add("d-none");
 }
