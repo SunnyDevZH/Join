@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="./img/logo_favicon.png" />
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
+  <body onload="updateSummaryCounter()">
     <div w3-include-html="navbar.html"></div>
 
     <div class="container">
@@ -24,19 +24,19 @@
           <div class="sum-tasks">
             <a class="sum-task-item" href="./board.html">
               <div class="sum-column">
-                <p class="fs-32 fs-b">5</p>
+                <p id="task-board-counter" class="fs-32 fs-b">5</p>
                 Tasks in<br />Board
               </div>
             </a>
             <a class="sum-task-item" href="./board.html">
               <div class="sum-column">
-                <p class="fs-32 fs-b">2</p>
+                <p id="todo-inprogress-counter" class="fs-32 fs-b">2</p>
                 Tasks in<br />Progress
               </div>
             </a>
             <a class="sum-task-item" href="./board.html">
               <div class="sum-column">
-                <p class="fs-32 fs-b">2</p>
+                <p id="todo-await-counter" class="fs-32 fs-b">2</p>
                 Awaiting<br />Feedback
               </div>
             </a>
@@ -45,7 +45,7 @@
             <a class="sum-task-item" href="./board.html">
               <img src="./icons/priority_urgent_full.svg" alt="" />
               <div class="sum-column">
-                <p class="fs-32 fs-b">1</p>
+                <p id="todo-prio-counter" class="fs-32 fs-b">1</p>
                 Urgent
               </div>
               <div
@@ -56,7 +56,7 @@
                   border-left: 3px solid rgba(0, 0, 0, 0.2);
                 "
               >
-                <p class="fs-20 fs-b">21. September 2023</p>
+                <p id="next-date" class="fs-20 fs-b">21. September 2023</p>
                 Upcoming Deadline
               </div>
             </a>
@@ -64,13 +64,13 @@
           <div class="sum-tasks">
             <a class="sum-task-item" href="./board.html">
               <div class="sum-column">
-                <p class="fs-32 fs-b">1</p>
+                <p id="todo-open-counter" class="fs-32 fs-b">1</p>
                 Todo
               </div>
             </a>
             <a class="sum-task-item" href="./board.html">
               <div class="sum-column">
-                <p class="fs-32 fs-b">1</p>
+                <p id="todo-done-counter" class="fs-32 fs-b">1</p>
                 Done
               </div>
             </a>
@@ -81,4 +81,6 @@
   </body>
 
   <script src="./js/include.js"></script>
+  <script src="./signUp/storage.js"></script>
+  <script src="script.js"></script>
 </html>
