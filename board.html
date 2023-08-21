@@ -1,161 +1,238 @@
 <!DOCTYPE html>
 <html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="./img/logo_favicon.png" />
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="./kanban/board.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./addTask/add_task.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="./img/logo_favicon.png">
-  <title>Kanban Board</title>
-  <link rel="stylesheet" href="./kanban/board.css" />
-  <link rel="stylesheet" href="./style.css" />
-  <link rel="stylesheet" href="./addTask/add_task.css">
-</head>
+  <body onload="init()">
+    <div w3-include-html="navbar.html"></div>
 
-<body onload="init()">
-  <div w3-include-html="navbar.html"></div>
-
-  <div id="overlay-container" class="d-none">
-    <div class="overlay-card">
-      <div class="overlay-background" onclick="closeOverlay()"></div>
-      <div class="main-card">
-        <div class="detail-close"><img class="btn-close" src="./icons/icon_cross.svg" alt="" onclick="closeOverlay()" />
-        </div>
-        <div id="showDetailTask"></div>
-        <div id="showEditTask" class="d-none">
-          <form onsubmit="editTask();return false">
-            <div class="input-table">
-              <div class="left-column">
-                <div class="input-form">
-                  <span>Title</span>
-                  <input id="title" required placeholder="Enter a Title">
-                </div>
-                <div class="input-form">
-                  <span>Description</span>
-                  <textarea id="description" required placeholder="Enter a Description"></textarea>
-                </div>
-                <div class="input-form">
-                  <span>Assigned to</span>
-                  <div class="input-with-button">
-                    <input disabled placeholder="Select Contacts to Assign">
-                    <button id="contactListButton" type="button" onclick="showContactList()"><img
-                        src="./icons/dropdown.svg"></button>
+    <div id="overlay-container" class="d-none">
+      <div class="overlay-card">
+        <div class="overlay-background" onclick="closeOverlay()"></div>
+        <div class="main-card">
+          <div class="detail-close">
+            <img
+              class="btn-close"
+              src="./icons/icon_cross.svg"
+              alt=""
+              onclick="closeOverlay()"
+            />
+          </div>
+          <div id="showDetailTask"></div>
+          <div id="showEditTask" class="d-none">
+            <form onsubmit="editTask();return false">
+              <div class="input-table">
+                <div class="left-column">
+                  <div class="input-form">
+                    <span>Title</span>
+                    <input id="title" required placeholder="Enter a Title" />
                   </div>
-                  <div class="list d-none" id="contactList"></div>
+                  <div class="input-form">
+                    <span>Description</span>
+                    <textarea
+                      id="description"
+                      required
+                      placeholder="Enter a Description"
+                    ></textarea>
+                  </div>
+                  <div class="input-form">
+                    <span>Assigned to</span>
+                    <div class="input-with-button">
+                      <input disabled placeholder="Select Contacts to Assign" />
+                      <button
+                        id="contactListButton"
+                        type="button"
+                        onclick="showContactList()"
+                      >
+                        <img src="./icons/dropdown.svg" />
+                      </button>
+                    </div>
+                    <div class="list d-none" id="contactList"></div>
+                  </div>
+                </div>
+                <div class="line"></div>
+                <div class="right-column">
+                  <div class="input-form">
+                    <span>Due date</span>
+                    <input
+                      type="date"
+                      id="calendar"
+                      required
+                      placeholder="dd/mm/yyyy"
+                    />
+                  </div>
+                  <div class="input-form">
+                    <span>Prio</span>
+                    <div class="prio-buttons">
+                      <button
+                        type="button"
+                        id="urgent"
+                        onclick="addPrio('urgent')"
+                      >
+                        URGENT <img src="./icons/priority_urgent.svg" />
+                      </button>
+                      <button
+                        type="button"
+                        id="medium"
+                        onclick="addPrio('medium')"
+                      >
+                        MEDIUM <img src="./icons/priority_medium.svg" />
+                      </button>
+                      <button type="button" id="low" onclick="addPrio('low')">
+                        LOW <img src="./icons/priority_low.svg" />
+                      </button>
+                    </div>
+                    <div id="priorityAlert"></div>
+                  </div>
+                  <div class="input-form">
+                    <span>Category</span>
+                    <div class="input-with-button">
+                      <input
+                        id="categoryInput"
+                        disabled
+                        placeholder="Select task category"
+                      />
+                      <button
+                        id="addCategoryButton"
+                        type="button"
+                        onclick="showAllCategories()"
+                      >
+                        <img src="./icons/dropdown.svg" />
+                      </button>
+                      <button
+                        id="addNewCategoryButton"
+                        class="d-none"
+                        type="button"
+                        onclick="pushNewCategory()"
+                      >
+                        <img src="./icons/correct.svg" />
+                      </button>
+                    </div>
+                    <div id="contentCategories" class="list d-none"></div>
+                    <div id="categoryAlert"></div>
+                  </div>
+
+                  <div class="input-form">
+                    <span>Subtasks</span>
+                    <div class="input-with-button">
+                      <input
+                        id="subtask"
+                        minlength="3"
+                        placeholder="Add new subtask"
+                      />
+                      <button
+                        id="addSubtaskButton"
+                        type="button"
+                        onclick="editSubtask()"
+                      >
+                        <img src="./icons/plus.svg" />
+                      </button>
+                    </div>
+                    <div id="subtaskContent"></div>
+                  </div>
                 </div>
               </div>
-              <div class="line"></div>
-              <div class="right-column">
-                <div class="input-form"><span>Due date</span>
-                  <input type="date" id="calendar" required placeholder="dd/mm/yyyy">
-                </div>
-                <div class="input-form">
-                  <span>Prio</span>
-                  <div class="prio-buttons">
-                    <button type="button" id="urgent" onclick="addPrio('urgent')">URGENT
-                      <img src="./icons/priority_urgent.svg"></button>
-                    <button type="button" id="medium" onclick="addPrio('medium')">MEDIUM
-                      <img src="./icons/priority_medium.svg"></button>
-                    <button type="button" id="low" onclick="addPrio('low')">LOW
-                      <img src="./icons/priority_low.svg"></button>
-                  </div>
-                  <div id="priorityAlert"></div>
-                </div>
-                <div class="input-form"><span>Category</span>
-                  <div class="input-with-button">
-                    <input id="categoryInput" disabled placeholder="Select task category">
-                    <button id="addCategoryButton" type="button" onclick="showAllCategories()">
-                      <img src="./icons/dropdown.svg"></button>
-                    <button id="addNewCategoryButton" class="d-none" type="button" onclick="pushNewCategory()">
-                      <img src="./icons/correct.svg">
-                    </button>
-                  </div>
-                  <div id="contentCategories" class="list d-none"></div>
-                  <div id="categoryAlert"></div>
-                </div>
-
-                <div class="input-form">
-                  <span>Subtasks</span>
-                  <div class="input-with-button">
-                    <input id="subtask" minlength="3" placeholder="Add new subtask">
-                    <button id="addSubtaskButton" type="button" onclick="editSubtask()">
-                      <img src="./icons/plus.svg"></button>
-                  </div>
-                  <div id="subtaskContent"></div>
-                </div>
+              <div class="submit-buttons">
+                <button type="submit">
+                  Edit Task<img src="./icons/correct.svg" />
+                </button>
               </div>
-            </div>
-            <div class="submit-buttons">
-              <button type="submit">Edit Task<img src="./icons/correct.svg"></button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-
-  <div class="container">
-    <div id="kanban-board">
-      <div class="board-header">
-        <h1>Board</h1>
-        <div class="board-header-left">
-          <div class="searchbar">
-            <input type="text" placeholder="Find Task" />
-            <img class="btn-search" src="./icons/icon_search.svg" alt="" />
+    <div class="container">
+      <div id="kanban-board">
+        <div class="board-header">
+          <h1>Board</h1>
+          <div class="board-header-right">
+            <div class="searchbar">
+              <input type="text" placeholder="Find Task" />
+              <img class="btn-search" src="./icons/icon_search.svg" alt="" />
+            </div>
+            <button class="button btn-black">
+              <a href="./add_task.html">Add Task +</a>
+            </button>
           </div>
-          <button class="btn-black fs-24"><a href="./add_task.html">Add Task +</a></button>
         </div>
-      </div>
-      <div class="board">
-        <div class="col col-01">
-          <div class="col-header">
-            <h3>To Do</h3>
-            <img class="btn-add" src="./icons/plus.svg" alt="+" />
-          </div>
-          <div id="col-01" class="todo-list" ondrop="moveTo('col-01'); removeHighlight('col-01')"
-            ondragleave="removeHighlight('col-01')" ondragover="allowDrop(event); highlight('col-01')">
-            <!-- <div>
+        <div class="board">
+          <div class="col col-01">
+            <div class="col-header">
+              <h3>To Do</h3>
+              <img class="btn-add" src="./icons/plus.svg" alt="+" />
+            </div>
+            <div
+              id="col-01"
+              class="todo-list"
+              ondrop="moveTo('col-01'); removeHighlight('col-01')"
+              ondragleave="removeHighlight('col-01')"
+              ondragover="allowDrop(event); highlight('col-01')"
+            >
+              <!-- <div>
                 <p>title</p>
               </div> -->
+            </div>
           </div>
-        </div>
-        <div class="col col-02">
-          <div class="col-header">
-            <h3>In Progress</h3>
-            <img class="btn-add" src="./icons/plus.svg" alt="+" />
+          <div class="col col-02">
+            <div class="col-header">
+              <h3>In Progress</h3>
+              <img class="btn-add" src="./icons/plus.svg" alt="+" />
+            </div>
+            <div
+              id="col-02"
+              class="todo-list"
+              ondrop="moveTo('col-02'); removeHighlight('col-02')"
+              ondragleave="removeHighlight('col-02')"
+              ondragover="allowDrop(event); highlight('col-02')"
+            >
+              <!-- todolist -->
+            </div>
           </div>
-          <div id="col-02" class="todo-list" ondrop="moveTo('col-02'); removeHighlight('col-02')"
-            ondragleave="removeHighlight('col-02')" ondragover="allowDrop(event); highlight('col-02')">
-            <!-- todolist -->
+          <div class="col col-03">
+            <div class="col-header">
+              <h3>Await Feedback</h3>
+              <img class="btn-add" src="./icons/plus.svg" alt="+" />
+            </div>
+            <div
+              id="col-03"
+              class="todo-list"
+              ondrop="moveTo('col-03'); removeHighlight('col-03')"
+              ondragleave="removeHighlight('col-03')"
+              ondragover="allowDrop(event); highlight('col-03')"
+            >
+              <!-- todolist -->
+            </div>
           </div>
-        </div>
-        <div class="col col-03">
-          <div class="col-header">
-            <h3>Await Feedback</h3>
-            <img class="btn-add" src="./icons/plus.svg" alt="+" />
-          </div>
-          <div id="col-03" class="todo-list" ondrop="moveTo('col-03'); removeHighlight('col-03')"
-            ondragleave="removeHighlight('col-03')" ondragover="allowDrop(event); highlight('col-03')">
-            <!-- todolist -->
-          </div>
-        </div>
-        <div class="col col-04">
-          <div class="col-header">
-            <h3>Done</h3>
-            <img class="btn-add" src="./icons/plus.svg" alt="+" />
-          </div>
-          <div id="col-04" class="todo-list" ondrop="moveTo('col-04'); removeHighlight('col-04')"
-            ondragleave="removeHighlight('col-04')" ondragover="allowDrop(event); highlight('col-04')">
-            <!-- todolist -->
+          <div class="col col-04">
+            <div class="col-header">
+              <h3>Done</h3>
+              <img class="btn-add" src="./icons/plus.svg" alt="+" />
+            </div>
+            <div
+              id="col-04"
+              class="todo-list"
+              ondrop="moveTo('col-04'); removeHighlight('col-04')"
+              ondragleave="removeHighlight('col-04')"
+              ondragover="allowDrop(event); highlight('col-04')"
+            >
+              <!-- todolist -->
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="./kanban/board.js"></script>
-  <script src="./signUp/storage.js"></script>
-  <script src="./js/include.js"></script>
-</body>
-
+    <script src="./kanban/board.js"></script>
+    <script src="./signUp/storage.js"></script>
+    <script src="./js/include.js"></script>
+  </body>
 </html>

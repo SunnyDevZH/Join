@@ -68,6 +68,23 @@ button {
   cursor: pointer;
 }
 
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 40px;
+  min-width: 160px;
+
+  padding: 12px 24px;
+
+  border: 2px solid black;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  white-space: nowrap;
+}
+
 .container {
   padding: 32px;
 }
@@ -92,6 +109,10 @@ button {
 .btn-light a,
 .btn-black:hover a {
   color: #2a3647;
+}
+
+.fs-20 {
+  font-size: 20px;
 }
 
 .fs-24 {
@@ -416,5 +437,5 @@ button {
   background-color: #888;
 }
 .detailSubtask img:hover {
-  cursor: auto; 
+  cursor: auto;
 }

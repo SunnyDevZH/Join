@@ -6,10 +6,11 @@
   gap: 16px;
 }
 
-.board-header-left {
+.board-header-right {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  gap: 24px;
 }
 
 .searchbar {
@@ -263,7 +264,7 @@
   cursor: pointer;
 }
 form {
-  width: 100%; 
+  width: 100%;
 }
 /* overlay container END */
 
