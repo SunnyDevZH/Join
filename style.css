@@ -194,6 +194,11 @@ button {
   display: flex;
 }
 
+.sum-tasks-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .sum-tasks {
   display: flex;
   flex-wrap: wrap;
@@ -202,13 +207,15 @@ button {
   margin-top: 32px;
 }
 
-.sum-task-container {
+.sum-task-item {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  gap: 20px;
 
-  height: 80px;
+  min-height: 80px;
 
   padding: 24px;
 
@@ -217,6 +224,12 @@ button {
   color: #000;
   text-align: center;
   text-decoration: none;
+}
+
+.sum-column {
+  flex-direction: column;
+
+  padding: 0 16px;
 }
 
 .sum-task-container:hover {
