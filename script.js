@@ -78,15 +78,16 @@ async function updateSummaryCounter() {
   let todoUrgent = todos.filter((t) => t["prio"][0] == "URGENT");
   document.getElementById("todo-prio-counter").innerHTML = todoUrgent.length;
 
+  document.getElementById("next-date").innerHTML = getNextDate(todoUrgent);
+}
+
+function getNextDate(element) {
   let nextdate = "3000-01-01";
-  console.log(nextdate);
-  todoUrgent.forEach((todo) => {
+  element.forEach((todo) => {
     if (todo["date"] < nextdate) {
       nextdate = todo["date"];
     }
   });
   let monthFull = monthsName[parseInt(nextdate.substring(5, 7))];
-  nextdate =
-    nextdate.substring(8) + ". " + monthFull + " " + nextdate.substring(0, 4);
-  document.getElementById("next-date").innerHTML = nextdate;
+  return `${nextdate.substring(8)}. ${monthFull} ${nextdate.substring(0, 4)}`;
 }
