@@ -4,11 +4,29 @@ body{
 .background{
     background-color: rgb(246,247,248); /* Farbe von Mockup */
     height: 100vh;
-    padding: 30px; /* Welche Grösse? */
 }
 
-.displayFlex{
+.loginHeader{
     display: flex;
+    justify-content: space-between;
+    padding: 67px;
+    align-items: center;
+}
+
+.signUp{
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+.signUpButton{
+    background-color: rgb(42,54,71);
+    width: 91px;
+    height: 49px;
+    font-size: 16px;
+    border-radius: 10px;
+    border-style: none;
+    color: white;
 }
 
 
@@ -18,12 +36,7 @@ body{
     flex-direction: column;
 }
 
-.loginHeader{
-    display: flex;
-    justify-content: space-between;
-    padding: 30px; /* Welche Grösse? */
-    align-items: center;
-}
+
 
 .loginContainer{
     display: flex;
@@ -33,7 +46,8 @@ body{
     background-color: rgb(255,255,255);  /* Farbe von Mockup */
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; /* Welchen Style? */
     border-radius: 30px;/* Welche Grösse? */
-    width: 400px; /* Welche Grösse? */
+    width: 652px;
+    height: 505px;
     gap: 30px; /* Welche Grösse? */
     padding: 10px; /* Welche Grösse? */
 }
@@ -51,8 +65,16 @@ button{
     /* Design */
 }
 footer{
+
+    width: 246px;
+    height: 35px;
     display: flex;
     justify-content: center;
     padding: 10px; /* Welche Grösse? */
     gap: 30px; /* Welche Grösse? */
+    color: grey;
+}
+a{
+    text-decoration: none;
+    color: rgb(101,194,234);
 }

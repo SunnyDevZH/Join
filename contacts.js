@@ -1,47 +1,93 @@
+let contacts = [];
+let isAddingContact = false; // Flag für den Kontakt-Hinzufügen-Modus
 
-let contacts= [];
+window.addEventListener('load', load);
 
-function render(){
- let mycontact = document.getElementById('mycontact'); /* Zugriff Div */
 
- mycontact.innerHTML = ''; /* inhalt leeren*/
+function render() {
+    let mycontact = document.getElementById('mycontact'); /* Zugriff Div */
+    mycontact.innerHTML = ''; /* Inhalt leeren */
 
- for (let i = 0; i < contacts.length; i++) {
-    mycontact.innerHTML += `
-    <div>
-        <b>Kontakt: ${contacts[i].name}</b>
-        <p>Email: ${contacts[i].email}</p>
-        <p>Telefon: ${contacts[i].phone}</p>
-        <button onclick="deletecontact(${i})">Löschen</button>
-    </div>
-`;
+    if (isAddingContact) {
+        mycontact.innerHTML = contactTemplate(); // Kontaktformular anzeigen
+    } else {
+        for (let i = 0; i < contacts.length; i++) {
+            mycontact.innerHTML += `
+            <div class="rendercontact">
+                <b onclick="contact()">${contacts[i].name}</b>
+                <a href="">${contacts[i].email}</a>
+                <button onclick="deletecontact(${i})">x</button>
+            </div>
+            `;
+        }
+    }
 
- }
-        document.getElementById('name').value = ''; /* leeren von Input*/
-        document.getElementById('email').value = ''; /* leeren von Input*/
-        document.getElementById('phone').value = ''; /* leeren von Input*/
+    document.getElementById('name').value = ''; /* Leeren von Input */
+    document.getElementById('email').value = ''; /* Leeren von Input */
+    document.getElementById('phone').value = ''; /* Leeren von Input */
 }
 
 function addContact() { // Funktion 1 aufgerufen durch onclick
-    document.getElementById('addcontact').innerHTML = contactTemplate(); // Zugriff auf Div Dialog
-
+    isAddingContact = true; // Flag setzen
+    render(); // Ansicht aktualisieren
 }
 
-function contactTemplate() { // Funktion 2 aufgerufen durch Funktion 1
-    return `
+function contact(i) { // Funktion 2 aufgerufen durch Funktion 1
+    let mycontact = document.getElementById('mycontact'); /* Zugriff Div */
+    mycontact.innerHTML = ''; /* Inhalt leeren */
 
-    <div>
-        <div class="input">
-            <input id="name" placeholder="Name" type="text" />
-            <input id="email" placeholder="Email" type="text" />
-            <input id="phone" placeholder="Phone" type="text" />
-        </div>
-        <div class="addbutton">
-            <button onclick="window.location.href= './contacts.html';">Cancel X</button>
-            <button onclick="addNotiz()">Create contact</button>
+    mycontact.innerHTML += `
+
+        <div class="rendercontact">
+        <b onclick="contact()">${contacts[i].name}</b>
+        <a href="">${contacts[i].email}</a>
+        <button onclick="deletecontact(${i})">x</button>
+        </div>`
+}
+
+function contactTemplate() {
+    return `
+    <div class="add">
+        <div class="container">
+            <div class="addcontainer">
+                <div class="betterteam">
+                    <img src="./img/join.png" alt="join">
+                    <h1>Add contact</h1>
+                    Tasks are better with a team!
+                    <div class="line2"></div>
+                </div>
+                <div class="inputcointainer">
+                    <div class="close" onclick="cancelContact()">x</div>
+                    <div class="input">
+                        <div>
+                            <img src="./img/user.png" alt="user">
+                        </div>
+                        <div>
+                            <div class="inputsytle">
+                                <input id="name" placeholder="Name" type="text" />
+                                <input id="email" placeholder="Email" type="text" />
+                                <input id="phone" placeholder="Phone" type="text" />
+                            </div>
+                            <div class="buttonfield">
+                                <button onclick="cancelContact()">Cancel X</button>
+                                <button class="createButton" onclick="addNotiz()">Create contact</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div> `;
 }
+
+function cancelContact() {
+    isAddingContact = false; // Flag zurücksetzen
+    render(); // Ansicht aktualisieren
+}
+
+// Restlicher Code bleibt unverändert
+
 
 function addNotiz() {
     let name = document.getElementById('name').value;
@@ -50,12 +96,11 @@ function addNotiz() {
     
     let contact = { name, email, phone }; // Erzeugen eines Kontaktobjekts
     contacts.push(contact);
-    render();
-    save();
-}
 
-function deletecontact(i) {
-    contacts.splice(i,1);
+     // Sortiere die Kontakte alphabetisch nach dem Namen
+     contacts.sort((a, b) => a.name.localeCompare(b.name));
+
+    isAddingContact = false;
     render();
     save();
 }
@@ -65,14 +110,18 @@ function save(){
     localStorage.setItem('contacts', contactAsText); /* names ist Key und namesAsText Value*/
 }
 
-function load(){
+function load() {
     let contactAsText = localStorage.getItem('contacts');
     if (contactAsText) {
         contacts = JSON.parse(contactAsText);
     } else {
         contacts = []; // Falls keine Daten vorhanden sind, leeres Array erstellen
     }
+    render(); // Zeige die geladenen Kontakte auf der Seite an
 }
 
-
-
+function deletecontact(i) {
+    contacts.splice(i, 1);
+    save(); // Speichere die aktualisierten Kontakte im Local Storage
+    render(); // Zeige die aktualisierten Kontakte auf der Seite an
+}
