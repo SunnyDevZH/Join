@@ -137,12 +137,15 @@ async function saveBoard() {
   await setItem("allTasks", JSON.stringify(todos));
 }
 
+// make the first character of a string (element) uppercase
 function firstCharToUpperCase(element) {
   return element.charAt(0).toUpperCase() + element.slice(1);
 }
 
+///////////////////////////
 // drag and drop logic END
 
+/////////////////
 // overlay logic
 
 function openOverlay(i) {
@@ -582,4 +585,6 @@ function renderEditTaskHTML(task) {
             </div>
           </form>`;
 }
+
+/////////////////////
 // overlay logic END
