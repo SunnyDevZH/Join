@@ -458,7 +458,7 @@ async function addEditTask(i) {
     'assignedContact': editedContacts,
     'contactColor': editedContactColor,
     'date': editedDate,
-    'prio': editetdPrio,
+    'prio': editedPrio,
     'category': editedCategory,
     'categoryColor': editedCategoryColor,
     'subtasks': editedSubtasks,
