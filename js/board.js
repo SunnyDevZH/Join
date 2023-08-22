@@ -2,6 +2,7 @@
 let todos = [];
 let contacts = ["Hermine Granger", "Harry Potter", "Ron Weasley"];
 let contactColors = ["#17D264", "#3043F0", "#496F70"];
+let assignedPrio = []; 
 let editedContacts = [];
 let editedContactColor = [];
 let editedPrio = [];
@@ -312,39 +313,30 @@ function renderSVG(taskColor) {
   </svg>`;
 }
 function displayPrio(task) {
-  let prio = task.prio[0];
-  let button;
-  if (prio === "URGENT") {
-    button = document.getElementById("urgent");
-    button.style.backgroundColor = "#f55d42";
-  } else if (prio === "MEDIUM") {
-    button = document.getElementById("medium");
-    button.style.backgroundColor = "#f5da42";
-  } else if (prio === "LOW") {
-    button = document.getElementById("low");
-    button.style.backgroundColor = "green";
-  }
+  const prio = task.prio[0];
+  const button = document.getElementById(prio.toLowerCase());
+  const colors = {
+    URGENT: "#f55d42",
+    MEDIUM: "#f5da42",
+    LOW: "green"
+  };
+  const image = `./icons/priority_${prio.toLowerCase()}.svg`;
+
+  button.style.backgroundColor = colors[prio];
+  assignedPrio.push(prio, image); 
 }
+
 function addPrio(clickedTab) {
-  let alertArea = document.getElementById("priorityAlert");
+  const alertArea = document.getElementById("priorityAlert");
   alertArea.classList.add("d-none");
-  let priority;
-  let image;
-  if (clickedTab === "urgent") {
-    checkPrio(clickedTab);
-    priority = "URGENT";
-    image = "./icons/priority_urgent.svg";
-  } else if (clickedTab === "medium") {
-    checkPrio(clickedTab);
-    priority = "MEDIUM";
-    image = "./icons/priority_medium.svg";
-  } else if (clickedTab === "low") {
-    checkPrio(clickedTab);
-    priority = "LOW";
-    image = "./icons/priority_low.svg";
-  }
+
+  const priority = clickedTab.toUpperCase();
+  const image = `./icons/priority_${priority.toLowerCase()}.svg`;
+
+  checkPrio(clickedTab);
   editedPrio.push(priority, image);
 }
+
 function checkPrio(clickedTab) {
   const tabs = ["urgent", "medium", "low"];
   const colors = ["#f55d42", "#f5da42", "green"];
@@ -478,7 +470,7 @@ async function addEditTask(i) {
     'assignedContact': editedContacts || task["assignedContact"],
     'contactColor': editedContactColor || task["contactColor"],
     'date': editedDate || task["date"],
-    'prio': editedPrio || task["prio"],
+    'prio': editedPrio || assignedPrio,
     'category': editedCategory || task["category"],
     'categoryColor': editedCategoryColor || task["categoryColor"],
     'subtasks': editedSubtasks || task["subtasks"],
@@ -493,13 +485,13 @@ function closeOverlay() {
   clearAll();
 }
 function clearAll() {
- editedContacts = [];
- editedContactColor = [];
- editedPrio = [];
- editedSubtasks = [];
- editedCol;
- editedCategory;
- editedCategoryColor; 
+  editedContacts = [];
+  editedContactColor = [];
+  editedPrio = [];
+  editedSubtasks = [];
+  editedCol;
+  editedCategory;
+  editedCategoryColor;
 }
 function renderEditTaskHTML(task) {
   return `
