@@ -2,7 +2,7 @@
 let todos = [];
 let contacts = ["Hermine Granger", "Harry Potter", "Ron Weasley"];
 let contactColors = ["#17D264", "#3043F0", "#496F70"];
-let assignedPrio = []; 
+let assignedPrio = [];
 let editedContacts = [];
 let editedContactColor = [];
 let editedPrio = [];
@@ -20,7 +20,6 @@ let currentDraggedElement;
 function init() {
   loadTodos();
   updateHTML();
-
 }
 
 async function loadTodos() {
@@ -55,8 +54,10 @@ function generateTodo(element) {
     })' class='todo' onclick="openOverlay(${element["id"]})">
     <div class="todo-category" style="background-color:${element["categoryColor"]
     }">${element["category"]}</div>
-    <div class="todo-title">${element["title"]}</div>
-    <div class="todo-content">${element["description"]}</div>
+    <div class="todo-title">${firstCharToUpperCase(element["title"])}</div>
+    <div class="todo-content">${firstCharToUpperCase(
+      element["description"]
+    )}</div>
     ${generateSubtasks(element)}
     <div class="todo-footer">
       <div class="todo-avatar-container">
@@ -77,6 +78,9 @@ function generateContacts(element) {
       contactColor = element["contactColor"][i];
       contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; left:${i * 30
         }px">${initials}</div>`;
+      if (i >= 6) {
+        break;
+      }
     }
     return contactList;
   } else {
@@ -86,13 +90,14 @@ function generateContacts(element) {
 
 function generateSubtasks(element) {
   if (element["subtasks"].length > 0) {
-    let finishedTasks = 0;
-    let progress = (100 / element["subtasks"].length) * finishedTasks;
+    let finishedTasks = element["subtasks"].filter((t) => t["status"] == true);
+
+    let progress = (100 / element["subtasks"].length) * finishedTasks.length;
     return `<div class="todo-subtasks">
     <div class="status-bar">
-      <div class="status-progress" style="width: ${progress}"></div>
+      <div class="status-progress" style="width: ${progress}%"></div>
     </div>
-    ${finishedTasks}/${element["subtasks"].length} Subtasks</div>`;
+    ${finishedTasks.length}/${element["subtasks"].length} Subtasks</div>`;
   } else {
     return "";
   }
@@ -136,10 +141,6 @@ async function saveBoard() {
 function firstCharToUpperCase(element) {
   return element.charAt(0).toUpperCase() + element.slice(1);
 }
-
-///////////////////////////
-// drag and drop logic END
-
 // overlay logic
 
 function openOverlay(i) {
