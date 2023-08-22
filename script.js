@@ -25,6 +25,7 @@ async function loadTodos() {
   for (let i = 0; i < todos.length; i++) {
     todos[i].id = i;
   }
+  changeAvatarColor();
   console.log(todos);
 }
 
@@ -93,4 +94,18 @@ function getNextDate(element) {
   });
   let monthFull = monthsName[parseInt(nextdate.substring(5, 7))];
   return `${nextdate.substring(8)}. ${monthFull} ${nextdate.substring(0, 4)}`;
+}
+
+function getRandomColor() {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function changeAvatarColor() {
+  document.querySelector(".header-avatar").style.backgroundColor =
+    getRandomColor();
 }
