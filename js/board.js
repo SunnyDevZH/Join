@@ -2,7 +2,7 @@
 let todos = [];
 let contacts = ["Hermine Granger", "Harry Potter", "Ron Weasley"];
 let contactColors = ["#17D264", "#3043F0", "#496F70"];
-let assignedPrio = []; 
+let assignedPrio = [];
 let editedContacts = [];
 let editedContactColor = [];
 let editedPrio = [];
@@ -20,7 +20,6 @@ let currentDraggedElement;
 function init() {
   loadTodos();
   updateHTML();
-
 }
 
 async function loadTodos() {
@@ -51,9 +50,11 @@ function updateHTML() {
 
 function generateTodo(element) {
   return `
-  <div draggable='true' ondragstart='startDragging(${element["id"]
-    })' class='todo' onclick="openOverlay(${element["id"]})">
-    <div class="todo-category" style="background-color:${element["categoryColor"]
+  <div draggable='true' ondragstart='startDragging(${
+    element["id"]
+  })' class='todo' onclick="openOverlay(${element["id"]})">
+    <div class="todo-category" style="background-color:${
+      element["categoryColor"]
     }">${element["category"]}</div>
     <div class="todo-title">${element["title"]}</div>
     <div class="todo-content">${element["description"]}</div>
@@ -75,8 +76,9 @@ function generateContacts(element) {
       let initials = element["assignedContact"][i].split(" ");
       initials = initials[0][0] + initials[1][0];
       contactColor = element["contactColor"][i];
-      contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; left:${i * 30
-        }px">${initials}</div>`;
+      contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; left:${
+        i * 30
+      }px">${initials}</div>`;
     }
     return contactList;
   } else {
@@ -86,13 +88,14 @@ function generateContacts(element) {
 
 function generateSubtasks(element) {
   if (element["subtasks"].length > 0) {
-    let finishedTasks = 0;
-    let progress = (100 / element["subtasks"].length) * finishedTasks;
+    let finishedTasks = element["subtasks"].filter((t) => t["status"] == true);
+
+    let progress = (100 / element["subtasks"].length) * finishedTasks.length;
     return `<div class="todo-subtasks">
     <div class="status-bar">
-      <div class="status-progress" style="width: ${progress}"></div>
+      <div class="status-progress" style="width: ${progress}%"></div>
     </div>
-    ${finishedTasks}/${element["subtasks"].length} Subtasks</div>`;
+    ${finishedTasks.length}/${element["subtasks"].length} Subtasks</div>`;
   } else {
     return "";
   }
@@ -192,7 +195,8 @@ function subtaskUpperCase(i, task) {
 }
 function renderDetailTask(task) {
   return `
-    <div class="todo-category width" style="background-color:${task["categoryColor"]
+    <div class="todo-category width" style="background-color:${
+      task["categoryColor"]
     }">
     ${task["category"]}
     </div>
@@ -214,12 +218,14 @@ function renderDetailTask(task) {
     </div>
     <div class="detail-buttons">
     <div id="delete-btn">
-    <button type="button" onclick="deleteTask(${task["id"]
+    <button type="button" onclick="deleteTask(${
+      task["id"]
     })" class="detail-btn"><img src="./icons/icon_bucket.svg">Delete</button>
     </div>
     <div class="line height"></div>
     <div id="edit-btn">
-    <button txpe ="button" onclick="editTask(${task["id"]
+    <button txpe ="button" onclick="editTask(${
+      task["id"]
     })" class="detail-btn"><img src="./icons/icon_edit.svg">Edit</button>
     </div>`;
 }
@@ -244,7 +250,6 @@ function editTask(i) {
   editTask.innerHTML = renderEditTaskHTML(task);
   getNewDate();
   showEditedTask(task);
-
 }
 function showEditedTask(task) {
   document.getElementById("title").value = task["title"];
@@ -254,7 +259,6 @@ function showEditedTask(task) {
   displayPrio(task);
   displayCategory(task);
   showEditedSubtasks(task);
-
 }
 function displayContacts(task) {
   let contactContent = document.getElementById("contactList");
@@ -318,12 +322,12 @@ function displayPrio(task) {
   const colors = {
     URGENT: "#f55d42",
     MEDIUM: "#f5da42",
-    LOW: "green"
+    LOW: "green",
   };
   const image = `./icons/priority_${prio.toLowerCase()}.svg`;
 
   button.style.backgroundColor = colors[prio];
-  assignedPrio.push(prio, image); 
+  assignedPrio.push(prio, image);
 }
 
 function addPrio(clickedTab) {
@@ -464,16 +468,16 @@ async function addEditTask(i) {
   let editedDescription = document.getElementById("description").value;
   let editedDate = document.getElementById("calendar").value;
   let editedTask = {
-    'step': task["step"],
-    'title': editedTitle || task["title"],
-    'description': editedDescription || task["description"],
-    'assignedContact': editedContacts || task["assignedContact"],
-    'contactColor': editedContactColor || task["contactColor"],
-    'date': editedDate || task["date"],
-    'prio': editedPrio || assignedPrio,
-    'category': editedCategory || task["category"],
-    'categoryColor': editedCategoryColor || task["categoryColor"],
-    'subtasks': editedSubtasks || task["subtasks"],
+    step: task["step"],
+    title: editedTitle || task["title"],
+    description: editedDescription || task["description"],
+    assignedContact: editedContacts || task["assignedContact"],
+    contactColor: editedContactColor || task["contactColor"],
+    date: editedDate || task["date"],
+    prio: editedPrio || assignedPrio,
+    category: editedCategory || task["category"],
+    categoryColor: editedCategoryColor || task["categoryColor"],
+    subtasks: editedSubtasks || task["subtasks"],
   };
   todos[i] = editedTask;
   await saveBoard();
@@ -495,7 +499,7 @@ function clearAll() {
 }
 function renderEditTaskHTML(task) {
   return `
-  <form onsubmit="addEditTask(${task['id']});return false">
+  <form onsubmit="addEditTask(${task["id"]});return false">
             <div class="input-table">
               <div class="left-column">
                 <div class="input-form">

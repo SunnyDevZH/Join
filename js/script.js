@@ -153,4 +153,14 @@ function toggleAvatarMenu() {
   }
 }
 
+function closeAvatarMenuOutside(event) {
+  const avatarMenu = document.getElementById("avatar-menu");
+  const avatarInitials = document.getElementById("avatar-initials");
+  if (!avatarMenu.contains(event.target) && event.target !== avatarInitials) {
+    avatarMenu.classList.add("d-none");
+  }
+}
+
+document.addEventListener("click", closeAvatarMenuOutside);
+
 // header end
