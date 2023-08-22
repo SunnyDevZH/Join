@@ -137,10 +137,13 @@
 
   font-weight: bold;
   font-size: 20px;
+  word-wrap: break-word;
 }
 
 .todo-content {
   margin-bottom: 16px;
+
+  word-wrap: break-word;
 }
 
 .todo-subtasks {
