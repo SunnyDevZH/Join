@@ -145,6 +145,24 @@ function firstCharToUpperCase(element) {
   return element.charAt(0).toUpperCase() + element.slice(1);
 }
 
+function searchTasks() {
+  let col = [];
+  let substring = document.getElementById("board-search").value;
+  console.log(substring);
+
+  // for (let i = 1; i <= 4; i++) {
+  //   col[i - 1] = todos.filter((t) => t["step"] == "col-0" + i);
+  //   document.getElementById("col-0" + i).innerHTML = "";
+  //   if (col[i - 1].length == 0) {
+  //     document.getElementById("col-0" + i).innerHTML = generateEmptyTodo();
+  //   }
+  //   col[i - 1].forEach((todo) => {
+  //     const element = todo;
+  //     document.getElementById("col-0" + i).innerHTML += generateTodo(element);
+  //   });
+  // }
+}
+
 ///////////////////////////
 // drag and drop logic END
 
