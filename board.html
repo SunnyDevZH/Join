@@ -38,7 +38,12 @@
           <h1>Board</h1>
           <div class="board-header-right">
             <div class="searchbar">
-              <input type="text" placeholder="Find Task" />
+              <input
+                id="board-search"
+                type="text"
+                placeholder="Find Task"
+                onkeyup="searchTasks()"
+              />
               <img class="btn-search" src="./icons/icon_search.svg" alt="" />
             </div>
             <button class="button btn-black">
