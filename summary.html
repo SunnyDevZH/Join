@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="./img/logo_favicon.png" />
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body onload="updateSummaryCounter()">
+  <body onload="summaryLoad()">
     <div w3-include-html="navbar.html"></div>
     <div w3-include-html="header.html"></div>
 
@@ -18,8 +18,8 @@
       </div>
       <div class="sum-main">
         <div class="sum-greeting">
-          <p class="fs-32">Good Morning,</p>
-          <p class="sum-name">Guest</p>
+          <p id="sum-greet" class="fs-32">Good Morning,</p>
+          <p id="sum-name" class="sum-name">Guest</p>
         </div>
         <div class="sum-tasks-container">
           <div class="sum-tasks">
@@ -57,7 +57,9 @@
                   border-left: 3px solid rgba(0, 0, 0, 0.2);
                 "
               >
-                <p id="next-date" class="fs-20 fs-b">21. September 2023</p>
+                <p id="next-date" class="fs-20 fs-b">
+                  No urgent task available
+                </p>
                 Upcoming Deadline
               </div>
             </a>

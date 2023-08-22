@@ -1,4 +1,5 @@
 let todos = [];
+let users = [{ username: "Dennis" }, { username: "Hermine" }];
 const monthsName = [
   null,
   "Januar",
@@ -66,6 +67,11 @@ function guestLogin() {
   window.location.href = "./summary.html";
 }
 
+async function summaryLoad() {
+  updateSummaryCounter();
+  updateSummaryGreeting();
+}
+
 async function updateSummaryCounter() {
   await loadTodos();
   document.getElementById("task-board-counter").innerHTML = todos.length;
@@ -85,15 +91,42 @@ async function updateSummaryCounter() {
   document.getElementById("next-date").innerHTML = getNextDate(todoUrgent);
 }
 
+async function updateSummaryGreeting() {
+  document.getElementById("sum-greet").innerHTML = getGreeting();
+  document.getElementById("sum-name").innerHTML = getUserName();
+}
+
+function getGreeting() {
+  let currentDate = new Date();
+  let currentHour = currentDate.getHours();
+  if (currentHour >= 0 && currentHour < 12) {
+    return "Good Morning,";
+  } else if (currentHour >= 12 && currentHour < 18) {
+    return "Good Afternoon,";
+  } else if (currentHour >= 18) {
+    return "Good Evening,";
+  } else {
+    return "Hello,";
+  }
+}
+
+function getUserName() {
+  return users[1]["username"];
+}
+
 function getNextDate(element) {
-  let nextdate = "3000-01-01";
-  element.forEach((todo) => {
-    if (todo["date"] < nextdate) {
-      nextdate = todo["date"];
-    }
-  });
-  let monthFull = monthsName[parseInt(nextdate.substring(5, 7))];
-  return `${nextdate.substring(8)}. ${monthFull} ${nextdate.substring(0, 4)}`;
+  if (element.length > 0) {
+    let nextdate = "3000-01-01";
+    element.forEach((todo) => {
+      if (todo["date"] < nextdate) {
+        nextdate = todo["date"];
+      }
+    });
+    let monthFull = monthsName[parseInt(nextdate.substring(5, 7))];
+    return `${nextdate.substring(8)}. ${monthFull} ${nextdate.substring(0, 4)}`;
+  } else {
+    return "No urgent task available";
+  }
 }
 
 // header
