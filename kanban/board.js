@@ -2,6 +2,13 @@
 let todos = [];
 let contacts = ['Hermine Granger', 'Harry Potter', 'Ron Weasley'];
 let contactColors = ['#17D264', '#3043F0', '#496F70'];
+let editedContacts = [];
+let editedContactColor = [];
+let editetdPrio = [];
+let editedSubtasks = [];
+let editedCol;
+let editedCategory;
+let editedCategoryColor;
 
 // const icon_prio_low = "./icons/priority_low.svg";
 // const icon_prio_med = "./icons/priority_medium.svg";
@@ -195,11 +202,11 @@ function renderDetailTask(task) {
     </div>
     <div class="detail-buttons">
     <div id="delete-btn">
-    <button onclick="deleteTask(${task['id']})" class="detail-btn"><img src="./icons/icon_bucket.svg">Delete</button>
+    <button type="button" onclick="deleteTask(${task['id']})" class="detail-btn"><img src="./icons/icon_bucket.svg">Delete</button>
     </div>
     <div class="line height"></div>
     <div id="edit-btn">
-    <button onclick="editTask(${task['id']})" class="detail-btn"><img src="./icons/icon_edit.svg">Edit</button>
+    <button txpe ="button" onclick="editTask(${task['id']})" class="detail-btn"><img src="./icons/icon_edit.svg">Edit</button>
     </div>`;
 }
 async function deleteTask(taskId) {
@@ -248,7 +255,27 @@ function showContactList() {
     contactContent.classList.add('d-none');
   }
 }
-
+function addContactToTask(i) {
+  let chosenContact = document.getElementById(`contact${i}`);
+  let contact = chosenContact.innerText;
+  let contactColor = contactColors[i];
+  if (chosenContact.style.backgroundColor !== 'lightgrey') {
+    chosenContact.style.backgroundColor = 'lightgrey';
+    if (!editedContacts.includes(contact)) {
+      editedContacts.push(contact)
+      editedContactColor.push(contactColor);
+    }
+  }
+  else {
+    chosenContact.style.backgroundColor = 'white';
+    let index = editedContacts.indexOf(contact);
+    let colorIndex = editedContactColor.indexOf(contactColor);
+    if (index > -1 || colorIndex > -1) {
+      editedContacts.splice(index, 1);
+      editedContactColor.splice(colorIndex, 1)
+    }
+  }
+}
 function renderContactHTML(contact, contactColor, i, task) {
   let backgroundColor = task['assignedContact'].includes(contact) ? 'lightgrey' : '';
   return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})" style="background-color: ${backgroundColor};">
@@ -273,6 +300,7 @@ function displayPrio(task) {
     button = document.getElementById('low');
     button.style.backgroundColor = 'green';
   }
+
 }
 function addPrio(clickedTab) {
   let alertArea = document.getElementById('priorityAlert');
@@ -280,18 +308,19 @@ function addPrio(clickedTab) {
   let priority;
   let image;
   if (clickedTab === 'urgent') {
-      checkPrio(clickedTab);
-      priority = 'URGENT';
-      image = './icons/priority_urgent.svg';
+    checkPrio(clickedTab);
+    priority = 'URGENT';
+    image = './icons/priority_urgent.svg';
   } else if (clickedTab === 'medium') {
-      checkPrio(clickedTab);
-      priority = 'MEDIUM';
-      image = './icons/priority_medium.svg';
+    checkPrio(clickedTab);
+    priority = 'MEDIUM';
+    image = './icons/priority_medium.svg';
   } else if (clickedTab === 'low') {
-      checkPrio(clickedTab);
-      priority = 'LOW';
-      image = './icons/priority_low.svg';
+    checkPrio(clickedTab);
+    priority = 'LOW';
+    image = './icons/priority_low.svg';
   }
+  editetdPrio.push(priority, image);
 }
 function checkPrio(clickedTab) {
   assignedPrio = [];
@@ -299,8 +328,8 @@ function checkPrio(clickedTab) {
   const colors = ['#f55d42', '#f5da42', 'green'];
 
   tabs.forEach((tab, index) => {
-      const backgroundColor = clickedTab === tab ? colors[index] : 'white';
-      document.getElementById(tab).style.backgroundColor = backgroundColor;
+    const backgroundColor = clickedTab === tab ? colors[index] : 'white';
+    document.getElementById(tab).style.backgroundColor = backgroundColor;
   });
 }
 function displayCategory(task) {
@@ -312,6 +341,21 @@ function displayCategory(task) {
   categoryElement.style.backgroundColor = categoryColor;
   categoryElement.style.color = 'white';
   renderCategories(task);
+}
+function chooseCategory(i) {
+  let alertArea = document.getElementById('categoryAlert');
+  alertArea.classList.add('d-none');
+
+  const selectedCategoryElement = document.getElementById(`category${i}`);
+  const selectedCategory = selectedCategoryElement.innerText;
+  const selectedColor = selectedCategoryElement.querySelector("circle").getAttribute("fill");
+
+  categoryInput.value = editedCategory = selectedCategory;
+  categoryInput.style.backgroundColor = editedCategoryColor = selectedColor;
+  categoryInput.style.color = 'white';
+  categoryInput.style.fontWeight = 'bold';
+  hideCategoryList();
+  document.getElementById('categoryAlert').classList.add('d-none');
 }
 function renderCategories() {
   let contentList = document.getElementById('contentCategories');
@@ -350,26 +394,83 @@ function showEditedSubtasks(task) {
   for (i = 0; i < subtasks.length; i++) {
     let subtask = task['subtasks'][i]['value'];
     let subtaskCheckBox = task['subtasks'][i]['imageSrc'];
+    let subtaskObj = {
+      value: subtask,
+      imageSrc: './icons/checkbutton_default.svg',
+      status: false
+    }
+    editedSubtasks.push(subtaskObj);
+
     subtaskElement.innerHTML += `<div class="detailSubtask">
         <img id="unchecked${i}" onclick="changeCheckbox(${i})" src="${subtaskCheckBox}">${subtask}
         </div>`;
   }
+
 }
 function editSubtask() {
   let subtaskElement = document.getElementById('subtaskContent');
   let newSubtask = document.getElementById('subtask').value;
-  subtaskElement.innerHTML += `<div class="detailSubtask">
+  let addButton = document.getElementById('addSubtaskButton');
+  if (newSubtask.length < 3) {
+    addButton.disabled;
+  }
+  else if (newSubtask.length >= 3) {
+    addButton.enabled;
+    let subtaskObj = {
+      value: newSubtask,
+      imageSrc: './icons/checkbutton_default.svg',
+      status: false
+    };
+    editedSubtasks.push(subtaskObj);
+    subtaskElement.innerHTML += `<div class="detailSubtask">
   <img id="unchecked${i}" onclick="changeCheckbox(${i})" src="./icons/checkbutton_default.svg">${newSubtask}
   </div>`;
+  }
+  document.getElementById('subtask').value = '';
 }
 function changeCheckbox(i) {
   let checkBox = document.getElementById(`unchecked${i}`);
   if (checkBox.src.includes('checkbutton_default')) {
+    editedSubtasks[i].imageSrc = './icons/checkbutton_checked.svg';
+    editedSubtasks[i].status = true;
     checkBox.src = './icons/checkbutton_checked.svg';
+  } else {
+    editedSubtasks[i].imageSrc = './icons/checkbutton_default.svg';
+    editedSubtasks[i].status = false;
+    checkBox.src = './icons/checkbutton_default.svg';
   }
-  else { checkBox.src = './icons/checkbutton_default.svg' }
 }
 
+async function addEditTask(i) {
+
+  let task = todos[i];
+  let editedTitle = document.getElementById('title').value;
+  let editedDescription = document.getElementById('description').value;
+  let editedDate = document.getElementById('calendar').value;
+  let editedTask = {
+    'step': task['step'],
+    'title': editedTitle,
+    'description': editedDescription,
+    'assignedContact': editedContacts,
+    'contactColor': editedContactColor,
+    'date': editedDate,
+    'prio': editetdPrio,
+    'category': editedCategory,
+    'categoryColor': editedCategoryColor,
+    'subtasks': editedSubtasks,
+  }
+  editedTask.assignedContact = task.assignedContact;
+  editedTask.contactColor = task.contactColor;
+  editedTask.prio = task.prio;
+  editedTask.category = task.category;
+  editedTask.categoryColor = task.categoryColor;
+  
+
+  todos[i] = editedTask;
+  await saveBoard();
+  init();
+  closeOverlay(); 
+}
 function closeOverlay() {
   document.getElementById("overlay-container").classList.add("d-none");
 }
