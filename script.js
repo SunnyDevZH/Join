@@ -30,31 +30,34 @@ async function loadTodos() {
 
 function renderLogin() {
   document.getElementById("login-container").innerHTML = `
-    <div class="background">
-        <header class="loginHeader">
-            <div class="displayFlex">
-                <p>Not a Join user?</p>
-                <button>Sign Up</button>
-            </div>
-        </header>
-        <div class="alignItems">
-            <div class="loginContainer">
-                <h1>Log in</h1>
-                <form onsubmit="register(); return false;">
-                    <input required type="email" id="email" placeholder="Email">
-                    <input required type="password" id="password" placeholder="Password">
-                  </form>
-                <div>
-                    <input type="checkbox" name="Remember" id="remember"><label for="remember">Remember me</label>
-                    <a href="#">I forgot my password</a>
-                </div>
-                <div>
-                    <button id="registerBtn">Log in</button>
-                    <button onclick="guestLogin()">Guest Log in</button>
-                </div>
-            </div>
-        </div>
-    </div>
+  <header class="loginHeader">
+  <div class="signUp">
+      <p>Not a Join user?</p>
+      <button class="signUpButton" onclick="window.location.href='../signUp/signUp.html'">Sign up</button> 
+  </div>
+</header>
+<div class="alignItems">
+  <div class="loginContainer">
+      <h1>Log in</h1>
+      <form class="flexdirection" onsubmit="login(); return false;">
+          <input required type="email" id="email" placeholder="Email"> 
+          <input required type="password" id="password" placeholder="Password">
+          <div>
+              <input type="checkbox" onclick="save()" name="Remember" id="remember"><label for="remember">Remember me</label>
+              <a href="../forgotSend/forgotSend.html">I forgot my password</a>
+          </div>
+          <div>
+              <button on>Log in</button>
+              <button onclick="window.location.href= '../summary.html';">Guest Log in</button>
+          </div>
+      </form>
+      <div id="msgBox"></div> <!-- Falsches Passwort-->
+  </div>
+</div>
+<footer>
+  <a  class="privacy" href="../privacyPolicy.html">Privacy Policy</a>
+  <a class="legal" href="../legalNotice.html">Legal notice</a>
+</footer>
     `;
 }
 
