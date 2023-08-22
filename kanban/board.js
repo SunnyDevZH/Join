@@ -4,7 +4,7 @@ let contacts = ['Hermine Granger', 'Harry Potter', 'Ron Weasley'];
 let contactColors = ['#17D264', '#3043F0', '#496F70'];
 let editedContacts = [];
 let editedContactColor = [];
-let editetdPrio = [];
+let editedPrio = [];
 let editedSubtasks = [];
 let editedCol;
 let editedCategory;
@@ -323,10 +323,10 @@ function addPrio(clickedTab) {
     priority = 'LOW';
     image = './icons/priority_low.svg';
   }
-  editetdPrio.push(priority, image);
+  editedPrio.push(priority, image);
 }
 function checkPrio(clickedTab) {
-  assignedPrio = [];
+  editedPrio = [];
   const tabs = ['urgent', 'medium', 'low'];
   const colors = ['#f55d42', '#f5da42', 'green'];
 
