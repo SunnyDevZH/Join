@@ -35,3 +35,22 @@
   color: #ffffff;
   cursor: pointer;
 }
+
+#avatar-menu {
+  position: absolute;
+  top: 64px;
+  right: 48px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  padding: 16px;
+
+  background-color: #2a3647;
+  border-radius: 16px 0 16px 16px;
+}
+
+#avatar-menu a {
+  color: #fff;
+}

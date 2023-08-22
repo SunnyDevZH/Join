@@ -96,6 +96,8 @@ function getNextDate(element) {
   return `${nextdate.substring(8)}. ${monthFull} ${nextdate.substring(0, 4)}`;
 }
 
+// header
+
 function getRandomColor() {
   const letters = "0123456789ABCDEF";
   let color = "#";
@@ -109,3 +111,13 @@ function changeAvatarColor() {
   document.querySelector(".header-avatar").style.backgroundColor =
     getRandomColor();
 }
+
+function toggleAvatarMenu() {
+  if (document.getElementById("avatar-menu").classList.contains("d-none")) {
+    document.getElementById("avatar-menu").classList.remove("d-none");
+  } else {
+    document.getElementById("avatar-menu").classList.add("d-none");
+  }
+}
+
+// header end

@@ -131,7 +131,7 @@ button {
 }
 
 .d-none {
-  display: none;
+  display: none !important;
 }
 
 /* basic styling END */
