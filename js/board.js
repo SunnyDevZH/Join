@@ -19,7 +19,7 @@ let currentDraggedElement;
 function init() {
   loadTodos();
   updateHTML();
-  getNewDate();
+
 }
 
 async function loadTodos() {
@@ -50,11 +50,9 @@ function updateHTML() {
 
 function generateTodo(element) {
   return `
-  <div draggable='true' ondragstart='startDragging(${
-    element["id"]
-  })' class='todo' onclick="openOverlay(${element["id"]})">
-    <div class="todo-category" style="background-color:${
-      element["categoryColor"]
+  <div draggable='true' ondragstart='startDragging(${element["id"]
+    })' class='todo' onclick="openOverlay(${element["id"]})">
+    <div class="todo-category" style="background-color:${element["categoryColor"]
     }">${element["category"]}</div>
     <div class="todo-title">${element["title"]}</div>
     <div class="todo-content">${element["description"]}</div>
@@ -76,9 +74,8 @@ function generateContacts(element) {
       let initials = element["assignedContact"][i].split(" ");
       initials = initials[0][0] + initials[1][0];
       contactColor = element["contactColor"][i];
-      contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; left:${
-        i * 30
-      }px">${initials}</div>`;
+      contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; left:${i * 30
+        }px">${initials}</div>`;
     }
     return contactList;
   } else {
@@ -194,8 +191,7 @@ function subtaskUpperCase(i, task) {
 }
 function renderDetailTask(task) {
   return `
-    <div class="todo-category width" style="background-color:${
-      task["categoryColor"]
+    <div class="todo-category width" style="background-color:${task["categoryColor"]
     }">
     ${task["category"]}
     </div>
@@ -217,14 +213,12 @@ function renderDetailTask(task) {
     </div>
     <div class="detail-buttons">
     <div id="delete-btn">
-    <button type="button" onclick="deleteTask(${
-      task["id"]
+    <button type="button" onclick="deleteTask(${task["id"]
     })" class="detail-btn"><img src="./icons/icon_bucket.svg">Delete</button>
     </div>
     <div class="line height"></div>
     <div id="edit-btn">
-    <button txpe ="button" onclick="editTask(${
-      task["id"]
+    <button txpe ="button" onclick="editTask(${task["id"]
     })" class="detail-btn"><img src="./icons/icon_edit.svg">Edit</button>
     </div>`;
 }
@@ -235,17 +229,21 @@ async function deleteTask(taskId) {
   }
   document.getElementById("overlay-container").classList.add("d-none");
   await saveBoard();
-  updateHTML();
+  init();
 }
 function getNewDate() {
   let today = new Date().toISOString().split("T")[0];
   document.getElementById("calendar").setAttribute("min", today);
 }
 function editTask(i) {
-  document.getElementById("showDetailTask").classList.add("d-none");
-  document.getElementById("showEditTask").classList.remove("d-none");
   const task = todos[i];
+  document.getElementById("showDetailTask").classList.add("d-none");
+  let editTask = document.getElementById("showEditTask");
+  editTask.classList.remove("d-none");
+  editTask.innerHTML = renderEditTaskHTML(task);
+  getNewDate();
   showEditedTask(task);
+
 }
 function showEditedTask(task) {
   document.getElementById("title").value = task["title"];
@@ -255,6 +253,7 @@ function showEditedTask(task) {
   displayPrio(task);
   displayCategory(task);
   showEditedSubtasks(task);
+
 }
 function displayContacts(task) {
   let contactContent = document.getElementById("contactList");
@@ -347,7 +346,6 @@ function addPrio(clickedTab) {
   editedPrio.push(priority, image);
 }
 function checkPrio(clickedTab) {
-  editedPrio = [];
   const tabs = ["urgent", "medium", "low"];
   const colors = ["#f55d42", "#f5da42", "green"];
 
@@ -474,23 +472,17 @@ async function addEditTask(i) {
   let editedDescription = document.getElementById("description").value;
   let editedDate = document.getElementById("calendar").value;
   let editedTask = {
-    step: task["step"],
-    title: editedTitle,
-    description: editedDescription,
-    assignedContact: editedContacts,
-    contactColor: editedContactColor,
-    date: editedDate,
-    prio: editedPrio,
-    category: editedCategory,
-    categoryColor: editedCategoryColor,
-    subtasks: editedSubtasks,
+    'step': task["step"],
+    'title': editedTitle || task["title"],
+    'description': editedDescription || task["description"],
+    'assignedContact': editedContacts || task["assignedContact"],
+    'contactColor': editedContactColor || task["contactColor"],
+    'date': editedDate || task["date"],
+    'prio': editedPrio || task["prio"],
+    'category': editedCategory || task["category"],
+    'categoryColor': editedCategoryColor || task["categoryColor"],
+    'subtasks': editedSubtasks || task["subtasks"],
   };
-  editedTask.assignedContact = task.assignedContact;
-  editedTask.contactColor = task.contactColor;
-  editedTask.prio = task.prio;
-  editedTask.category = task.category;
-  editedTask.categoryColor = task.categoryColor;
-
   todos[i] = editedTask;
   await saveBoard();
   init();
@@ -498,6 +490,94 @@ async function addEditTask(i) {
 }
 function closeOverlay() {
   document.getElementById("overlay-container").classList.add("d-none");
+  clearAll();
 }
+function clearAll() {
+ editedContacts = [];
+ editedContactColor = [];
+ editedPrio = [];
+ editedSubtasks = [];
+ editedCol;
+ editedCategory;
+ editedCategoryColor; 
+}
+function renderEditTaskHTML(task) {
+  return `
+  <form onsubmit="addEditTask(${task['id']});return false">
+            <div class="input-table">
+              <div class="left-column">
+                <div class="input-form">
+                  <span>Title</span>
+                  <input id="title" required placeholder="Enter a Title" />
+                </div>
+                <div class="input-form">
+                  <span>Description</span>
+                  <textarea id="description" required placeholder="Enter a Description"></textarea>
+                </div>
+                <div class="input-form">
+                  <span>Assigned to</span>
+                  <div class="input-with-button">
+                    <input disabled placeholder="Select Contacts to Assign" />
+                    <button id="contactListButton" type="button" onclick="showContactList()">
+                      <img src="./icons/dropdown.svg" />
+                    </button>
+                  </div>
+                  <div class="list d-none" id="contactList"></div>
+                </div>
+              </div>
+              <div class="line"></div>
+              <div class="right-column">
+                <div class="input-form">
+                  <span>Due date</span>
+                  <input type="date" id="calendar" required placeholder="dd/mm/yyyy" />
+                </div>
+                <div class="input-form">
+                  <span>Prio</span>
+                  <div class="prio-buttons">
+                    <button type="button" id="urgent" onclick="addPrio('urgent')">
+                      URGENT <img src="./icons/priority_urgent.svg" />
+                    </button>
+                    <button type="button" id="medium" onclick="addPrio('medium')">
+                      MEDIUM <img src="./icons/priority_medium.svg" />
+                    </button>
+                    <button type="button" id="low" onclick="addPrio('low')">
+                      LOW <img src="./icons/priority_low.svg" />
+                    </button>
+                  </div>
+                  <div id="priorityAlert"></div>
+                </div>
+                <div class="input-form">
+                  <span>Category</span>
+                  <div class="input-with-button">
+                    <input id="categoryInput" disabled placeholder="Select task category" />
+                    <button id="addCategoryButton" type="button" onclick="showAllCategories()">
+                      <img src="./icons/dropdown.svg" />
+                    </button>
+                    <button id="addNewCategoryButton" class="d-none" type="button" onclick="pushNewCategory()">
+                      <img src="./icons/correct.svg" />
+                    </button>
+                  </div>
+                  <div id="contentCategories" class="list d-none"></div>
+                  <div id="categoryAlert"></div>
+                </div>
 
+                <div class="input-form">
+                  <span>Subtasks</span>
+                  <div class="input-with-button">
+                    <input id="subtask" minlength="3" placeholder="Add new subtask" />
+                    <button id="addSubtaskButton" type="button" onclick="editSubtask()">
+                      <img src="./icons/plus.svg" />
+                    </button>
+                  </div>
+                  <div id="subtaskContent"></div>
+                </div>
+              </div>
+            </div>
+            <div class="submit-buttons">
+              <button type="submit">
+                Edit Task<img src="./icons/correct.svg" />
+              </button>
+            </div>
+          </form>`;
+}
 // overlay logic END
