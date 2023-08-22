@@ -56,8 +56,10 @@ function generateTodo(element) {
     <div class="todo-category" style="background-color:${
       element["categoryColor"]
     }">${element["category"]}</div>
-    <div class="todo-title">${element["title"]}</div>
-    <div class="todo-content">${element["description"]}</div>
+    <div class="todo-title">${firstCharToUpperCase(element["title"])}</div>
+    <div class="todo-content">${firstCharToUpperCase(
+      element["description"]
+    )}</div>
     ${generateSubtasks(element)}
     <div class="todo-footer">
       <div class="todo-avatar-container">
@@ -133,6 +135,10 @@ function removeHighlight(id) {
 
 async function saveBoard() {
   await setItem("allTasks", JSON.stringify(todos));
+}
+
+function firstCharToUpperCase(element) {
+  return element.charAt(0).toUpperCase() + element.slice(1);
 }
 
 // drag and drop logic END
