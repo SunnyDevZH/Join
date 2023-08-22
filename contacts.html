@@ -11,38 +11,32 @@
   </head>
 
   <body onload="load()">
-    <div class="margin">
-      <div w3-include-html="navbar.html"></div>
-      <div class="header">
-        Kanban Project Managemant Tool
-      </div>
-        <div class="maincontainer">
-          <div class="scrolebar">
-            <button class="addButton" onclick="addContact()">Add new contact +</button>
-            <!-- my Contact-->
-            <div id="mycontact"></div>
-          </div>
-          <div>
-            <div id="" class="containerTeam">
-              <h1>Contacts</h1>
-              <div class="line"></div>
-              <p>Better with a team</p>
-            </div>
-            <!-- Add Contact-->
-            <div id="addcontact"></div>
-          </div>  
-        </div>
-      </div>
-    </div>
-    <div>
+    <div w3-include-html="navbar.html"></div>
+    <div w3-include-html="header.html"></div>
 
+    <div class="maincontainer">
+      <div class="scrolebar">
+        <button class="addButton" onclick="addContact()">
+          Add new contact +
+        </button>
+        <!-- my Contact-->
+        <div id="mycontact"></div>
+      </div>
+      <div>
+        <div id="" class="containerTeam">
+          <h1>Contacts</h1>
+          <div class="line"></div>
+          <p>Better with a team</p>
+        </div>
+        <!-- Add Contact-->
+        <div id="addcontact"></div>
+      </div>
     </div>
-    
+
+    <div></div>
+
     <script src="./contacts.js"></script>
     <script src="./js/include.js"></script>
-    
-    
-
-  
+    <script src="./script.js"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-let todos = [];
+let sumTodos = [];
 let users = [{ username: "Dennis" }, { username: "Hermine" }];
 const monthsName = [
   null,
@@ -22,12 +22,12 @@ function init() {
 
 async function loadTodos() {
   let newTodos = await getItem("allTasks");
-  todos = JSON.parse(newTodos);
-  for (let i = 0; i < todos.length; i++) {
-    todos[i].id = i;
+  sumTodos = JSON.parse(newTodos);
+  for (let i = 0; i < sumTodos.length; i++) {
+    sumTodos[i].id = i;
   }
   changeAvatarColor();
-  console.log(todos);
+  console.log(sumTodos);
 }
 
 function renderLogin() {
@@ -74,18 +74,18 @@ async function summaryLoad() {
 
 async function updateSummaryCounter() {
   await loadTodos();
-  document.getElementById("task-board-counter").innerHTML = todos.length;
-  let todoProgress = todos.filter((t) => t["step"] == "col-02");
+  document.getElementById("task-board-counter").innerHTML = sumTodos.length;
+  let todoProgress = sumTodos.filter((t) => t["step"] == "col-02");
   document.getElementById("todo-inprogress-counter").innerHTML =
     todoProgress.length;
-  let todoAwait = todos.filter((t) => t["step"] == "col-03");
+  let todoAwait = sumTodos.filter((t) => t["step"] == "col-03");
   document.getElementById("todo-await-counter").innerHTML = todoAwait.length;
-  let todoOpen = todos.filter((t) => t["step"] == "col-01");
+  let todoOpen = sumTodos.filter((t) => t["step"] == "col-01");
   document.getElementById("todo-open-counter").innerHTML = todoOpen.length;
-  let todoDone = todos.filter((t) => t["step"] == "col-04");
+  let todoDone = sumTodos.filter((t) => t["step"] == "col-04");
   document.getElementById("todo-done-counter").innerHTML = todoDone.length;
 
-  let todoUrgent = todos.filter((t) => t["prio"][0] == "URGENT");
+  let todoUrgent = sumTodos.filter((t) => t["prio"][0] == "URGENT");
   document.getElementById("todo-prio-counter").innerHTML = todoUrgent.length;
 
   document.getElementById("next-date").innerHTML = getNextDate(todoUrgent);
