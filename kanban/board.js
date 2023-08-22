@@ -138,6 +138,8 @@ async function saveBoard() {
 function openOverlay(i) {
   const task = todos[i];
   document.getElementById("overlay-container").classList.remove("d-none");
+  document.getElementById('showEditTask').classList.add('d-none'); 
+  document.getElementById('showDetailTask').classList.remove('d-none'); 
   let detail = document.getElementById('showDetailTask');
   detail.innerHTML = '';
   detail.innerHTML += renderDetailTask(task);
@@ -241,6 +243,7 @@ function showEditedTask(task) {
 function displayContacts(task) {
   let contactContent = document.getElementById('contactList');
   contactContent.classList.remove('d-none');
+  contactContent.innerHTML = ''; 
   for (i = 0; i < contacts.length; i++) {
     let contact = contacts[i];
     let contactColor = contactColors[i];
@@ -391,6 +394,7 @@ function renderCategoryHTML(taskCategory, taskColor, i) {
 function showEditedSubtasks(task) {
   let subtaskElement = document.getElementById('subtaskContent');
   let subtasks = task['subtasks'];
+  subtaskElement.innerHTML = ''; 
   for (i = 0; i < subtasks.length; i++) {
     let subtask = task['subtasks'][i]['value'];
     let subtaskCheckBox = task['subtasks'][i]['imageSrc'];
