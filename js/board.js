@@ -22,7 +22,7 @@ function init() {
   loadTodos();
   updateHTML();
   loadCategory();
-  
+
 }
 
 async function loadTodos() {
@@ -33,6 +33,7 @@ async function loadTodos() {
   }
   console.log(todos);
   updateHTML();
+  pushCategories(); 
 }
 
 function updateHTML() {
@@ -146,14 +147,16 @@ function firstCharToUpperCase(element) {
 }
 // overlay logic
 async function pushCategories() {
+  taskCategories = [];
+  taskColors = [];
 
   for (i = 0; i < todos.length; i++) {
     if (!taskCategories.includes(todos[i]['category'])) {
       taskCategories.push(todos[i]['category']);
       taskColors.push(todos[i]['categoryColor']);
-      await saveCategory();
-      await loadCategory();
-    }
+
+    } await saveCategory();
+    await loadCategory();
   }
 }
 function openOverlay(i) {
@@ -451,7 +454,6 @@ function chooseCategory(i) {
   document.getElementById('categoryAlert').classList.add('d-none');
 }
 function renderCategories() {
-  pushCategories();
   let contentList = document.getElementById('contentCategories');
   if (isClicked == false) {
     contentList.innerHTML += renderNewCategoryHTML();
