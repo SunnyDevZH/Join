@@ -469,7 +469,7 @@ async function addEditTask(i) {
   let editedDate = document.getElementById("calendar").value;
   let editedTask = {
     'step': task["step"],
-    'title': editedTitle, 
+    'title': editedTitle,
     'description': editedDescription,
     'assignedContact': editedContacts,
     'contactColor': editedContactColor,
