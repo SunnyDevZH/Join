@@ -101,18 +101,22 @@ function getNewDate() {
 function addPrio(clickedTab) {
     let alertArea = document.getElementById('priorityAlert');
     alertArea.classList.add('d-none');
+    resetImages();
     let priority;
     let image;
     if (clickedTab === 'urgent') {
         checkPrio(clickedTab);
+        changeImage(clickedTab);
         priority = 'URGENT';
         image = './icons/priority_urgent.svg';
     } else if (clickedTab === 'medium') {
         checkPrio(clickedTab);
+        changeImage(clickedTab);
         priority = 'MEDIUM';
         image = './icons/priority_medium.svg';
     } else if (clickedTab === 'low') {
         checkPrio(clickedTab);
+        changeImage(clickedTab);
         priority = 'LOW';
         image = './icons/priority_low.svg';
     }
@@ -124,11 +128,24 @@ function checkPrio(clickedTab) {
     const tabs = ['urgent', 'medium', 'low'];
     const colors = ['#FF3D00', '#FFA800', '#7AE229'];
 
+
     tabs.forEach((tab, index) => {
         const backgroundColor = clickedTab === tab ? colors[index] : 'white';
         document.getElementById(tab).style.backgroundColor = backgroundColor;
     });
 }
+function changeImage(clickedTab) {
+    const imgPath = "./icons/priority_" + clickedTab + "_default.svg";
+    document.getElementById(clickedTab + "-img").src = imgPath;
+}
+function resetImages() {
+    document.getElementById('urgent-img').src = "./icons/priority_urgent.svg";
+    document.getElementById('medium-img').src = "./icons/priority_medium.svg";
+    document.getElementById('low-img').src = "./icons/priority_low.svg";
+}
+
+
+
 //* clears the PrioButtons and the Array
 function resetPrio() {
     assignedPrio = [];
@@ -280,9 +297,9 @@ function addContactToTask(i) {
         chosenContact.style.backgroundColor = 'white';
         let index = assignedContacts.indexOf(contact);
         let colorIndex = assignedContactColor.indexOf(contactColor);
-        if (index > -1 || colorIndex > -1) { 
+        if (index > -1 || colorIndex > -1) {
             assignedContacts.splice(index, 1);
-            assignedContactColor.splice(colorIndex, 1) 
+            assignedContactColor.splice(colorIndex, 1)
         }
     }
 }
@@ -357,8 +374,8 @@ function renderNewCategoryHTML() {
     return `<div class="option" id="newCategory" onclick="addNewCategory()">Add New Category</div>`;
 }
 function renderCategoryHTML(taskCategory, taskColor, i) {
-    return `<div class="option">
-            <div id="category${i}" onclick="chooseCategory(${i})">${taskCategory} ${renderSVG(taskColor)}
+    return `<div class="option space-between">
+            <div class="space-between" id="category${i}" onclick="chooseCategory(${i})"> ${taskCategory} ${renderSVG(taskColor)}  
             </div>
             </div>`;
 }
@@ -368,7 +385,7 @@ function renderContactHTML(contact, contactColor, i) {
     </div>`
 }
 function renderSubtaskHTML(subtaskObj, i) {
-    return `<div class="option">${subtaskObj.value} 
-    <img id="subtaskImage${i}" onclick="checkSubtask(${i})" src="${subtaskObj.imageSrc}">
+    return `<div class="option"> 
+    <img id="subtaskImage${i}" onclick="checkSubtask(${i})" src="${subtaskObj.imageSrc}">${subtaskObj.value}
     </div>`;
 }

@@ -77,6 +77,7 @@ button img {
 .prio-buttons {
     display: flex;
     gap: 8px;
+    
 }
 
 .submit-buttons {
@@ -89,8 +90,9 @@ button img {
 .invert img {
     filter: invert();
 }
-.invert:hover img{
-    filter:unset; 
+
+.invert:hover img {
+    filter: unset;
 }
 
 .submit-buttons button {
@@ -111,6 +113,9 @@ button img {
     border: 2px solid #29ABE2;
     background-color: white;
 }
+.stroke:hover {
+    stroke: #29ABE2; 
+}
 
 
 textarea {
@@ -121,12 +126,20 @@ textarea {
     padding: 10px 2px 40px 23px;
     font-family: "Inter", Helvetica, sans-serif;
 }
+
 .prio button {
     font-size: 21px;
     font-weight: 700;
     border-radius: 10px;
     border: 0px;
+    display: flex; 
+    align-items: center;
 }
+.prio:hover {
+    box-shadow:  0px 4px 0px rgba(0, 0, 0, 0.10);
+}
+
+
 .input-with-button img {
     width: 18px;
 
@@ -172,6 +185,12 @@ textarea {
     padding: 4px;
     display: flex;
     align-items: center;
+}
+.space-between {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    width: 100%; 
 }
 
 .d-none {
