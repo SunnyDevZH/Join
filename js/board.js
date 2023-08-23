@@ -22,7 +22,6 @@ function init() {
   loadTodos();
   updateHTML();
   loadCategory();
-
 }
 
 async function loadTodos() {
@@ -33,7 +32,7 @@ async function loadTodos() {
   }
   console.log(todos);
   updateHTML();
-  pushCategories(); 
+  pushCategories();
 }
 
 function updateHTML() {
@@ -54,9 +53,11 @@ function updateHTML() {
 
 function generateTodo(element) {
   return `
-  <div draggable='true' ondragstart='startDragging(${element["id"]
-    })' class='todo' onclick="openOverlay(${element["id"]})">
-    <div class="todo-category" style="background-color:${element["categoryColor"]
+  <div draggable='true' ondragstart='startDragging(${
+    element["id"]
+  })' class='todo' onclick="openOverlay(${element["id"]})">
+    <div class="todo-category" style="background-color:${
+      element["categoryColor"]
     }">${element["category"]}</div>
     <div class="todo-title">${firstCharToUpperCase(element["title"])}</div>
     <div class="todo-content">${firstCharToUpperCase(
@@ -80,8 +81,9 @@ function generateContacts(element) {
       let initials = element["assignedContact"][i].split(" ");
       initials = initials[0][0] + initials[1][0];
       contactColor = element["contactColor"][i];
-      contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; left:${i * 30
-        }px">${initials}</div>`;
+      contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; left:${
+        i * 30
+      }px">${initials}</div>`;
       if (i >= 6) {
         break;
       }
@@ -145,17 +147,39 @@ async function saveBoard() {
 function firstCharToUpperCase(element) {
   return element.charAt(0).toUpperCase() + element.slice(1);
 }
+
+function searchTasks() {
+  let col = [];
+  let substring = document.getElementById("board-search").value;
+
+  for (let i = 1; i <= 4; i++) {
+    col[i - 1] = todos.filter(
+      (t) =>
+        t["step"] == "col-0" + i &&
+        (t["title"].includes(substring) || t["description"].includes(substring))
+    );
+    document.getElementById("col-0" + i).innerHTML = "";
+    if (col[i - 1].length == 0) {
+      document.getElementById("col-0" + i).innerHTML = generateEmptyTodo();
+    }
+    col[i - 1].forEach((todo) => {
+      const element = todo;
+      document.getElementById("col-0" + i).innerHTML += generateTodo(element);
+    });
+  }
+}
+
 // overlay logic
 async function pushCategories() {
   taskCategories = [];
   taskColors = [];
 
   for (i = 0; i < todos.length; i++) {
-    if (!taskCategories.includes(todos[i]['category'])) {
-      taskCategories.push(todos[i]['category']);
-      taskColors.push(todos[i]['categoryColor']);
-
-    } await saveCategory();
+    if (!taskCategories.includes(todos[i]["category"])) {
+      taskCategories.push(todos[i]["category"]);
+      taskColors.push(todos[i]["categoryColor"]);
+    }
+    await saveCategory();
     await loadCategory();
   }
 }
@@ -196,7 +220,9 @@ function generateDetailSubtasks(task) {
   for (i = 0; i < subtasks.length; i++) {
     let subtaskCheckBox = task["subtasks"][i]["imageSrc"];
     detailSubtaskList += `<div class="detailSubtask">
-        <img src="${subtaskCheckBox}">&nbsp${firstCharToUpperCase(task['subtasks'][i]['value'])}
+        <img src="${subtaskCheckBox}">&nbsp${firstCharToUpperCase(
+      task["subtasks"][i]["value"]
+    )}
         </div>`;
   }
   return detailSubtaskList;
@@ -204,7 +230,8 @@ function generateDetailSubtasks(task) {
 
 function renderDetailTask(task) {
   return `
-    <div class="todo-category width" style="background-color:${task["categoryColor"]
+    <div class="todo-category width" style="background-color:${
+      task["categoryColor"]
     }">
     ${task["category"]}
     </div>
@@ -226,12 +253,14 @@ function renderDetailTask(task) {
     </div>
     <div class="detail-buttons">
     <div id="delete-btn">
-    <button type="button" onclick="deleteTask(${task["id"]
+    <button type="button" onclick="deleteTask(${
+      task["id"]
     })" class="detail-btn"><img src="./icons/icon_bucket.svg">Delete</button>
     </div>
     <div class="line height"></div>
     <div id="edit-btn">
-    <button txpe ="button" onclick="editTask(${task["id"]
+    <button txpe ="button" onclick="editTask(${
+      task["id"]
     })" class="detail-btn"><img src="./icons/icon_edit.svg">Edit</button>
     </div>`;
 }
@@ -291,9 +320,9 @@ function showContactList() {
   }
 }
 function pushContacts(task) {
-  for (i = 0; i < task['assignedContact'].length; i++) {
-    editedContacts.push(task['assignedContact'][i]);
-    editedContactColor.push(task['contactColor'][i]);
+  for (i = 0; i < task["assignedContact"].length; i++) {
+    editedContacts.push(task["assignedContact"][i]);
+    editedContactColor.push(task["contactColor"][i]);
   }
 }
 function addContactToTask(i) {
@@ -317,21 +346,21 @@ function addContactToTask(i) {
   }
 }
 function addNewCategory() {
-  let input = document.getElementById('categoryInput');
-  let addButton = document.getElementById('addCategoryButton');
-  addButton.classList.add('d-none');
-  let addNewButton = document.getElementById('addNewCategoryButton');
-  addNewButton.classList.remove('d-none');
+  let input = document.getElementById("categoryInput");
+  let addButton = document.getElementById("addCategoryButton");
+  addButton.classList.add("d-none");
+  let addNewButton = document.getElementById("addNewCategoryButton");
+  addNewButton.classList.remove("d-none");
   input.disabled = false;
   resetCategory();
-  input.placeholder = 'Add New Category';
-  input.style.color = 'black';
+  input.placeholder = "Add New Category";
+  input.style.color = "black";
   hideCategoryList();
 }
 function resetCategory() {
-  editedCategory = '';
-  editedCategoryColordCategoryColor = '';
-  const categoryInput = document.getElementById('categoryInput');
+  editedCategory = "";
+  editedCategoryColordCategoryColor = "";
+  const categoryInput = document.getElementById("categoryInput");
   const defaultCategory = "";
   const defaultColor = "";
 
@@ -351,28 +380,24 @@ async function pushNewCategory() {
     await saveCategory();
     resetCategoryInput();
     renderCategories();
-  }
-  else {
+  } else {
     resetCategoryInput();
-    let alert = document.getElementById('categoryAlert');
-    alert.innerHTML = 'Please add new Category';
-
+    let alert = document.getElementById("categoryAlert");
+    alert.innerHTML = "Please add new Category";
   }
-
-
 }
 async function saveCategory() {
-  await setItem('taskCategories', JSON.stringify(taskCategories));
-  await setItem('taskColors', JSON.stringify(taskColors));
+  await setItem("taskCategories", JSON.stringify(taskCategories));
+  await setItem("taskColors", JSON.stringify(taskColors));
 }
 function resetCategoryInput() {
-  let input = document.getElementById('categoryInput');
-  document.getElementById('addCategoryButton').classList.remove('d-none');
-  document.getElementById('addNewCategoryButton').classList.add('d-none');
-  input.value = '';
+  let input = document.getElementById("categoryInput");
+  document.getElementById("addCategoryButton").classList.remove("d-none");
+  document.getElementById("addNewCategoryButton").classList.add("d-none");
+  input.value = "";
   input.disabled = true;
-  input.placeholder = 'Select Task Category';
-  input.style.backgroundColor = 'white';
+  input.placeholder = "Select Task Category";
+  input.style.backgroundColor = "white";
 }
 function renderContactHTML(contact, contactColor, i, task) {
   let backgroundColor = task["assignedContact"].includes(contact)
@@ -437,24 +462,25 @@ function displayCategory(task) {
   categoryElement.value = category;
   categoryElement.style.backgroundColor = categoryColor;
   categoryElement.style.color = "white";
-
 }
 function chooseCategory(i) {
-  let alertArea = document.getElementById('categoryAlert');
-  alertArea.classList.add('d-none');
+  let alertArea = document.getElementById("categoryAlert");
+  alertArea.classList.add("d-none");
 
   const selectedCategoryElement = document.getElementById(`category${i}`);
   const selectedCategory = selectedCategoryElement.innerText;
-  const selectedColor = selectedCategoryElement.querySelector("circle").getAttribute("fill");
+  const selectedColor = selectedCategoryElement
+    .querySelector("circle")
+    .getAttribute("fill");
   categoryInput.value = editedCategory = selectedCategory;
   categoryInput.style.backgroundColor = editedCategoryColor = selectedColor;
-  categoryInput.style.color = 'white';
-  categoryInput.style.fontWeight = 'bold';
+  categoryInput.style.color = "white";
+  categoryInput.style.fontWeight = "bold";
   hideCategoryList();
-  document.getElementById('categoryAlert').classList.add('d-none');
+  document.getElementById("categoryAlert").classList.add("d-none");
 }
 function renderCategories() {
-  let contentList = document.getElementById('contentCategories');
+  let contentList = document.getElementById("contentCategories");
   if (isClicked == false) {
     contentList.innerHTML += renderNewCategoryHTML();
     for (i = 0; i < taskCategories.length; i++) {
@@ -463,10 +489,9 @@ function renderCategories() {
       contentList.innerHTML += renderCategoryHTML(taskCategory, taskColor, i);
     }
     isClicked = true;
-  }
-  else {
+  } else {
     hideCategoryList();
-    contentList.innerHTML = '';
+    contentList.innerHTML = "";
     isClicked = false;
   }
 }
@@ -496,7 +521,7 @@ function showEditedSubtasks(task) {
   for (i = 0; i < subtasks.length; i++) {
     let subtask = task["subtasks"][i]["value"];
     let subtaskCheckBox = task["subtasks"][i]["imageSrc"];
-    let status = task["subtasks"][i]["status"]
+    let status = task["subtasks"][i]["status"];
     let subtaskObj = {
       value: subtask,
       imageSrc: subtaskCheckBox,
@@ -550,16 +575,16 @@ async function addEditTask(i) {
   let editedDescription = document.getElementById("description").value;
   let editedDate = document.getElementById("calendar").value;
   let editedTask = {
-    'step': task["step"],
-    'title': editedTitle,
-    'description': editedDescription,
-    'assignedContact': editedContacts,
-    'contactColor': editedContactColor,
-    'date': editedDate,
-    'prio': editedPrio,
-    'category': editedCategory || task["category"],
-    'categoryColor': editedCategoryColor || task["categoryColor"],
-    'subtasks': editedSubtasks,
+    step: task["step"],
+    title: editedTitle,
+    description: editedDescription,
+    assignedContact: editedContacts,
+    contactColor: editedContactColor,
+    date: editedDate,
+    prio: editedPrio,
+    category: editedCategory || task["category"],
+    categoryColor: editedCategoryColor || task["categoryColor"],
+    subtasks: editedSubtasks,
   };
   todos[i] = editedTask;
   await saveBoard();
