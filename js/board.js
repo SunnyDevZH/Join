@@ -10,8 +10,6 @@ let editedSubtasks = [];
 let editedCol;
 let editedCategory;
 let editedCategoryColor;
-let taskCategories = [];
-let taskColors = [];
 let isClicked = false;
 
 // const icon_prio_low = "./icons/priority_low.svg";
@@ -24,7 +22,7 @@ function init() {
   loadTodos();
   updateHTML();
   loadCategory();
-  pushCategories();
+  
 }
 
 async function loadTodos() {
@@ -148,12 +146,11 @@ function firstCharToUpperCase(element) {
 }
 // overlay logic
 async function pushCategories() {
+
   for (i = 0; i < todos.length; i++) {
-    let category = todos[i]["category"];
-    let categoryColor = todos[i]["categoryColor"];
-    if (!taskCategories.includes(category)) {
-      taskCategories.push(category);
-      taskColors.push(categoryColor);
+    if (!taskCategories.includes(todos[i]['category'])) {
+      taskCategories.push(todos[i]['category']);
+      taskColors.push(todos[i]['categoryColor']);
       await saveCategory();
       await loadCategory();
     }
@@ -454,6 +451,7 @@ function chooseCategory(i) {
   document.getElementById('categoryAlert').classList.add('d-none');
 }
 function renderCategories() {
+  pushCategories();
   let contentList = document.getElementById('contentCategories');
   if (isClicked == false) {
     contentList.innerHTML += renderNewCategoryHTML();
