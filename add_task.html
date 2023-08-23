@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Task</title>
-    <link rel="icon" type="image/x-icon" href="./img/logo_favicon.png" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/add_task.css" />
-  </head>
 
-  <body onload="init()">
-    <div w3-include-html="./templates/navbar.html"></div>
-    <div w3-include-html="./templates/header.html"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Task</title>
+  <link rel="icon" type="image/x-icon" href="./img/logo_favicon.png" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/add_task.css" />
+</head>
 
+<body onload="init()">
+  <div w3-include-html="./templates/navbar.html"></div>
+  <div w3-include-html="./templates/header.html"></div>
+  <div class="content-add-task">
     <h1>Add Task</h1>
     <form onsubmit="addTask();return false">
       <div class="input-table">
@@ -23,11 +24,7 @@
           </div>
           <div class="input-form">
             <span>Description</span>
-            <textarea
-              id="description"
-              required
-              placeholder="Enter a Description"
-            ></textarea>
+            <textarea id="description" required placeholder="Enter a Description"></textarea>
           </div>
           <div class="input-form">
             <span>Assigned to</span>
@@ -44,23 +41,18 @@
         <div class="right-column">
           <div class="input-form">
             <span>Due date</span>
-            <input
-              type="date"
-              id="calendar"
-              required
-              placeholder="dd/mm/yyyy"
-            />
+            <input type="date" id="calendar" required placeholder="dd/mm/yyyy" />
           </div>
           <div class="input-form">
             <span>Prio</span>
             <div class="prio-buttons">
-              <button type="button" id="urgent" onclick="addPrio('urgent')">
+              <button class="prio" type="button" id="urgent" onclick="addPrio('urgent')">
                 URGENT <img src="./icons/priority_urgent.svg" />
               </button>
-              <button type="button" id="medium" onclick="addPrio('medium')">
+              <button class="prio" type="button" id="medium" onclick="addPrio('medium')">
                 MEDIUM <img src="./icons/priority_medium.svg" />
               </button>
-              <button type="button" id="low" onclick="addPrio('low')">
+              <button class="prio" type="button" id="low" onclick="addPrio('low')">
                 LOW <img src="./icons/priority_low.svg" />
               </button>
             </div>
@@ -69,24 +61,11 @@
           <div class="input-form">
             <span>Category</span>
             <div class="input-with-button">
-              <input
-                id="categoryInput"
-                disabled
-                placeholder="Select task category"
-              />
-              <button
-                id="addCategoryButton"
-                type="button"
-                onclick="renderCategories()"
-              >
+              <input id="categoryInput" disabled placeholder="Select task category" />
+              <button id="addCategoryButton" type="button" onclick="renderCategories()">
                 <img src="./icons/dropdown.svg" />
               </button>
-              <button
-                id="addNewCategoryButton"
-                class="d-none"
-                type="button"
-                onclick="pushNewCategory()"
-              >
+              <button id="addNewCategoryButton" class="d-none" type="button" onclick="pushNewCategory()">
                 <img src="./icons/correct.svg" />
               </button>
             </div>
@@ -98,11 +77,7 @@
             <span>Subtasks</span>
             <div class="input-with-button">
               <input id="subtask" minlength="3" placeholder="Add new subtask" />
-              <button
-                id="addSubtaskButton"
-                type="button"
-                onclick="addSubtask()"
-              >
+              <button id="addSubtaskButton" type="button" onclick="addSubtask()">
                 <img src="./icons/plus.svg" />
               </button>
             </div>
@@ -111,17 +86,19 @@
         </div>
       </div>
       <div class="submit-buttons">
-        <button onclick="clearAll()" type="button">
+        <button class="btn-lightblue" onclick="clearAll()" type="button">
           Clear<img src="./icons/cross.svg" />
         </button>
-        <button type="submit">
-          Create Task<img src="./icons/correct.svg" />
+        <button class="btn-black invert" type="submit">
+          Create Task<img class="white" src="./icons/correct.svg" />
         </button>
       </div>
     </form>
-    <script src="./js/script.js"></script>
-    <script src="./js/add_task.js"></script>
-    <script src="./js/storage.js"></script>
-    <script src="./js/include.js"></script>
-  </body>
+  </div>
+  <script src="./js/script.js"></script>
+  <script src="./js/add_task.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/include.js"></script>
+</body>
+
 </html>

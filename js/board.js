@@ -416,9 +416,9 @@ function displayPrio(task) {
   const prio = task.prio[0];
   const button = document.getElementById(prio.toLowerCase());
   const colors = {
-    URGENT: "#f55d42",
-    MEDIUM: "#f5da42",
-    LOW: "green",
+    URGENT: "#FF3D00",
+    MEDIUM: "#FFA800",
+    LOW: "#7AE229",
   };
   const image = `./icons/priority_${prio.toLowerCase()}.svg`;
 

@@ -122,7 +122,7 @@ function addPrio(clickedTab) {
 function checkPrio(clickedTab) {
     assignedPrio = [];
     const tabs = ['urgent', 'medium', 'low'];
-    const colors = ['#f55d42', '#f5da42', 'green'];
+    const colors = ['#FF3D00', '#FFA800', '#7AE229'];
 
     tabs.forEach((tab, index) => {
         const backgroundColor = clickedTab === tab ? colors[index] : 'white';
