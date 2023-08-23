@@ -113,9 +113,7 @@ button img {
     border: 2px solid #29ABE2;
     background-color: white;
 }
-.stroke:hover {
-    stroke: #29ABE2; 
-}
+
 
 
 textarea {
@@ -135,14 +133,19 @@ textarea {
     display: flex; 
     align-items: center;
 }
+.prio img {
+    width: 24px; 
+}
 .prio:hover {
     box-shadow:  0px 4px 0px rgba(0, 0, 0, 0.10);
 }
 
 
 .input-with-button img {
-    width: 18px;
-
+    width: 14px;
+}
+.input-with-button img:hover {
+    filter: drop-shadow(0 0 8px black);
 }
 
 .input-with-button {
@@ -183,8 +186,14 @@ textarea {
 
 .option {
     padding: 4px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+.option:hover {
+    background-color: lightgray;
+    border-radius: 8px;
 }
 .space-between {
     display: flex;

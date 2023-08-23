@@ -286,15 +286,20 @@ function addContactToTask(i) {
     let chosenContact = document.getElementById(`contact${i}`);
     let contact = chosenContact.innerText;
     let contactColor = contactColors[i];
-    if (chosenContact.style.backgroundColor !== 'lightgrey') {
-        chosenContact.style.backgroundColor = 'lightgrey';
+    let checkBox = document.getElementById(`checkboxContact${i}`);
+    if (chosenContact.style.backgroundColor !== 'rgb(42, 54, 71)') {
+        chosenContact.style.backgroundColor = '#2a3647';
+        chosenContact.style.color = 'white';
+        checkBox.src = "./icons/checkbutton_checked_white.svg";
         if (!assignedContacts.includes(contact)) {
             assignedContacts.push(contact)
             assignedContactColor.push(contactColor);
         }
     }
     else {
+        checkBox.src = "./icons/checkbutton_default.svg"
         chosenContact.style.backgroundColor = 'white';
+        chosenContact.style.color = 'black'; 
         let index = assignedContacts.indexOf(contact);
         let colorIndex = assignedContactColor.indexOf(contactColor);
         if (index > -1 || colorIndex > -1) {
@@ -380,8 +385,8 @@ function renderCategoryHTML(taskCategory, taskColor, i) {
             </div>`;
 }
 function renderContactHTML(contact, contactColor, i) {
-    return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})"> 
-    ${contact}  ${renderSVG(contactColor)}
+    return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})">${renderSVG(contactColor)}
+    ${contact}   <img id="checkboxContact${i}" src="./icons/checkbutton_default.svg">
     </div>`
 }
 function renderSubtaskHTML(subtaskObj, i) {
