@@ -18,11 +18,13 @@ async function loadUsers(){ // User laden
 async function register() { // Registrieren
     registerBtn.disabled = true; // Button aus
     users.push({ // email und passwort in Array user pushen
+        name: name.value,
         email: email.value,
         password: password.value,
+
     });
     await setItem('users', JSON.stringify(users)); // Daten von Users auf Server laden 
-    window.location.href = '../login/login.html?msg= Du hast dich erfolgreich registriert' // Weiterleitung zum Login
+    window.location.href = './login.html' // Weiterleitung zum Login
     resetForm();
     
 }

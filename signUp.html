@@ -6,13 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
 
-    <script src="storage.js"></script>
-    <script src="register.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./ja/register.js"></script>
 
-    <link rel="stylesheet" href="signUp.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/signUp.css">
+    
+    
     <link rel="shortcut icon" type="image/x-icon" href="/img/logo_favicon.png"> 
 </head>
-<body>
+<body onload="init()">
     <div class="background">
         <header class="signUpHeader">
             <img src="/img/logo.svg" alt="Logo">
@@ -21,16 +25,30 @@
             <div class="signUpContainer">
                 <h1>Sign up</h1>
                 <form class="flexdirection" onsubmit="register(); return false;">
-                    <input type="text" placeholder="Name">
-                    <input required type="email" id="email" placeholder="Email"> 
-                    <input required type="password" id="password" placeholder="Password">
-                    <input required type="password" placeholder="Confirm Password">
-                    <div>
-                        <input type="checkbox" name="Remember" id="remember"><label for="remember">I accept the</label>
-                        <a href="#">Privacy policy</a>
+                    <div class="displayflex">
+                        <input required type="text" id="name" placeholder="Name">
+                        <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"> 
+                    </div>
+                    <div class="displayflex">
+                        <input required type="email" id="email" placeholder="Email">
+                        <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"> 
+                    </div>
+                    <div class="displayflex">
+                        <input required type="password" id="password" placeholder="Password">
+                        <img class="loginimg" src="./img/login.png" alt="login" width="30px">
+                    </div>
+                    <div class="displayflex">
+                        <input required type="password" id="password" placeholder="Confirm Password">
+                        <img class="loginimg" src="./img/login.png" alt="login" width="30px">
+                    </div>
+                    <div class="footergap">
+                        <div>
+                            <input class="checkbox" type="checkbox" name="Remember" id="remember"><label for="remember">I accept the</label>
+                            <a href="#">Privacy policy</a>
+                        </div>
                     </div>
                     <div>
-                        <button id="registerBtn">Sign up</button>
+                        <button class="signUpButton" id="registerBtn">Sign up</button>
                     </div>
                 </form>
                 
@@ -39,8 +57,8 @@
         </div>
         
         <footer>
-            <a href="../privacyPolicy.html">Privacy Policy</a>
-            <a href="../legalNotice.html">Legal notice</a>
+            <a class="footerlink" href="../privacyPolicy.html">Privacy Policy</a>
+            <a class="footerlink" href="../legalNotice.html">Legal notice</a>
         </footer>
     </div>
 </body>

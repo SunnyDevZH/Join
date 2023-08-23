@@ -1,6 +1,5 @@
 
 async function init(){
-    loadUsers();
     loadUserInformation()
 }
 
@@ -10,27 +9,12 @@ function login(){
     let user = users.find(u => u.email == email.value && u.password == password.value); // Vergleich von Login und Register 
     console.log(user);
     if(user){
-        window.location.href = '../summary.html' // Weiterleitung zum Summary
+        window.location.href = './summary.html' // Weiterleitung zum Summary
         alert('Passwort korrekt')
     } else{
         alert('Falsches Passwort');
     }
 }
-
-const urlParams = new URLSearchParams(window.location.search);
-const msg = urlParams.get('msg');
-
-if(msg){
-    document.getElementById('msgBox').innerHTML = msg;
-} else {
-    document.addEventListener("DOMContentLoaded", function() {
-        // Hier wird der Code ausgeführt, nachdem das DOM geladen wurde
-        document.getElementById('msgBox').innerHTML = '';
-        // Weitere Aktionen...
-    });    
-}
-
-
 
 // Local Storage für Remember me hacken
 

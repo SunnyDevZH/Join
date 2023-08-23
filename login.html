@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/login.css">
     <link rel="shortcut icon" type="image/x-icon" href="/img/logo_favicon.png"> 
 
-    <script src="../signUp/storage.js"></script>
-    <script src="../signUp/register.js"></script>
-    <script src="login.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/register.js"></script>
+    <script src="./js/login.js"></script>
     
 </head>
 <body onload="init()">
@@ -19,30 +20,40 @@
             <img src="/img/logo.svg" alt="Logo">
             <div class="signUp">
                 <p>Not a Join user?</p>
-                <button class="signUpButton" onclick="window.location.href='../signUp/signUp.html'">Sign up</button> 
+                <button class="signUpButton" onclick="window.location.href='./signUp.html'">Sign up</button> 
             </div>
         </header>
         <div class="alignItems">
             <div class="loginContainer">
                 <h1>Log in</h1>
                 <form class="flexdirection" onsubmit="login(); return false;">
-                    <input required type="email" id="email" placeholder="Email"> 
-                    <input required type="password" id="password" placeholder="Password">
-                    <div>
-                        <input type="checkbox" onclick="save()" name="Remember" id="remember"><label for="remember">Remember me</label>
-                        <a href="../forgotSend/forgotSend.html">I forgot my password</a>
+                    <div class="displayflex">
+                        <input required type="email" id="email" placeholder="Email">
+                        <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"> 
                     </div>
-                    <div>
-                        <button on>Log in</button>
-                        <button onclick="window.location.href= '../summary.html';">Guest Log in</button>
+                    <div class="displayflex">
+                        <input required type="password" id="password" placeholder="Password">
+                        <img class="loginimg" src="./img/login.png" alt="login" width="30px">
+                    </div>
+                    <div class="footergap">
+                        <div>
+                            <input class="checkbox" type="checkbox" onclick="save()" name="Remember" id="remember"><label for="remember">Remember me</label>
+                        </div>
+                       <div>
+                            <a href="./forgotSend/forgotSend.html">I forgot my password</a>
+                       </div>
+                    </div>
+                    <div class="loginbutton">
+                        <button class="signUpButton" on>Log in</button>
+                        <button onclick="window.location.href= './summary.html';">Guest Log in</button>
                     </div>
                 </form>
                 <div id="msgBox"></div> <!-- Falsches Passwort-->
             </div>
         </div>
         <footer>
-            <a  class="privacy" href="../privacyPolicy.html">Privacy Policy</a>
-            <a class="legal" href="../legalNotice.html">Legal notice</a>
+            <a  class="footerlink" href="./privacyPolicy.html">Privacy Policy</a>
+            <a class="footerlink" href="./legalNotice.html">Legal notice</a>
         </footer>
     </div>
 </body>

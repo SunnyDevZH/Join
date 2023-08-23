@@ -17,7 +17,7 @@ const monthsName = [
 ];
 
 function init() {
-  setTimeout(renderLogin, 1300);
+  setTimeout(function(){location.href="./login.html"} , 1300); 
 }
 
 async function loadTodos() {
@@ -28,43 +28,6 @@ async function loadTodos() {
   }
   changeAvatarColor();
   console.log(sumTodos);
-}
-
-function renderLogin() {
-  document.getElementById("login-container").innerHTML = `
-  <header class="loginHeader">
-  <div class="signUp">
-      <p>Not a Join user?</p>
-      <button class="signUpButton" onclick="window.location.href='../signUp/signUp.html'">Sign up</button> 
-  </div>
-</header>
-<div class="alignItems">
-  <div class="loginContainer">
-      <h1>Log in</h1>
-      <form class="flexdirection" onsubmit="login(); return false;">
-          <input required type="email" id="email" placeholder="Email"> 
-          <input required type="password" id="password" placeholder="Password">
-          <div>
-              <input type="checkbox" onclick="save()" name="Remember" id="remember"><label for="remember">Remember me</label>
-              <a href="../forgotSend/forgotSend.html">I forgot my password</a>
-          </div>
-          <div>
-              <button on>Log in</button>
-              <button onclick="window.location.href= '../summary.html';">Guest Log in</button>
-          </div>
-      </form>
-      <div id="msgBox"></div> <!-- Falsches Passwort-->
-  </div>
-</div>
-<footer>
-  <a  class="privacy" href="../privacyPolicy.html">Privacy Policy</a>
-  <a class="legal" href="../legalNotice.html">Legal notice</a>
-</footer>
-    `;
-}
-
-function guestLogin() {
-  window.location.href = "./summary.html";
 }
 
 async function summaryLoad() {
@@ -165,5 +128,3 @@ document.addEventListener("click", closeAvatarMenuOutside);
 
 // header end
 
-
-// Login 
