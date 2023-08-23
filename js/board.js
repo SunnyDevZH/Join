@@ -10,6 +10,9 @@ let editedSubtasks = [];
 let editedCol;
 let editedCategory;
 let editedCategoryColor;
+let taskCategories = [];
+let taskColors = [];
+let isClicked = false;
 
 // const icon_prio_low = "./icons/priority_low.svg";
 // const icon_prio_med = "./icons/priority_medium.svg";
@@ -20,6 +23,8 @@ let currentDraggedElement;
 function init() {
   loadTodos();
   updateHTML();
+  loadCategory();
+  pushCategories();
 }
 
 async function loadTodos() {
@@ -142,7 +147,18 @@ function firstCharToUpperCase(element) {
   return element.charAt(0).toUpperCase() + element.slice(1);
 }
 // overlay logic
-
+async function pushCategories() {
+  for (i = 0; i < todos.length; i++) {
+    let category = todos[i]["category"];
+    let categoryColor = todos[i]["categoryColor"];
+    if (!taskCategories.includes(category)) {
+      taskCategories.push(category);
+      taskColors.push(categoryColor);
+      await saveCategory();
+      await loadCategory();
+    }
+  }
+}
 function openOverlay(i) {
   const task = todos[i];
   document.getElementById("overlay-container").classList.remove("d-none");
@@ -264,7 +280,7 @@ function displayContacts(task) {
       i,
       task
     );
-  } 
+  }
 }
 function showContactList() {
   let contactContent = document.getElementById("contactList");
@@ -299,6 +315,64 @@ function addContactToTask(i) {
       editedContactColor.splice(colorIndex, 1);
     }
   }
+}
+function addNewCategory() {
+  let input = document.getElementById('categoryInput');
+  let addButton = document.getElementById('addCategoryButton');
+  addButton.classList.add('d-none');
+  let addNewButton = document.getElementById('addNewCategoryButton');
+  addNewButton.classList.remove('d-none');
+  input.disabled = false;
+  resetCategory();
+  input.placeholder = 'Add New Category';
+  input.style.color = 'black';
+  hideCategoryList();
+}
+function resetCategory() {
+  editedCategory = '';
+  editedCategoryColordCategoryColor = '';
+  const categoryInput = document.getElementById('categoryInput');
+  const defaultCategory = "";
+  const defaultColor = "";
+
+  categoryInput.value = defaultCategory;
+  categoryInput.style.backgroundColor = defaultColor;
+  editedCategory = defaultCategory;
+  editedCategoryColor = defaultColor;
+  hideCategoryList();
+}
+async function pushNewCategory() {
+  let newCategory = document.getElementById("categoryInput").value;
+  newCategory = newCategory.charAt(0).toUpperCase() + newCategory.slice(1);
+  let newColor = getRandomColor();
+  if (newCategory.length >= 3 && !taskCategories.includes(newCategory)) {
+    taskCategories.push(newCategory);
+    taskColors.push(newColor);
+    await saveCategory();
+    resetCategoryInput();
+    renderCategories();
+  }
+  else {
+    resetCategoryInput();
+    let alert = document.getElementById('categoryAlert');
+    alert.innerHTML = 'Please add new Category';
+
+  }
+
+
+}
+async function saveCategory() {
+  await setItem('taskCategories', JSON.stringify(taskCategories));
+  await setItem('taskColors', JSON.stringify(taskColors));
+}
+function resetCategoryInput() {
+  let input = document.getElementById('categoryInput');
+  document.getElementById('addCategoryButton').classList.remove('d-none');
+  document.getElementById('addNewCategoryButton').classList.add('d-none');
+  input.value = '';
+  input.disabled = true;
+  input.placeholder = 'Select Task Category';
+  input.style.backgroundColor = 'white';
 }
 function renderContactHTML(contact, contactColor, i, task) {
   let backgroundColor = task["assignedContact"].includes(contact)
@@ -348,6 +422,14 @@ function checkPrio(clickedTab) {
     document.getElementById(tab).style.backgroundColor = backgroundColor;
   });
 }
+async function loadCategory() {
+  try {
+    taskCategories = JSON.parse(await getItem("taskCategories"));
+    taskColors = JSON.parse(await getItem("taskColors"));
+  } catch (e) {
+    console.error("Loading error:", e);
+  }
+}
 function displayCategory(task) {
   let category = task["category"];
   let categoryColor = task["categoryColor"];
@@ -355,42 +437,42 @@ function displayCategory(task) {
   categoryElement.value = category;
   categoryElement.style.backgroundColor = categoryColor;
   categoryElement.style.color = "white";
-  renderCategories(task);
+
 }
 function chooseCategory(i) {
-  let alertArea = document.getElementById("categoryAlert");
-  alertArea.classList.add("d-none");
+  let alertArea = document.getElementById('categoryAlert');
+  alertArea.classList.add('d-none');
 
   const selectedCategoryElement = document.getElementById(`category${i}`);
   const selectedCategory = selectedCategoryElement.innerText;
-  const selectedColor = selectedCategoryElement
-    .querySelector("circle")
-    .getAttribute("fill");
-
+  const selectedColor = selectedCategoryElement.querySelector("circle").getAttribute("fill");
   categoryInput.value = editedCategory = selectedCategory;
   categoryInput.style.backgroundColor = editedCategoryColor = selectedColor;
-  categoryInput.style.color = "white";
-  categoryInput.style.fontWeight = "bold";
+  categoryInput.style.color = 'white';
+  categoryInput.style.fontWeight = 'bold';
   hideCategoryList();
-  document.getElementById("categoryAlert").classList.add("d-none");
+  document.getElementById('categoryAlert').classList.add('d-none');
 }
 function renderCategories() {
-  let contentList = document.getElementById("contentCategories");
-  contentList.classList.add("d-none");
-  contentList.innerHTML = "";
-  contentList.innerHTML += renderNewCategoryHTML();
-  let existingCategories = [];
-  for (i = 0; i < todos.length; i++) {
-    let taskCategory = todos[i]["category"];
-    let taskColor = todos[i]["categoryColor"];
-    if (!existingCategories.includes(taskCategory)) {
+  let contentList = document.getElementById('contentCategories');
+  if (isClicked == false) {
+    contentList.innerHTML += renderNewCategoryHTML();
+    for (i = 0; i < taskCategories.length; i++) {
+      let taskCategory = taskCategories[i];
+      let taskColor = taskColors[i];
       contentList.innerHTML += renderCategoryHTML(taskCategory, taskColor, i);
-      existingCategories.push(taskCategory);
     }
+    isClicked = true;
+  }
+  else {
+    hideCategoryList();
+    contentList.innerHTML = '';
+    isClicked = false;
   }
 }
 function showAllCategories() {
   document.getElementById("contentCategories").classList.remove("d-none");
+  renderCategories();
 }
 function hideCategoryList() {
   let contentList = document.getElementById("contentCategories");

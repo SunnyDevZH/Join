@@ -1,6 +1,6 @@
 let allTasks = [];
-let taskCategories = ['Marketing', 'User Stories', 'Technical Task'];
-let taskColors = ['#F3C774', '#5E3FD8', '#26AB6A'];
+let taskCategories = [];
+let taskColors = [];
 let contacts = ['Hermine Granger', 'Harry Potter', 'Ron Weasley'];
 let contactColors = ['#17D264', '#3043F0', '#496F70'];
 
