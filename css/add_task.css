@@ -114,7 +114,9 @@ button img {
     background-color: white;
 }
 
-
+.white-text {
+    color: white;
+  }
 
 textarea {
     border-radius: 16px;
@@ -183,7 +185,11 @@ textarea {
     width: 94%;
 
 }
-
+.stroke:hover {
+    color:#29ABE2; 
+    stroke: #29ABE2;
+    fill:  #29ABE2;
+}
 .option {
     padding: 4px;
     border-radius: 8px;

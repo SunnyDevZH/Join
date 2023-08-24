@@ -102,6 +102,7 @@ function addPrio(clickedTab) {
     let alertArea = document.getElementById('priorityAlert');
     alertArea.classList.add('d-none');
     resetImages();
+    document.getElementById(clickedTab).classList.add('white-text');
     let priority;
     let image;
     if (clickedTab === 'urgent') {
@@ -132,7 +133,10 @@ function checkPrio(clickedTab) {
     tabs.forEach((tab, index) => {
         const backgroundColor = clickedTab === tab ? colors[index] : 'white';
         document.getElementById(tab).style.backgroundColor = backgroundColor;
+        const textColor = clickedTab === tab ? 'white' : 'black';
+        document.getElementById(tab).style.color = textColor;
     });
+
 }
 function changeImage(clickedTab) {
     const imgPath = "./icons/priority_" + clickedTab + "_default.svg";
@@ -299,7 +303,7 @@ function addContactToTask(i) {
     else {
         checkBox.src = "./icons/checkbutton_default.svg"
         chosenContact.style.backgroundColor = 'white';
-        chosenContact.style.color = 'black'; 
+        chosenContact.style.color = 'black';
         let index = assignedContacts.indexOf(contact);
         let colorIndex = assignedContactColor.indexOf(contactColor);
         if (index > -1 || colorIndex > -1) {
