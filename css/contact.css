@@ -10,6 +10,7 @@ body {
   border-radius: 10px;
   border-style: none;
   color: white;
+  margin-bottom: 50px;
 }
 
 .createButton {
@@ -26,10 +27,13 @@ body {
   display: flex;
 }
 .rendercontact {
-  padding: 10px;
+  
   display: flex;
-  flex-direction: column;
-  background-color: rgb(255, 255, 255);
+  justify-content: center;
+  gap: 20px;
+  box-shadow: 0 4px 2px -2px gray;
+  margin-bottom: 50px;
+  
 }
 .containerTeam {
   display: flex;
@@ -140,4 +144,14 @@ input {
 
 b {
   cursor: pointer;
+}
+
+.flex-direction{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.displayflex{
+  display: flex;
 }

@@ -1,8 +1,11 @@
 let users = []; // Array Users
 
+let colorArray = [];
+
 
 async function init(){
     loadUsers();
+    generateRandomColor();
 }
 
 async function loadUsers(){ // User laden
@@ -16,13 +19,20 @@ async function loadUsers(){ // User laden
 
 
 async function register() { // Registrieren
-    registerBtn.disabled = true; // Button aus
-    users.push({ // email und passwort in Array user pushen
-        name: name.value,
-        email: email.value,
-        password: password.value,
 
-    });
+    let names = document.getElementById('names').value;
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+    
+    let contact = {
+        'names': names,
+        'email': email,
+        'password': password,
+        'color': colorCode,
+    }
+
+    users.push(contact);
+    
     await setItem('users', JSON.stringify(users)); // Daten von Users auf Server laden 
     window.location.href = './login.html' // Weiterleitung zum Login
     resetForm();
@@ -32,5 +42,10 @@ async function register() { // Registrieren
 function resetForm() {
     email.value = ''; // Feld leeren
     password.value = ''; // Feld leeren
-    registerBtn.disabled = false; // Button an
+}
+
+function generateRandomColor() {
+    const colorCode = "#" + Math.floor(Math.random() * 16777216).toString(16).padStart(6, '0');
+    colorArray.push(colorCode);
+    return colorCode;
 }

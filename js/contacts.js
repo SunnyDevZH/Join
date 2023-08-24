@@ -14,11 +14,18 @@ function render() {
         for (let i = 0; i < contacts.length; i++) {
             mycontact.innerHTML += `
             <div class="rendercontact">
-                <b onclick="contact()">${contacts[i].name}</b>
-                <a href="">${contacts[i].email}</a>
-                <button onclick="deletecontact(${i})">x</button>
-            </div>
-            `;
+                <div>
+                img
+                </div>
+                <div class="flex-direction">
+                    <div>
+                        <b onclick="currentContact()">${contacts[i].name}</b>
+                    </div>
+                    <div>
+                        <a href="">${contacts[i].email}</a>
+                    </div>
+                </div>
+            </div>`;
         }
     }
 
@@ -32,17 +39,27 @@ function addContact() { // Funktion 1 aufgerufen durch onclick
     render(); // Ansicht aktualisieren
 }
 
-function contact(i) { // Funktion 2 aufgerufen durch Funktion 1
+function contact(i) { 
     let mycontact = document.getElementById('mycontact'); /* Zugriff Div */
     mycontact.innerHTML = ''; /* Inhalt leeren */
 
     mycontact.innerHTML += `
 
         <div class="rendercontact">
-        <b onclick="contact()">${contacts[i].name}</b>
-        <a href="">${contacts[i].email}</a>
-        <button onclick="deletecontact(${i})">x</button>
-        </div>`
+            <div>
+              img
+            </div>
+            <div class="flex-direction">
+                <div>
+                    <b onclick="currentcontact()">${contacts[i].name}</b>
+                </div>
+                <div>
+                  <a href="">${contacts[i].email}</a>
+                </div>
+            </div>
+        </div>`;
+
+        
 }
 
 function contactTemplate() {
@@ -86,9 +103,6 @@ function cancelContact() {
     render(); // Ansicht aktualisieren
 }
 
-// Restlicher Code bleibt unverändert
-
-
 function addNotiz() {
     let name = document.getElementById('name').value;
     let email = document.getElementById('email').value;
@@ -124,4 +138,43 @@ function deletecontact(i) {
     contacts.splice(i, 1);
     save(); // Speichere die aktualisierten Kontakte im Local Storage
     render(); // Zeige die aktualisierten Kontakte auf der Seite an
+}
+
+function currentcontact() { 
+    let currentcontact = document.getElementById('currentcontact'); /* Zugriff Div */
+    currentcontact.innerHTML = ''; /* Inhalt leeren */
+
+    currentcontact.innerHTML += `
+
+    <div class="rendercontact">
+    <div>
+    img
+    </div>
+
+    <div class="flex-direction">
+        <div>
+            <b>${contacts[i].name}</b>
+        </div>
+        
+          <div class="displayflex">
+            <div>
+              <img src="./img/edit.png" alt="edit" width="80px">
+            </div>
+            <div>
+              <img src="./img/delete.png" alt="delte" width="80px">
+            </div>
+          </div>        
+    </div>
+  </div>
+  <div class="flex-direction">
+    <div>
+        <b>Contact Information</b>
+    </div>
+    <div>
+      <a href="">${contacts[i].phone}</a>
+    </div>
+    <div>
+        <a href="">${contacts[i].email}</a>
+    </div>
+  </div>`
 }

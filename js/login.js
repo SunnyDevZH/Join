@@ -22,24 +22,25 @@ function login(){
 function save(){
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
-    let remember = document.getElementById('remember').checked;
+    let name = document.getElementById('names').value;
+    
 
     localStorage.setItem('email', email);
-    localStorage.setItem('password', password);     
+    localStorage.setItem('password', password);
+    localStorage.setItem('names', name);      
+
+
 }
 
 function loadUserInformation(){
     let getemail= localStorage.getItem('email');
     let getpassword = localStorage.getItem('password');
     
+    
     document.getElementById('email').value = getemail;
     document.getElementById('password').value = getpassword;
+    
+    
 }
 
-window.onload = function() {
-    let remember = localStorage.getItem('remember');
-    if (remember === 'true') {
-        load();
-        document.getElementById('remember').checked = true;
-    }
-}
+
