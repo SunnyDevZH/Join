@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/forgotSend.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/logo_favicon.png"> 
+</head>
+<body>
+    <div class="background">
+        <header class="forgotSendHeader">
+            <img src="/img/logo.svg" alt="Logo">
+        </header>
+        <form class="alignItems">
+            <div class="forgotSendContainer">
+                <div class="center">
+                    <h1 >I forgot my password</h1>
+                </div>
+                <div class="flexdirection">
+                    <p>Don't worry! We will send you an email with the </br>instructions to reset your Password.</p>
+                    <div class="displayflex">
+                        <input required type="email" id="email" placeholder="Email">
+                        <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"> 
+                    </div>
+                </div>
+                <div>
+                    <button class="signUpButton" onclick="window.location.href= './forgotReset.html';">Send me the email</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="./css/login.css">
     <link rel="shortcut icon" type="image/x-icon" href="/img/logo_favicon.png"> 
 
+    <script src="./js/login.js"></script>
     <script src="./js/storage.js"></script>
     <script src="./js/register.js"></script>
-    <script src="./js/login.js"></script>
+    
     
 </head>
-<body onload="init()">
+<body onload="start()">
     <div class="background">
         <header class="loginHeader">
             <img src="/img/logo.svg" alt="Logo">
@@ -40,7 +41,7 @@
                             <input class="checkbox" type="checkbox" onclick="save()" name="Remember" id="remember"><label for="remember">Remember me</label>
                         </div>
                        <div>
-                            <a href="./forgotSend/forgotSend.html">I forgot my password</a>
+                            <a href="./forgotSend.html">I forgot my password</a>
                        </div>
                     </div>
                     <div class="loginbutton">
@@ -48,7 +49,6 @@
                         <button onclick="window.location.href= './summary.html';">Guest Log in</button>
                     </div>
                 </form>
-                <div id="msgBox"></div> <!-- Falsches Passwort-->
             </div>
         </div>
         <footer>

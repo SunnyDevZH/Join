@@ -15,6 +15,8 @@ body{
 
 .forgotSendHeader{
     display: flex;
+    justify-content: center;
+    align-items: center;
     justify-content: space-between;
     padding: 30px; /* Welche Grösse? */
     align-items: center;
@@ -28,9 +30,9 @@ body{
     background-color: rgb(255,255,255);  /* Farbe von Mockup */
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; /* Welchen Style? */
     border-radius: 30px;/* Welche Grösse? */
-    width: 400px; /* Welche Grösse? */
+    height: 300px;
     gap: 30px; /* Welche Grösse? */
-    padding: 10px; /* Welche Grösse? */
+    padding: 30px; /* Welche Grösse? */
 }
 
 .flexdirection{
@@ -44,4 +46,10 @@ body{
 button{
     cursor: pointer;
     /* Design */
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }

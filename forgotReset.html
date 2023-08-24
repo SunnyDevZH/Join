@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+
+    <script src="./signUp/storage.js"></script>
+    <script src="./signUp/register.js"></script>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/forgotReset.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/logo_favicon.png"> 
+
+</head>
+<body>
+    <div class="background">
+        <header class="forgotResetHeader">
+            <img src="/img/logo.svg" alt="Logo">
+        </header>
+
+        <form class="flexdirection">
+            <div class="alignItems">
+                <div class="forgotResetContainer">
+                    <h1>Reset your password</h1>
+                    <div class="flexdirection">
+                        <p>Change your Accoount password</p>
+                        <div class="displayflex">
+                            <input required type="email" id="email" placeholder="Email">
+                            <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"> 
+                        </div>
+                        <div class="displayflex">
+                            <input required type="password" id="password" placeholder="Password">
+                            <img class="loginimg" src="./img/login.png" alt="login" width="30px">
+                        </div>
+                    </div>
+                    <div>
+                        <button class="signUpButton" onclick="window.location.href= './login.html';">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

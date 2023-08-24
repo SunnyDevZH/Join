@@ -1,6 +1,7 @@
 
-async function init(){
-    loadUserInformation()
+async function start(){
+    loadUserInformation();
+    loadUsers();
 }
 
 function login(){ 
