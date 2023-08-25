@@ -25,8 +25,8 @@ function renderContacts() {
     
             mycontact.innerHTML += `
                 <div class="rendercontact">
-                    <div class="circle">
-                        <span class="initials">AB</span>
+                    <div class="circle" style="background-color: ${contact.color}">
+                        <span class="initials">${contacts[i].name.substring(0, 2)}</span>
                     </div>
                     <div class="flex-direction">
                         <div>
@@ -45,9 +45,8 @@ function addContact() {
     isAddingContact = true;
     let contactContainer = document.getElementById('contactContainer');
     contactContainer.innerHTML = contactTemplate(); // Hier wird das Kontaktformular gerendert
+    
 }
-
-// ... (vorheriger Code)
 
 function currentcontact(i) { // Funktion zum Anzeigen der Informationen des ausgewählten Kontakts
     let currentcontactDiv = document.getElementById('currentcontact'); // Zugriff auf das Container-Div
@@ -56,8 +55,8 @@ function currentcontact(i) { // Funktion zum Anzeigen der Informationen des ausg
     currentcontactDiv.innerHTML += `
 
     <div class="contactBoxOne">
-        <div class="circle">
-            <span class="initials">AB</span>
+        <div class="circle" style="background-color: ${contacts[i].color}">
+            <span class="initials">${contacts[i].name.substring(0, 2)}</span>
         </div>
     <div class="flex-direction">
         <div>
@@ -86,10 +85,10 @@ function currentcontact(i) { // Funktion zum Anzeigen der Informationen des ausg
         <p>Tel:</p>
         <p>${contacts[i].phone}</p>
     </div>
-  </div>`
-}
+  </div>`;
 
-// ... der restliche Code bleibt unverändert
+  contactTemplate()
+}
 
 function contactTemplate() {
     return `
@@ -137,8 +136,10 @@ function addNotiz() {
     let name = document.getElementById('name').value;
     let email = document.getElementById('email').value;
     let phone = document.getElementById('phone').value;
-      
-    let contact = { name, email, phone }; // Erzeugen eines Kontaktobjekts
+
+    let color = getRandomColor(); // Zufällige Farbe generieren
+
+    let contact = { name, email, phone, color }; // dem Kontakt hinzufügen
     contacts.push(contact);
       
     // Sortiere die Kontakte alphabetisch nach dem Namen
@@ -147,17 +148,10 @@ function addNotiz() {
     isAddingContact = false;
     save();
     renderContacts();
-    
-    if (contacts.length > 0) {
-        updateCircleWithInitials(0); // Hier wird die Funktion aufgerufen, um den ersten Kontakt zu aktualisieren
-    }
-    
-    
     window.location.href = 'contacts.html';
 }
 
  
-    
 function save(){
     let contactAsText = JSON.stringify(contacts); /* erster Schritt für Localstorage*/
     localStorage.setItem('contacts', contactAsText); /* names ist Key und namesAsText Value*/
@@ -172,9 +166,7 @@ function load() {
         contacts = [];
     }
     renderContacts();
-    
 }
-
 
 function deletecontact(i) {
     contacts.splice(i, 1);
@@ -183,3 +175,12 @@ function deletecontact(i) {
     window.location.href = 'contacts.html';
 
 }
+
+function getRandomColor() {
+    const hue = Math.floor(Math.random() * 360); // Zufälliger Farbwert zwischen 0 und 359
+    const saturation = Math.floor(Math.random() * 50) + 50; // Sättigung zwischen 50 und 100
+    const lightness = Math.floor(Math.random() * 20) + 40; // Helligkeit zwischen 40 und 60
+
+    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+}
+
