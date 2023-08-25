@@ -53,9 +53,11 @@ function updateHTML() {
 
 function generateTodo(element) {
   return `
-  <div draggable='true' ondragstart='startDragging(${element["id"]
-    })' class='todo' onclick="openOverlay(${element["id"]})">
-    <div class="todo-category" style="background-color:${element["categoryColor"]
+  <div draggable='true' ondragstart='startDragging(${
+    element["id"]
+  })' class='todo' onclick="openOverlay(${element["id"]})">
+    <div class="todo-category" style="background-color:${
+      element["categoryColor"]
     }">${element["category"]}</div>
     <div class="todo-title">${firstCharToUpperCase(element["title"])}</div>
     <div class="todo-content">${firstCharToUpperCase(
@@ -79,8 +81,9 @@ function generateContacts(element) {
       let initials = element["assignedContact"][i].split(" ");
       initials = initials[0][0] + initials[1][0];
       contactColor = element["contactColor"][i];
-      contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; left:${i * 30
-        }px">${initials}</div>`;
+      contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; left:${
+        i * 30
+      }px">${initials}</div>`;
       if (i >= 6) {
         break;
       }
@@ -217,7 +220,7 @@ function generateDetailContacts(task) {
 function generateDetailSubtasks(task) {
   let detailSubtaskList = "";
   let subtasks = task["subtasks"];
-  if (task['subtasks'].length > 0) {
+  if (task["subtasks"].length > 0) {
     detailSubtaskList = `<p class="violett">Subtasks</p>`;
 
     for (i = 0; i < subtasks.length; i++) {
@@ -233,9 +236,9 @@ function generateDetailSubtasks(task) {
 }
 
 function renderDetailTask(task) {
-
   return `
-    <div class="todo-category width" style="background-color:${task["categoryColor"]
+    <div class="todo-category width" style="background-color:${
+      task["categoryColor"]
     }">
     ${task["category"]}
     </div>
@@ -248,16 +251,13 @@ function renderDetailTask(task) {
       task
     )} &nbsp
     <img src="${task["prio"][1]}"></div>
-    <div class="margin-top"> ${generateDetailContacts(
-      task
-    )}</div>
-    <div class="detailSubtasks"> ${generateDetailSubtasks(
-      task
-    )}</div>
+    <div class="margin-top"> ${generateDetailContacts(task)}</div>
+    <div class="detailSubtasks"> ${generateDetailSubtasks(task)}</div>
     </div>
     <div class="detail-buttons">
     <div id="delete-btn">
-    <button class="stroke" type="button" onclick="deleteTask(${task["id"]
+    <button class="stroke" type="button" onclick="deleteTask(${
+      task["id"]
     })" class="detail-btn">
     <svg class="stroke" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
@@ -271,7 +271,8 @@ function renderDetailTask(task) {
     </div>
     <div class="line height"></div>
     <div id="edit-btn">
-    <button class="stroke" type ="button" onclick="editTask(${task["id"]
+    <button class="stroke" type ="button" onclick="editTask(${
+      task["id"]
     })" class="detail-btn">
     <svg class="stroke" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
@@ -424,8 +425,12 @@ function resetCategoryInput() {
   input.style.backgroundColor = "white";
 }
 function renderContactHTML(contact, contactColor, i, task) {
-  let backgroundColor = task["assignedContact"].includes(contact) ? "#2a3647" : "";
-  let checkBox = task["assignedContact"].includes(contact) ? "./icons/checkbutton_checked_white.svg" : "./icons/checkbutton_default.svg";
+  let backgroundColor = task["assignedContact"].includes(contact)
+    ? "#2a3647"
+    : "";
+  let checkBox = task["assignedContact"].includes(contact)
+    ? "./icons/checkbutton_checked_white.svg"
+    : "./icons/checkbutton_default.svg";
   let color = task["assignedContact"].includes(contact) ? "white" : "black";
 
   return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})" style="background-color: ${backgroundColor}; color: ${color};">
@@ -468,7 +473,7 @@ function addPrio(clickedTab) {
 
 function checkPrio(clickedTab) {
   const tabs = ["urgent", "medium", "low"];
-  const colors = ['#FF3D00', '#FFA800', '#7AE229'];
+  const colors = ["#FF3D00", "#FFA800", "#7AE229"];
 
   tabs.forEach((tab, index) => {
     const backgroundColor = clickedTab === tab ? colors[index] : "white";
@@ -482,9 +487,9 @@ function changeImage(clickedTab) {
   document.getElementById(clickedTab + "-img").src = imgPath;
 }
 function resetImages() {
-  document.getElementById('urgent-img').src = "./icons/priority_urgent.svg";
-  document.getElementById('medium-img').src = "./icons/priority_medium.svg";
-  document.getElementById('low-img').src = "./icons/priority_low.svg";
+  document.getElementById("urgent-img").src = "./icons/priority_urgent.svg";
+  document.getElementById("medium-img").src = "./icons/priority_medium.svg";
+  document.getElementById("low-img").src = "./icons/priority_low.svg";
 }
 
 async function loadCategory() {
@@ -724,7 +729,7 @@ function renderEditTaskHTML(task) {
           </form>`;
 }
 function newTaskColumn(chosenColumn) {
-  window.location.href = `add_Task.html?chosenColumn=${chosenColumn}`
+  window.location.href = `add_Task.html?chosenColumn=${chosenColumn}`;
 }
 /////////////////////
 // overlay logic END

@@ -1,29 +1,30 @@
 let contacts = [];
 let isAddingContact = false; // Flag für den Kontakt-Hinzufügen-Modus
 
-window.addEventListener('load', load);
+window.addEventListener("load", load);
 
 function renderContacts() {
-    let mycontact = document.getElementById('mycontact');
-    mycontact.innerHTML = '';
+  let mycontact = document.getElementById("mycontact");
+  mycontact.innerHTML = "";
 
-    // Sortiere die Kontakte alphabetisch nach dem Namen
-    contacts.sort((a, b) => a.name.localeCompare(b.name));
+  // Sortiere die Kontakte alphabetisch nach dem Namen
+  contacts.sort((a, b) => a.name.localeCompare(b.name));
 
-    let currentLetter = null;
+  let currentLetter = null;
 
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
-        
-        if (contact && contact.name) { // Überprüfung, ob der Kontakt und der Name definiert sind
-            const firstLetter = contact.name[0].toUpperCase();
-    
-            if (firstLetter !== currentLetter) {
-                currentLetter = firstLetter;
-                mycontact.innerHTML += `<div class="alphabet-group">${currentLetter}</div>`;
-            }
-    
-            mycontact.innerHTML += `
+  for (let i = 0; i < contacts.length; i++) {
+    const contact = contacts[i];
+
+    if (contact && contact.name) {
+      // Überprüfung, ob der Kontakt und der Name definiert sind
+      const firstLetter = contact.name[0].toUpperCase();
+
+      if (firstLetter !== currentLetter) {
+        currentLetter = firstLetter;
+        mycontact.innerHTML += `<div class="alphabet-group">${currentLetter}</div>`;
+      }
+
+      mycontact.innerHTML += `
                 <div class="rendercontact">
                     <div class="circle">
                         <span class="initials">AB</span>
@@ -37,23 +38,24 @@ function renderContacts() {
                         </div>
                     </div>
                 </div>`;
-        }
     }
+  }
 }
 
 function addContact() {
-    isAddingContact = true;
-    let contactContainer = document.getElementById('contactContainer');
-    contactContainer.innerHTML = contactTemplate(); // Hier wird das Kontaktformular gerendert
+  isAddingContact = true;
+  let contactContainer = document.getElementById("contactContainer");
+  contactContainer.innerHTML = contactTemplate(); // Hier wird das Kontaktformular gerendert
 }
 
 // ... (vorheriger Code)
 
-function currentcontact(i) { // Funktion zum Anzeigen der Informationen des ausgewählten Kontakts
-    let currentcontactDiv = document.getElementById('currentcontact'); // Zugriff auf das Container-Div
-    currentcontactDiv.innerHTML = ''; // Inhalte leeren
+function currentcontact(i) {
+  // Funktion zum Anzeigen der Informationen des ausgewählten Kontakts
+  let currentcontactDiv = document.getElementById("currentcontact"); // Zugriff auf das Container-Div
+  currentcontactDiv.innerHTML = ""; // Inhalte leeren
 
-    currentcontactDiv.innerHTML += `
+  currentcontactDiv.innerHTML += `
 
     <div class="contactBoxOne">
         <div class="circle">
@@ -86,13 +88,13 @@ function currentcontact(i) { // Funktion zum Anzeigen der Informationen des ausg
         <p>Tel:</p>
         <p>${contacts[i].phone}</p>
     </div>
-  </div>`
+  </div>`;
 }
 
 // ... der restliche Code bleibt unverändert
 
 function contactTemplate() {
-    return `
+  return `
     <div class="add">
         <div class="container">
             <div class="addcontainer">
@@ -128,58 +130,55 @@ function contactTemplate() {
 }
 
 function cancelContact() {
-    isAddingContact = false; // Flag zurücksetzen
-    save();
-    window.location.href = 'contacts.html';
+  isAddingContact = false; // Flag zurücksetzen
+  save();
+  window.location.href = "contacts.html";
 }
 
 function addNotiz() {
-    let name = document.getElementById('name').value;
-    let email = document.getElementById('email').value;
-    let phone = document.getElementById('phone').value;
-      
-    let contact = { name, email, phone }; // Erzeugen eines Kontaktobjekts
-    contacts.push(contact);
-      
-    // Sortiere die Kontakte alphabetisch nach dem Namen
-    contacts.sort((a, b) => a.name.localeCompare(b.name));
-      
-    isAddingContact = false;
-    save();
-    renderContacts();
-    
-    if (contacts.length > 0) {
-        updateCircleWithInitials(0); // Hier wird die Funktion aufgerufen, um den ersten Kontakt zu aktualisieren
-    }
-    
-    
-    window.location.href = 'contacts.html';
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let phone = document.getElementById("phone").value;
+
+  let contact = { name, email, phone }; // Erzeugen eines Kontaktobjekts
+  contacts.push(contact);
+
+  // Sortiere die Kontakte alphabetisch nach dem Namen
+  contacts.sort((a, b) => a.name.localeCompare(b.name));
+
+  isAddingContact = false;
+  save();
+  renderContacts();
+
+  if (contacts.length > 0) {
+    updateCircleWithInitials(0); // Hier wird die Funktion aufgerufen, um den ersten Kontakt zu aktualisieren
+  }
+
+  window.location.href = "contacts.html";
 }
 
- 
-    
-function save(){
-    let contactAsText = JSON.stringify(contacts); /* erster Schritt für Localstorage*/
-    localStorage.setItem('contacts', contactAsText); /* names ist Key und namesAsText Value*/
+function save() {
+  let contactAsText =
+    JSON.stringify(contacts); /* erster Schritt für Localstorage*/
+  localStorage.setItem(
+    "contacts",
+    contactAsText
+  ); /* names ist Key und namesAsText Value*/
 }
-
 
 function load() {
-    let contactAsText = localStorage.getItem('contacts');
-    if (contactAsText) {
-        contacts = JSON.parse(contactAsText);
-    } else {
-        contacts = [];
-    }
-    renderContacts();
-    
+  let contactAsText = localStorage.getItem("contacts");
+  if (contactAsText) {
+    contacts = JSON.parse(contactAsText);
+  } else {
+    contacts = [];
+  }
+  renderContacts();
 }
 
-
 function deletecontact(i) {
-    contacts.splice(i, 1);
-    save(); // Speichere die aktualisierten Kontakte im Local Storage
-    renderContacts(); // Zeige die aktualisierten Kontakte auf der Seite an
-    window.location.href = 'contacts.html';
-
+  contacts.splice(i, 1);
+  save(); // Speichere die aktualisierten Kontakte im Local Storage
+  renderContacts(); // Zeige die aktualisierten Kontakte auf der Seite an
+  window.location.href = "contacts.html";
 }
