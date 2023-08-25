@@ -1,5 +1,6 @@
 let sumTodos = [];
 let users = [];
+let userIndex = localStorage.getItem("activeID");
 const monthsName = [
   null,
   "Januar",
@@ -80,8 +81,8 @@ function getGreeting() {
 }
 
 function getUserName() {
-  if (users[7].hasOwnProperty("names")) {
-    return users[7].names;
+  if (users[userIndex].hasOwnProperty("names")) {
+    return users[userIndex].names;
   } else {
     return "Mr Nobody";
   }
@@ -99,9 +100,13 @@ function generateInitials(name) {
 }
 
 function updateHeader() {
-  document.getElementById("avatar-initials").innerHTML = generateInitials(
-    users[7].names
-  );
+  if (users[userIndex].hasOwnProperty("names")) {
+    document.getElementById("avatar-initials").innerHTML = generateInitials(
+      users[userIndex].names
+    );
+  } else {
+    document.getElementById("avatar-initials").innerHTML = "NO";
+  }
 }
 
 function getNextDate(element) {
