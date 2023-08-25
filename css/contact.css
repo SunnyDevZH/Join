@@ -7,10 +7,8 @@ body {
   width: 352px;
   height: 56px;
   font-size: 21px;
-  border-radius: 10px;
-  border-style: none;
   color: white;
-  margin-bottom: 50px;
+  margin: 30px;
 }
 
 .createButton {
@@ -26,15 +24,7 @@ body {
 .maincontainer {
   display: flex;
 }
-.rendercontact {
-  
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  box-shadow: 0 4px 2px -2px gray;
-  margin-bottom: 50px;
-  
-}
+
 .containerTeam {
   display: flex;
   justify-content: center;
@@ -136,22 +126,75 @@ input {
 }
 
 .scrolebar {
-  padding: 20px;
   background-color: rgb(255, 255, 255);
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; /* Welchen Style? */
-  height: 100vh;
 }
 
 b {
   cursor: pointer;
 }
 
-.flex-direction{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .displayflex{
   display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.rendercontact {
+  display: flex;
+  padding: 10px;
+  margin: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-direction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  gap: 20px;
+}
+
+.alphabet-group {
+  margin-top: 15px;
+  margin-left: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 5px;
+  font-weight: bold;
+}
+
+#mycontact {
+  height: 700px;
+  overflow-y: scroll;
+}
+.contactBox{
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+  gap: 20px;
+}
+.contactBoxOne{
+  display: flex;
+  align-items: center;
+  margin: 50px;
+  gap: 20px;
+}
+
+.circle {
+  width: 150px;
+  height: 150px;
+  background-color: aqua;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.initials {
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
 }

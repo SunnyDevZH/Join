@@ -3,64 +3,93 @@ let isAddingContact = false; // Flag für den Kontakt-Hinzufügen-Modus
 
 window.addEventListener('load', load);
 
+function renderContacts() {
+    let mycontact = document.getElementById('mycontact');
+    mycontact.innerHTML = '';
 
-function render() {
-    let mycontact = document.getElementById('mycontact'); /* Zugriff Div */
-    mycontact.innerHTML = ''; /* Inhalt leeren */
+    // Sortiere die Kontakte alphabetisch nach dem Namen
+    contacts.sort((a, b) => a.name.localeCompare(b.name));
 
-    if (isAddingContact) {
-        mycontact.innerHTML = contactTemplate(); // Kontaktformular anzeigen
-    } else {
-        for (let i = 0; i < contacts.length; i++) {
+    let currentLetter = null;
+
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
+        
+        if (contact && contact.name) { // Überprüfung, ob der Kontakt und der Name definiert sind
+            const firstLetter = contact.name[0].toUpperCase();
+    
+            if (firstLetter !== currentLetter) {
+                currentLetter = firstLetter;
+                mycontact.innerHTML += `<div class="alphabet-group">${currentLetter}</div>`;
+            }
+    
             mycontact.innerHTML += `
-            <div class="rendercontact">
-                <div>
-                img
-                </div>
-                <div class="flex-direction">
-                    <div>
-                        <b onclick="currentContact()">${contacts[i].name}</b>
+                <div class="rendercontact">
+                    <div class="circle">
+                        <span class="initials">AB</span>
                     </div>
-                    <div>
-                        <a href="">${contacts[i].email}</a>
+                    <div class="flex-direction">
+                        <div>
+                            <b onclick="currentcontact(${i})">${contact.name}</b>
+                        </div>
+                        <div>
+                            <a href="mailto:${contact.email}">${contact.email}</a>
+                        </div>
                     </div>
-                </div>
-            </div>`;
+                </div>`;
         }
     }
-
-    document.getElementById('name').value = ''; /* Leeren von Input */
-    document.getElementById('email').value = ''; /* Leeren von Input */
-    document.getElementById('phone').value = ''; /* Leeren von Input */
 }
 
-function addContact() { // Funktion 1 aufgerufen durch onclick
-    isAddingContact = true; // Flag setzen
-    render(); // Ansicht aktualisieren
+function addContact() {
+    isAddingContact = true;
+    let contactContainer = document.getElementById('contactContainer');
+    contactContainer.innerHTML = contactTemplate(); // Hier wird das Kontaktformular gerendert
 }
 
-function contact(i) { 
-    let mycontact = document.getElementById('mycontact'); /* Zugriff Div */
-    mycontact.innerHTML = ''; /* Inhalt leeren */
+// ... (vorheriger Code)
 
-    mycontact.innerHTML += `
+function currentcontact(i) { // Funktion zum Anzeigen der Informationen des ausgewählten Kontakts
+    let currentcontactDiv = document.getElementById('currentcontact'); // Zugriff auf das Container-Div
+    currentcontactDiv.innerHTML = ''; // Inhalte leeren
 
-        <div class="rendercontact">
-            <div>
-              img
-            </div>
-            <div class="flex-direction">
-                <div>
-                    <b onclick="currentcontact()">${contacts[i].name}</b>
-                </div>
-                <div>
-                  <a href="">${contacts[i].email}</a>
-                </div>
-            </div>
-        </div>`;
+    currentcontactDiv.innerHTML += `
 
+    <div class="contactBoxOne">
+        <div class="circle">
+            <span class="initials">AB</span>
+        </div>
+    <div class="flex-direction">
+        <div>
+            <b>${contacts[i].name}</b>
+        </div>
         
+          <div class="displayflex">
+            <div>
+              <img src="./img/edit.png" alt="edit" width="80px">
+            </div>
+            <div>
+              <img onclick="deletecontact(${i})" src="./img/delete.png" alt="delte" width="100px">
+            </div>
+          </div>        
+    </div>
+  </div>
+  <div class="contactBox">
+    <div>
+        <b>Contact Information</b>
+    </div>
+    <div>
+        <p>E-mail:</p>
+        <a href="">${contacts[i].email}</a>
+    </div>
+    <div>
+        <p>Tel:</p>
+        <p>${contacts[i].phone}</p>
+    </div>
+  </div>`
 }
+
+// ... der restliche Code bleibt unverändert
 
 function contactTemplate() {
     return `
@@ -100,81 +129,57 @@ function contactTemplate() {
 
 function cancelContact() {
     isAddingContact = false; // Flag zurücksetzen
-    render(); // Ansicht aktualisieren
+    save();
+    window.location.href = 'contacts.html';
 }
 
 function addNotiz() {
     let name = document.getElementById('name').value;
     let email = document.getElementById('email').value;
     let phone = document.getElementById('phone').value;
-    
+      
     let contact = { name, email, phone }; // Erzeugen eines Kontaktobjekts
     contacts.push(contact);
-
-     // Sortiere die Kontakte alphabetisch nach dem Namen
-     contacts.sort((a, b) => a.name.localeCompare(b.name));
-
+      
+    // Sortiere die Kontakte alphabetisch nach dem Namen
+    contacts.sort((a, b) => a.name.localeCompare(b.name));
+      
     isAddingContact = false;
-    render();
     save();
+    renderContacts();
+    
+    if (contacts.length > 0) {
+        updateCircleWithInitials(0); // Hier wird die Funktion aufgerufen, um den ersten Kontakt zu aktualisieren
+    }
+    
+    
+    window.location.href = 'contacts.html';
 }
 
+ 
+    
 function save(){
     let contactAsText = JSON.stringify(contacts); /* erster Schritt für Localstorage*/
     localStorage.setItem('contacts', contactAsText); /* names ist Key und namesAsText Value*/
 }
+
 
 function load() {
     let contactAsText = localStorage.getItem('contacts');
     if (contactAsText) {
         contacts = JSON.parse(contactAsText);
     } else {
-        contacts = []; // Falls keine Daten vorhanden sind, leeres Array erstellen
+        contacts = [];
     }
-    render(); // Zeige die geladenen Kontakte auf der Seite an
+    renderContacts();
+    
 }
+
 
 function deletecontact(i) {
     contacts.splice(i, 1);
     save(); // Speichere die aktualisierten Kontakte im Local Storage
-    render(); // Zeige die aktualisierten Kontakte auf der Seite an
-}
+    renderContacts(); // Zeige die aktualisierten Kontakte auf der Seite an
+    window.location.href = 'contacts.html';
 
-function currentcontact() { 
-    let currentcontact = document.getElementById('currentcontact'); /* Zugriff Div */
-    currentcontact.innerHTML = ''; /* Inhalt leeren */
-
-    currentcontact.innerHTML += `
-
-    <div class="rendercontact">
-    <div>
-    img
-    </div>
-
-    <div class="flex-direction">
-        <div>
-            <b>${contacts[i].name}</b>
-        </div>
-        
-          <div class="displayflex">
-            <div>
-              <img src="./img/edit.png" alt="edit" width="80px">
-            </div>
-            <div>
-              <img src="./img/delete.png" alt="delte" width="80px">
-            </div>
-          </div>        
-    </div>
-  </div>
-  <div class="flex-direction">
-    <div>
-        <b>Contact Information</b>
-    </div>
-    <div>
-      <a href="">${contacts[i].phone}</a>
-    </div>
-    <div>
-        <a href="">${contacts[i].email}</a>
-    </div>
-  </div>`
 }
