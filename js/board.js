@@ -201,31 +201,39 @@ function generatePrio(task) {
 function generateDetailContacts(task) {
   let detailContactList = "";
   let contacts = task["assignedContact"];
-  for (i = 0; i < contacts.length; i++) {
-    let initials = task["assignedContact"][i].split(" ");
-    initials = initials[0][0] + initials[1][0];
-    contactColor = task["contactColor"][i];
-    detailContactList += `<div class="detailContact">
+  if (contacts.length > 0) {
+    detailContactList = `<p class="violett">Assigned to:</p>`;
+    for (i = 0; i < contacts.length; i++) {
+      let initials = task["assignedContact"][i].split(" ");
+      initials = initials[0][0] + initials[1][0];
+      contactColor = task["contactColor"][i];
+      detailContactList += `<div class="detailContact">
         <div class="contact-circle" style="background-color: ${contactColor}">${initials}</div>&nbsp
         <div>${task["assignedContact"][i]}</div></div>`;
+    }
   }
   return detailContactList;
 }
 function generateDetailSubtasks(task) {
   let detailSubtaskList = "";
   let subtasks = task["subtasks"];
-  for (i = 0; i < subtasks.length; i++) {
-    let subtaskCheckBox = task["subtasks"][i]["imageSrc"];
-    detailSubtaskList += `<div class="detailSubtask">
+  if (task['subtasks'].length > 0) {
+    detailSubtaskList = `<p class="violett">Subtasks</p>`;
+
+    for (i = 0; i < subtasks.length; i++) {
+      let subtaskCheckBox = task["subtasks"][i]["imageSrc"];
+      detailSubtaskList += `<div class="detailSubtask">
         <img src="${subtaskCheckBox}">&nbsp${firstCharToUpperCase(
-      task["subtasks"][i]["value"]
-    )}
+        task["subtasks"][i]["value"]
+      )}
         </div>`;
+    }
   }
   return detailSubtaskList;
 }
 
 function renderDetailTask(task) {
+
   return `
     <div class="todo-category width" style="background-color:${task["categoryColor"]
     }">
@@ -240,10 +248,10 @@ function renderDetailTask(task) {
       task
     )} &nbsp
     <img src="${task["prio"][1]}"></div>
-    <div class="margin-top"><p class="violett">Assigned to:</p> ${generateDetailContacts(
+    <div class="margin-top"> ${generateDetailContacts(
       task
     )}</div>
-    <div class="detailSubtasks"><p class="violett">Subtasks</p> ${generateDetailSubtasks(
+    <div class="detailSubtasks"> ${generateDetailSubtasks(
       task
     )}</div>
     </div>
@@ -715,6 +723,8 @@ function renderEditTaskHTML(task) {
             </div>
           </form>`;
 }
-
+function newTaskColumn(chosenColumn) {
+  window.location.href = `add_Task.html?chosenColumn=${chosenColumn}`
+}
 /////////////////////
 // overlay logic END

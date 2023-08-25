@@ -19,9 +19,13 @@ async function init() {
     getNewDate();
     await load();
 }
-
+function getChosenColumn() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let chosenColumn = urlParams.get('chosenColumn');
+    return (chosenColumn);
+}
 //* function to get all values from all inputfields and to push it in an JSON, and then in an array
-async function addTask() {
+async function addTask(chosenColumn) {
 
     let title = document.getElementById('title').value;
     let description = document.getElementById('description').value;
@@ -33,7 +37,7 @@ async function addTask() {
         return;
     }
     let task = {
-        'step': 'col-01',
+        'step': getChosenColumn(chosenColumn) || 'col-01',
         'title': title,
         'description': description,
         'assignedContact': assignedContacts,
