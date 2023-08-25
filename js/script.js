@@ -1,5 +1,5 @@
 let sumTodos = [];
-let users = [{ username: "Dennis" }, { username: "Hermine" }];
+let users = [];
 const monthsName = [
   null,
   "Januar",
@@ -17,7 +17,9 @@ const monthsName = [
 ];
 
 function init() {
-  setTimeout(function(){location.href="./login.html"} , 1300); 
+  setTimeout(function () {
+    location.href = "./login.html";
+  }, 1300);
 }
 
 async function loadTodos() {
@@ -27,16 +29,20 @@ async function loadTodos() {
     sumTodos[i].id = i;
   }
   changeAvatarColor();
-  console.log(sumTodos);
 }
 
-async function summaryLoad() {
-  updateSummaryCounter();
-  updateSummaryGreeting();
+async function loadUsers() {
+  let getUsers = await getItem("users");
+  users = JSON.parse(getUsers);
+  console.log(users);
 }
 
 async function updateSummaryCounter() {
+  await loadUsers();
   await loadTodos();
+  await updateSummaryGreeting();
+  updateHeader();
+
   document.getElementById("task-board-counter").innerHTML = sumTodos.length;
   let todoProgress = sumTodos.filter((t) => t["step"] == "col-02");
   document.getElementById("todo-inprogress-counter").innerHTML =
@@ -74,7 +80,28 @@ function getGreeting() {
 }
 
 function getUserName() {
-  return users[1]["username"];
+  if (users[7].hasOwnProperty("names")) {
+    return users[7].names;
+  } else {
+    return "Mr Nobody";
+  }
+}
+
+function generateInitials(name) {
+  let initials = name.split(" ");
+  if (initials.length == 1) {
+    return initials[0][0] + initials[0][1].toUpperCase();
+  } else if (initials.length == 2) {
+    return initials[0][0] + initials[1][0];
+  } else {
+    return "00";
+  }
+}
+
+function updateHeader() {
+  document.getElementById("avatar-initials").innerHTML = generateInitials(
+    users[7].names
+  );
 }
 
 function getNextDate(element) {
@@ -127,4 +154,3 @@ function closeAvatarMenuOutside(event) {
 document.addEventListener("click", closeAvatarMenuOutside);
 
 // header end
-
