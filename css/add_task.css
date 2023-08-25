@@ -197,6 +197,10 @@ textarea {
     align-items: center;
     justify-content: space-between;
 }
+.nospace-between {
+    display: flex; 
+    justify-content: flex-start !important;
+}
 .option:hover {
     background-color: lightgray;
     border-radius: 8px;

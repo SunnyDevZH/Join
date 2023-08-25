@@ -215,6 +215,9 @@ function pushNewCategory() {
     let newInput = input.value;
     newInput = newInput.charAt(0).toUpperCase() + newInput.slice(1);
     let newColor = getRandomColor();
+    if (taskColors.includes(newColor)) {
+        getRandomColor();
+    }
     if (newInput.length >= 3 && !taskCategories.includes(newInput)) {
         taskCategories.push(newInput);
         taskColors.push(newColor);
@@ -398,7 +401,7 @@ function renderContactHTML(contact, contactColor, i) {
     </div>`
 }
 function renderSubtaskHTML(subtaskObj, i) {
-    return `<div class="option"> 
-    <img id="subtaskImage${i}" onclick="checkSubtask(${i})" src="${subtaskObj.imageSrc}">${subtaskObj.value}
+    return `<div class="option nospace-between"> 
+    <img id="subtaskImage${i}" onclick="checkSubtask(${i})" src="${subtaskObj.imageSrc}"> ${subtaskObj.value}
     </div>`;
 }
