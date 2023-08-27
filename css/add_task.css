@@ -247,8 +247,8 @@ input {
 #animationBox {
     position: fixed;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: calc(100vw - 50% - 100px);
+    right: calc(100vw - 50% - 100px);
     width: 100px;
     height: 100px;
 }
