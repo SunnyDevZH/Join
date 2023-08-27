@@ -20,8 +20,6 @@ function login() {
   }
 }
 
-// Local Storage für Remember me hacken
-
 function save() {
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;

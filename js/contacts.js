@@ -1,5 +1,7 @@
-let contacts = [];
+let addContacts = [];
 let isAddingContact = false; // Flag für den Kontakt-Hinzufügen-Modus
+
+
 
 window.addEventListener('load', load);
 
@@ -7,13 +9,16 @@ function renderContacts() {
     let mycontact = document.getElementById('mycontact');
     mycontact.innerHTML = '';
 
+    // Filtere Kontakte, um undefinierte oder Kontakte ohne Namen zu entfernen
+    const validContacts = addContacts.filter(contact => contact && contact.name);
+
     // Sortiere die Kontakte alphabetisch nach dem Namen
-    contacts.sort((a, b) => a.name.localeCompare(b.name));
+    validContacts.sort((a, b) => a.name.localeCompare(b.name));
 
     let currentLetter = null;
 
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
+    for (let i = 0; i < addContacts.length; i++) {
+        const contact = addContacts[i];
         
         if (contact && contact.name) { // Überprüfung, ob der Kontakt und der Name definiert sind
             const firstLetter = contact.name[0].toUpperCase();
@@ -26,7 +31,7 @@ function renderContacts() {
             mycontact.innerHTML += `
                 <div class="rendercontact">
                     <div class="circle" style="background-color: ${contact.color}">
-                        <span class="initials">${contacts[i].name.substring(0, 2)}</span>
+                        <span class="initials">${addContacts[i].name.substring(0, 2)}</span>
                     </div>
                     <div class="flex-direction">
                         <div>
@@ -55,12 +60,12 @@ function currentcontact(i) { // Funktion zum Anzeigen der Informationen des ausg
     currentcontactDiv.innerHTML += `
 
     <div class="contactBoxOne">
-        <div class="circle" style="background-color: ${contacts[i].color}">
-            <span class="initials">${contacts[i].name.substring(0, 2)}</span>
+        <div class="circle" style="background-color: ${addContacts[i].color}">
+            <span class="initials">${addContacts[i].name.substring(0, 2)}</span>
         </div>
     <div class="flex-direction">
         <div>
-            <b>${contacts[i].name}</b>
+            <b>${addContacts[i].name}</b>
         </div>
         
           <div class="displayflex">
@@ -79,11 +84,11 @@ function currentcontact(i) { // Funktion zum Anzeigen der Informationen des ausg
     </div>
     <div>
         <p>E-mail:</p>
-        <a href="">${contacts[i].email}</a>
+        <a href="">${addContacts[i].email}</a>
     </div>
     <div>
         <p>Tel:</p>
-        <p>${contacts[i].phone}</p>
+        <p>${addContacts[i].phone}</p>
     </div>
   </div>`;
 
@@ -131,7 +136,8 @@ function cancelContact() {
     window.location.href = 'contacts.html';
 }
 
-function addNotiz() {
+async function addNotiz() {
+
     let name = document.getElementById('name').value;
     let email = document.getElementById('email').value;
     let phone = document.getElementById('phone').value;
@@ -139,10 +145,9 @@ function addNotiz() {
     let color = getRandomColor(); // Zufällige Farbe generieren
 
     let contact = { name, email, phone, color }; // dem Kontakt hinzufügen
-    contacts.push(contact);
-      
-    // Sortiere die Kontakte alphabetisch nach dem Namen
-    contacts.sort((a, b) => a.name.localeCompare(b.name));
+    addContacts.push(contact);
+
+    await setItem("addContacts", JSON.stringify(addContacts)); // Daten von Users auf Server laden
       
     isAddingContact = false;
     save();
@@ -152,23 +157,22 @@ function addNotiz() {
 
  
 function save(){
-    let contactAsText = JSON.stringify(contacts); /* erster Schritt für Localstorage*/
-    localStorage.setItem('contacts', contactAsText); /* names ist Key und namesAsText Value*/
+    let contactAsText = JSON.stringify(addContacts); /* erster Schritt für Localstorage*/
+    localStorage.setItem('addContacts', contactAsText); /* names ist Key und namesAsText Value*/
 }
 
-
-function load() {
-    let contactAsText = localStorage.getItem('contacts');
-    if (contactAsText) {
-        contacts = JSON.parse(contactAsText);
-    } else {
-        contacts = [];
+async function load() {
+    try {
+    addContacts = JSON.parse(await getItem("addContacts")); // Items als json laden
+    } catch (e) {
+      console.error("Loading error:", e); // Falls Users nicht gefunden
+      alert("Kontakt nicht gefunden");
     }
     renderContacts();
-}
+  }
 
 function deletecontact(i) {
-    contacts.splice(i, 1);
+    addContacts.splice(i, 1);
     save(); // Speichere die aktualisierten Kontakte im Local Storage
     renderContacts(); // Zeige die aktualisierten Kontakte auf der Seite an
     window.location.href = 'contacts.html';
