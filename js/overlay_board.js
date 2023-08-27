@@ -50,8 +50,7 @@ function generateDetailContacts(task) {
     if (contacts.length > 0) {
         detailContactList = `<p class="violett">Assigned to:</p>`;
         for (i = 0; i < contacts.length; i++) {
-            let initials = task["assignedContact"][i].split(" ");
-            initials = initials[0][0] + initials[1][0];
+            let initials = generateInitials(contacts[i]); 
             contactColor = task["contactColor"][i];
             detailContactList += `<div class="detailContact">
         <div class="contact-circle" style="background-color: ${contactColor}">${initials}</div>&nbsp
