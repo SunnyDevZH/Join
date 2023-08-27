@@ -187,7 +187,7 @@ function pushContacts(task) {
 function addContactToTask(i) {
     let chosenContact = document.getElementById(`contact${i}`);
     let contact = chosenContact.innerText;
-    let contactColor = contactColors[i];
+    let contactColor = addContacts[i]['color'];
     let checkBox = document.getElementById(`checkbox-contact${i}`);
     if (chosenContact.style.backgroundColor !== "rgb(42, 54, 71)") {
         chosenContact.style.color = "white";
