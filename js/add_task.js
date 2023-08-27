@@ -1,8 +1,7 @@
 let allTasks = [];
 let taskCategories = [];
 let taskColors = [];
-let contacts = ['Hermine Granger', 'Harry Potter', 'Ron Weasley'];
-let contactColors = ['#17D264', '#3043F0', '#496F70'];
+let addContacts= []; 
 
 let isClicked = false;
 let isClicked2 = false;
@@ -51,12 +50,12 @@ async function addTask(chosenColumn) {
     allTasks.push(task);
     await saveTask();
     clearAll();
-    animation(); 
+    animation();
     setTimeout(function () {
         window.location.href = "./board.html"; // Hier wird zur neuen Seite umgeleitet
-    }, 1000); 
+    }, 1000);
 }
-function animation () {
+function animation() {
     document.getElementById("animationBox").classList.remove("d-none");
     document.getElementById("animationBox").classList.add("animation");
 }
@@ -98,9 +97,11 @@ async function load() {
         taskCategories = JSON.parse(await getItem("taskCategories"));
         taskColors = JSON.parse(await getItem("taskColors"));
         allTasks = JSON.parse(await getItem("allTasks"));
+        addContacts = JSON.parse(await getItem("addContacts"));
     } catch (e) {
         console.error("Loading error:", e);
     }
+    console.log(addContacts);
 }
 //* gets the date of today, so the user cannot chose previous dates
 function getNewDate() {
@@ -256,9 +257,9 @@ function renderContactList() {
     let contactList = document.getElementById('contactList');
     if (isClicked2 == false) {
         contactList.classList.remove('d-none');
-        for (i = 0; i < contacts.length; i++) {
-            let contact = contacts[i];
-            let contactColor = contactColors[i];
+        for (i = 0; i < addContacts.length; i++) {
+            let contact = addContacts[i]['name'];
+            let contactColor = addContacts[i]['color'];
             contactList.innerHTML += renderContactHTML(contact, contactColor, i);
         }
         isClicked2 = true;

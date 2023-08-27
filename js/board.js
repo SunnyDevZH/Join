@@ -1,16 +1,6 @@
 // for testing
 let todos = [];
-let contacts = ["Hermine Granger", "Harry Potter", "Ron Weasley"];
-let contactColors = ["#17D264", "#3043F0", "#496F70"];
-let assignedPrio = [];
-let editedContacts = [];
-let editedContactColor = [];
-let editedPrio = [];
-let editedSubtasks = [];
-let editedCol;
-let editedCategory;
-let editedCategoryColor;
-let isClicked = false;
+
 
 // const icon_prio_low = "./icons/priority_low.svg";
 // const icon_prio_med = "./icons/priority_medium.svg";
@@ -22,6 +12,7 @@ function init() {
   loadTodos();
   updateHTML();
   loadCategory();
+  loadContacts(); 
 }
 
 async function loadTodos() {

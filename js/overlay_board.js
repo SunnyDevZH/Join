@@ -1,3 +1,13 @@
+let addContacts = [];
+let assignedPrio = [];
+let editedContacts = [];
+let editedContactColor = [];
+let editedPrio = [];
+let editedSubtasks = [];
+let editedCol;
+let editedCategory;
+let editedCategoryColor;
+let isClicked = false;
 // overlay logic
 async function pushCategories() {
     taskCategories = [];
@@ -8,7 +18,7 @@ async function pushCategories() {
             taskCategories.push(todos[i]["category"]);
             taskColors.push(todos[i]["categoryColor"]);
         }
-    } 
+    }
     await saveCategory();
     await loadCategory();
 }
@@ -149,9 +159,9 @@ function displayContacts(task) {
     pushContacts(task);
     let contactContent = document.getElementById("contactList");
     contactContent.innerHTML = "";
-    for (i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        let contactColor = contactColors[i];
+    for (i = 0; i < addContacts.length; i++) {
+        let contact = addContacts[i]['name'];
+        let contactColor = addContacts[i]['color'];
         contactContent.innerHTML += renderContactHTML(
             contact,
             contactColor,
@@ -276,7 +286,9 @@ async function loadCategory() {
         console.error("Loading error:", e);
     }
 }
-
+async function loadContacts() {
+    addContacts = JSON.parse(await getItem("addContacts"));
+}
 function showEditedSubtasks(task) {
     let subtaskElement = document.getElementById("subtaskContent");
     let subtasks = task["subtasks"];
