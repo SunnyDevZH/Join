@@ -15,7 +15,7 @@
   <div w3-include-html="./templates/header.html"></div>
   <div class="content-add-task">
     <h1>Add Task</h1>
-    <form onsubmit="addTask();return false">
+    <form id="myForm" onsubmit="addTask();return false">
       <div class="input-table">
         <div class="left-column">
           <div class="input-form">
@@ -105,6 +105,7 @@
         </button>
       </div>
     </form>
+    <div class="d-none" id="animationBox"><img src="./icons/addtask_success.svg"></div>
   </div>
   <script src="./js/script.js"></script>
   <script src="./js/add_task.js"></script>

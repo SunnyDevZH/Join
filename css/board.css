@@ -282,7 +282,11 @@
   right: 10px;
 }
 
-
+.detailSubtask {
+  display: flex; 
+  justify-content: flex-start; 
+  align-items: center;
+}
 .top-nav {
   display: flex;
   justify-content: space-between;
@@ -319,7 +323,11 @@ form {
 @media (max-width: 768px) {
   .main-card {
     width: 80%;
-
     margin: 0;
+  }
+}
+@media(max-width:500px) {
+  .main-card{
+    min-width:200px; 
   }
 }

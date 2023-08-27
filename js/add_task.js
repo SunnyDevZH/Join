@@ -51,8 +51,14 @@ async function addTask(chosenColumn) {
     allTasks.push(task);
     await saveTask();
     clearAll();
-    window.location.href = "./board.html";
-
+    animation(); 
+    setTimeout(function () {
+        window.location.href = "./board.html"; // Hier wird zur neuen Seite umgeleitet
+    }, 1000); 
+}
+function animation () {
+    document.getElementById("animationBox").classList.remove("d-none");
+    document.getElementById("animationBox").classList.add("animation");
 }
 //* checks if the Prio was chosen, if not there is an alert. 
 function requirePrio() {
@@ -214,11 +220,12 @@ function pushNewCategory() {
     let input = document.getElementById('categoryInput');
     let newInput = input.value;
     newInput = newInput.charAt(0).toUpperCase() + newInput.slice(1);
+    newInput = newInput.trim();
     let newColor = getRandomColor();
     if (taskColors.includes(newColor)) {
         getRandomColor();
     }
-    if (newInput.length >= 3 && !taskCategories.includes(newInput)) {
+    if (newInput.length >= 3 && !taskCategories.includes(newInput) && !taskColors.includes(newColor)) {
         taskCategories.push(newInput);
         taskColors.push(newColor);
         resetCategoryInput();
