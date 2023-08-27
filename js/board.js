@@ -1,7 +1,6 @@
 // for testing
 let todos = [];
 
-
 // const icon_prio_low = "./icons/priority_low.svg";
 // const icon_prio_med = "./icons/priority_medium.svg";
 // const icon_prio_urg = "./icons/priority_urgent.svg";
@@ -12,7 +11,7 @@ function init() {
   loadTodos();
   updateHTML();
   loadCategory();
-  loadContacts(); 
+  loadContacts();
 }
 
 async function loadTodos() {
@@ -44,9 +43,11 @@ function updateHTML() {
 
 function generateTodo(element) {
   return `
-  <div draggable='true' ondragstart='startDragging(${element["id"]
-    })' class='todo' onclick="openOverlay(${element["id"]})">
-    <div class="todo-category" style="background-color:${element["categoryColor"]
+  <div draggable='true' ondragstart='startDragging(${
+    element["id"]
+  })' class='todo' onclick="openOverlay(${element["id"]})">
+    <div class="todo-category" style="background-color:${
+      element["categoryColor"]
     }">${element["category"]}</div>
     <div class="todo-title">${firstCharToUpperCase(element["title"])}</div>
     <div class="todo-content">${firstCharToUpperCase(
@@ -67,11 +68,13 @@ function generateContacts(element) {
   let contactList = "";
   if (element["assignedContact"].length > 0) {
     for (let i = 0; i < element["assignedContact"].length; i++) {
-      let initials = element["assignedContact"][i].split(" ");
-      initials = initials[0][0] + initials[1][0];
+      //let initials = element["assignedContact"][i].split(" ");
+      //initials = initials[0][0] + initials[1][0];
+      initials = generateInitials(element["assignedContact"][i]);
       contactColor = element["contactColor"][i];
-      contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; left:${i * 30
-        }px">${initials}</div>`;
+      contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; left:${
+        i * 30
+      }px">${initials}</div>`;
       if (i >= 6) {
         break;
       }
@@ -156,4 +159,3 @@ function searchTasks() {
     });
   }
 }
-
