@@ -247,10 +247,7 @@ input {
 #animationBox {
     position: fixed;
     bottom: 0;
-    left: calc(100vw - 50% - 100px);
-    right: calc(100vw - 50% - 100px);
-    width: 100px;
-    height: 100px;
+    left: calc(100vw - 55%);
 }
 
 .animation {
@@ -282,7 +279,11 @@ input {
 @media(max-width:768px) {
     form {
         margin-bottom: 90px;
-
+    }
+    #animationBox {
+        position: fixed;
+        bottom: 0;
+        left: calc(100vw - 50% - 166px);
     }
 }
 
@@ -290,5 +291,8 @@ input {
     .submit-buttons {
         width: 100%;
         justify-content: center;
+    }
+    .animation {
+        width: 90%; 
     }
 }
