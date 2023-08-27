@@ -23,6 +23,12 @@ function init() {
   }, 1300);
 }
 
+async function loadPage() {
+  await loadUsers();
+  await loadTodos();
+  updateHeader();
+}
+
 async function loadTodos() {
   let newTodos = await getItem("allTasks");
   sumTodos = JSON.parse(newTodos);
@@ -39,10 +45,8 @@ async function loadUsers() {
 }
 
 async function updateSummaryCounter() {
-  await loadUsers();
-  await loadTodos();
+  await loadPage();
   await updateSummaryGreeting();
-  updateHeader();
 
   document.getElementById("task-board-counter").innerHTML = sumTodos.length;
   let todoProgress = sumTodos.filter((t) => t["step"] == "col-02");
@@ -101,9 +105,8 @@ function generateInitials(name) {
 
 function updateHeader() {
   if (users[userIndex].hasOwnProperty("names")) {
-    document.getElementById("avatar-initials").innerHTML = generateInitials(
-      users[userIndex].names
-    );
+    let initials = generateInitials(users[userIndex].names);
+    document.getElementById("avatar-initials").innerHTML = initials;
   } else {
     document.getElementById("avatar-initials").innerHTML = "NO";
   }

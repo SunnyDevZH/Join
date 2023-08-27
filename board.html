@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/add_task.css" />
   </head>
 
-  <body onload="init()">
+  <body onload="loadPage(); init();">
     <div w3-include-html="./templates/navbar.html"></div>
     <div w3-include-html="./templates/header.html"></div>
 
@@ -55,7 +55,12 @@
           <div class="col col-01">
             <div class="col-header">
               <h3>To Do</h3>
-              <img onclick="newTaskColumn('col-01')" class="btn-add" src="./icons/plus.svg" alt="+" />
+              <img
+                onclick="newTaskColumn('col-01')"
+                class="btn-add"
+                src="./icons/plus.svg"
+                alt="+"
+              />
             </div>
             <div
               id="col-01"
@@ -72,7 +77,12 @@
           <div class="col col-02">
             <div class="col-header">
               <h3>In Progress</h3>
-              <img onclick="newTaskColumn('col-02')"class="btn-add" src="./icons/plus.svg" alt="+" />
+              <img
+                onclick="newTaskColumn('col-02')"
+                class="btn-add"
+                src="./icons/plus.svg"
+                alt="+"
+              />
             </div>
             <div
               id="col-02"
@@ -87,7 +97,12 @@
           <div class="col col-03">
             <div class="col-header">
               <h3>Await Feedback</h3>
-              <img onclick="newTaskColumn('col-03')" class="btn-add" src="./icons/plus.svg" alt="+" />
+              <img
+                onclick="newTaskColumn('col-03')"
+                class="btn-add"
+                src="./icons/plus.svg"
+                alt="+"
+              />
             </div>
             <div
               id="col-03"
@@ -102,7 +117,6 @@
           <div class="col col-04">
             <div class="col-header">
               <h3>Done</h3>
-              
             </div>
             <div
               id="col-04"
