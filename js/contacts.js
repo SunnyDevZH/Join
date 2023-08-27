@@ -87,7 +87,6 @@ function currentcontact(i) { // Funktion zum Anzeigen der Informationen des ausg
     </div>
   </div>`;
 
-  contactTemplate()
 }
 
 function contactTemplate() {
