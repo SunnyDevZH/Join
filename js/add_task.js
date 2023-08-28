@@ -404,8 +404,9 @@ function renderCategoryHTML(taskCategory, taskColor, i) {
             </div>`;
 }
 function renderContactHTML(contact, contactColor, i) {
-    return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})">${renderSVG(contactColor)}
-    ${contact}   <img id="checkboxContact${i}" src="./icons/checkbutton_default.svg">
+    return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})"><div class="contact-circle" style="background-color: ${contactColor}">
+    ${generateInitials(contact)}</div>
+    ${contact} <img id="checkboxContact${i}" src="./icons/checkbutton_default.svg">
     </div>`
 }
 function renderSubtaskHTML(subtaskObj, i) {
