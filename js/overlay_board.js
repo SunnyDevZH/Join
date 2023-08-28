@@ -50,7 +50,7 @@ function generateDetailContacts(task) {
     if (contacts.length > 0) {
         detailContactList = `<p class="violett">Assigned to:</p>`;
         for (i = 0; i < contacts.length; i++) {
-            let initials = generateInitials(contacts[i]); 
+            let initials = generateInitials(contacts[i]);
             contactColor = task["contactColor"][i];
             detailContactList += `<div class="detailContact">
         <div class="contact-circle" style="background-color: ${contactColor}">${initials}</div>&nbsp
@@ -219,7 +219,8 @@ function renderContactHTML(contact, contactColor, i, task) {
     let color = task["assignedContact"].includes(contact) ? "white" : "black";
 
     return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})" style="background-color: ${backgroundColor}; color: ${color};">
-    ${renderSVG(contactColor)} ${contact}
+    <div class="contact-circle" style="background-color: ${contactColor}">
+    ${generateInitials(contact)}</div> ${contact}
     <img id="checkbox-contact${i}" src="${checkBox}">
   </div>`;
 }
