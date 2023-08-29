@@ -1,6 +1,10 @@
 body{
     margin: 0;
 }
+
+h1{
+    font-size: 35px;
+}
 .background{
     background-color: rgb(246,247,248); /* Farbe von Mockup */
     height: 100vh;
@@ -45,3 +49,25 @@ button{
     cursor: pointer;
     /* Design */
 }
+
+@media (max-width: 765px) {
+    h1 {
+        font-size: 32px;
+    } 
+
+    p {
+        display: none;
+    }
+  }
+  @media (max-width: 455px) {
+    h1 {
+        font-size: 25px;
+    } 
+
+    p {
+        display: none;
+    }
+    .forgotResetContainer {
+        width: 300px;
+    }
+  }

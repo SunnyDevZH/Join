@@ -53,3 +53,25 @@ button{
     justify-content: center;
     width: 100%;
 }
+
+@media (max-width: 765px) {
+    h1 {
+        font-size: 32px;
+    } 
+
+    p {
+        display: none;
+    }
+  }
+  @media (max-width: 455px) {
+    h1 {
+        font-size: 20px;
+    } 
+
+    p {
+        display: none;
+    }
+    .forgotSendContainer {
+        height: 200px;
+    }
+  }

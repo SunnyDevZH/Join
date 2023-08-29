@@ -1,5 +1,6 @@
 body{
     margin: 0;
+    overflow: hidden; /* Hide scrollbars */
 }
 .background{
     background-color: rgb(246,247,248); /* Farbe von Mockup */
@@ -121,4 +122,15 @@ input {
     font-size: 15px;
     align-items: center;
     justify-content: center;
+  }
+
+  @media (max-width: 650px) {
+    .loginContainer {
+      width: 320px;
+      height: 400px;
+    } 
+
+    p {
+        display: none;
+    }
   }

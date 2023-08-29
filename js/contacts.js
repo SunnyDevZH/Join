@@ -41,10 +41,7 @@ function renderContacts() {
   }
 }
 
-function addContact() {
-  let contactContainer = document.getElementById("contactContainer");
-  contactContainer.innerHTML = contactTemplate(); // Hier wird das Kontaktformular gerendert
-}
+// Kontakt anzeigen //
 
 function currentcontact(i) {
   let currentcontactDiv = document.getElementById("currentcontact");
@@ -52,13 +49,8 @@ function currentcontact(i) {
 
   currentcontactDiv.innerHTML += `
         <div class="contactBoxOne">
-            <div class="circle" style="background-color: ${
-              addContacts[i].color
-            }">
-                <span class="initials">${addContacts[i].name.substring(
-                  0,
-                  2
-                )}</span>
+            <div class="circle" style="background-color: ${addContacts[i].color}">
+                <span class="initials">${addContacts[i].name.substring(0,2)}</span>
             </div>
             <div class="flex-direction">
                 <div>
@@ -69,7 +61,7 @@ function currentcontact(i) {
                         <img onclick="deletecontact(${i})" src="./img/delete.png" alt="delete" width="100px">
                     </div>
                     <div>
-                        <img src="./img/edit.png" alt="edit" width="80px">
+                        <img onclick="editContainer(${i})" src="./img/edit.png" alt="edit" width="80px">
                     </div>
                 </div>
             </div>
@@ -89,6 +81,14 @@ function currentcontact(i) {
         </div>`;
 }
 
+
+// Kontakt Hinzufügen //
+
+function addContact() {
+  let contactContainer = document.getElementById("contactContainer");
+  contactContainer.innerHTML = contactTemplate(); // Hier wird das Kontaktformular gerendert
+}
+
 function contactTemplate() {
   return `
     <div class="add">
@@ -97,14 +97,14 @@ function contactTemplate() {
                 <div class="betterteam">
                     <img src="./img/join.png" alt="join">
                     <h1>Add contact</h1>
-                    Tasks are better with a team!
+                    <p>Tasks are better with a team!</p>
                     <div class="line2"></div>
                 </div>
                 <div class="inputcointainer">
                     <div class="close" onclick="cancelContact()">x</div>
                     <div class="input">
                         <div>
-                            <img src="./img/user.png" alt="user">
+                            <img src="./img/user.png" alt="user" style="width: 120px;">
                         </div>
                         <div>
                             <div class="inputsytle">
@@ -125,12 +125,77 @@ function contactTemplate() {
     </div> `;
 }
 
+// Edit //
+
+function editContainer(i) {
+  let editContainer = document.getElementById("editContainer");
+  editContainer.innerHTML = renderEdit(i);
+}
+
+function renderEdit(i) {
+
+  return`
+  <div class="add">
+        <div class="container">
+            <div class="addcontainer">
+                <div class="betterteam">
+                    <img src="./img/join.png" alt="join">
+                    <h1>Edit contacts</h1>
+                    <div class="line2"></div>
+                </div>
+                <div class="inputcointainer">
+                    <div class="close" onclick="cancelContact()">x</div>
+                    <div class="input">
+                        <div>
+                          <div class="circle" style="background-color: ${addContacts[i].color}">
+                            <span class="initials">${addContacts[i].name.substring(0,2)}</span>
+                          </div>
+                        </div>
+                        <div>
+                            <div class="inputsytle">
+                                <input id="name" placeholder="Name" type="text" />
+                                <input id="email" placeholder="Email" type="email" />
+                                <input id="phone" placeholder="Phone" type="number" />
+                            </div>
+                            <div class="buttonfield">
+                                <button onclick="deletecontact(${i})">Delete </button>
+                                <button class="createButton" onclick="edit()">Safe</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div> `;
+
+}
+
+
 function cancelContact() {
-  renderContacts();
   window.location.href = "contacts.html";
 }
 
 async function addNotiz() {
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let phone = document.getElementById("phone").value;
+
+  let color = getRandomColor(); // Zufällige Farbe generieren
+
+  let contact = { name, email, phone, color }; // dem Kontakt hinzufügen
+  addContacts.push(contact);
+
+  await setItem("addContacts", JSON.stringify(addContacts)); // Daten von Users auf Server laden
+
+  renderContacts();
+  window.location.href = "contacts.html";
+}
+
+async function edit() {
+
+  deletecontact();
+
   let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
   let phone = document.getElementById("phone").value;

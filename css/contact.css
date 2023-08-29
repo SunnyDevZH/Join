@@ -1,5 +1,6 @@
 body {
   padding: 0;
+  overflow: hidden; /* Hide scrollbars */
 }
 
 .addButton {
@@ -15,7 +16,6 @@ body {
   background-color: rgb(42, 54, 71);
   height: 40px;
   min-width: 80px;
-  font-size: 21px;
   border-radius: 10px;
   border-style: none;
   color: white;
@@ -69,7 +69,7 @@ body {
   align-items: center;
   background-color: rgb(255, 255, 255);
   width: 1000px;
-  height: 400px;
+  height: 350px;
   border-radius: 30px;
 }
 
@@ -112,6 +112,7 @@ body {
 }
 .buttonfield {
   display: flex;
+  justify-content: center;
   gap: 20px;
 }
 input {
@@ -205,3 +206,38 @@ b {
   align-items: center;
   cursor: pointer;
 }
+
+@media (max-width: 1050px) {
+  h1 {
+      font-size: 30px;
+  } 
+}
+
+@media (max-width: 800px) {
+  h1 {
+      font-size: 20px;
+  } 
+  p {
+    display: none;
+  }
+}
+
+@media (max-width: 690px) {
+  img {
+    display: none;
+  }
+  .addcontainer{
+    gap: 0;
+  }
+ 
+}
+
+@media (max-width: 500px) {
+  .addcontainer{
+    display: flex;
+    flex-direction: column;
+    height: 550px;
+  }
+ 
+}
+
