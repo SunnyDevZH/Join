@@ -14,7 +14,7 @@ function renderContacts() {
   for (let i = 0; i < addContacts.length; i++) {
     const contact = addContacts[i];
 
-    const firstLetter = contact.name[0].toUpperCase();
+    const firstLetter = contact.name[0];
 
     if (firstLetter !== currentLetter) {
       currentLetter = firstLetter;
@@ -22,7 +22,7 @@ function renderContacts() {
     }
 
     mycontact.innerHTML += `
-            <div class="rendercontact">
+            <div onclick="currentcontact(${i})" class="rendercontact">
                 <div class="circle" style="background-color: ${contact.color}">
                     <span class="initials">${contact.name.substring(
                       0,
@@ -31,7 +31,7 @@ function renderContacts() {
                 </div>
                 <div class="flex-direction">
                     <div>
-                        <b onclick="currentcontact(${i})">${contact.name}</b>
+                        <b>${contact.name}</b>
                     </div>
                     <div>
                         <a href="mailto:${contact.email}">${contact.email}</a>
