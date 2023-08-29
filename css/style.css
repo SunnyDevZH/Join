@@ -342,6 +342,10 @@ button {
     margin: 0;
   }
 
+  h1 {
+    font-size: 48px;
+  }
+
   .logo-menu {
     display: none;
   }
@@ -381,10 +385,40 @@ button {
     font-size: 16px;
   }
 
+  .sum-header {
+    padding-bottom: 16px;
+
+    border-bottom: 4px solid #29abe2;
+  }
+
+  .sum-title {
+    border: unset;
+  }
+
   .sum-greeting {
     min-width: 200px;
 
     padding-left: 32px;
+  }
+
+  .sum-tasks {
+    display: flex;
+    gap: 16px;
+
+    margin-top: 16px;
+  }
+
+  .sum-task-item {
+    gap: 8px;
+
+    min-height: 80px;
+    min-width: 80px;
+
+    padding: 8px 0px;
+  }
+
+  .sum-column {
+    font-size: 14px;
   }
 }
 
