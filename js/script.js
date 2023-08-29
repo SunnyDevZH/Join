@@ -60,7 +60,7 @@ function getUserData() {
       userName = "Mr Nobody";
     }
     if (users[userIndex].hasOwnProperty("color")) {
-      userColor = users[userIndex].names;
+      userColor = users[userIndex].color;
     } else {
       userColor = "#22ab5b";
     }
