@@ -14,7 +14,7 @@
     <script src="./js/storage.js"></script>
   </head>
 
-  <body onload="load()">
+  <body onload="loadPage(); load()">
     <div w3-include-html="./templates/navbar.html"></div>
     <div w3-include-html="./templates/header.html"></div>
 
@@ -33,8 +33,8 @@
           <p>Better with a team</p>
         </div>
         <!-- Add Contact-->
-        <div id="currentcontact"> </div>
-          <!-- Das ist der Container, in dem das Kontaktformular gerendert wird -->
+        <div id="currentcontact"></div>
+        <!-- Das ist der Container, in dem das Kontaktformular gerendert wird -->
       </div>
       <div id="contactContainer"></div>
       <div id="editContainer"></div>
