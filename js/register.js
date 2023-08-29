@@ -2,6 +2,7 @@ let users = []; // Array Users
 let colorArray = [];
 
 async function init() {
+  loadUsers();
   generateRandomColor();
 }
 
@@ -39,4 +40,14 @@ function generateRandomColor() {
       .padStart(6, "0");
   colorArray.push(colorCode);
   return colorCode;
+}
+
+async function loadUsers() {
+  // User laden
+  try {
+    users = JSON.parse(await getItem("users")); // Items als json laden
+  } catch (e) {
+    console.error("Loading error:", e); // Falls Users nicht gefunden
+    alert("User nicht gefunden");
+  }
 }
