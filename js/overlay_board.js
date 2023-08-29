@@ -444,7 +444,7 @@ function renderEditTaskHTML(task) {
           </form>`;
 }
 function newTaskColumn(chosenColumn) {
-    window.location.href = `add_Task.html?chosenColumn=${chosenColumn}`;
+    window.location.href = `add_task.html?chosenColumn=${chosenColumn}`;
 }
 /////////////////////
 // overlay logic END

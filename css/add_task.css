@@ -127,17 +127,18 @@ textarea {
     font-family: "Inter", Helvetica, sans-serif;
 }
 
-.prio button {
-    font-size: 21px;
-    font-weight: 700;
+.prio {
+    font-weight: 400;
     border-radius: 10px;
     border: 0px;
     display: flex;
     align-items: center;
+    padding: 25px !important; 
 }
 
 .prio img {
     width: 24px;
+    margin: 0 !important; 
 }
 
 .prio:hover {
