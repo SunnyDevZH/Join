@@ -1,10 +1,6 @@
 // for testing
 let todos = [];
 
-// const icon_prio_low = "./icons/priority_low.svg";
-// const icon_prio_med = "./icons/priority_medium.svg";
-// const icon_prio_urg = "./icons/priority_urgent.svg";
-
 let currentDraggedElement;
 
 function init() {
@@ -147,7 +143,8 @@ function searchTasks() {
     col[i - 1] = todos.filter(
       (t) =>
         t["step"] == "col-0" + i &&
-        (t["title"].includes(substring) || t["description"].includes(substring))
+        (t["title"].includes(substring.toLowerCase()) ||
+          t["description"].includes(substring.toLowerCase()))
     );
     document.getElementById("col-0" + i).innerHTML = "";
     if (col[i - 1].length == 0) {
