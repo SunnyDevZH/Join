@@ -50,7 +50,7 @@ async function loadUsers() {
 }
 
 function getUserData() {
-  if (userIndex == -1) {
+  if (userIndex == -1 || userIndex == null) {
     userName = "Guest";
     userColor = "#29abe2";
   } else {
@@ -90,7 +90,7 @@ async function updateSummaryCounter() {
 
 async function updateSummaryGreeting() {
   document.getElementById("sum-greet").innerHTML = getGreeting();
-  document.getElementById("sum-name").innerHTML = getUserName();
+  document.getElementById("sum-name").innerHTML = userName;
 }
 
 function getGreeting() {
@@ -104,13 +104,6 @@ function getGreeting() {
     return "Good Evening,";
   } else {
     return "Hello,";
-  }
-}
-
-function getUserName() {
-  if (userIndex == -1) {
-    return "Guest";
-  } else {
   }
 }
 
