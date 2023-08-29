@@ -1,10 +1,6 @@
 // for testing
 let todos = [];
 
-// const icon_prio_low = "./icons/priority_low.svg";
-// const icon_prio_med = "./icons/priority_medium.svg";
-// const icon_prio_urg = "./icons/priority_urgent.svg";
-
 let currentDraggedElement;
 
 function init() {
