@@ -26,12 +26,13 @@ async function saveCategory() {
     await setItem('taskCategories', JSON.stringify(taskCategories));
     await setItem('taskColors', JSON.stringify(taskColors));
 }
-function openOverlay(i) {
-    const task = todos[i];
+function openOverlay(index) {
+    const task = todos[index];
     document.getElementById("overlay-container").classList.remove("d-none");
     document.getElementById("showEditTask").classList.add("d-none");
     let detail = document.getElementById("showDetailTask");
     detail.classList.remove("d-none");
+    pushSubtasks(index);
     detail.innerHTML = "";
     detail.innerHTML += renderDetailTask(task);
 }
@@ -59,34 +60,43 @@ function generateDetailContacts(task) {
     }
     return detailContactList;
 }
+function pushSubtasks(index) {
+    for (i = 0; i < todos[index]['subtasks'].length; i++) {
+        editedSubtasks.push(todos[index]["subtasks"][i])
+    }; 
+}
 function generateDetailSubtasks(task) {
+    let index = todos.indexOf(task); 
     let detailSubtaskList = "";
-    let subtasks = task["subtasks"];
-    if (task["subtasks"].length > 0) {
-        detailSubtaskList = `<p class="violett">Subtasks</p>`;
+    if (editedSubtasks.length > 0) {
+        detailSubtaskList += "<p class='violett'>Subtasks</p>";
 
-        for (i = 0; i < subtasks.length; i++) {
-            let subtaskCheckBox = task["subtasks"][i]["imageSrc"];
+        for (let i = 0; i < editedSubtasks.length; i++) {
+            let subtaskCheckBox = editedSubtasks[i]["imageSrc"];
             detailSubtaskList += `<div class="detailSubtask">
-        <img id="check${i}" onclick="changeDetailCheckbox(${i, task})" src="${subtaskCheckBox}">&nbsp${firstCharToUpperCase(
-                task["subtasks"][i]["value"]
-            )}
-        </div>`;
+                <img id="check${i}" onclick="changeDetailCheckbox(${index}, ${i})" src="${subtaskCheckBox}">&nbsp
+                ${firstCharToUpperCase(editedSubtasks[i]["value"])}
+                </div>`;
         }
     }
     return detailSubtaskList;
 }
-function changeDetailCheckbox(i, task) {
+function changeDetailCheckbox(index,i) {
     let checkBox = document.getElementById(`check${i}`);
     if (checkBox.src.includes("checkbutton_default")) {
         checkBox.src = "./icons/checkbutton_checked.svg";
-        task["subtasks"][i]["imageSrc"] = "./icons/checkbutton_checked.svg";
-        task["subtasks"][i]["status"] = true;
+        editedSubtasks[i]["imageSrc"] = "./icons/checkbutton_checked.svg";
+        editedSubtasks[i]["status"] = true;
     } else {
-        task["subtasks"][i]["imageSrc"] = "./icons/checkbutton_default.svg";
-        task["subtasks"][i]["staus"] = false;
+        editedSubtasks[i]["imageSrc"] = "./icons/checkbutton_default.svg";
+        editedSubtasks[i]["status"] = false;
         checkBox.src = "./icons/checkbutton_default.svg";
-    }
+    }updateSubtasksInTodoArray(index);
+}
+function updateSubtasksInTodoArray(index) {
+    todos[index]["subtasks"] = editedSubtasks;
+    saveBoard();
+    init(); 
 }
 function renderDetailTask(task) {
     return `
@@ -400,9 +410,9 @@ function deleteSubtask(index) {
     let subtaskContent = document.getElementById('subtaskContent');
     subtaskContent.innerHTML = '';
     editedSubtasks.forEach((subtaskObj, i) => {
-      subtaskContent.innerHTML += renderSubtaskHTML(i, subtaskObj.value, subtaskObj.imageSrc);
+        subtaskContent.innerHTML += renderSubtaskHTML(i, subtaskObj.value, subtaskObj.imageSrc);
     });
-  }
+}
 function renderEditTaskHTML(task) {
     return `
   <form onsubmit="addEditTask(${task["id"]});return false">
