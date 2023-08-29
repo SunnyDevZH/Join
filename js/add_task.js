@@ -373,6 +373,14 @@ function checkSubtask(i) {
         assignedSubtasks[i].status = true;
     }
 }
+    function deleteSubtask(index) {
+        assignedSubtasks.splice(index, 1);
+        let subtaskContent = document.getElementById('subtaskContent');
+        subtaskContent.innerHTML = '';
+        assignedSubtasks.forEach((subtaskObj, i) => {
+          subtaskContent.innerHTML += renderSubtaskHTML(subtaskObj, i);
+        });
+      }
 
 //* resets ALL Subtasks
 function resetSubtasks() {
@@ -412,5 +420,6 @@ function renderContactHTML(contact, contactColor, i) {
 function renderSubtaskHTML(subtaskObj, i) {
     return `<div class="option nospace-between"> 
     <img id="subtaskImage${i}" onclick="checkSubtask(${i})" src="${subtaskObj.imageSrc}"> ${subtaskObj.value}
+    <img id="subtaskBucket${i}" onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
     </div>`;
 }

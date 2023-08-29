@@ -68,7 +68,7 @@ function generateDetailSubtasks(task) {
         for (i = 0; i < subtasks.length; i++) {
             let subtaskCheckBox = task["subtasks"][i]["imageSrc"];
             detailSubtaskList += `<div class="detailSubtask">
-        <img src="${subtaskCheckBox}">&nbsp${firstCharToUpperCase(
+        <img id="check${i}" onclick="changeDetailCheckbox(${i, task})" src="${subtaskCheckBox}">&nbsp${firstCharToUpperCase(
                 task["subtasks"][i]["value"]
             )}
         </div>`;
@@ -76,7 +76,18 @@ function generateDetailSubtasks(task) {
     }
     return detailSubtaskList;
 }
-
+function changeDetailCheckbox(i, task) {
+    let checkBox = document.getElementById(`check${i}`);
+    if (checkBox.src.includes("checkbutton_default")) {
+        checkBox.src = "./icons/checkbutton_checked.svg";
+        task["subtasks"][i]["imageSrc"] = "./icons/checkbutton_checked.svg";
+        task["subtasks"][i]["status"] = true;
+    } else {
+        task["subtasks"][i]["imageSrc"] = "./icons/checkbutton_default.svg";
+        task["subtasks"][i]["staus"] = false;
+        checkBox.src = "./icons/checkbutton_default.svg";
+    }
+}
 function renderDetailTask(task) {
     return `
     <div class="todo-category width" style="background-color:${task["categoryColor"]
@@ -304,11 +315,16 @@ function showEditedSubtasks(task) {
         };
         editedSubtasks.push(subtaskObj);
 
-        subtaskElement.innerHTML += `<div class="detailSubtask">
-        <img id="unchecked${i}" onclick="changeCheckbox(${i})" src="${subtaskCheckBox}">${subtask}
-        </div>`;
+        subtaskElement.innerHTML += renderSubtaskHTML(i, subtask, subtaskCheckBox);
     }
 }
+
+function renderSubtaskHTML(i, subtask, subtaskCheckBox) {
+    return `<div class="detailSubtask">
+        <img id="unchecked${i}" onclick="changeCheckbox(${i})" src="${subtaskCheckBox}">${subtask}<img onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
+        </div>`;
+}
+
 function editSubtask() {
     let subtaskElement = document.getElementById("subtaskContent");
     let newSubtask = document.getElementById("subtask").value;
@@ -326,7 +342,7 @@ function editSubtask() {
         subtaskElement.innerHTML += `<div class="detailSubtask">
     <img id="unchecked${editedSubtasks.length - 1}" 
     onclick="changeCheckbox(${editedSubtasks.length - 1})" 
-    src="./icons/checkbutton_default.svg">${newSubtask}
+    src="./icons/checkbutton_default.svg">${newSubtask} <img onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
     </div>`;
     }
     document.getElementById("subtask").value = "";
@@ -379,6 +395,14 @@ function clearAll() {
     editedCategory;
     editedCategoryColor;
 }
+function deleteSubtask(index) {
+    editedSubtasks.splice(index, 1);
+    let subtaskContent = document.getElementById('subtaskContent');
+    subtaskContent.innerHTML = '';
+    editedSubtasks.forEach((subtaskObj, i) => {
+      subtaskContent.innerHTML += renderSubtaskHTML(i, subtaskObj.value, subtaskObj.imageSrc);
+    });
+  }
 function renderEditTaskHTML(task) {
     return `
   <form onsubmit="addEditTask(${task["id"]});return false">
