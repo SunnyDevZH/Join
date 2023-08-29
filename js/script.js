@@ -1,6 +1,9 @@
 let sumTodos = [];
 let users = [];
+let userName = "";
+let userColor = "";
 let userIndex = localStorage.getItem("activeID");
+
 const monthsName = [
   null,
   "Januar",
@@ -42,6 +45,26 @@ async function loadUsers() {
   let getUsers = await getItem("users");
   users = JSON.parse(getUsers);
   console.log(users);
+
+  getUserData();
+}
+
+function getUserData() {
+  if (userIndex == -1) {
+    userName = "Guest";
+    userColor = "#29abe2";
+  } else {
+    if (users[userIndex].hasOwnProperty("names")) {
+      userName = users[userIndex].names;
+    } else {
+      userName = "Mr Nobody";
+    }
+    if (users[userIndex].hasOwnProperty("color")) {
+      userColor = users[userIndex].names;
+    } else {
+      userColor = "#22ab5b";
+    }
+  }
 }
 
 async function updateSummaryCounter() {
@@ -85,10 +108,9 @@ function getGreeting() {
 }
 
 function getUserName() {
-  if (users[userIndex].hasOwnProperty("names")) {
-    return users[userIndex].names;
+  if (userIndex == -1) {
+    return "Guest";
   } else {
-    return "Mr Nobody";
   }
 }
 
@@ -99,17 +121,13 @@ function generateInitials(name) {
   } else if (initials.length == 2) {
     return initials[0][0].toUpperCase() + initials[1][0].toUpperCase();
   } else {
-    return "00";
+    return "__";
   }
 }
 
 function updateHeader() {
-  if (users[userIndex].hasOwnProperty("names")) {
-    let initials = generateInitials(users[userIndex].names);
-    document.getElementById("avatar-initials").innerHTML = initials;
-  } else {
-    document.getElementById("avatar-initials").innerHTML = "NO";
-  }
+  let initials = generateInitials(userName);
+  document.getElementById("avatar-initials").innerHTML = initials;
 }
 
 function getNextDate(element) {
@@ -129,18 +147,8 @@ function getNextDate(element) {
 
 // header
 
-function getRandomColor() {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
 function changeAvatarColor() {
-  document.querySelector(".header-avatar").style.backgroundColor =
-    users[userIndex].color;
+  document.querySelector(".header-avatar").style.backgroundColor = userColor;
 }
 
 function toggleAvatarMenu() {
