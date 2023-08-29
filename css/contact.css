@@ -146,9 +146,14 @@ b {
 .rendercontact {
   display: flex;
   padding: 10px;
-  margin: 5px;
   align-items: center;
   justify-content: space-around;
+}
+
+.rendercontact:hover {
+  background-color: rgb(218, 218, 218);
+  cursor: pointer;
+  
 }
 
 .flex-direction {
@@ -168,7 +173,7 @@ b {
 }
 
 #mycontact {
-  height: 700px;
+  height: 100vh;
   overflow-y: scroll;
 }
 .contactBox{
@@ -207,10 +212,11 @@ b {
   cursor: pointer;
 }
 
-@media (max-width: 1050px) {
-  h1 {
-      font-size: 30px;
-  } 
+@media (max-width: 1070px) {
+
+  .displaynone {
+    display: none;
+} 
 }
 
 @media (max-width: 800px) {
@@ -237,6 +243,16 @@ b {
     display: flex;
     flex-direction: column;
     height: 550px;
+  }
+ 
+}
+
+@media (max-width: 450px) {
+  .addButton{
+    width: 230px;
+  }
+  .circle{
+    display: none;
   }
  
 }
