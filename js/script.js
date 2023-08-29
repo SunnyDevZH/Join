@@ -140,7 +140,7 @@ function getRandomColor() {
 
 function changeAvatarColor() {
   document.querySelector(".header-avatar").style.backgroundColor =
-    getRandomColor();
+    users[userIndex].color;
 }
 
 function toggleAvatarMenu() {
