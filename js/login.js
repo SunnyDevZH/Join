@@ -1,4 +1,5 @@
 let users = [];
+localStorage.setItem("activeID", -1);
 
 async function start() {
   loadUsers();
@@ -11,7 +12,7 @@ function login() {
     (u) => u.email == email.value && u.password == password.value
   ); // Vergleich von Login und Register
   if (user) {
-    let userId = users.findIndex((u) => u.email == email.value);
+    userId = users.findIndex((u) => u.email == email.value);
     localStorage.setItem("activeID", userId);
     window.location.href = "./summary.html"; // Weiterleitung zum Summary
     alert("Passwort korrekt");
