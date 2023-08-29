@@ -143,7 +143,8 @@ function searchTasks() {
     col[i - 1] = todos.filter(
       (t) =>
         t["step"] == "col-0" + i &&
-        (t["title"].includes(substring) || t["description"].includes(substring))
+        (t["title"].includes(substring.toLowerCase()) ||
+          t["description"].includes(substring.toLowerCase()))
     );
     document.getElementById("col-0" + i).innerHTML = "";
     if (col[i - 1].length == 0) {
