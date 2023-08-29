@@ -63,10 +63,10 @@ function generateDetailContacts(task) {
 function pushSubtasks(index) {
     for (i = 0; i < todos[index]['subtasks'].length; i++) {
         editedSubtasks.push(todos[index]["subtasks"][i])
-    }; 
+    };
 }
 function generateDetailSubtasks(task) {
-    let index = todos.indexOf(task); 
+    let index = todos.indexOf(task);
     let detailSubtaskList = "";
     if (editedSubtasks.length > 0) {
         detailSubtaskList += "<p class='violett'>Subtasks</p>";
@@ -81,7 +81,7 @@ function generateDetailSubtasks(task) {
     }
     return detailSubtaskList;
 }
-function changeDetailCheckbox(index,i) {
+function changeDetailCheckbox(index, i) {
     let checkBox = document.getElementById(`check${i}`);
     if (checkBox.src.includes("checkbutton_default")) {
         checkBox.src = "./icons/checkbutton_checked.svg";
@@ -91,12 +91,12 @@ function changeDetailCheckbox(index,i) {
         editedSubtasks[i]["imageSrc"] = "./icons/checkbutton_default.svg";
         editedSubtasks[i]["status"] = false;
         checkBox.src = "./icons/checkbutton_default.svg";
-    }updateSubtasksInTodoArray(index);
+    } updateSubtasksInTodoArray(index);
 }
 function updateSubtasksInTodoArray(index) {
     todos[index]["subtasks"] = editedSubtasks;
     saveBoard();
-    init(); 
+    init();
 }
 function renderDetailTask(task) {
     return `
@@ -310,29 +310,16 @@ async function loadCategory() {
 async function loadContacts() {
     addContacts = JSON.parse(await getItem("addContacts"));
 }
-function showEditedSubtasks(task) {
+function showEditedSubtasks() {
     let subtaskElement = document.getElementById("subtaskContent");
-    let subtasks = task["subtasks"];
     subtaskElement.innerHTML = "";
-    for (i = 0; i < subtasks.length; i++) {
-        let subtask = task["subtasks"][i]["value"];
-        let subtaskCheckBox = task["subtasks"][i]["imageSrc"];
-        let status = task["subtasks"][i]["status"];
-        let subtaskObj = {
-            value: subtask,
-            imageSrc: subtaskCheckBox,
-            status: status,
-        };
-        editedSubtasks.push(subtaskObj);
-
-        subtaskElement.innerHTML += renderSubtaskHTML(i, subtask, subtaskCheckBox);
+    for (let i = 0; i < editedSubtasks.length; i++) {
+        let subtaskCheckBox = editedSubtasks[i]["imageSrc"];
+        subtaskElement.innerHTML += `<div class="detailSubtask">
+            <img id="unchecked${i}" onclick="changeCheckbox(${i})" src="${subtaskCheckBox}">&nbsp
+            ${firstCharToUpperCase(editedSubtasks[i]["value"])} <img onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
+            </div>`;
     }
-}
-
-function renderSubtaskHTML(i, subtask, subtaskCheckBox) {
-    return `<div class="detailSubtask">
-        <img id="unchecked${i}" onclick="changeCheckbox(${i})" src="${subtaskCheckBox}">${subtask}<img onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
-        </div>`;
 }
 
 function editSubtask() {
@@ -348,12 +335,14 @@ function editSubtask() {
             imageSrc: "./icons/checkbutton_default.svg",
             status: false,
         };
-        editedSubtasks.push(subtaskObj);
-        subtaskElement.innerHTML += `<div class="detailSubtask">
+        if (!editedSubtasks.includes(subtaskObj)) {
+            editedSubtasks.push(subtaskObj);
+            subtaskElement.innerHTML += `<div class="detailSubtask">
     <img id="unchecked${editedSubtasks.length - 1}" 
     onclick="changeCheckbox(${editedSubtasks.length - 1})" 
     src="./icons/checkbutton_default.svg">${newSubtask} <img onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
     </div>`;
+        }
     }
     document.getElementById("subtask").value = "";
 }
@@ -409,9 +398,7 @@ function deleteSubtask(index) {
     editedSubtasks.splice(index, 1);
     let subtaskContent = document.getElementById('subtaskContent');
     subtaskContent.innerHTML = '';
-    editedSubtasks.forEach((subtaskObj, i) => {
-        subtaskContent.innerHTML += renderSubtaskHTML(i, subtaskObj.value, subtaskObj.imageSrc);
-    });
+    showEditedSubtasks(); 
 }
 function renderEditTaskHTML(task) {
     return `
