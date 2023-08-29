@@ -30,6 +30,7 @@ async function loadPage() {
   await loadUsers();
   await loadTodos();
   updateHeader();
+  changeAvatarColor();
 }
 
 async function loadTodos() {
@@ -38,7 +39,6 @@ async function loadTodos() {
   for (let i = 0; i < sumTodos.length; i++) {
     sumTodos[i].id = i;
   }
-  changeAvatarColor();
 }
 
 async function loadUsers() {
@@ -142,6 +142,7 @@ function getNextDate(element) {
 
 function changeAvatarColor() {
   document.querySelector(".header-avatar").style.backgroundColor = userColor;
+  console.log(userColor);
 }
 
 function toggleAvatarMenu() {
