@@ -95,9 +95,9 @@ function getUserName() {
 function generateInitials(name) {
   let initials = name.split(" ");
   if (initials.length == 1) {
-    return initials[0][0] + initials[0][1].toUpperCase();
+    return initials[0][0].toUpperCase() + initials[0][1].toUpperCase();
   } else if (initials.length == 2) {
-    return initials[0][0] + initials[1][0];
+    return initials[0][0].toUpperCase() + initials[1][0].toUpperCase();
   } else {
     return "00";
   }
