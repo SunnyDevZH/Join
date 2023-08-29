@@ -1,31 +1,33 @@
 let addContacts = [];
 
-
-window.addEventListener('load', load);
+window.addEventListener("load", load);
 
 function renderContacts() {
-    let mycontact = document.getElementById('mycontact');
-    mycontact.innerHTML = '';
+  let mycontact = document.getElementById("mycontact");
+  mycontact.innerHTML = "";
 
-    // Sortiere die Kontakte alphabetisch nach dem Namen
-    addContacts.sort((a, b) => a.name.localeCompare(b.name));
+  // Sortiere die Kontakte alphabetisch nach dem Namen
+  addContacts.sort((a, b) => a.name.localeCompare(b.name));
 
-    let currentLetter = null;
+  let currentLetter = null;
 
-    for (let i = 0; i < addContacts.length; i++) {
-        const contact = addContacts[i];
+  for (let i = 0; i < addContacts.length; i++) {
+    const contact = addContacts[i];
 
-        const firstLetter = contact.name[0].toUpperCase();
+    const firstLetter = contact.name[0].toUpperCase();
 
-        if (firstLetter !== currentLetter) {
-            currentLetter = firstLetter;
-            mycontact.innerHTML += `<div class="alphabet-group">${currentLetter}</div>`;
-        }
+    if (firstLetter !== currentLetter) {
+      currentLetter = firstLetter;
+      mycontact.innerHTML += `<div class="alphabet-group">${currentLetter}</div>`;
+    }
 
-        mycontact.innerHTML += `
+    mycontact.innerHTML += `
             <div class="rendercontact">
                 <div class="circle" style="background-color: ${contact.color}">
-                    <span class="initials">${contact.name.substring(0, 2)}</span>
+                    <span class="initials">${contact.name.substring(
+                      0,
+                      2
+                    )}</span>
                 </div>
                 <div class="flex-direction">
                     <div>
@@ -36,24 +38,27 @@ function renderContacts() {
                     </div>
                 </div>
             </div>`;
-    }
+  }
 }
 
-
 function addContact() {
-    isAddingContact = true;
-    let contactContainer = document.getElementById('contactContainer');
-    contactContainer.innerHTML = contactTemplate(); // Hier wird das Kontaktformular gerendert
+  let contactContainer = document.getElementById("contactContainer");
+  contactContainer.innerHTML = contactTemplate(); // Hier wird das Kontaktformular gerendert
 }
 
 function currentcontact(i) {
-    let currentcontactDiv = document.getElementById('currentcontact');
-    currentcontactDiv.innerHTML = '';
-    
-    currentcontactDiv.innerHTML += `
+  let currentcontactDiv = document.getElementById("currentcontact");
+  currentcontactDiv.innerHTML = "";
+
+  currentcontactDiv.innerHTML += `
         <div class="contactBoxOne">
-            <div class="circle" style="background-color: ${addContacts[i].color}">
-                <span class="initials">${addContacts[i].name.substring(0, 2)}</span>
+            <div class="circle" style="background-color: ${
+              addContacts[i].color
+            }">
+                <span class="initials">${addContacts[i].name.substring(
+                  0,
+                  2
+                )}</span>
             </div>
             <div class="flex-direction">
                 <div>
@@ -85,7 +90,7 @@ function currentcontact(i) {
 }
 
 function contactTemplate() {
-    return `
+  return `
     <div class="add">
         <div class="container">
             <div class="addcontainer">
@@ -121,50 +126,47 @@ function contactTemplate() {
 }
 
 function cancelContact() {
-    renderContacts();
-    window.location.href = 'contacts.html';
+  renderContacts();
+  window.location.href = "contacts.html";
 }
 
 async function addNotiz() {
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let phone = document.getElementById("phone").value;
 
-    let name = document.getElementById('name').value;
-    let email = document.getElementById('email').value;
-    let phone = document.getElementById('phone').value;
+  let color = getRandomColor(); // Zufällige Farbe generieren
 
-    let color = getRandomColor(); // Zufällige Farbe generieren
+  let contact = { name, email, phone, color }; // dem Kontakt hinzufügen
+  addContacts.push(contact);
 
-    let contact = { name, email, phone, color }; // dem Kontakt hinzufügen
-    addContacts.push(contact);
+  await setItem("addContacts", JSON.stringify(addContacts)); // Daten von Users auf Server laden
 
-    await setItem("addContacts", JSON.stringify(addContacts)); // Daten von Users auf Server laden
-      
-    renderContacts();
-    window.location.href = 'contacts.html';
+  renderContacts();
+  window.location.href = "contacts.html";
 }
 
 async function load() {
-    try {
+  try {
     addContacts = JSON.parse(await getItem("addContacts")); // Items als json laden
-    } catch (e) {
-      console.error("Loading error:", e); // Falls Users nicht gefunden
-      alert("Kontakt nicht gefunden");
-    }
-    renderContacts();
+  } catch (e) {
+    console.error("Loading error:", e); // Falls Users nicht gefunden
+    alert("Kontakt nicht gefunden");
   }
+  renderContacts();
+}
 
 async function deletecontact(i) {
-    addContacts.splice(i, 1);
-    await setItem("addContacts", JSON.stringify(addContacts));
-    renderContacts(); // Zeige die aktualisierten Kontakte auf der Seite an
-    window.location.href = "./contacts.html";
-
+  addContacts.splice(i, 1);
+  await setItem("addContacts", JSON.stringify(addContacts));
+  renderContacts(); // Zeige die aktualisierten Kontakte auf der Seite an
+  window.location.href = "./contacts.html";
 }
 
 function getRandomColor() {
-    const hue = Math.floor(Math.random() * 360); // Zufälliger Farbwert zwischen 0 und 359
-    const saturation = Math.floor(Math.random() * 50) + 50; // Sättigung zwischen 50 und 100
-    const lightness = Math.floor(Math.random() * 20) + 40; // Helligkeit zwischen 40 und 60
+  const hue = Math.floor(Math.random() * 360); // Zufälliger Farbwert zwischen 0 und 359
+  const saturation = Math.floor(Math.random() * 50) + 50; // Sättigung zwischen 50 und 100
+  const lightness = Math.floor(Math.random() * 20) + 40; // Helligkeit zwischen 40 und 60
 
-    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
-
