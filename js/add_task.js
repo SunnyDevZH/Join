@@ -262,6 +262,7 @@ function renderContactList() {
             let contactColor = addContacts[i]['color'];
             contactList.innerHTML += renderContactHTML(contact, contactColor, i);
         }
+        contactList.innerHTML += addNewContactToTask();
         isClicked2 = true;
     }
     else {
@@ -269,6 +270,9 @@ function renderContactList() {
         contactList.innerHTML = '';
         isClicked2 = false;
     }
+}
+function addNewContactToTask() {
+    return `<div><button class="button btn-black width-button"><a href="contacts.html">Add New Contact +</a></button></div>`
 }
 //* choses the category and shows only this category in the Inputfield
 function chooseCategory(i) {
@@ -303,7 +307,7 @@ function resetCategory() {
 //adds the chosen contacts to the task and sets a highlight to the background
 function addContactToTask(i) {
     let chosenContact = document.getElementById(`contact${i}`);
-    let contact = chosenContact.innerText;
+    let contact = chosenContact.querySelector('.contact-name').innerText; 
     let contactColor = addContacts[i]['color'];
     let checkBox = document.getElementById(`checkboxContact${i}`);
     if (chosenContact.style.backgroundColor !== 'rgb(42, 54, 71)') {
@@ -413,12 +417,12 @@ function renderCategoryHTML(taskCategory, taskColor, i) {
 }
 function renderContactHTML(contact, contactColor, i) {
     return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})"><div class="contact-circle" style="background-color: ${contactColor}">
-    ${generateInitials(contact)}</div>
-    ${contact} <img id="checkboxContact${i}" src="./icons/checkbutton_default.svg">
+    ${generateInitials(contact)}</div> <span class="contact-name">${contact}</span>
+    <img id="checkboxContact${i}" src="./icons/checkbutton_default.svg">
     </div>`
 }
 function renderSubtaskHTML(subtaskObj, i) {
-    return `<div class="option nospace-between"> 
+    return `<div class="option"> 
     <img id="subtaskImage${i}" onclick="checkSubtask(${i})" src="${subtaskObj.imageSrc}"> ${subtaskObj.value}
     <img id="subtaskBucket${i}" onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
     </div>`;

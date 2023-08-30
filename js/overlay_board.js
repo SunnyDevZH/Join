@@ -185,10 +185,9 @@ function displayContacts(task) {
         contactContent.innerHTML += renderContactHTML(
             contact,
             contactColor,
-            i,
-            task
+            i, task,
         );
-    }
+    }contactContent.innerHTML += addNewContactToTask();
 }
 function showContactList() {
     let contactContent = document.getElementById("contactList");
@@ -206,7 +205,7 @@ function pushContacts(task) {
 }
 function addContactToTask(i) {
     let chosenContact = document.getElementById(`contact${i}`);
-    let contact = chosenContact.innerText;
+    let contact = chosenContact.querySelector('.contact-name').innerText;
     let contactColor = addContacts[i]['color'];
     let checkBox = document.getElementById(`checkbox-contact${i}`);
     if (chosenContact.style.backgroundColor !== "rgb(42, 54, 71)") {
@@ -229,19 +228,20 @@ function addContactToTask(i) {
         }
     }
 }
-
+function addNewContactToTask() {
+    return `<div><button class="button btn-black width-button"><a href="contacts.html">Add New Contact +</a></button></div>`
+}
 function renderContactHTML(contact, contactColor, i, task) {
-    let backgroundColor = task["assignedContact"].includes(contact)
+    let backgroundColor = task['assignedContact'].includes(contact)
         ? "#2a3647"
         : "";
-    let checkBox = task["assignedContact"].includes(contact)
+    let checkBox = task['assignedContact'].includes(contact)
         ? "./icons/checkbutton_checked_white.svg"
         : "./icons/checkbutton_default.svg";
-    let color = task["assignedContact"].includes(contact) ? "white" : "black";
+    let color = task['assignedContact'].includes(contact) ? "white" : "black";
 
     return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})" style="background-color: ${backgroundColor}; color: ${color};">
-    <div class="contact-circle" style="background-color: ${contactColor}">
-    ${generateInitials(contact)}</div> ${contact}
+    <div class="contact-circle" style="background-color: ${contactColor}">${generateInitials(contact)}</div> <span class="contact-name">${contact}</span>
     <img id="checkbox-contact${i}" src="${checkBox}">
   </div>`;
 }
@@ -398,7 +398,7 @@ function deleteSubtask(index) {
     editedSubtasks.splice(index, 1);
     let subtaskContent = document.getElementById('subtaskContent');
     subtaskContent.innerHTML = '';
-    showEditedSubtasks(); 
+    showEditedSubtasks();
 }
 function renderEditTaskHTML(task) {
     return `
