@@ -113,7 +113,10 @@ function generateInitials(name) {
     return initials[0][0].toUpperCase() + initials[0][1].toUpperCase();
   } else if (initials.length == 2) {
     return initials[0][0].toUpperCase() + initials[1][0].toUpperCase();
-  } else {
+  } else if (initials.length === 3) {
+    return initials[0][0].toUpperCase() + initials[2][0].toUpperCase();
+  }
+  else {
     return "__";
   }
 }
