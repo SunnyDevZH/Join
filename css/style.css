@@ -420,13 +420,35 @@ button {
     gap: 8px;
 
     min-height: 80px;
-    min-width: 80px;
+    min-width: 60px;
+    width: 90px;
 
-    padding: 8px 0px;
+    padding: 8px 8px;
   }
 
   .sum-column {
     font-size: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .sum-tasks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 8px;
+  }
+
+  .sum-task-item {
+    gap: 4px;
+    flex-wrap: wrap;
+
+    min-height: 80px;
+    min-width: 40px;
+    width: 90px;
+
+    padding: 8px 8px;
   }
 }
 
