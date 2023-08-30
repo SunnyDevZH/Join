@@ -173,7 +173,7 @@ b {
 }
 
 #mycontact {
-  height: 100vh;
+  height: 80vh;
   overflow-y: scroll;
 }
 .contactBox{
@@ -219,10 +219,13 @@ b {
 } 
 }
 
-@media (max-width: 800px) {
+@media (max-width: 930px) {
   h1 {
       font-size: 20px;
   } 
+}
+
+@media (max-width: 800px) {
   p {
     display: none;
   }
