@@ -25,14 +25,14 @@
         <div class="alignItems">
             <div class="signUpContainer">
                 <h1>Sign up</h1>
-                <form class="flexdirection" onsubmit="register(); return false;">
+                <form class="flexdirection" onsubmit="checkBox(); return false;">
                     <div class="displayflex">
                         <input required type="names" id="names" placeholder="Name">
-                        <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"> 
+                        <img class="loginimg" src="./img/name.png" alt="name" width="30px"> 
                     </div>
                     <div class="displayflex">
                         <input required type="email" id="email" placeholder="Email">
-                        <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"> 
+                        <img class="loginimg" src="./img/mail.png" alt="mail" width="30px"> 
                     </div>
                     <div class="displayflex">
                         <input required type="password" id="password" placeholder="Password">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div>
-                        <button class="signUpButton" id="registerBtn">Sign up</button>
+                        <button onclick="checkBox()" class="signUpButton">Sign up</button>
                     </div>
                 </form>
                 

@@ -1,13 +1,13 @@
-let users = []; // Array Users
-let colorArray = [];
+let users = []; 
 
 async function init() {
   loadUsers();
   generateRandomColor();
 }
 
+// Registrieren //
+
 async function register() {
-  // Registrieren
 
   let names = document.getElementById("names").value;
   let email = document.getElementById("email").value;
@@ -27,27 +27,40 @@ async function register() {
   resetForm();
 }
 
+// Form leeren //
+
 function resetForm() {
-  email.value = ""; // Feld leeren
-  password.value = ""; // Feld leeren
+  names.value = ""; // Feld leeren
+  email.value = ""; 
+  password.value = ""; 
 }
 
+// Farbe generieren //
+
 function generateRandomColor() {
-  const colorCode =
-    "#" +
-    Math.floor(Math.random() * 16777216)
-      .toString(16)
-      .padStart(6, "0");
-  colorArray.push(colorCode);
+  const colorCode = "#" + Math.floor(Math.random() * 16777216).toString(16).padStart(6, "0");
   return colorCode;
 }
 
+// User laden //
+
 async function loadUsers() {
-  // User laden
   try {
-    users = JSON.parse(await getItem("users")); // Items als json laden
+    users = JSON.parse(await getItem("users")); 
   } catch (e) {
     console.error("Loading error:", e); // Falls Users nicht gefunden
     alert("User nicht gefunden");
+  }
+}
+
+// Checkbox //
+
+function checkBox() {
+  var checkbox = document.getElementById("remember");
+  
+  if (checkbox.checked) {
+    register();
+  } else {
+    alert("Bitte akzeptieren Sie die Bedingungen, um fortzufahren.");
   }
 }

@@ -32,7 +32,7 @@ h1{
     background-color: rgb(255,255,255);  /* Farbe von Mockup */
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; /* Welchen Style? */
     border-radius: 30px;/* Welche Grösse? */
-    width: 400px; /* Welche Grösse? */
+    width: 500px; /* Welche Grösse? */
     gap: 30px; /* Welche Grösse? */
     padding: 10px; /* Welche Grösse? */
 }
@@ -59,14 +59,11 @@ button{
         display: none;
     }
   }
-  @media (max-width: 455px) {
+  @media (max-width: 555px) {
     h1 {
         font-size: 25px;
     } 
 
-    p {
-        display: none;
-    }
     .forgotResetContainer {
         width: 300px;
     }

@@ -2,6 +2,8 @@ let addContacts = [];
 
 window.addEventListener("load", load);
 
+// Kontakt anzeigen //
+
 function renderContacts() {
   let mycontact = document.getElementById("mycontact");
   mycontact.innerHTML = "";
@@ -22,12 +24,9 @@ function renderContacts() {
     }
 
     mycontact.innerHTML += `
-            <div onclick="currentcontact(${i})" class="rendercontact">
+            <div onclick="currentcontact(${i}); selectContact(this);" class="rendercontact">
                 <div class="circle" style="background-color: ${contact.color}">
-                    <span class="initials">${contact.name.substring(
-                      0,
-                      2
-                    )}</span>
+                    <span class="initials">${contact.name.substring(0,2)}</span>
                 </div>
                 <div class="flex-direction">
                     <div>
@@ -41,7 +40,7 @@ function renderContacts() {
   }
 }
 
-// Kontakt anzeigen //
+// aktueller Kontakt anzeigen //
 
 function currentcontact(i) {
   let currentcontactDiv = document.getElementById("currentcontact");
@@ -86,7 +85,7 @@ function currentcontact(i) {
 
 function addContact() {
   let contactContainer = document.getElementById("contactContainer");
-  contactContainer.innerHTML = contactTemplate(); // Hier wird das Kontaktformular gerendert
+  contactContainer.innerHTML = contactTemplate(); 
 }
 
 function contactTemplate() {
@@ -108,9 +107,18 @@ function contactTemplate() {
                         </div>
                         <div>
                             <div class="inputsytle">
-                                <input id="name" placeholder="Name" type="text" />
-                                <input id="email" placeholder="Email" type="text" />
-                                <input id="phone" placeholder="Phone" type="text" />
+                                <div class="displayflex">
+                                    <input required type="text" id="name" placeholder="Name">
+                                    <img class="loginimg" src="./img/name.png" alt="name" width="30px"> 
+                                </div>
+                                <div class="displayflex">
+                                    <input required type="email" id="email" placeholder="Email">
+                                    <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"> 
+                                </div>
+                                <div class="displayflex">
+                                    <input required type="number" id="phone" placeholder="Phone">
+                                    <img class="loginimg" src="./img/tel.png" alt="mail" width="30px"> 
+                                </div>
                             </div>
                             <div class="buttonfield">
                                 <button onclick="cancelContact()">Cancel X</button>
@@ -153,9 +161,18 @@ function renderEdit(i) {
                         </div>
                         <div>
                             <div class="inputsytle">
-                                <input id="name" placeholder="Name" type="text" />
-                                <input id="email" placeholder="Email" type="email" />
-                                <input id="phone" placeholder="Phone" type="number" />
+                                <div class="displayflex">
+                                    <input required type="text" id="name" placeholder="Name">
+                                    <img class="loginimg" src="./img/name.png" alt="name" width="30px"> 
+                                </div>
+                                <div class="displayflex">
+                                    <input required type="email" id="email" placeholder="Email">
+                                    <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"> 
+                                </div>
+                                <div class="displayflex">
+                                    <input required type="number" id="phone" placeholder="Phone">
+                                    <img class="loginimg" src="./img/tel.png" alt="mail" width="30px"> 
+                                </div>
                             </div>
                             <div class="buttonfield">
                                 <button onclick="deletecontact(${i})">Delete </button>
@@ -171,10 +188,13 @@ function renderEdit(i) {
 
 }
 
+// Zurück //
 
 function cancelContact() {
-  window.location.href = "contacts.html";
+window.location.href = "contacts.html";
 }
+
+// Kontakt hinzufügen //
 
 async function addNotiz() {
   let name = document.getElementById("name").value;
@@ -191,6 +211,8 @@ async function addNotiz() {
   renderContacts();
   window.location.href = "contacts.html";
 }
+
+// Kontakt bearbeiten //
 
 async function edit() {
 
@@ -211,6 +233,8 @@ async function edit() {
   window.location.href = "contacts.html";
 }
 
+// Kontakt laden //
+
 async function load() {
   try {
     addContacts = JSON.parse(await getItem("addContacts")); // Items als json laden
@@ -221,6 +245,8 @@ async function load() {
   renderContacts();
 }
 
+// Kontakt löschen //
+
 async function deletecontact(i) {
   addContacts.splice(i, 1);
   await setItem("addContacts", JSON.stringify(addContacts));
@@ -228,10 +254,25 @@ async function deletecontact(i) {
   window.location.href = "./contacts.html";
 }
 
+// Farbe generieren //
+
 function getRandomColor() {
   const hue = Math.floor(Math.random() * 360); // Zufälliger Farbwert zwischen 0 und 359
   const saturation = Math.floor(Math.random() * 50) + 50; // Sättigung zwischen 50 und 100
   const lightness = Math.floor(Math.random() * 20) + 40; // Helligkeit zwischen 40 und 60
 
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+}
+
+// Auswahl markieren //
+
+let selectedContact = null;
+
+function selectContact(contactElement) {
+  if (selectedContact !== null) {
+    selectedContact.classList.remove("selected");
+  }
+
+  selectedContact = contactElement;
+  selectedContact.classList.add("selected");
 }

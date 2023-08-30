@@ -5,7 +5,7 @@ body {
 
 .addButton {
   background-color: rgb(42, 54, 71);
-  width: 352px;
+  width: 300px;
   height: 56px;
   font-size: 21px;
   color: white;
@@ -64,7 +64,6 @@ body {
 
 .addcontainer {
   display: flex;
-  gap: 30px;
   justify-content: center;
   align-items: center;
   background-color: rgb(255, 255, 255);
@@ -103,6 +102,7 @@ body {
   flex-direction: column;
   margin: 20px;
   gap: 20px;
+  padding-left: 60px;
 }
 .close {
   display: flex;
@@ -137,6 +137,7 @@ b {
 
 
 .displayflex{
+  margin-left: -70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -153,8 +154,13 @@ b {
 .rendercontact:hover {
   background-color: rgb(218, 218, 218);
   cursor: pointer;
-  
 }
+
+.rendercontact.selected  {
+  background-color: rgb(218, 218, 218);
+}
+
+.rendercontact.sele
 
 .flex-direction {
   display: flex;
@@ -174,6 +180,7 @@ b {
 
 #mycontact {
   height: 80vh;
+  width: 430px;
   overflow-y: scroll;
 }
 .contactBox{
@@ -190,9 +197,9 @@ b {
 }
 
 .circle {
-  width: 100px;
-  height: 100px;
-  background-color: aqua;
+  border: 5px solid #ffffffb8;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -211,6 +218,16 @@ b {
   align-items: center;
   cursor: pointer;
 }
+
+.loginimg{
+  margin-left: -40px;
+  
+}
+
+#name, #email, #phone{
+  padding-left: 10px;
+}
+
 
 @media (max-width: 1070px) {
 
@@ -235,10 +252,16 @@ b {
   img {
     display: none;
   }
+  .displayflex {
+    margin-left: 0px;
+  }
   .addcontainer{
     gap: 0;
   }
- 
+  .inputsytle{
+    padding-left: 0px;
+  }
+
 }
 
 @media (max-width: 500px) {
