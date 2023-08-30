@@ -121,7 +121,7 @@ function contactTemplate() {
                                 </div>
                             </div>
                             <div class="buttonfield">
-                                <button onclick="cancelContact()">Cancel X</button>
+                                <button onclick="cancelContact()">Cancel</button>
                                 <button class="createButton" onclick="addNotiz()">Create contact</button>
                             </div>
                         </div>
