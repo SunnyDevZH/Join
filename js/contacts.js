@@ -163,15 +163,15 @@ function renderEdit(i) {
                         <div>
                             <div class="inputsytle">
                                 <div class="displayflex">
-                                    <input required type="text" id="name" placeholder="Name">
+                                    <input required type="text" id="name" placeholder=${addContacts[i].name}>
                                     <img class="loginimg" src="./img/name.png" alt="name" width="30px"> 
                                 </div>
                                 <div class="displayflex">
-                                    <input required type="email" id="email" placeholder="Email">
+                                    <input required type="email" id="email" placeholder=${addContacts[i].email}>
                                     <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"> 
                                 </div>
                                 <div class="displayflex">
-                                    <input required type="number" id="phone" placeholder="Phone">
+                                    <input required type="number" id="phone" placeholder=${addContacts[i].phone}>
                                     <img class="loginimg" src="./img/tel.png" alt="mail" width="30px"> 
                                 </div>
                             </div>
@@ -224,7 +224,7 @@ function contactExists(name) {
 
 // Kontakt bearbeiten //
 
-async function edit(i) {
+async function edit() {
   
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
