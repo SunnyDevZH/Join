@@ -71,7 +71,7 @@ function generateContacts(element) {
       contactList += `<div class="todo-avatar" style="background-color: ${contactColor}; left:${
         i * 30
       }px">${initials}</div>`;
-      if (i >= 6) {
+      if (i >= 4) {
         break;
       }
     }
