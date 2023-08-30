@@ -104,7 +104,7 @@ function contactTemplate() {
                     <div class="close" onclick="cancelContact()">x</div>
                     <div class="input">
                         <div>
-                            <img src="./img/user.png" alt="user" style="width: 120px;">
+                            <img class="displaynone1" src="./img/user.png" alt="user" style="width: 120px;">
                         </div>
                         <div>
                             <div class="inputsytle">
@@ -204,6 +204,11 @@ async function addNotiz() {
 
   let color = getRandomColor(); // Zufällige Farbe generieren
 
+  if (contactExists(name)) {
+    alert("Ein Kontakt mit diesem Namen existiert bereits.");
+    return;
+  }
+
   let contact = { name, email, phone, color }; // dem Kontakt hinzufügen
   addContacts.push(contact);
 
@@ -212,6 +217,10 @@ async function addNotiz() {
   renderContacts();
   window.location.href = "contacts.html";
 }
+
+function contactExists(name) {
+    return addContacts.some(contact => contact.name === name);
+  }
 
 // Kontakt bearbeiten //
 
@@ -222,6 +231,11 @@ async function edit(i) {
     const phone = document.getElementById("phone").value;
   
     const color = getRandomColor(); // Zufällige Farbe generieren
+
+    if (contactExists(name)) {
+        alert("Ein Kontakt mit diesem Namen existiert bereits.");
+        return;
+    }
   
     const editedContact = { name, email, phone, color }; // Aktualisierte Kontaktinformationen
   

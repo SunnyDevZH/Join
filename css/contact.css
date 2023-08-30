@@ -149,7 +149,7 @@ b {
   display: flex;
   padding: 10px;
   align-items: center;
-  justify-content: space-around;
+  gap: 30px;
 }
 
 .rendercontact:hover {
@@ -252,26 +252,27 @@ button{
   h1 {
       font-size: 20px;
   } 
+  .displaynone1{
+    display: none;
+  }
 }
 
 @media (max-width: 800px) {
   p {
     display: none;
   }
+  .addcontainer{
+    display: flex;
+    flex-direction: column;
+    height: 550px;
+  }
+  
 }
 
 @media (max-width: 690px) {
-  img {
-    display: none;
-  }
-  .displayflex {
-    margin-left: 0px;
-  }
+  
   .addcontainer{
     gap: 0;
-  }
-  .inputsytle{
-    padding-left: 0px;
   }
 
 }
@@ -286,11 +287,13 @@ button{
 }
 
 @media (max-width: 450px) {
-  .addButton{
-    width: 230px;
-  }
+ 
   .circle{
-    display: none;
+    height: 50px;
+    width: 50px;
+  }
+  #mycontact{
+    width: 370px;
   }
  
 }
