@@ -163,15 +163,15 @@ function renderEdit(i) {
                         <div>
                             <div class="inputsytle">
                                 <div class="displayflex">
-                                    <input required type="text" id="name" placeholder=${addContacts[i].name}>
+                                    <input required type="text" id="name" value="${addContacts[i].name}">
                                     <img class="loginimg" src="./img/name.png" alt="name" width="30px"> 
                                 </div>
                                 <div class="displayflex">
-                                    <input required type="email" id="email" placeholder=${addContacts[i].email}>
+                                    <input required type="email" id="email" value="${addContacts[i].email}">
                                     <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"> 
                                 </div>
                                 <div class="displayflex">
-                                    <input required type="number" id="phone" placeholder=${addContacts[i].phone}>
+                                    <input required type="number" id="phone" value="${addContacts[i].phone}">
                                     <img class="loginimg" src="./img/tel.png" alt="mail" width="30px"> 
                                 </div>
                             </div>
@@ -198,25 +198,26 @@ window.location.href = "contacts.html";
 // Kontakt hinzufügen //
 
 async function addNotiz() {
-  let name = document.getElementById("name").value;
-  let email = document.getElementById("email").value;
-  let phone = document.getElementById("phone").value;
-
-  let color = getRandomColor(); // Zufällige Farbe generieren
-
-  if (contactExists(name)) {
-    alert("Ein Kontakt mit diesem Namen existiert bereits.");
-    return;
-  }
-
-  let contact = { name, email, phone, color }; // dem Kontakt hinzufügen
-  addContacts.push(contact);
-
-  await setItem("addContacts", JSON.stringify(addContacts)); // Daten von Users auf Server laden
-
-  renderContacts();
-  window.location.href = "contacts.html";
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value; // Hier wird die Telefonnummer abgerufen
+  
+    let color = getRandomColor();
+  
+    if (contactExists(name)) {
+      alert("Ein Kontakt mit diesem Namen existiert bereits.");
+      return;
+    }
+  
+    let contact = { name, email, phone, color };
+    addContacts.push(contact);
+  
+    await setItem("addContacts", JSON.stringify(addContacts));
+  
+    renderContacts();
+    window.location.href = "contacts.html";
 }
+  
 
 function contactExists(name) {
     return addContacts.some(contact => contact.name === name);
@@ -224,7 +225,7 @@ function contactExists(name) {
 
 // Kontakt bearbeiten //
 
-async function edit() {
+async function edit(i) {
   
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
