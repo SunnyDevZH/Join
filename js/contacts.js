@@ -24,6 +24,7 @@ function renderContacts() {
     }
 
     mycontact.innerHTML += `
+            
             <div onclick="currentcontact(${i}); selectContact(this);" class="rendercontact">
                 <div class="circle" style="background-color: ${contact.color}">
                     <span class="initials">${contact.name.substring(0,2)}</span>
@@ -136,9 +137,9 @@ function contactTemplate() {
 // Edit //
 
 function editContainer(i) {
-  let editContainer = document.getElementById("editContainer");
-  editContainer.innerHTML = renderEdit(i);
-}
+    let editContainer = document.getElementById("editContainer");
+    editContainer.innerHTML = renderEdit(i);
+  }
 
 function renderEdit(i) {
 
@@ -176,7 +177,7 @@ function renderEdit(i) {
                             </div>
                             <div class="buttonfield">
                                 <button onclick="deletecontact(${i})">Delete </button>
-                                <button class="createButton" onclick="edit()">Safe</button>
+                                <button class="createButton" onclick="edit(${i})">Save</button>
                             </div>
                         </div>
                     </div>
@@ -214,24 +215,24 @@ async function addNotiz() {
 
 // Kontakt bearbeiten //
 
-async function edit() {
-
-  deletecontact();
-
-  let name = document.getElementById("name").value;
-  let email = document.getElementById("email").value;
-  let phone = document.getElementById("phone").value;
-
-  let color = getRandomColor(); // Zufällige Farbe generieren
-
-  let contact = { name, email, phone, color }; // dem Kontakt hinzufügen
-  addContacts.push(contact);
-
-  await setItem("addContacts", JSON.stringify(addContacts)); // Daten von Users auf Server laden
-
-  renderContacts();
-  window.location.href = "contacts.html";
-}
+async function edit(i) {
+  
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+  
+    const color = getRandomColor(); // Zufällige Farbe generieren
+  
+    const editedContact = { name, email, phone, color }; // Aktualisierte Kontaktinformationen
+  
+    // Überschreibe den Kontakt im Array mit den bearbeiteten Informationen
+    addContacts[i] = editedContact;
+  
+    await setItem("addContacts", JSON.stringify(addContacts)); // Speichern der aktualisierten Kontakte auf dem Server
+  
+    renderContacts();
+    window.location.href = "contacts.html";
+}  
 
 // Kontakt laden //
 
