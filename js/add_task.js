@@ -416,9 +416,17 @@ function renderCategoryHTML(taskCategory, taskColor, i) {
             </div>`;
 }
 function renderContactHTML(contact, contactColor, i) {
-    return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})"><div class="contact-circle" style="background-color: ${contactColor}">
+    let backgroundColor = assignedContacts.includes(contact)
+        ? "#2a3647"
+        : "";
+    let checkBox = assignedContacts.includes(contact)
+        ? "./icons/checkbutton_checked_white.svg"
+        : "./icons/checkbutton_default.svg";
+    let color = assignedContacts.includes(contact) ? "white" : "black";
+
+    return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})" style="background-color: ${backgroundColor}; color: ${color}"><div class="contact-circle" style="background-color: ${contactColor}">
     ${generateInitials(contact)}</div> <span class="contact-name">${contact}</span>
-    <img id="checkboxContact${i}" src="./icons/checkbutton_default.svg">
+    <img id="checkboxContact${i}" src="${checkBox}">
     </div>`
 }
 function renderSubtaskHTML(subtaskObj, i) {
