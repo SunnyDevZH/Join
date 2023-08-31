@@ -49,17 +49,32 @@ function generatePrio(task) {
 function generateDetailContacts(task) {
     let detailContactList = "";
     let contacts = task["assignedContact"];
+  
     if (contacts.length > 0) {
-        detailContactList = `<p class="violett">Assigned to:</p>`;
+      detailContactList = `<p class="violett">Assigned to:</p>`;
+  
+      if (contacts.length < 4) {
         for (i = 0; i < contacts.length; i++) {
-            let contact = contacts[i];
-            contactColor = task["contactColor"][i];
-            detailContactList += `<div class="detailContact">
+          let contact = contacts[i];
+          contactColor = task["contactColor"][i];
+          detailContactList += renderDetailContactList(contact, contactColor);
+        }
+      } else {
+        for (i = 0; i < 4; i++) {
+          let contact = contacts[i];
+          contactColor = task["contactColor"][i];
+          detailContactList += renderDetailContactList(contact, contactColor);
+        }
+        detailContactList += `And more`;
+      }
+    }
+  
+    return detailContactList;
+  }
+function renderDetailContactList(contact, contactColor) {
+    return `<div class="detailContact">
         <div class="contact-circle" style="background-color: ${contactColor}">${generateInitials(contact)}</div>&nbsp
         <div>${contact}</div></div>`;
-        }
-        return detailContactList;
-    }
 }
 function pushSubtasks(index) {
     for (i = 0; i < todos[index]['subtasks'].length; i++) {
@@ -118,7 +133,7 @@ function renderDetailTask(task) {
         )} &nbsp
     <img src="${task["prio"][1]}"></div>
     <div class="margin-top"> ${generateDetailContacts(task)}</div>
-    <div class="detailSubtasks"> ${generateDetailSubtasks(task)}</div>
+    <div class="detailSubtasks margin-bottom"> ${generateDetailSubtasks(task)}</div>
     </div>
     <div class="detail-buttons">
     <div id="delete-btn">

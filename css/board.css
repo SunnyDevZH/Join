@@ -251,7 +251,7 @@
 .main-card {
   position: relative;
   min-width: 400px;
-  min-height: 600px;
+  min-height: 500px;
 
   margin-left: 230px;
   padding: 24px 32px;
@@ -301,6 +301,9 @@
   background-color: lightgray;
   border-radius: 8px;
 
+}
+.margin-bottom {
+  margin-bottom: 48px; 
 }
 
 .top-nav {
