@@ -123,13 +123,17 @@
   color: rgb(126, 126, 126);
 }
 
+.todo-category-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .todo-category {
   margin-bottom: 16px;
-  padding: 4px;
+  padding: 8px 16px;
 
   border-radius: 8px;
   color: white;
-  text-align: center;
 }
 
 .todo-title {

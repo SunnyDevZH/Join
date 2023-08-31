@@ -41,9 +41,12 @@ function generateTodo(element) {
   <div draggable='true' ondragstart='startDragging(${
     element["id"]
   })' class='todo' onclick="openOverlay(${element["id"]})">
-    <div class="todo-category" style="background-color:${
-      element["categoryColor"]
-    }">${element["category"]}</div>
+    <div  class="todo-category-container">
+      <div class="todo-category" style="background-color:${
+        element["categoryColor"]
+      }">${element["category"]}
+      </div>
+    </div>
     <div class="todo-title">${firstCharToUpperCase(element["title"])}</div>
     <div class="todo-content">${firstCharToUpperCase(
       element["description"]
