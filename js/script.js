@@ -44,8 +44,6 @@ async function loadTodos() {
 async function loadUsers() {
   let getUsers = await getItem("users");
   users = JSON.parse(getUsers);
-  console.log(users);
-
   getUserData();
 }
 
@@ -115,8 +113,7 @@ function generateInitials(name) {
     return initials[0][0].toUpperCase() + initials[1][0].toUpperCase();
   } else if (initials.length === 3) {
     return initials[0][0].toUpperCase() + initials[2][0].toUpperCase();
-  }
-  else {
+  } else {
     return "__";
   }
 }
@@ -145,7 +142,6 @@ function getNextDate(element) {
 
 function changeAvatarColor() {
   document.querySelector(".header-avatar").style.backgroundColor = userColor;
-  console.log(userColor);
 }
 
 function toggleAvatarMenu() {

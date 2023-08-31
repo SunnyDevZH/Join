@@ -16,7 +16,6 @@ async function loadTodos() {
   for (let i = 0; i < todos.length; i++) {
     todos[i].id = i;
   }
-  console.log(todos);
   updateHTML();
   pushCategories();
 }
