@@ -195,7 +195,7 @@ button {
 
 .sum-main {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   flex-direction: row-reverse;
   flex-wrap: wrap;
   gap: 32px;
