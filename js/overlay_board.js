@@ -28,6 +28,7 @@ async function saveCategory() {
 }
 function openOverlay(index) {
     const task = todos[index];
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
     document.getElementById("overlay-container").classList.remove("d-none");
     document.getElementById("showEditTask").classList.add("d-none");
     let detail = document.getElementById("showDetailTask");
@@ -50,17 +51,15 @@ function generateDetailContacts(task) {
     let contacts = task["assignedContact"];
     if (contacts.length > 0) {
         detailContactList = `<p class="violett">Assigned to:</p>`;
-        for (i = 0; i < 3; i++) {
-            let initials = generateInitials(contacts[i]);
+        for (i = 0; i < contacts.length; i++) {
+            let contact = contacts[i];
             contactColor = task["contactColor"][i];
             detailContactList += `<div class="detailContact">
-        <div class="contact-circle" style="background-color: ${contactColor}">${initials}</div>&nbsp
-        <div>${task["assignedContact"][i]}</div></div>`;
+        <div class="contact-circle" style="background-color: ${contactColor}">${generateInitials(contact)}</div>&nbsp
+        <div>${contact}</div></div>`;
         }
-    } if(contacts.length >= 3) {
-        detailContactList += `And more contacts`; 
+        return detailContactList;
     }
-    return detailContactList;
 }
 function pushSubtasks(index) {
     for (i = 0; i < todos[index]['subtasks'].length; i++) {
@@ -75,12 +74,12 @@ function generateDetailSubtasks(task) {
 
         for (let i = 0; i < editedSubtasks.length; i++) {
             let subtaskCheckBox = editedSubtasks[i]["imageSrc"];
-            detailSubtaskList += renderDetailSubtasks(index,i,subtaskCheckBox);
+            detailSubtaskList += renderDetailSubtasks(index, i, subtaskCheckBox);
         }
     }
     return detailSubtaskList;
 }
-function renderDetailSubtasks(index,i,subtaskCheckBox){
+function renderDetailSubtasks(index, i, subtaskCheckBox) {
     return `<div class="detailSubtask nospace-between">
     <img id="check${i}" onclick="changeDetailCheckbox(${index}, ${i})" src="${subtaskCheckBox}">&nbsp
     ${firstCharToUpperCase(editedSubtasks[i]["value"])}
