@@ -290,6 +290,7 @@
   display: flex;
   justify-content: space-between; 
   align-items: center;
+  font-size: 14px; 
 }
 .detailSubtask img:hover {
   cursor: pointer; 
@@ -300,6 +301,9 @@
   background-color: lightgray;
   border-radius: 8px;
 
+}
+.margin-bottom {
+  margin-bottom: 48px; 
 }
 
 .top-nav {

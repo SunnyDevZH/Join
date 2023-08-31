@@ -28,6 +28,7 @@ async function saveCategory() {
 }
 function openOverlay(index) {
     const task = todos[index];
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
     document.getElementById("overlay-container").classList.remove("d-none");
     document.getElementById("showEditTask").classList.add("d-none");
     let detail = document.getElementById("showDetailTask");
@@ -48,17 +49,26 @@ function generatePrio(task) {
 function generateDetailContacts(task) {
     let detailContactList = "";
     let contacts = task["assignedContact"];
+    
     if (contacts.length > 0) {
-        detailContactList = `<p class="violett">Assigned to:</p>`;
-        for (i = 0; i < contacts.length; i++) {
-            let initials = generateInitials(contacts[i]);
-            contactColor = task["contactColor"][i];
-            detailContactList += `<div class="detailContact">
-        <div class="contact-circle" style="background-color: ${contactColor}">${initials}</div>&nbsp
-        <div>${task["assignedContact"][i]}</div></div>`;
-        }
+    detailContactList = ` <p class="violett">Assigned to:</p>`;
+    for (i = 0; i < Math.min(contacts.length, 4); i++) {
+      let contact = contacts[i];
+      contactColor = task["contactColor"][i];
+      detailContactList += renderDetailContactList(contact, contactColor);
+    }
+    if (contacts.length > 4) {
+      detailContactList += `And more`;
+    }
     }
     return detailContactList;
+    }
+    
+    
+function renderDetailContactList(contact, contactColor) {
+    return `<div class="detailContact">
+        <div class="contact-circle" style="background-color: ${contactColor}">${generateInitials(contact)}</div>&nbsp
+        <div>${contact}</div></div>`;
 }
 function pushSubtasks(index) {
     for (i = 0; i < todos[index]['subtasks'].length; i++) {
@@ -73,13 +83,16 @@ function generateDetailSubtasks(task) {
 
         for (let i = 0; i < editedSubtasks.length; i++) {
             let subtaskCheckBox = editedSubtasks[i]["imageSrc"];
-            detailSubtaskList += `<div class="detailSubtask">
-                <img id="check${i}" onclick="changeDetailCheckbox(${index}, ${i})" src="${subtaskCheckBox}">&nbsp
-                ${firstCharToUpperCase(editedSubtasks[i]["value"])}
-                </div>`;
+            detailSubtaskList += renderDetailSubtasks(index, i, subtaskCheckBox);
         }
     }
     return detailSubtaskList;
+}
+function renderDetailSubtasks(index, i, subtaskCheckBox) {
+    return `<div class="detailSubtask nospace-between">
+    <img id="check${i}" onclick="changeDetailCheckbox(${index}, ${i})" src="${subtaskCheckBox}">&nbsp
+    ${firstCharToUpperCase(editedSubtasks[i]["value"])}
+    </div>`;
 }
 function changeDetailCheckbox(index, i) {
     let checkBox = document.getElementById(`check${i}`);
@@ -114,7 +127,7 @@ function renderDetailTask(task) {
         )} &nbsp
     <img src="${task["prio"][1]}"></div>
     <div class="margin-top"> ${generateDetailContacts(task)}</div>
-    <div class="detailSubtasks"> ${generateDetailSubtasks(task)}</div>
+    <div class="detailSubtasks margin-bottom"> ${generateDetailSubtasks(task)}</div>
     </div>
     <div class="detail-buttons">
     <div id="delete-btn">
@@ -187,7 +200,7 @@ function displayContacts(task) {
             contactColor,
             i, task,
         );
-    }contactContent.innerHTML += addNewContactToTask();
+    } contactContent.innerHTML += addNewContactToTask();
 }
 function showContactList() {
     let contactContent = document.getElementById("contactList");
@@ -315,13 +328,18 @@ function showEditedSubtasks() {
     subtaskElement.innerHTML = "";
     for (let i = 0; i < editedSubtasks.length; i++) {
         let subtaskCheckBox = editedSubtasks[i]["imageSrc"];
-        subtaskElement.innerHTML += `<div class="detailSubtask">
-            <img id="unchecked${i}" onclick="changeCheckbox(${i})" src="${subtaskCheckBox}">&nbsp
-            ${firstCharToUpperCase(editedSubtasks[i]["value"])} <img onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
-            </div>`;
+        subtaskElement.innerHTML += renderShowEditedSubtasks(subtaskCheckBox, i);
     }
 }
-
+function renderShowEditedSubtasks(subtaskCheckBox, i) {
+    return `<div class="detailSubtask">
+    <img id="unchecked${i}" onclick="changeCheckbox(${i})" src="${subtaskCheckBox}">&nbsp
+    ${firstCharToUpperCase(editedSubtasks[i]["value"])} 
+    <div class="subtasks-icons">
+    <img onclick="editChosenSubtask(${i})" src="./icons/icon_edit.svg">
+    <img onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
+    </div></div>`;
+}
 function editSubtask() {
     let subtaskElement = document.getElementById("subtaskContent");
     let newSubtask = document.getElementById("subtask").value;
@@ -337,15 +355,40 @@ function editSubtask() {
         };
         if (!editedSubtasks.includes(subtaskObj)) {
             editedSubtasks.push(subtaskObj);
-            subtaskElement.innerHTML += `<div class="detailSubtask">
-    <img id="unchecked${editedSubtasks.length - 1}" 
-    onclick="changeCheckbox(${editedSubtasks.length - 1})" 
-    src="./icons/checkbutton_default.svg">${newSubtask} <img onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
-    </div>`;
-        }
+            subtaskElement.innerHTML += renderEditSubtaskHTML(newSubtask, i)
+        };
     }
     document.getElementById("subtask").value = "";
 }
+function renderEditSubtaskHTML(newSubtask, i) {
+    return `<div class="detailSubtask">
+    <img id="unchecked${editedSubtasks.length - 1}" 
+    onclick="changeCheckbox(${editedSubtasks.length - 1})" 
+    src="./icons/checkbutton_default.svg">${firstCharToUpperCase(newSubtask)} 
+    <div class="subtasks-icons">
+    <img onclick="editChosenSubtask(${i})" src="./icons/icon_edit.svg">
+    <img onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
+    </div>`;
+}
+function editChosenSubtask(i) {
+    let input = document.getElementById('subtask');
+    input.value = editedSubtasks[i]['value'];
+
+    let img = document.getElementById('plus');
+    img.src = "./icons/icon_checkmark.svg";
+    img.onclick = function () { overwriteSubtask(i) };
+}
+function overwriteSubtask(i) {
+    let input = document.getElementById('subtask');
+    let newValue = input.value;
+    editedSubtasks[i].value = newValue;
+    showEditedSubtasks();
+    input.value = '';
+    let img = document.getElementById('plus');
+    img.src = "./icons/plus.svg";
+    img.onclick = function () { editSubtask() };
+}
+
 function changeCheckbox(i) {
     let checkBox = document.getElementById(`unchecked${i}`);
     if (checkBox.src.includes("checkbutton_default")) {
@@ -449,8 +492,8 @@ function renderEditTaskHTML(task) {
                   <span>Subtasks</span>
                   <div class="input-with-button">
                     <input id="subtask" minlength="3" placeholder="Add new subtask" />
-                    <button id="addSubtaskButton" type="button" onclick="editSubtask()">
-                      <img src="./icons/plus.svg" />
+                    <button id="addSubtaskButton" type="button" >
+                      <img onclick="editSubtask()" id="plus" src="./icons/plus.svg" />
                     </button>
                   </div>
                   <div id="subtaskContent"></div>
