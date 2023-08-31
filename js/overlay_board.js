@@ -508,7 +508,10 @@ function renderEditTaskHTML(task) {
           </form>`;
 }
 function newTaskColumn(chosenColumn) {
-    window.location.href = `add_task.html?chosenColumn=${chosenColumn}`;
+    document.getElementById('overlay-container').classList.remove('d-none');
+    document.getElementById('showDetailTask').classList.add('d-none');
+    document.getElementById('showEditTask').classList.add('d-none');
+    document.getElementById('showNewTask').classList.remove('d-none');
 }
 /////////////////////
 // overlay logic END
