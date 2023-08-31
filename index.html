@@ -1,16 +1,30 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join Login</title>
-    <link rel="icon" type="image/x-icon" href="./img/logo_favicon.png" />
+    <title>Join</title>
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./login/login.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="./img/logo_favicon.png"
+    />
+
+    <script src="./js/login.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/register.js"></script>
   </head>
-  <body onload="init()">
+  <body onload="indexStart()">
+    <div id="index-main">
+      <div w3-include-html="./login.html"></div>
+    </div>
+
     <img id="main-logo" src="./img/logo.svg" alt="JOIN" />
 
     <script src="./js/script.js"></script>
+    <script src="./js/include.js"></script>
   </body>
 </html>

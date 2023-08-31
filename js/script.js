@@ -1,5 +1,7 @@
 let sumTodos = [];
-let users = [];
+if (!users) {
+  let users = [];
+}
 let userName = "";
 let userColor = "";
 let userIndex = localStorage.getItem("activeID");
@@ -24,6 +26,13 @@ function init() {
   setTimeout(function () {
     location.href = "./login.html";
   }, 1300);
+}
+
+function indexStart() {
+  document.getElementById("index-main").style.display = "none";
+  setTimeout(() => {
+    document.getElementById("index-main").style.display = "block";
+  }, 1500);
 }
 
 async function loadPage() {

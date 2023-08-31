@@ -144,6 +144,10 @@ button {
   height: 100vh;
 }
 
+#index-main {
+  display: none;
+}
+
 /* Logo with animation */
 
 #main-logo {
