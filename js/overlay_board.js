@@ -50,13 +50,15 @@ function generateDetailContacts(task) {
     let contacts = task["assignedContact"];
     if (contacts.length > 0) {
         detailContactList = `<p class="violett">Assigned to:</p>`;
-        for (i = 0; i < contacts.length; i++) {
+        for (i = 0; i < 3; i++) {
             let initials = generateInitials(contacts[i]);
             contactColor = task["contactColor"][i];
             detailContactList += `<div class="detailContact">
         <div class="contact-circle" style="background-color: ${contactColor}">${initials}</div>&nbsp
         <div>${task["assignedContact"][i]}</div></div>`;
         }
+    } if(contacts.length >= 3) {
+        detailContactList += `And more contacts`; 
     }
     return detailContactList;
 }
@@ -73,13 +75,16 @@ function generateDetailSubtasks(task) {
 
         for (let i = 0; i < editedSubtasks.length; i++) {
             let subtaskCheckBox = editedSubtasks[i]["imageSrc"];
-            detailSubtaskList += `<div class="detailSubtask">
-                <img id="check${i}" onclick="changeDetailCheckbox(${index}, ${i})" src="${subtaskCheckBox}">&nbsp
-                ${firstCharToUpperCase(editedSubtasks[i]["value"])}
-                </div>`;
+            detailSubtaskList += renderDetailSubtasks(index,i,subtaskCheckBox);
         }
     }
     return detailSubtaskList;
+}
+function renderDetailSubtasks(index,i,subtaskCheckBox){
+    return `<div class="detailSubtask nospace-between">
+    <img id="check${i}" onclick="changeDetailCheckbox(${index}, ${i})" src="${subtaskCheckBox}">&nbsp
+    ${firstCharToUpperCase(editedSubtasks[i]["value"])}
+    </div>`;
 }
 function changeDetailCheckbox(index, i) {
     let checkBox = document.getElementById(`check${i}`);
@@ -355,7 +360,7 @@ function renderEditSubtaskHTML(newSubtask, i) {
     <div class="subtasks-icons">
     <img onclick="editChosenSubtask(${i})" src="./icons/icon_edit.svg">
     <img onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
-    </div></div>`;
+    </div>`;
 }
 function editChosenSubtask(i) {
     let input = document.getElementById('subtask');
