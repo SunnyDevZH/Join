@@ -13,7 +13,7 @@ body {
 }
 
 .createButton {
-  background-color: rgb(42,54,71);
+  background-color: rgb(42, 54, 71);
   width: 120px;
   height: 49px;
   font-size: 16px;
@@ -136,8 +136,7 @@ b {
   cursor: pointer;
 }
 
-
-.displayflex{
+.displayflex {
   margin-left: -70px;
   display: flex;
   justify-content: center;
@@ -157,13 +156,11 @@ b {
   cursor: pointer;
 }
 
-.rendercontact.selected  {
+.rendercontact.selected {
   background-color: rgb(218, 218, 218);
 }
 
-.rendercontact.sele
-
-.flex-direction {
+.rendercontact.sele .flex-direction {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -184,13 +181,13 @@ b {
   width: 450px;
   overflow-y: scroll;
 }
-.contactBox{
+.contactBox {
   display: flex;
   flex-direction: column;
   margin: 50px;
   gap: 20px;
 }
-.contactBoxOne{
+.contactBoxOne {
   display: flex;
   align-items: center;
   margin: 50px;
@@ -213,23 +210,24 @@ b {
   font-weight: bold;
 }
 
-.edit{
+.edit {
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
 
-.loginimg{
+.loginimg {
   margin-left: -40px;
-  
 }
 
-#name, #email, #phone{
+#name,
+#email,
+#phone {
   padding-left: 10px;
 }
 
-button{
+button {
   background-color: rgb(255, 255, 255);
   width: 150px;
   height: 49px;
@@ -240,19 +238,17 @@ button{
   cursor: pointer;
 }
 
-
 @media (max-width: 1070px) {
-
   .displaynone {
     display: none;
-} 
+  }
 }
 
 @media (max-width: 930px) {
   h1 {
-      font-size: 20px;
-  } 
-  .displaynone1{
+    font-size: 20px;
+  }
+  .displaynone1 {
     display: none;
   }
 }
@@ -261,40 +257,39 @@ button{
   p {
     display: none;
   }
-  .addcontainer{
+  .addcontainer {
     display: flex;
     flex-direction: column;
     height: 550px;
   }
-  
 }
 
 @media (max-width: 690px) {
-  
-  .addcontainer{
+  .addcontainer {
     gap: 0;
   }
+}
 
+@media (max-width: 768px) {
+  #mycontact {
+    height: 65vh;
+  }
 }
 
 @media (max-width: 500px) {
-  .addcontainer{
+  .addcontainer {
     display: flex;
     flex-direction: column;
     height: 550px;
   }
- 
 }
 
 @media (max-width: 450px) {
- 
-  .circle{
+  .circle {
     height: 50px;
     width: 50px;
   }
-  #mycontact{
+  #mycontact {
     width: 370px;
   }
- 
 }
-
