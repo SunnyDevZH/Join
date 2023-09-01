@@ -15,6 +15,7 @@
     <div class="background">
         <header class="forgotSendHeader">
             <img src="./img/logo.svg" alt="Logo">
+            <img id="meinBild" src="./img/AnEmail.png" alt="bild" width="250px" style="display: none;">
         </header>
         <form class="alignItems">
             <div class="forgotSendContainer">
@@ -25,13 +26,26 @@
                 <div class="flexdirection">
                     <p>Don't worry! We will send you an email with the </br>instructions to reset your Password.</p>
                     <div class="displayflex">
-                        <input required type="email" placeholder="Email">
+                        <input required type="email" id="emailInput" placeholder="Email">
                         <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"> 
                     </div>
                 </div>
                 <div>
-                    <button class="signUpButton" onclick="window.location.href= './forgotReset.html';">Send me the email</button>
+                    <button id="anzeigenButton" class="signUpButton">Send me the email</button>
+                    
                 </div>
+                <script>
+                    document.getElementById('anzeigenButton').addEventListener('click', function() {
+                        var emailInput = document.getElementById('emailInput');
+                        if (emailInput.checkValidity()) {
+                            document.getElementById('meinBild').style.display = 'block';
+                            setTimeout(function() {
+                                window.location.href = './forgotReset.html';
+                            }, 3000);
+                        } 
+                    });
+                </script>
+
             </div>
         </form>
     </div>
