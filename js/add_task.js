@@ -13,17 +13,13 @@ let assignedContacts = [];
 let assignedContactColor = [];
 let assignedSubtasks = [];
 
-async function init() {
+async function initAddTask() {
   getNewDate();
   await load();
 }
-function getChosenColumn() {
-  const urlParams = new URLSearchParams(window.location.search);
-  let chosenColumn = urlParams.get("chosenColumn");
-  return chosenColumn;
-}
+
 //* function to get all values from all inputfields and to push it in an JSON, and then in an array
-async function addTask(chosenColumn) {
+async function addTask() {
   let title = document.getElementById("title").value;
   let description = document.getElementById("description").value;
   let date = document.getElementById("calendar").value;
@@ -34,7 +30,7 @@ async function addTask(chosenColumn) {
     return;
   }
   let task = {
-    step: getChosenColumn(chosenColumn) || "col-01",
+    step: columns[0] || "col-01",
     title: title,
     description: description,
     assignedContact: assignedContacts,
@@ -177,6 +173,7 @@ function clearAll() {
   resetCategory();
   resetContact();
   resetSubtasks();
+  columns = [];
 }
 //**funtion to renderCategories onclick */
 function renderCategories() {
@@ -421,8 +418,8 @@ function renderContactHTML(contact, contactColor, i) {
 
   return `<div id="contact${i}" class="option" onclick="addContactToTask(${i})" style="background-color: ${backgroundColor}; color: ${color}"><div class="contact-circle" style="background-color: ${contactColor}">
     ${generateInitials(
-      contact
-    )}</div> <span class="contact-name">${contact}</span>
+    contact
+  )}</div> <span class="contact-name">${contact}</span>
     <img id="checkboxContact${i}" src="${checkBox}">
     </div>`;
 }

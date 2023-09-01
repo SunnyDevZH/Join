@@ -6,8 +6,7 @@ let currentDraggedElement;
 function init() {
   loadTodos();
   updateHTML();
-  loadCategory();
-  loadContacts();
+  load(); 
 }
 
 async function loadTodos() {
