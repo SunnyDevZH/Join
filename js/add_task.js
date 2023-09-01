@@ -195,6 +195,7 @@ function renderCategories() {
       contentList.innerHTML += renderCategoryHTML(taskCategory, taskColor, i);
     }
     isClicked = true;
+    
   } else {
     hideCategoryList();
     contentList.innerHTML = "";
@@ -437,3 +438,5 @@ function renderSubtaskHTML(subtaskObj, i) {
     <img id="subtaskBucket${i}" onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
     </div>`;
 }
+
+  

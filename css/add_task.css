@@ -253,7 +253,16 @@ input::placeholder {
 input {
     font-family: "Inter", Helvetica, sans-serif;
 }
+#subtask {
+    width: 260px; 
+}
+#addSubtaskButton {
+    margin: -30px -20px -6px -35px 
+}
+#addSubtaskButton:hover {
+    filter: drop-shadow(0 0 8px black);
 
+}
 #animationBox {
     position: fixed;
     bottom: 0;

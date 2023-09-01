@@ -92,13 +92,13 @@ function renderEditTaskHTML(task) {
                   <div id="priorityAlert"></div>
                 </div>
                 <div class="input-form">
-                  <span>Subtasks</span>
-                  <div class="input-with-button">
-                    <input id="subtask" minlength="3" placeholder="Add new subtask" />
-                    <button id="addSubtaskButton" type="button" >
-                      <img onclick="editSubtask()" id="plus" src="./icons/plus.svg" />
-                    </button>
-                  </div>
+                <span>Subtasks</span>
+                <div>
+                  <input id="subtask" minlength="3" placeholder="Add new subtask" />
+      
+                  <img onclick="addSubtask()" id="addSubtaskButton" src="./icons/plus.svg" />
+                </div>
+              </div>
                   <div id="subtaskContent"></div>
                 </div>
               </div>

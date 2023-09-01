@@ -12,7 +12,7 @@
   <body onload="loadPage(); initAddTask()">
     <div w3-include-html="./templates/navbar.html"></div>
     <div w3-include-html="./templates/header.html"></div>
-    <div class="content-add-task">
+    <div id="content-add-task" class="content-add-task">
       <h1>Add Task</h1>
       <form id="myForm" onsubmit="addTask();return false">
         <div class="input-table">
@@ -113,19 +113,14 @@
 
             <div class="input-form">
               <span>Subtasks</span>
-              <div class="input-with-button">
+              <div>
                 <input
                   id="subtask"
                   minlength="3"
                   placeholder="Add new subtask"
                 />
-                <button
-                  id="addSubtaskButton"
-                  type="button"
-                  onclick="addSubtask()"
-                >
-                  <img src="./icons/plus.svg" />
-                </button>
+                
+                  <img  onclick="addSubtask()"  id="addSubtaskButton" src="./icons/plus.svg" />
               </div>
               <div id="subtaskContent"></div>
             </div>
