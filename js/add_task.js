@@ -30,7 +30,7 @@ async function addTask() {
     return;
   }
   let task = {
-    step: columns[0] || "col-01",
+    step: showColumn(),
     title: title,
     description: description,
     assignedContact: assignedContacts,
@@ -48,6 +48,14 @@ async function addTask() {
   setTimeout(function () {
     window.location.href = "./board.html"; // Hier wird zur neuen Seite umgeleitet
   }, 1000);
+}
+function showColumn () {
+  if(columns=[]) {
+    return 'col-01';
+  }
+  else {
+    return columns[0]; 
+  }
 }
 function animation() {
   document.getElementById("animationBox").classList.remove("d-none");
