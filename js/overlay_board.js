@@ -29,6 +29,7 @@ function openOverlay(index) {
     document.getElementById("showNewTask").classList.add("d-none");
     let detail = document.getElementById("showDetailTask");
     detail.classList.remove("d-none");
+    document.body.style.overflow = 'hidden'; 
     pushSubtasks(index);
     detail.innerHTML = "";
     detail.innerHTML += renderDetailTask(task);
@@ -359,6 +360,7 @@ async function addEditTask(i) {
 function closeOverlay() {
     document.getElementById("overlay-container").classList.add("d-none");
     clearAllEditTask();
+    document.body.style.overflow = 'auto'; 
 }
 function clearAllEditTask() {
     editedContacts = [];

@@ -177,6 +177,14 @@ textarea {
     background-color: white;
     font-family: "Inter", Helvetica, sans-serif;
 }
+input:focus {
+    border-color: #29ABE2; 
+    outline:none;
+}
+textarea:focus {
+    border-color: #29ABE2; 
+    outline:none;
+}
 
 .list {
     background-color: white;

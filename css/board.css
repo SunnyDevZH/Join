@@ -221,16 +221,18 @@
 
   z-index: 100;
 }
+
 .border {
   border: 1px solid lightgrey;
 }
+
 .overlay-card {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  position: absolute;
-  top: 0;
+  position: sticky;
+  top: 25;
   left: 0;
 
   width: 100%;
@@ -242,6 +244,7 @@
 .width-button {
   width: 100%;
 }
+
 .overlay-background {
   position: fixed;
   top: 0;
@@ -256,8 +259,8 @@
 
 .main-card {
   position: relative;
-  min-width: 400px;
-  min-height: 500px;
+  width: 400px;
+  height: 500px;
 
   margin-left: 230px;
   padding: 24px 32px;
@@ -266,7 +269,15 @@
   border-radius: 32px;
   gap: 12px;
   z-index: 999;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
 }
+.main-card::-webkit-scrollbar {
+  width: 0.1rem;
+  background-color: transparent; 
+}
+
 
 .input-column {
   display: flex;
@@ -298,6 +309,7 @@
   align-items: center;
   font-size: 14px;
 }
+
 .detailSubtask img:hover {
   cursor: pointer;
 }
@@ -307,6 +319,7 @@
   background-color: lightgray;
   border-radius: 8px;
 }
+
 .margin-bottom {
   margin-bottom: 48px;
 }
@@ -337,7 +350,7 @@ form {
 
 .ok-button {
   position: absolute;
-  bottom: 30px;
+  bottom: 0p;
   right: 10px;
 }
 

@@ -46,7 +46,7 @@ async function addTask() {
   clearAll();
   animation();
   setTimeout(function () {
-    window.location.href = "./board.html"; // Hier wird zur neuen Seite umgeleitet
+    window.location.href = "./board.html"; 
   }, 1000);
 }
 function showColumn () {
