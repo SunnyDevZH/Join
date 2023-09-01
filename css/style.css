@@ -178,6 +178,15 @@ button {
   }
 }
 
+#login-logo {
+  position: absolute;
+
+  left: 50px;
+  top: 50px;
+  width: 101px;
+  height: 122px;
+}
+
 /* Summary */
 
 .sum-header {
