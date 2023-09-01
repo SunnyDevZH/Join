@@ -52,11 +52,9 @@
               <a href="#">Privacy policy</a>
             </div>
           </div>
-          <div style="display: flex; gap: 16px">
-            <button class="signUpButton" onclick="window.location.href= './index.html';">
-              Cancel
-            </button>
-            <button onclick="checkBox()" class="signUpButton">Sign up</button>
+          <div>
+            <button onclick="checkBox(); showImage();" class="signUpButton">Sign up</button>
+            <img id="main-logo" src="./img/YouSigned.png" alt="JOIN" style="display: none;">
           </div>
         </form>
       </div>

@@ -52,6 +52,7 @@ footer{
     gap: 30px; /* Welche Grösse? */
 }
 
+
 @media (max-width: 650px) {
     .signUpContainer {
       width: 320px;
