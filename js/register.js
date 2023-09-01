@@ -1,4 +1,6 @@
-let users = []; 
+try {
+  let users = [];
+} catch {}
 
 async function init() {
   loadUsers();
@@ -8,7 +10,6 @@ async function init() {
 // Registrieren //
 
 async function register() {
-
   let names = document.getElementById("names").value;
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
@@ -31,14 +32,18 @@ async function register() {
 
 function resetForm() {
   names.value = ""; // Feld leeren
-  email.value = ""; 
-  password.value = ""; 
+  email.value = "";
+  password.value = "";
 }
 
 // Farbe generieren //
 
 function generateRandomColor() {
-  const colorCode = "#" + Math.floor(Math.random() * 16777216).toString(16).padStart(6, "0");
+  const colorCode =
+    "#" +
+    Math.floor(Math.random() * 16777216)
+      .toString(16)
+      .padStart(6, "0");
   return colorCode;
 }
 
@@ -46,7 +51,7 @@ function generateRandomColor() {
 
 async function loadUsers() {
   try {
-    users = JSON.parse(await getItem("users")); 
+    users = JSON.parse(await getItem("users"));
   } catch (e) {
     console.error("Loading error:", e); // Falls Users nicht gefunden
     alert("User nicht gefunden");
@@ -57,7 +62,7 @@ async function loadUsers() {
 
 function checkBox() {
   var checkbox = document.getElementById("remember");
-  
+
   if (checkbox.checked) {
     register();
   } else {

@@ -324,10 +324,11 @@ button {
 }
 
 .nav-item:hover {
-  background-color: #0919317c;
+  background-color: #4371b77c;
 }
 
-.nav-item:focus {
+.nav-item:focus,
+.nav-item:active {
   background-color: #091931;
 }
 

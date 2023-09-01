@@ -1,7 +1,6 @@
 let sumTodos = [];
-if (!users) {
-  let users = [];
-}
+let users = [];
+
 let userName = "";
 let userColor = "";
 let userIndex = localStorage.getItem("activeID");
@@ -40,6 +39,20 @@ async function loadPage() {
   await loadTodos();
   updateHeader();
   changeAvatarColor();
+  updateNavbar();
+}
+
+function setNavID(navId = 1) {
+  localStorage.setItem("nav-id", navId);
+}
+
+function updateNavbar() {
+  navId = localStorage.getItem("nav-id");
+  if (navId == "none") {
+    return;
+  } else {
+    document.getElementById(navId).style.backgroundColor = "#091931";
+  }
 }
 
 async function loadTodos() {

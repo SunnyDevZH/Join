@@ -1,4 +1,7 @@
-let users = [];
+try {
+  let users = [];
+} catch {}
+
 localStorage.setItem("activeID", -1);
 
 function start() {
@@ -10,7 +13,9 @@ function start() {
 function login() {
   let email = document.getElementById("email"); // Eingabe von Login
   let password = document.getElementById("password"); // Eingabe von Login
-  let user = users.find((u) => u.email == email.value && u.password == password.value); // Vergleich von Login und Register
+  let user = users.find(
+    (u) => u.email == email.value && u.password == password.value
+  ); // Vergleich von Login und Register
   if (user) {
     userId = users.findIndex((u) => u.email == email.value);
     localStorage.setItem("activeID", userId);
@@ -31,6 +36,3 @@ async function loadUsers() {
     alert("User nicht gefunden");
   }
 }
-
-
-
