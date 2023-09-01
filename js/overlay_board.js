@@ -26,6 +26,7 @@ function openOverlay(index) {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     document.getElementById("overlay-container").classList.remove("d-none");
     document.getElementById("showEditTask").classList.add("d-none");
+    document.getElementById("showNewTask").classList.add("d-none");
     let detail = document.getElementById("showDetailTask");
     detail.classList.remove("d-none");
     pushSubtasks(index);
@@ -119,7 +120,7 @@ async function deleteTask(taskId) {
 
 function editTask(i) {
     const task = todos[i];
-    document.getElementById("showDetailTask").classList.add("d-none");
+    document.getElementById("showDetailTask").classList.add("d-none"); 
     let editTask = document.getElementById("showEditTask");
     editTask.classList.remove("d-none");
     editTask.innerHTML = renderEditTaskHTML(task);

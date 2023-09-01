@@ -134,6 +134,7 @@ textarea {
     display: flex;
     align-items: center;
     padding: 25px !important; 
+    border: 1px solid lightgrey;
 }
 
 .prio img {
