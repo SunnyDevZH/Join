@@ -1,102 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join</title>
 
-    <script src="./js/register.js"></script>
-    <script src="./js/storage.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join</title>
 
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/login.css" />
-    <link rel="stylesheet" href="./css/signUp.css" />
+  <script src="./js/register.js"></script>
+  <script src="./js/storage.js"></script>
 
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="./img/logo_favicon.png"
-    />
-  </head>
-  <body onload="init()">
-    <div class="background">
-      <header class="signUpHeader">
-        <img src="./img/logo.svg" alt="Logo" />
-      </header>
-      <div class="alignItems">
-        <div class="signUpContainer">
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/login.css" />
+  <link rel="stylesheet" href="./css/signUp.css" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="./img/logo_favicon.png" />
+</head>
+
+<body onload="init()">
+  <div class="background">
+    <header class="signUpHeader">
+      <img src="./img/logo.svg" alt="Logo" />
+    </header>
+    <div class="alignItems">
+      <div class="signUpContainer">
+        <div class="displayflex">
+          <img onclick="window.location.href= './index.html';" src="./img/zurück.png" alt="back" width="60px" style="margin-left: -60px;">
           <h1>Sign up</h1>
-          <form class="flexdirection" onsubmit="checkBox(); return false;">
-            <div class="displayflex">
-              <input required type="names" id="names" placeholder="Name" />
-              <img
-                class="loginimg"
-                src="./img/name.png"
-                alt="name"
-                width="30px"
-              />
-            </div>
-            <div class="displayflex">
-              <input required type="email" id="email" placeholder="Email" />
-              <img
-                class="loginimg"
-                src="./img/mail.png"
-                alt="mail"
-                width="30px"
-              />
-            </div>
-            <div class="displayflex">
-              <input
-                required
-                type="password"
-                id="password"
-                placeholder="Password"
-              />
-              <img
-                class="loginimg"
-                src="./img/login.png"
-                alt="login"
-                width="30px"
-              />
-            </div>
-            <div class="displayflex">
-              <input required type="password" placeholder="Confirm Password" />
-              <img
-                class="loginimg"
-                src="./img/login.png"
-                alt="login"
-                width="30px"
-              />
-            </div>
-            <div class="footergap">
-              <div>
-                <input
-                  class="checkbox"
-                  type="checkbox"
-                  name="Remember"
-                  id="remember"
-                /><label for="remember">I accept the</label>
-                <a href="#">Privacy policy</a>
-              </div>
-            </div>
-            <div style="display: flex; gap: 16px">
-              <button
-                class="signUpButton"
-                onclick="window.location.href= './index.html';"
-              >
-                Cancel
-              </button>
-              <button onclick="checkBox()" class="signUpButton">Sign up</button>
-            </div>
-          </form>
         </div>
+        <form class="flexdirection" onsubmit="checkBox(); return false;">
+          <div class="displayflex">
+            <input required type="names" id="names" placeholder="Name" />
+            <img class="loginimg" src="./img/name.png" alt="name" width="30px" />
+          </div>
+          <div class="displayflex">
+            <input required type="email" id="email" placeholder="Email" />
+            <img class="loginimg" src="./img/mail.png" alt="mail" width="30px" />
+          </div>
+          <div class="displayflex">
+            <input required type="password" id="password" placeholder="Password" />
+            <img class="loginimg" src="./img/login.png" alt="login" width="30px" />
+          </div>
+          <div class="displayflex">
+            <input required type="password" placeholder="Confirm Password" />
+            <img class="loginimg" src="./img/login.png" alt="login" width="30px" />
+          </div>
+          <div class="footergap">
+            <div>
+              <input class="checkbox" type="checkbox" name="Remember" id="remember" /><label for="remember">I accept
+                the</label>
+              <a href="#">Privacy policy</a>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px">
+            <button class="signUpButton" onclick="window.location.href= './index.html';">
+              Cancel
+            </button>
+            <button onclick="checkBox()" class="signUpButton">Sign up</button>
+          </div>
+        </form>
       </div>
-
-      <footer>
-        <a class="footerlink" href="privacyPolicy.html">Privacy Policy</a>
-        <a class="footerlink" href="legalNotice.html">Legal notice</a>
-      </footer>
     </div>
-  </body>
+
+    <footer>
+      <a class="footerlink" href="privacyPolicy.html">Privacy Policy</a>
+      <a class="footerlink" href="legalNotice.html">Legal notice</a>
+    </footer>
+  </div>
+</body>
+
 </html>

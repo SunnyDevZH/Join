@@ -30,6 +30,7 @@ body{
     background-color: rgb(255,255,255);  /* Farbe von Mockup */
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; /* Welchen Style? */
     border-radius: 30px;/* Welche Grösse? */
+    width: 540px;
     height: 300px;
     gap: 30px; /* Welche Grösse? */
     padding: 30px; /* Welche Grösse? */
@@ -53,17 +54,22 @@ button{
     justify-content: center;
     width: 100%;
 }
+h1{
+    font-size: 45px;
+}
 
 @media (max-width: 765px) {
     h1 {
         font-size: 32px;
     } 
-
+    .forgotSendContainer{
+        width: 400px;
+    }
     p {
         display: none;
     }
   }
-  @media (max-width: 455px) {
+  @media (max-width: 490px) {
     h1 {
         font-size: 20px;
     } 
@@ -73,5 +79,8 @@ button{
     }
     .forgotSendContainer {
         height: 200px;
+    }
+    .forgotSendContainer{
+        width: 320px;
     }
   }

@@ -49,6 +49,9 @@ button{
     cursor: pointer;
     /* Design */
 }
+.center{
+    display: flex;
+}
 
 @media (max-width: 765px) {
     h1 {
@@ -65,6 +68,15 @@ button{
     } 
 
     .forgotResetContainer {
-        width: 300px;
+        width: 380px;
+    }
+  }
+  @media (max-width: 445px) {
+    h1 {
+        font-size: 21px;
+    } 
+
+    .forgotResetContainer {
+        width: 335px;
     }
   }
