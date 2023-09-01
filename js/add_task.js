@@ -366,6 +366,7 @@ function addSubtask() {
 
   newSubtask.value = "";
 }
+
 function checkSubtask(i) {
   let checkbox = document.getElementById(`subtaskImage${i}`);
   if (checkbox.src.includes("checkbutton_checked")) {
