@@ -46,15 +46,15 @@ async function addTask() {
   clearAll();
   animation();
   setTimeout(function () {
-    window.location.href = "./board.html"; 
+    window.location.href = "./board.html";
   }, 1000);
 }
-function showColumn () {
-  if(columns=[]) {
+function showColumn() {
+  if (columns = []) {
     return 'col-01';
   }
   else {
-    return columns[0]; 
+    return columns[0];
   }
 }
 function animation() {
@@ -195,7 +195,7 @@ function renderCategories() {
       contentList.innerHTML += renderCategoryHTML(taskCategory, taskColor, i);
     }
     isClicked = true;
-    
+
   } else {
     hideCategoryList();
     contentList.innerHTML = "";
@@ -251,6 +251,7 @@ function hideCategoryList() {
   let contentList = document.getElementById("contentCategories");
   contentList.classList.add("d-none");
 }
+
 //*renders the contactList from the Array
 function renderContactList() {
   let contactList = document.getElementById("contactList");
@@ -439,5 +440,3 @@ function renderSubtaskHTML(subtaskObj, i) {
     <img id="subtaskBucket${i}" onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
     </div>`;
 }
-
-  
