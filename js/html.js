@@ -15,7 +15,7 @@ function renderDetailTask(task) {
         )} &nbsp
     <img src="${task["prio"][1]}"></div>
     <div class="margin-top"> ${generateDetailContacts(task)}</div>
-    <div class="detailSubtasks margin-bottom"> ${generateDetailSubtasks(task)}</div>
+    <div class="detailSubtasks"> ${generateDetailSubtasks(task)}</div>
     </div>
     <div class="detail-buttons">
     <div id="delete-btn">

@@ -299,9 +299,9 @@
 }
 
 .detail-buttons {
-  position: absolute;
-  bottom: 30px;
-  right: 10px;
+  margin-left: 13%;
+  position: fixed;
+  bottom: 120px;
 }
 
 .detailSubtask {
@@ -321,6 +321,10 @@
   border-radius: 8px;
 }
 
+#subtaskContent {
+  width: 300px;
+}
+
 .margin-bottom {
   margin-bottom: 48px;
 }
@@ -332,6 +336,7 @@
 
 .btn-close {
   cursor: pointer;
+  position: fixed;
 }
 
 .btn-close:hover {
