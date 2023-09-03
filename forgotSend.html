@@ -15,7 +15,6 @@
     <div class="background">
         <header class="forgotSendHeader">
             <img src="./img/logo.svg" alt="Logo">
-            <img id="meinBild" src="./img/AnEmail.png" alt="bild" width="250px" style="display: none;">
         </header>
         <form class="alignItems">
             <div class="forgotSendContainer">
@@ -32,22 +31,24 @@
                 </div>
                 <div>
                     <button id="anzeigenButton" class="signUpButton">Send me the email</button>
-                    
                 </div>
                 <script>
                     document.getElementById('anzeigenButton').addEventListener('click', function() {
+                        event.preventDefault();
                         var emailInput = document.getElementById('emailInput');
                         if (emailInput.checkValidity()) {
                             document.getElementById('meinBild').style.display = 'block';
                             setTimeout(function() {
                                 window.location.href = './forgotReset.html';
-                            }, 3000);
+                            },1000);
                         } 
                     });
                 </script>
-
             </div>
         </form>
+        <div class="meinBild">
+            <img id="meinBild" src="./img/AnEmail.png" alt="bild" width="250px" style="display: none;">
+        </div>
     </div>
 </body>
 </html>

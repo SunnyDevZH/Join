@@ -9,18 +9,14 @@
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/login.css" />
     <link rel="stylesheet" href="./css/forgotReset.css" />
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="/img/logo_favicon.png"
-    />
+    <link rel="shortcut icon" type="image/x-icon" href="/img/logo_favicon.png"/>
+
   </head>
   <body>
     <div class="background">
       <header class="forgotResetHeader">
         <img src="/img/logo.svg" alt="Logo" />
       </header>
-
       <form class="flexdirection">
         <div class="alignItems">
           <div class="forgotResetContainer">
@@ -31,35 +27,35 @@
             <div class="flexdirection">
               <p>Change your Accoount password</p>
               <div class="displayflex">
-                <input required type="email" placeholder="Email" />
-                <img
-                  class="loginimg"
-                  src="./img/mail.png"
-                  alt="mail"
-                  width="25px"
-                />
+                <input required type="email" id="emailInput" placeholder="Email" />
+                <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"/>
               </div>
               <div class="displayflex">
                 <input required type="password" placeholder="Password" />
-                <img
-                  class="loginimg"
-                  src="./img/login.png"
-                  alt="login"
-                  width="30px"
-                />
+                <img class="loginimg" src="./img/login.png" alt="login" width="30px"/>
               </div>
             </div>
             <div>
-              <button
-                class="signUpButton"
-                onclick="window.location.href= './login.html';"
-              >
-                Continue
-              </button>
+              <button id="anzeigenButton" class="signUpButton">Continue</button>
             </div>
+            <script>
+              document.getElementById('anzeigenButton').addEventListener('click', function() {
+                  event.preventDefault();
+                  var emailInput = document.getElementById('emailInput');
+                  if (emailInput.checkValidity()) {
+                      document.getElementById('meinBild').style.display = 'block';
+                      setTimeout(function() {
+                          window.location.href = './login.html';
+                      },1000);
+                  } 
+              });
+            </script>
           </div>
         </div>
       </form>
+      <div class="meinBild">
+        <img id="meinBild" src="./img/YourRes.png" alt="bild" width="250px" style="display: none;">
+      </div>
     </div>
   </body>
 </html>

@@ -34,7 +34,7 @@
             <img class="loginimg" src="./img/name.png" alt="name" width="30px" />
           </div>
           <div class="displayflex">
-            <input required type="email" id="email" placeholder="Email" />
+            <input required type="email" id="email"  placeholder="Email" />
             <img class="loginimg" src="./img/mail.png" alt="mail" width="30px" />
           </div>
           <div class="displayflex">
@@ -53,10 +53,24 @@
             </div>
           </div>
           <div>
-            <button onclick="checkBox(); showImage();" class="signUpButton">Sign up</button>
-            <img id="main-logo" src="./img/YouSigned.png" alt="JOIN" style="display: none;">
+            <button id="anzeigenButton" onclick="checkBox();" class="signUpButton">Sign up</button>
           </div>
+          <script>
+            document.getElementById('anzeigenButton').addEventListener('click', function() {
+                event.preventDefault();
+                var emailInput = document.getElementById('email');
+                if (emailInput.checkValidity()) {
+                    document.getElementById('meinBild').style.display = 'block';
+                    setTimeout(function() {
+                        window.location.href = './login.html';
+                    },1000);
+                } 
+            });
+          </script>
         </form>
+      </div>
+      <div class="meinBild">
+        <img id="meinBild" src="./img/YouSigned.png" alt="bild" width="250px" style="display: none;">
       </div>
     </div>
 

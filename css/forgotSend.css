@@ -58,6 +58,12 @@ h1{
     font-size: 45px;
 }
 
+.meinBild{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
 @media (max-width: 765px) {
     h1 {
         font-size: 32px;
@@ -81,6 +87,6 @@ h1{
         height: 200px;
     }
     .forgotSendContainer{
-        width: 320px;
+        width: 280px;
     }
   }

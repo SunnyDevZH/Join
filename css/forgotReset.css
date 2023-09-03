@@ -35,6 +35,7 @@ h1{
     width: 500px; /* Welche Grösse? */
     gap: 30px; /* Welche Grösse? */
     padding: 10px; /* Welche Grösse? */
+    height: 320px;
 }
 
 .flexdirection{
@@ -51,6 +52,11 @@ button{
 }
 .center{
     display: flex;
+}
+.meinBild{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
 }
 
 @media (max-width: 765px) {
@@ -77,6 +83,6 @@ button{
     } 
 
     .forgotResetContainer {
-        width: 335px;
+        width: 321px;
     }
   }

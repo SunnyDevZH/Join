@@ -52,6 +52,12 @@ footer{
     gap: 30px; /* Welche Grösse? */
 }
 
+.meinBild{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
 
 @media (max-width: 650px) {
     .signUpContainer {

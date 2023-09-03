@@ -22,7 +22,7 @@ body {
 
 .signUpButton {
   background-color: rgb(42, 54, 71);
-  width: 120px;
+  width: 185px;
   height: 49px;
   font-size: 16px;
   border-radius: 10px;
@@ -126,8 +126,8 @@ input {
 
 @media (max-width: 650px) {
   .loginContainer {
-    width: 320px;
-    height: 400px;
+    width: 350px;
+    height: 360px;
   }
 
   p {

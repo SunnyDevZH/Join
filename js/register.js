@@ -24,7 +24,6 @@ async function register() {
   users.push(contact);
 
   await setItem("users", JSON.stringify(users)); // Daten von Users auf Server laden
-  window.location.href = "./login.html"; // Weiterleitung zum Login
   resetForm();
 }
 
@@ -69,3 +68,5 @@ function checkBox() {
     alert("Bitte akzeptieren Sie die Bedingungen, um fortzufahren.");
   }
 }
+
+
