@@ -299,9 +299,10 @@
 }
 
 .detail-buttons {
-  margin-left: 13%;
-  position: fixed;
-  bottom: 120px;
+
+  position: absolute;
+  bottom: 20px;
+  right: 50px;
 }
 
 .detailSubtask {
@@ -371,6 +372,9 @@ form {
   .main-card {
     width: 80%;
     margin: 0;
+  }
+  .overlay-card {
+    left:0; 
   }
 }
 
