@@ -203,23 +203,29 @@ function cancelContact(elementId) {
 async function addNotiz() {
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
-    let phone = document.getElementById("phone").value; // Hier wird die Telefonnummer abgerufen
-  
-    let color = getRandomColor();
-  
-    if (contactExists(name)) {
-      alert("Ein Kontakt mit diesem Namen existiert bereits.");
+    let phone = document.getElementById("phone").value;
+
+    if (name.trim() === "" || email.trim() === "" || phone.trim() === "") {
+      alert("Bitte füllen Sie alle Felder aus.");
       return;
     }
-  
+
+    let color = getRandomColor();
+
+    if (contactExists(name)) {
+        alert("Ein Kontakt mit diesem Namen existiert bereits.");
+        return;
+    }
+
     let contact = { name, email, phone, color };
     addContacts.push(contact);
-  
+
     await setItem("addContacts", JSON.stringify(addContacts));
-  
+
     renderContacts();
     window.location.href = "contacts.html";
 }
+
   
 
 function contactExists(name) {
