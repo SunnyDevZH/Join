@@ -91,7 +91,7 @@ function addContact() {
 
 function contactTemplate() {
   return `
-    <div class="add">
+    <div id="add" class="add">
         <div class="container">
             <div class="addcontainer">
                 <div class="betterteam">
@@ -101,7 +101,7 @@ function contactTemplate() {
                     <div class="line2"></div>
                 </div>
                 <div class="inputcointainer">
-                    <div class="close" onclick="cancelContact()">x</div>
+                    <div class="close" onclick="cancelContact('add')">x</div>
                     <div class="input">
                         <div>
                             <img class="displaynone1" src="./img/user.png" alt="user" style="width: 120px;">
@@ -122,7 +122,7 @@ function contactTemplate() {
                                 </div>
                             </div>
                             <div class="buttonfield">
-                                <button onclick="cancelContact()">Cancel</button>
+                                <button onclick="cancelContact('add')">Cancel</button>
                                 <button class="createButton" onclick="addNotiz()">Create contact</button>
                             </div>
                         </div>
@@ -144,7 +144,7 @@ function editContainer(i) {
 function renderEdit(i) {
 
   return`
-  <div class="add">
+  <div id="edit${i}" class="add">
         <div class="container">
             <div class="addcontainer">
                 <div class="betterteam">
@@ -153,7 +153,7 @@ function renderEdit(i) {
                     <div class="line2"></div>
                 </div>
                 <div class="inputcointainer">
-                    <div class="close" onclick="cancelContact()">x</div>
+                    <div class="close" onclick="cancelContact('edit${i}')">x</div>
                     <div class="input">
                         <div>
                           <div class="circle" style="background-color: ${addContacts[i].color}">
@@ -191,9 +191,12 @@ function renderEdit(i) {
 
 // Zurück //
 
-function cancelContact() {
-window.location.href = "contacts.html";
-}
+function cancelContact(elementId) {
+    const contactElement = document.getElementById(elementId);
+    if (contactElement) {
+      contactElement.style.display = "none";
+    }
+  }
 
 // Kontakt hinzufügen //
 

@@ -48,7 +48,7 @@ body {
 }
 
 .add {
-  background-color: rgb(245, 245, 245);
+  background-color: rgba(251, 251, 251, 0.500);
   z-index: 999; /* Dieser Div liegt über allen anderen */
   position: fixed;
   left: 0;
@@ -195,7 +195,7 @@ b {
 }
 
 .circle {
-  border: 5px solid #ffffffb8;
+
   width: 90px;
   height: 90px;
   border-radius: 50%;
