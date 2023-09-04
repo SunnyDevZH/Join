@@ -13,6 +13,14 @@
   font-size: 24px;
 }
 
+.header-logo {
+  display: none;
+  width: 48px;
+  height: 48px;
+
+  cursor: none;
+}
+
 .header-user-info {
   display: flex;
   align-items: center;
@@ -53,4 +61,14 @@
 
 #avatar-menu a {
   color: #fff;
+}
+
+@media (max-width: 768px) {
+  .header-title {
+    display: none;
+  }
+
+  .header-logo {
+    display: block;
+  }
 }
