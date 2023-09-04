@@ -29,7 +29,8 @@ function openOverlay(index) {
     document.getElementById("showNewTask").classList.add("d-none");
     let detail = document.getElementById("showDetailTask");
     detail.classList.remove("d-none");
-    document.body.style.overflow = 'hidden'; 
+    document.body.style.overflow = 'hidden';
+    document.getElementById('main-card').style.width = '500px';
     pushSubtasks(index);
     detail.innerHTML = "";
     detail.innerHTML += renderDetailTask(task);
@@ -46,22 +47,22 @@ function generatePrio(task) {
 function generateDetailContacts(task) {
     let detailContactList = "";
     let contacts = task["assignedContact"];
-    
+
     if (contacts.length > 0) {
-    detailContactList = ` <p class="violett">Assigned to:</p>`;
-    for (i = 0; i < Math.min(contacts.length, 4); i++) {
-      let contact = contacts[i];
-      contactColor = task["contactColor"][i];
-      detailContactList += renderDetailContactList(contact, contactColor);
-    }
-    if (contacts.length > 4) {
-      detailContactList += `And more`;
-    }
+        detailContactList = ` <p class="violett">Assigned to:</p>`;
+        for (i = 0; i < Math.min(contacts.length, 4); i++) {
+            let contact = contacts[i];
+            contactColor = task["contactColor"][i];
+            detailContactList += renderDetailContactList(contact, contactColor);
+        }
+        if (contacts.length > 4) {
+            detailContactList += `And more`;
+        }
     }
     return detailContactList;
-    }
-    
-    
+}
+
+
 function renderDetailContactList(contact, contactColor) {
     return `<div class="detailContact">
         <div class="contact-circle" style="background-color: ${contactColor}">${generateInitials(contact)}</div>&nbsp
@@ -121,7 +122,7 @@ async function deleteTask(taskId) {
 
 function editTask(i) {
     const task = todos[i];
-    document.getElementById("showDetailTask").classList.add("d-none"); 
+    document.getElementById("showDetailTask").classList.add("d-none");
     let editTask = document.getElementById("showEditTask");
     editTask.classList.remove("d-none");
     editTask.innerHTML = renderEditTaskHTML(task);
@@ -360,7 +361,7 @@ async function addEditTask(i) {
 function closeOverlay() {
     document.getElementById("overlay-container").classList.add("d-none");
     clearAllEditTask();
-    document.body.style.overflow = 'auto'; 
+    document.body.style.overflow = 'auto';
 }
 function clearAllEditTask() {
     editedContacts = [];
@@ -383,7 +384,8 @@ function newTaskColumn(chosenColumn) {
     document.getElementById('showDetailTask').classList.add('d-none');
     document.getElementById('showEditTask').classList.add('d-none');
     document.getElementById('showNewTask').classList.remove('d-none');
-    document.body.style.overflow = 'hidden'; 
+    document.getElementById('main-card').style.width = '700px';
+    document.body.style.overflow = 'hidden';
     columns.push(chosenColumn);
 }
 /////////////////////

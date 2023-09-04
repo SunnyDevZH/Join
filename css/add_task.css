@@ -83,8 +83,11 @@ button img {
 .submit-buttons {
     display: flex;
     justify-content: flex-end;
-    margin-top: 24px;
+    margin-top: 8px;
     gap: 8px;
+    position: sticky;
+    z-index: 3;
+    bottom: 10px;
 }
 
 .invert img {
@@ -133,13 +136,13 @@ textarea {
     border: 0px;
     display: flex;
     align-items: center;
-    padding: 25px !important; 
+    padding: 25px !important;
     border: 1px solid lightgrey;
 }
 
 .prio img {
     width: 24px;
-    margin: 0 !important; 
+    margin: 0 !important;
 }
 
 .prio:hover {
@@ -160,6 +163,7 @@ textarea {
     align-items: center;
 
 
+
 }
 
 .input-with-button button {
@@ -171,19 +175,20 @@ textarea {
 }
 
 .input-with-button input {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    border-right: white;
+    border-radius: 10px;
+
     background-color: white;
     font-family: "Inter", Helvetica, sans-serif;
 }
+
 input:focus {
-    border-color: #29ABE2; 
-    outline:none;
+    border-color: #29ABE2;
+    outline: none;
 }
+
 textarea:focus {
-    border-color: #29ABE2; 
-    outline:none;
+    border-color: #29ABE2;
+    outline: none;
 }
 
 .list {
@@ -195,8 +200,12 @@ textarea:focus {
     padding: 10px;
     border-top: white;
     font-size: 16px;
-    width: 94%;
 
+
+}
+
+.input-image {
+    margin: -30px;
 }
 
 .stroke:hover {
@@ -253,16 +262,24 @@ input::placeholder {
 input {
     font-family: "Inter", Helvetica, sans-serif;
 }
+
 #subtask {
-    width: 260px; 
+    width: 256.4px;
 }
+
+.width {
+    width: 256.4px;
+}
+
 #addSubtaskButton {
-    margin: -30px -20px -6px -35px 
+    margin: -40px -50px 42px 260px;
 }
+
 #addSubtaskButton:hover {
     filter: drop-shadow(0 0 8px black);
 
 }
+
 #animationBox {
     position: fixed;
     bottom: 0;
@@ -299,6 +316,7 @@ input {
     form {
         margin-bottom: 90px;
     }
+
     #animationBox {
         position: fixed;
         bottom: 0;
@@ -311,7 +329,8 @@ input {
         width: 100%;
         justify-content: center;
     }
+
     .animation {
-        width: 90%; 
+        width: 90%;
     }
 }

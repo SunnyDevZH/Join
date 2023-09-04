@@ -14,10 +14,10 @@
         <div class="input-form">
           <span>Assigned to</span>
           <div class="input-with-button">
-            <input disabled placeholder="Select Contacts to Assign" />
-            <button type="button" onclick="renderContactList()">
-              <img src="./icons/dropdown.svg" />
-            </button>
+            <input class="width" disabled placeholder="Select Contacts to Assign" />
+            
+              <img class="input-image" onclick="renderContactList()"src="./icons/dropdown.svg" />
+           
           </div>
           <div class="list d-none" id="contactList"></div>
         </div>
@@ -48,10 +48,10 @@
         <div class="input-form">
           <span>Category</span>
           <div class="input-with-button">
-            <input id="categoryInput" disabled placeholder="Select task category" />
-            <button id="addCategoryButton" type="button" onclick="renderCategories()">
-              <img src="./icons/dropdown.svg" />
-            </button>
+            <input class="width" id="categoryInput" disabled placeholder="Select task category" />
+            
+              <img class="input-image" onclick="renderCategories()"src="./icons/dropdown.svg" />
+            
             <button id="addNewCategoryButton" class="d-none" type="button" onclick="pushNewCategory()">
               <img src="./icons/correct.svg" />
             </button>

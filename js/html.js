@@ -62,10 +62,10 @@ function renderEditTaskHTML(task) {
                 <div class="input-form margin">
                   <span>Assigned to</span>
                   <div class="input-with-button">
-                    <input disabled placeholder="Select Contacts to Assign" />
-                    <button id="contactListButton" type="button" onclick="showContactList()">
-                      <img src="./icons/dropdown.svg" />
-                    </button>
+                    <input class="width" disabled placeholder="Select Contacts to Assign" />
+                    
+                      <img class="input-image" onclick="showContactList()" src="./icons/dropdown.svg" />
+                   
                   </div>
                   <div class="list d-none" id="contactList"></div>
                 </div>
