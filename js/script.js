@@ -21,11 +21,9 @@ const monthsName = [
   "Dezember",
 ];
 
-function init() {
-  setTimeout(function () {
-    location.href = "./login.html";
-  }, 1300);
-}
+/**
+ * first start of the index page
+ */
 
 function indexStart() {
   document.getElementById("index-main").style.display = "none";
@@ -34,6 +32,10 @@ function indexStart() {
   }, 1500);
 }
 
+/**
+ * initial page load
+ */
+
 async function loadPage() {
   await loadUsers();
   await loadTodos();
@@ -41,6 +43,11 @@ async function loadPage() {
   changeAvatarColor();
   updateNavbar();
 }
+
+/**
+ * save actual user to the local storage
+ * @param navId array index of the actual user
+ */
 
 function setNavID(navId = 1) {
   localStorage.setItem("nav-id", navId);
@@ -55,6 +62,10 @@ function updateNavbar() {
   }
 }
 
+/**
+ * save todos from server to local array
+ */
+
 async function loadTodos() {
   let newTodos = await getItem("allTasks");
   sumTodos = JSON.parse(newTodos);
@@ -63,11 +74,20 @@ async function loadTodos() {
   }
 }
 
+/**
+ * load users from server to local array
+ */
+
 async function loadUsers() {
   let getUsers = await getItem("users");
   users = JSON.parse(getUsers);
   getUserData();
 }
+
+/**
+ * get user data from the server
+ * setup guest user if needed
+ */
 
 function getUserData() {
   if (userIndex == -1 || userIndex == null) {
@@ -86,6 +106,10 @@ function getUserData() {
     }
   }
 }
+
+/**
+ * update summary data
+ */
 
 async function updateSummaryCounter() {
   await loadPage();
@@ -113,6 +137,11 @@ async function updateSummaryGreeting() {
   document.getElementById("sum-name").innerHTML = userName;
 }
 
+/**
+ * get greeting string from actual time
+ * @returns greeting time
+ */
+
 function getGreeting() {
   let currentDate = new Date();
   let currentHour = currentDate.getHours();
@@ -127,6 +156,12 @@ function getGreeting() {
   }
 }
 
+/**
+ * generate 2 characters from the first character of the first and last name
+ * @param name full name as string
+ * @returns 2 characters as initial string
+ */
+
 function generateInitials(name) {
   let initials = name.split(" ");
   if (initials.length == 1) {
@@ -140,10 +175,20 @@ function generateInitials(name) {
   }
 }
 
+/**
+ * show actual user in the header
+ */
+
 function updateHeader() {
   let initials = generateInitials(userName);
   document.getElementById("avatar-initials").innerHTML = initials;
 }
+
+/**
+ * check and show the next task
+ * @param element todo task from the server
+ * @returns next task to clear
+ */
 
 function getNextDate(element) {
   if (element.length > 0) {
@@ -166,6 +211,10 @@ function changeAvatarColor() {
   document.querySelector(".header-avatar").style.backgroundColor = userColor;
 }
 
+/**
+ * show and hide the header menu
+ */
+
 function toggleAvatarMenu() {
   if (document.getElementById("avatar-menu").classList.contains("d-none")) {
     document.getElementById("avatar-menu").classList.remove("d-none");
@@ -173,6 +222,10 @@ function toggleAvatarMenu() {
     document.getElementById("avatar-menu").classList.add("d-none");
   }
 }
+
+/**
+ * close the header menu by clicking outside the menu
+ */
 
 function closeAvatarMenuOutside(event) {
   const avatarMenu = document.getElementById("avatar-menu");
