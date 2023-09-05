@@ -259,8 +259,9 @@
 
 .main-card {
   position: relative;
-  width: 500px; 
-  height: calc(100vh - 90px); 
+  min-width: 500px;
+  max-width: 800px;
+  height: calc(100vh - 90px);
 
 
   padding: 24px 32px;
@@ -359,8 +360,8 @@ form {
   position: sticky;
   bottom: 10px;
   display: flex;
-  justify-content: end; 
-  
+  justify-content: end;
+
 }
 
 .ok-button:hover button {
@@ -374,17 +375,20 @@ form {
     width: 60%;
     margin: 0;
   }
+
   .overlay-card {
-    left:0; 
+    left: 0;
   }
 }
+
 @media (max-width: 768px) {
   .main-card {
     width: 80%;
     margin: 0;
   }
+
   .overlay-card {
-    left:0; 
+    left: 0;
   }
 }
 

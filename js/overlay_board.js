@@ -6,6 +6,8 @@ let editedSubtasks = [];
 let editedCol;
 let editedCategory;
 let editedCategoryColor;
+
+
 // overlay logic
 async function pushCategories() {
     taskCategories = [];
@@ -21,6 +23,7 @@ async function pushCategories() {
     await loadCategory();
 }
 
+
 function openOverlay(index) {
     const task = todos[index];
     document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -30,20 +33,25 @@ function openOverlay(index) {
     let detail = document.getElementById("showDetailTask");
     detail.classList.remove("d-none");
     document.body.style.overflow = 'hidden';
-    document.getElementById('main-card').style.width = '500px';
     pushSubtasks(index);
     detail.innerHTML = "";
     detail.innerHTML += renderDetailTask(task);
 }
+
+
 function generateDate(task) {
     let date = task["date"];
     const [year, month, day] = date.split("-");
     return `${day}/${month}/${year}`;
 }
+
+
 function generatePrio(task) {
     let prio = task["prio"][0];
     return prio.charAt(0).toUpperCase() + prio.slice(1).toLowerCase();
 }
+
+
 function generateDetailContacts(task) {
     let detailContactList = "";
     let contacts = task["assignedContact"];
@@ -68,11 +76,15 @@ function renderDetailContactList(contact, contactColor) {
         <div class="contact-circle" style="background-color: ${contactColor}">${generateInitials(contact)}</div>&nbsp
         <div>${contact}</div></div>`;
 }
+
+
 function pushSubtasks(index) {
     for (i = 0; i < todos[index]['subtasks'].length; i++) {
         editedSubtasks.push(todos[index]["subtasks"][i])
     };
 }
+
+
 function generateDetailSubtasks(task) {
     let index = todos.indexOf(task);
     let detailSubtaskList = "";
@@ -86,12 +98,22 @@ function generateDetailSubtasks(task) {
     }
     return detailSubtaskList;
 }
+
+
 function renderDetailSubtasks(index, i, subtaskCheckBox) {
     return `<div class="detailSubtask nospace-between">
     <img id="check${i}" onclick="changeDetailCheckbox(${index}, ${i})" src="${subtaskCheckBox}">&nbsp
     ${firstCharToUpperCase(editedSubtasks[i]["value"])}
     </div>`;
 }
+
+
+async function updateTodosArray(index) {
+    todos[index]["subtasks"] = editedSubtasks;
+    await saveBoard();
+    init();
+}
+
 function changeDetailCheckbox(index, i) {
     let checkBox = document.getElementById(`check${i}`);
     if (checkBox.src.includes("checkbutton_default")) {
@@ -102,13 +124,11 @@ function changeDetailCheckbox(index, i) {
         editedSubtasks[i]["imageSrc"] = "./icons/checkbutton_default.svg";
         editedSubtasks[i]["status"] = false;
         checkBox.src = "./icons/checkbutton_default.svg";
-    } updateSubtasksInTodoArray(index);
+    }
+
+    updateTodosArray(index);
 }
-function updateSubtasksInTodoArray(index) {
-    todos[index]["subtasks"] = editedSubtasks;
-    saveBoard();
-    init();
-}
+
 
 async function deleteTask(taskId) {
     const index = todos.findIndex((task) => task["id"] === taskId);
@@ -116,9 +136,11 @@ async function deleteTask(taskId) {
         todos.splice(index, 1);
     }
     document.getElementById("overlay-container").classList.add("d-none");
+    document.body.style.overflow = 'auto';
     await saveBoard();
     init();
 }
+
 
 function editTask(i) {
     const task = todos[i];
@@ -129,6 +151,8 @@ function editTask(i) {
     getNewDate();
     showEditedTask(task);
 }
+
+
 function showEditedTask(task) {
     document.getElementById("title").value = task["title"];
     document.getElementById("description").value = task["description"];
@@ -137,6 +161,8 @@ function showEditedTask(task) {
     displayPrio(task);
     showEditedSubtasks(task);
 }
+
+
 function displayContacts(task) {
     pushContacts(task);
     let contactContent = document.getElementById("contactList");
@@ -151,6 +177,8 @@ function displayContacts(task) {
         );
     } contactContent.innerHTML += addNewContactToTask();
 }
+
+
 function showContactList() {
     let contactContent = document.getElementById("contactList");
     if (contactContent.classList.contains("d-none")) {
@@ -159,12 +187,16 @@ function showContactList() {
         contactContent.classList.add("d-none");
     }
 }
+
+
 function pushContacts(task) {
     for (i = 0; i < task["assignedContact"].length; i++) {
         editedContacts.push(task["assignedContact"][i]);
         editedContactColor.push(task["contactColor"][i]);
     }
 }
+
+
 function addEditedContactToTask(i) {
     let chosenContact = document.getElementById(`contact${i}`);
     let contact = chosenContact.querySelector('.contact-name').innerText;
@@ -190,6 +222,7 @@ function addEditedContactToTask(i) {
         }
     }
 }
+
 
 function renderEditedContactHTML(contact, contactColor, i, task) {
     let backgroundColor = task['assignedContact'].includes(contact)
@@ -222,6 +255,7 @@ function displayPrio(task) {
     editedPrio.push(prio, image);
 }
 
+
 function addEditedPrio(clickedTab) {
     editedPrio = [];
     const priority = clickedTab.toUpperCase();
@@ -233,6 +267,7 @@ function addEditedPrio(clickedTab) {
 
     editedPrio.push(priority, image);
 }
+
 
 function checkEditedPrio(clickedTab) {
     const tabs = ["urgent", "medium", "low"];
@@ -247,7 +282,6 @@ function checkEditedPrio(clickedTab) {
 }
 
 
-
 async function loadCategory() {
     try {
         taskCategories = JSON.parse(await getItem("taskCategories"));
@@ -257,6 +291,7 @@ async function loadCategory() {
     }
 }
 
+
 function showEditedSubtasks() {
     let subtaskElement = document.getElementById("subtaskContent");
     subtaskElement.innerHTML = "";
@@ -265,6 +300,8 @@ function showEditedSubtasks() {
         subtaskElement.innerHTML += renderShowEditedSubtasks(subtaskCheckBox, i);
     }
 }
+
+
 function renderShowEditedSubtasks(subtaskCheckBox, i) {
     return `<div class="detailSubtask">
     <img id="unchecked${i}" onclick="changeCheckbox(${i})" src="${subtaskCheckBox}">&nbsp
@@ -274,6 +311,8 @@ function renderShowEditedSubtasks(subtaskCheckBox, i) {
     <img onclick="deleteEditedSubtask(${i})" src="./icons/icon_bucket.svg">
     </div></div>`;
 }
+
+
 function editSubtask() {
     let subtaskElement = document.getElementById("subtaskContent");
     let newSubtask = document.getElementById("subtask").value;
@@ -294,6 +333,8 @@ function editSubtask() {
     }
     document.getElementById("subtask").value = "";
 }
+
+
 function renderEditSubtaskHTML(newSubtask, i) {
     return `<div class="detailSubtask">
     <img id="unchecked${editedSubtasks.length - 1}" 
@@ -304,6 +345,8 @@ function renderEditSubtaskHTML(newSubtask, i) {
     <img onclick="deleteSubtask(${i})" src="./icons/icon_bucket.svg">
     </div>`;
 }
+
+
 function editChosenSubtask(i) {
     let input = document.getElementById('subtask');
     input.value = editedSubtasks[i]['value'];
@@ -312,6 +355,8 @@ function editChosenSubtask(i) {
     img.src = "./icons/icon_checkmark.svg";
     img.onclick = function () { overwriteSubtask(i) };
 }
+
+
 function overwriteSubtask(i) {
     let input = document.getElementById('subtask');
     let newValue = input.value;
@@ -322,6 +367,7 @@ function overwriteSubtask(i) {
     img.src = "./icons/plus.svg";
     img.onclick = function () { editSubtask() };
 }
+
 
 function changeCheckbox(i) {
     let checkBox = document.getElementById(`unchecked${i}`);
@@ -336,7 +382,8 @@ function changeCheckbox(i) {
     }
 }
 
-async function addEditTask(i) {
+
+async function getEditedTask(i) {
     let task = todos[i];
     let editedTitle = document.getElementById("title").value;
     let editedDescription = document.getElementById("description").value;
@@ -353,16 +400,25 @@ async function addEditTask(i) {
         categoryColor: task["categoryColor"],
         subtasks: editedSubtasks,
     };
+    return editedTask;
+}
+
+async function addEditTask(i) {
+    let editedTask = await getEditedTask(i);
     todos[i] = editedTask;
     await saveBoard();
     init();
     closeOverlay();
 }
+
+
 function closeOverlay() {
     document.getElementById("overlay-container").classList.add("d-none");
     clearAllEditTask();
     document.body.style.overflow = 'auto';
 }
+
+
 function clearAllEditTask() {
     editedContacts = [];
     editedContactColor = [];
@@ -372,6 +428,8 @@ function clearAllEditTask() {
     editedCategory;
     editedCategoryColor;
 }
+
+
 function deleteEditedSubtask(index) {
     editedSubtasks.splice(index, 1);
     let subtaskContent = document.getElementById('subtaskContent');
@@ -379,12 +437,13 @@ function deleteEditedSubtask(index) {
     showEditedSubtasks();
 }
 
+
 function newTaskColumn(chosenColumn) {
+    clearAll();
     document.getElementById('overlay-container').classList.remove('d-none');
     document.getElementById('showDetailTask').classList.add('d-none');
     document.getElementById('showEditTask').classList.add('d-none');
     document.getElementById('showNewTask').classList.remove('d-none');
-    document.getElementById('main-card').style.width = '700px';
     document.body.style.overflow = 'hidden';
     columns.push(chosenColumn);
 }
