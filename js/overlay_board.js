@@ -108,6 +108,12 @@ function renderDetailSubtasks(index, i, subtaskCheckBox) {
 }
 
 
+async function updateTodosArray(index) {
+    todos[index]["subtasks"] = editedSubtasks;
+    await saveBoard();
+    init();
+}
+
 function changeDetailCheckbox(index, i) {
     let checkBox = document.getElementById(`check${i}`);
     if (checkBox.src.includes("checkbutton_default")) {
@@ -118,15 +124,9 @@ function changeDetailCheckbox(index, i) {
         editedSubtasks[i]["imageSrc"] = "./icons/checkbutton_default.svg";
         editedSubtasks[i]["status"] = false;
         checkBox.src = "./icons/checkbutton_default.svg";
-    } updateSubtasksInTodoArray(index,i);
-}
+    }
 
-
-function updateSubtasksInTodoArray(index,i) {
-    todos[index]["subtasks"][i]["imageSrc"] = editedSubtasks[i]["imageSrc"];
-    todos[index]["subtasks"][i]["status"] = editedSubtasks[i]["status"];
-    saveBoard();
-    init();
+    updateTodosArray(index);
 }
 
 
@@ -439,7 +439,7 @@ function deleteEditedSubtask(index) {
 
 
 function newTaskColumn(chosenColumn) {
-    clearAll(); 
+    clearAll();
     document.getElementById('overlay-container').classList.remove('d-none');
     document.getElementById('showDetailTask').classList.add('d-none');
     document.getElementById('showEditTask').classList.add('d-none');
