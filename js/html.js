@@ -46,6 +46,8 @@ function renderDetailTask(task) {
     Edit</button>
     </div>`;
 }
+
+
 function renderEditTaskHTML(task) {
     return `
   <form onsubmit="addEditTask(${task["id"]});return false">
