@@ -22,7 +22,7 @@ async function initAddTask() {
 
 //* function to get all values from all inputfields and to push it in an JSON, and then in an array
 async function addTask() {
-  let task = getTask(); 
+  let task = getTask();
   allTasks.push(task);
   await saveTask();
   clearAll();
@@ -289,10 +289,16 @@ function resetCategoryInput() {
 
 
 //* hides the categoryList if a category is chosen
-function hideCategoryList() {
+function hideCategoryList(event) {
   let contentList = document.getElementById("contentCategories");
-  contentList.classList.add("d-none");
+
+  if (event && event.target && event.target.id === "addCategoryButton") {
+    event.preventDefault();
+  } else {
+    contentList.classList.add("d-none");
+  }
 }
+
 
 
 //*renders the contactList from the Array
@@ -308,9 +314,19 @@ function renderContactList() {
     contactList.innerHTML += addNewContactToTask();
     isClicked2 = true;
   } else {
-    contactList.classList.add("d-none");
+    hideContactList();
     contactList.innerHTML = "";
     isClicked2 = false;
+  }
+}
+
+
+function hideContactList(event) {
+  let contactList = document.getElementById("contactList");
+  if (event && event.target && event.target.id === "addContactButton") {
+    event.preventDefault();
+  } else {
+    contactList.classList.add("d-none");
   }
 }
 
