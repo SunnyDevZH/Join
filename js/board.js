@@ -6,8 +6,12 @@ let currentDraggedElement;
 function init() {
   loadTodos();
   updateHTML();
-  load(); 
+  load();
 }
+
+/**
+ * preload all todos for the board
+ */
 
 async function loadTodos() {
   let newTodos = await getItem("allTasks");
@@ -18,6 +22,11 @@ async function loadTodos() {
   updateHTML();
   pushCategories();
 }
+
+/**
+ * update all board elements
+ * fill the columns with tasks
+ */
 
 function updateHTML() {
   let col = [];
@@ -34,6 +43,12 @@ function updateHTML() {
     });
   }
 }
+
+/**
+ * generate todo elements
+ * @param {*} element todo data from the server
+ * @returns html code for the task
+ */
 
 function generateTodo(element) {
   return `
@@ -61,6 +76,12 @@ function generateTodo(element) {
     `;
 }
 
+/**
+ * generate contact list for the board tasks
+ * @param {*} element todo data from the server
+ * @returns html code with all generated contacs
+ */
+
 function generateContacts(element) {
   let contactList = "";
   if (element["assignedContact"].length > 0) {
@@ -82,6 +103,12 @@ function generateContacts(element) {
   }
 }
 
+/**
+ * generate html code with all the subtask from the element
+ * @param {*} element todo data from the server
+ * @returns html code with generated subtasks
+ */
+
 function generateSubtasks(element) {
   if (element["subtasks"].length > 0) {
     let finishedTasks = element["subtasks"].filter((t) => t["status"] == true);
@@ -97,6 +124,11 @@ function generateSubtasks(element) {
   }
 }
 
+/**
+ * generate html code for empty columns
+ * @returns empty task element
+ */
+
 function generateEmptyTodo() {
   return `
   <div class='emptyTodo'>
@@ -104,6 +136,11 @@ function generateEmptyTodo() {
   </div>
     `;
 }
+
+/**
+ * drag an drop logic
+ * @param id id of the dragged element
+ */
 
 function startDragging(id) {
   currentDraggedElement = id;
@@ -113,11 +150,21 @@ function allowDrop(ev) {
   ev.preventDefault();
 }
 
+/**
+ * change column and category for the dragged element
+ * @param {*} category new category for the element
+ */
+
 function moveTo(category) {
   todos[currentDraggedElement]["step"] = category;
   updateHTML();
   saveBoard();
 }
+
+/**
+ * add or remove highlight while dragging
+ * @param id id of the dragged element
+ */
 
 function highlight(id) {
   document.getElementById(id).classList.add("col-highlight");
@@ -127,6 +174,10 @@ function removeHighlight(id) {
   document.getElementById(id).classList.remove("col-highlight");
 }
 
+/**
+ * save actual data to the server
+ */
+
 async function saveBoard() {
   await setItem("allTasks", JSON.stringify(todos));
 }
@@ -135,6 +186,10 @@ async function saveBoard() {
 function firstCharToUpperCase(element) {
   return element.charAt(0).toUpperCase() + element.slice(1);
 }
+
+/**
+ * search logic for the kanban
+ */
 
 function searchTasks() {
   let col = [];
