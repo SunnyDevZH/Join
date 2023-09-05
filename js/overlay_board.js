@@ -118,12 +118,13 @@ function changeDetailCheckbox(index, i) {
         editedSubtasks[i]["imageSrc"] = "./icons/checkbutton_default.svg";
         editedSubtasks[i]["status"] = false;
         checkBox.src = "./icons/checkbutton_default.svg";
-    } updateSubtasksInTodoArray(index);
+    } updateSubtasksInTodoArray(index,i);
 }
 
 
-function updateSubtasksInTodoArray(index) {
-    todos[index]["subtasks"] = editedSubtasks;
+function updateSubtasksInTodoArray(index,i) {
+    todos[index]["subtasks"][i]["imageSrc"] = editedSubtasks[i]["imageSrc"];
+    todos[index]["subtasks"][i]["status"] = editedSubtasks[i]["status"];
     saveBoard();
     init();
 }
@@ -135,6 +136,7 @@ async function deleteTask(taskId) {
         todos.splice(index, 1);
     }
     document.getElementById("overlay-container").classList.add("d-none");
+    document.body.style.overflow = 'auto';
     await saveBoard();
     init();
 }
@@ -437,7 +439,7 @@ function deleteEditedSubtask(index) {
 
 
 function newTaskColumn(chosenColumn) {
-    columns = [];
+    clearAll(); 
     document.getElementById('overlay-container').classList.remove('d-none');
     document.getElementById('showDetailTask').classList.add('d-none');
     document.getElementById('showEditTask').classList.add('d-none');

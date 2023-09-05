@@ -98,7 +98,7 @@ function renderEditTaskHTML(task) {
                 <div>
                   <input id="subtask" minlength="3" placeholder="Add new subtask" />
       
-                  <img onclick="addSubtask()" id="addSubtaskButton" src="./icons/plus.svg" />
+                  <img onclick="editSubtask()" id="addSubtaskButton" src="./icons/plus.svg" />
                 </div>
               </div>
                   <div id="subtaskContent"></div>
