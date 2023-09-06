@@ -20,7 +20,7 @@ async function initAddTask() {
 }
 
 
-//* function to get all values from all inputfields and to push it in an JSON, and then in an array
+/**  function to get all values from all inputfields and to push it in an JSON, and then in an array */
 async function addTask() {
   let task = getTask();
   allTasks.push(task);
@@ -33,6 +33,7 @@ async function addTask() {
 }
 
 
+/**this function gets all the values from inputfields and has the values for the TASK JSON */
 function getTask() {
   let title = document.getElementById("title").value;
   let description = document.getElementById("description").value;
@@ -58,6 +59,8 @@ function getTask() {
   return task
 }
 
+
+/**this function gets the column for section of the task */
 function showColumn() {
   if (typeof columns === 'undefined' || columns.length == 0) {
     return 'col-01';
@@ -68,13 +71,14 @@ function showColumn() {
 }
 
 
+/**this is the animation when a task is added to board */
 function animation() {
   document.getElementById("animationBox").classList.remove("d-none");
   document.getElementById("animationBox").classList.add("animation");
 }
 
 
-//* checks if the Prio was chosen, if not there is an alert.
+/** checks if the Prio was chosen, if not there is an alert.*/
 function requirePrio() {
   let alertArea = document.getElementById("priorityAlert");
   alertArea.classList.add("d-none");
@@ -88,7 +92,7 @@ function requirePrio() {
 }
 
 
-//* checks if the Category was chosen, if not there is an alert
+/** checks if the Category was chosen, if not there is an alert*/
 function requireCategory() {
   let alertArea = document.getElementById("categoryAlert");
   alertArea.classList.add("d-none");
@@ -102,16 +106,20 @@ function requireCategory() {
 }
 
 
-//* saves the tasks to the server
+/** saves the tasks to the server*/
 async function saveTask() {
   await setItem("allTasks", JSON.stringify(allTasks));
 }
+
+
+/**this function saves only the categoryto the server for mathcing it with the board to only show used categories */
 async function saveCategory() {
   await setItem("taskCategories", JSON.stringify(taskCategories));
   await setItem("taskColors", JSON.stringify(taskColors));
 }
 
 
+/**this function loads all items from the server */
 async function load() {
   try {
     taskCategories = JSON.parse(await getItem("taskCategories"));
@@ -124,14 +132,16 @@ async function load() {
 }
 
 
-//* gets the date of today, so the user cannot chose previous dates
+/** gets the date of today, so the user cannot chose previous dates*/
 function getNewDate() {
   let today = new Date().toISOString().split("T")[0];
   document.getElementById("calendar").setAttribute("min", today);
 }
 
 
-//* function to check which prio is clicked
+/** function to check which prio is clicked 
+ * @param clickedTab displays the prio 
+*/
 function addPrio(clickedTab) {
   let alertArea = document.getElementById("priorityAlert");
   alertArea.classList.add("d-none");
@@ -159,7 +169,9 @@ function addPrio(clickedTab) {
 }
 
 
-//* changes the color of the Prio tab and sets back the other prioButtons
+/** changes the color of the Prio tab and sets back the other prioButtons
+ * @param clickedTab displays the prio 
+ */
 function checkPrio(clickedTab) {
   assignedPrio = [];
   const tabs = ["urgent", "medium", "low"];
@@ -174,12 +186,16 @@ function checkPrio(clickedTab) {
 }
 
 
+/**this function changes the image auf the Prio Image to a white one, when the button is clicked
+ * @param clickedTab displays the prio
+ */
 function changeImage(clickedTab) {
   const imgPath = "./icons/priority_" + clickedTab + "_default.svg";
   document.getElementById(clickedTab + "-img").src = imgPath;
 }
 
 
+/**this function sets the image back to the normal one, when another button is clicked */
 function resetImages() {
   document.getElementById("urgent-img").src = "./icons/priority_urgent.svg";
   document.getElementById("medium-img").src = "./icons/priority_medium.svg";
@@ -187,7 +203,7 @@ function resetImages() {
 }
 
 
-//* clears the PrioButtons and the Array
+/** clears the PrioButtons and the Array*/
 function resetPrio() {
   assignedPrio = [];
   const tabs = ["urgent", "medium", "low"];
@@ -199,7 +215,7 @@ function resetPrio() {
 }
 
 
-//* function to clear all inputfields
+/** function to clear all inputfields*/
 function clearAll() {
   const title = document.getElementById("title");
   const description = document.getElementById("description");
@@ -217,7 +233,7 @@ function clearAll() {
 }
 
 
-//**funtion to renderCategories onclick */
+/**funtion to renderCategories onclick */
 function renderCategories() {
   let contentList = document.getElementById("contentCategories");
   if (isClicked == false) {
@@ -238,6 +254,7 @@ function renderCategories() {
 }
 
 
+/**this function adds a new category and display it in the category inputfield */
 function addNewCategory() {
   let input = document.getElementById("categoryInput");
   let addButton = document.getElementById("addCategoryButton");
@@ -252,6 +269,7 @@ function addNewCategory() {
 }
 
 
+/**this function pushes the newCategory in the taskcategory und taskcolor array */
 function pushNewCategory() {
   let input = document.getElementById("categoryInput");
   let newInput = input.value;
@@ -278,6 +296,7 @@ function pushNewCategory() {
 }
 
 
+/**sets back the category Inputfield */
 function resetCategoryInput() {
   let input = document.getElementById("categoryInput");
   document.getElementById("addCategoryButton").classList.remove("d-none");
@@ -288,7 +307,9 @@ function resetCategoryInput() {
 }
 
 
-//* hides the categoryList if a category is chosen
+/** hides the categoryList if a category is chosen
+ * @param event displays the event where the click came from
+*/
 function hideCategoryList(event) {
   let contentList = document.getElementById("contentCategories");
 
@@ -300,8 +321,7 @@ function hideCategoryList(event) {
 }
 
 
-
-//*renders the contactList from the Array
+/**renders the contactList from the Array*/
 function renderContactList() {
   let contactList = document.getElementById("contactList");
   if (isClicked2 == false) {
@@ -321,9 +341,15 @@ function renderContactList() {
 }
 
 
+/**this function hides the contactList when something else is clicked
+ * @param event displays where the click came from
+ */
 function hideContactList(event) {
   let contactList = document.getElementById("contactList");
+
   if (event && event.target && event.target.id === "addContactButton") {
+    event.preventDefault();
+  } else if (event && event.target && (event.target.id === "contactList" || contactList.contains(event.target))) {
     event.preventDefault();
   } else {
     contactList.classList.add("d-none");
@@ -331,12 +357,17 @@ function hideContactList(event) {
 }
 
 
+/**this function is the last items of the contactlist
+ * the user will be redirected to the contactsite
+ */
 function addNewContactToTask() {
   return `<div><button class="button btn-black width-button"><a href="contacts.html">Add New Contact +</a></button></div>`;
 }
 
 
-//* choses the category and shows only this category in the Inputfield
+/** choses the category and shows only this category in the Inputfield
+ * @param i displays which category element was chosen
+*/
 function chooseCategory(i) {
   let alertArea = document.getElementById("categoryAlert");
   alertArea.classList.add("d-none");
@@ -356,7 +387,7 @@ function chooseCategory(i) {
 }
 
 
-//* resets chosen category
+/** resets chosen category*/
 function resetCategory() {
   assignedCategory = "";
   assignedCategoryColor = "";
@@ -372,7 +403,9 @@ function resetCategory() {
 }
 
 
-//adds the chosen contacts to the task and sets a highlight to the background
+/**adds the chosen contacts to the task and sets a highlight to the background
+ * @param i displays which contact was clicked
+*/
 function addContactToTask(i) {
   let chosenContact = document.getElementById(`contact${i}`);
   let contact = chosenContact.querySelector(".contact-name").innerText;
@@ -400,7 +433,7 @@ function addContactToTask(i) {
 }
 
 
-//* resets the Contacts
+/** resets the Contacts*/
 function resetContact() {
   renderContactList();
   let contactList = document.getElementById("contactList");
@@ -413,7 +446,7 @@ function resetContact() {
 }
 
 
-//* this function adds subtasks to the mainTask and pushes it in the array
+/** this function adds subtasks to the mainTask and pushes it in the array*/
 function addSubtask() {
   let subtaskContent = document.getElementById("subtaskContent");
   let newSubtask = document.getElementById("subtask");
@@ -440,6 +473,9 @@ function addSubtask() {
 }
 
 
+/**this function changes the checkboxes when a subtask is done or not and overwrites the array
+ * @param i displays the number of the subtask in the array
+ */
 function checkSubtask(i) {
   let checkbox = document.getElementById(`subtaskImage${i}`);
   if (checkbox.src.includes("checkbutton_checked")) {
@@ -454,6 +490,9 @@ function checkSubtask(i) {
 }
 
 
+/**this function deletes the subtask
+ * @param index displays the number of the subtask in the subtaskarray
+ */
 function deleteSubtask(index) {
   assignedSubtasks.splice(index, 1);
   let subtaskContent = document.getElementById("subtaskContent");
@@ -464,7 +503,7 @@ function deleteSubtask(index) {
 }
 
 
-//* resets ALL Subtasks
+/** resets ALL Subtasks*/
 function resetSubtasks() {
   let subtaskContent = document.getElementById("subtaskContent");
   subtaskContent.innerHTML = "";
@@ -472,7 +511,7 @@ function resetSubtasks() {
 }
 
 
-//** function to getRandomColor for the new Categories */
+/** function to getRandomColor for the new Categories */
 function getRandomColor() {
   const letters = "0123456789ABCDEF";
   let color = "#";
@@ -483,6 +522,9 @@ function getRandomColor() {
 }
 
 
+/**this is the SVG which shows the color for the category
+ * @param taskColor displays the saved color of the taskcategory
+ */
 function renderSVG(taskColor) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
     <circle cx="10" cy="10.5" r="9" fill="${taskColor}" stroke="white" stroke-width="2"></circle>
@@ -490,9 +532,17 @@ function renderSVG(taskColor) {
 }
 
 
+/**html for the addnewcategory section of the categorylist */
 function renderNewCategoryHTML() {
   return `<div class="option" id="newCategory" onclick="addNewCategory()">Add New Category</div>`;
 }
+
+
+/**html code for the category list
+ * @param taskCategory displays the saved category in the array
+ * @param taskcolor displays the saved color to the category
+ * @param i gives a different id to the functions in the html code
+ */
 function renderCategoryHTML(taskCategory, taskColor, i) {
   return `<div class="option space-between">
             <div class="space-between" id="category${i}" onclick="chooseCategory(${i})"> ${taskCategory} ${renderSVG(
@@ -503,6 +553,11 @@ function renderCategoryHTML(taskCategory, taskColor, i) {
 }
 
 
+/**this function renders the contactlist html and changes the backgroundcolor, textcolor and checkbox, when a contact is chosen
+ * @param contact displays the chosen contact
+ * @param contactColor displays the saved contactcolor
+ * @param i gives different ids to the functions and ids in the html
+ */
 function renderContactHTML(contact, contactColor, i) {
   let backgroundColor = assignedContacts.includes(contact) ? "#2a3647" : "";
   let checkBox = assignedContacts.includes(contact)
@@ -519,6 +574,10 @@ function renderContactHTML(contact, contactColor, i) {
 }
 
 
+/**html for the subtasklist
+ * @param subtaskObj this is the array for all the infromations of the subtask
+ * @param i displays the chosen subtask and gives different ids to the html ids and the functions 
+ */
 function renderSubtaskHTML(subtaskObj, i) {
   return `<div class="option"> 
     <img id="subtaskImage${i}" onclick="checkSubtask(${i})" src="${subtaskObj.imageSrc}"> ${subtaskObj.value}

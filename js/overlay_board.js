@@ -8,7 +8,7 @@ let editedCategory;
 let editedCategoryColor;
 
 
-// overlay logic
+/**this function pushes all the categories of the board in the arrays taskCategories and taskcolors */
 async function pushCategories() {
     taskCategories = [];
     taskColors = [];
@@ -24,6 +24,9 @@ async function pushCategories() {
 }
 
 
+/**this function opens the overlay and shows the detailTask
+ * @param index displays the number of the chosen task in the todos Array
+ */
 function openOverlay(index) {
     const task = todos[index];
     document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -39,6 +42,9 @@ function openOverlay(index) {
 }
 
 
+/**this function rebuilds the date which was saved after the mockup
+ * @param task displays the chosen task
+*/
 function generateDate(task) {
     let date = task["date"];
     const [year, month, day] = date.split("-");
@@ -46,12 +52,19 @@ function generateDate(task) {
 }
 
 
+/**this function generates the prio of the chosen task and returns it in a readable version
+ * @param task displays the chosen task
+ */
 function generatePrio(task) {
     let prio = task["prio"][0];
     return prio.charAt(0).toUpperCase() + prio.slice(1).toLowerCase();
 }
 
 
+/**this function generates the detailCOntacts from the saved task and shows the contactList
+ * when there are more than 4 chosen contacts it shows and More
+ * @param task displays the chosen task
+ */
 function generateDetailContacts(task) {
     let detailContactList = "";
     let contacts = task["assignedContact"];
@@ -71,6 +84,10 @@ function generateDetailContacts(task) {
 }
 
 
+/**html for the contactList
+ * @param contact displays the saved contacts
+ * @param contactColor displays the saved colors for the contacts
+ */
 function renderDetailContactList(contact, contactColor) {
     return `<div class="detailContact">
         <div class="contact-circle" style="background-color: ${contactColor}">${generateInitials(contact)}</div>&nbsp
@@ -78,6 +95,9 @@ function renderDetailContactList(contact, contactColor) {
 }
 
 
+/**this functions pushes all the subtask of one task in the editedSubtasks array
+ * @param index displays the index of the subtask in the array
+ */
 function pushSubtasks(index) {
     for (i = 0; i < todos[index]['subtasks'].length; i++) {
         editedSubtasks.push(todos[index]["subtasks"][i])
@@ -85,6 +105,9 @@ function pushSubtasks(index) {
 }
 
 
+/**this function generate the subtaskList of the chosen Task
+ * @param task displays the chosen task
+ */
 function generateDetailSubtasks(task) {
     let index = todos.indexOf(task);
     let detailSubtaskList = "";
@@ -100,6 +123,11 @@ function generateDetailSubtasks(task) {
 }
 
 
+/**html for the subtaskList
+ * @param index number of the subtask in the array
+ * @param i gives a different id and function to the html
+ * @param subtaskCheckBox displays the checkbox whether it is checked or not and displays it
+ */
 function renderDetailSubtasks(index, i, subtaskCheckBox) {
     return `<div class="detailSubtask nospace-between">
     <img id="check${i}" onclick="changeDetailCheckbox(${index}, ${i})" src="${subtaskCheckBox}">&nbsp
@@ -108,12 +136,20 @@ function renderDetailSubtasks(index, i, subtaskCheckBox) {
 }
 
 
+/**this function overwrites the checkbox and the status to display the progress of the subtasks in the board
+ * @param index is the number of the task in the todos array
+ */
 async function updateTodosArray(index) {
     todos[index]["subtasks"] = editedSubtasks;
     await saveBoard();
     init();
 }
 
+
+/**changes the checkbox when it is clicked and overwrites it in the editedSubtasks array
+ * @param index number of the task in the todos array
+ * @param i number of the subtask in the editedSubtasks array
+ */
 function changeDetailCheckbox(index, i) {
     let checkBox = document.getElementById(`check${i}`);
     if (checkBox.src.includes("checkbutton_default")) {
@@ -130,6 +166,9 @@ function changeDetailCheckbox(index, i) {
 }
 
 
+/**this function deletes the whole task from the board
+ * @param taskId number of the task in the totods array
+ */
 async function deleteTask(taskId) {
     const index = todos.findIndex((task) => task["id"] === taskId);
     if (index !== -1) {
@@ -142,6 +181,9 @@ async function deleteTask(taskId) {
 }
 
 
+/** this function shows the values of the chosen task to be edited
+ * @param i number of the task in the todos array
+ */
 function editTask(i) {
     const task = todos[i];
     document.getElementById("showDetailTask").classList.add("d-none");
@@ -153,6 +195,9 @@ function editTask(i) {
 }
 
 
+/**gets all the values for the taskEdit
+ * @param task displays the chosen task
+ */
 function showEditedTask(task) {
     document.getElementById("title").value = task["title"];
     document.getElementById("description").value = task["description"];
@@ -163,6 +208,9 @@ function showEditedTask(task) {
 }
 
 
+/**gets all the contacts for the contactList
+ * @param task displays the chosen task
+ */
 function displayContacts(task) {
     pushContacts(task);
     let contactContent = document.getElementById("contactList");
@@ -179,16 +227,20 @@ function displayContacts(task) {
 }
 
 
+/** this functions shows the contactList */
 function showContactList() {
     let contactContent = document.getElementById("contactList");
     if (contactContent.classList.contains("d-none")) {
         contactContent.classList.remove("d-none");
     } else {
-        contactContent.classList.add("d-none");
+        hideContactList();
     }
 }
 
 
+/**this function pushes all the chosen contacts of the saved task in the editedContacts and editedCOntactColor array
+ * @param task displays the chosen task
+ */
 function pushContacts(task) {
     for (i = 0; i < task["assignedContact"].length; i++) {
         editedContacts.push(task["assignedContact"][i]);
@@ -197,6 +249,9 @@ function pushContacts(task) {
 }
 
 
+/**this functions adds contacts to the editedContacts array and gives them a new backgroundcolor, textcolor and checkbox
+ * @param i number of the contact in the addcontacts array
+ */
 function addEditedContactToTask(i) {
     let chosenContact = document.getElementById(`contact${i}`);
     let contact = chosenContact.querySelector('.contact-name').innerText;
@@ -224,6 +279,12 @@ function addEditedContactToTask(i) {
 }
 
 
+/**html for the contactlist
+ * @param contact all the contacts in the addContact Array
+ * @param color all the colors for the contacts in the addContact array
+ * @param i gives another id and number to the functions
+ * @param task displays chosen task
+ */
 function renderEditedContactHTML(contact, contactColor, i, task) {
     let backgroundColor = task['assignedContact'].includes(contact)
         ? "#2a3647"
@@ -240,6 +301,9 @@ function renderEditedContactHTML(contact, contactColor, i, task) {
 }
 
 
+/**this function shows the prio of the chosen task and pushes it to the editedPrio Array
+ * @param task displays the chosen task
+ */
 function displayPrio(task) {
     const prio = task.prio[0];
     const button = document.getElementById(prio.toLowerCase());
@@ -256,6 +320,9 @@ function displayPrio(task) {
 }
 
 
+/**this function saves a edited prio and removes the former chosen one from the array
+ * @param clickedTab displays the prio of the tab
+ */
 function addEditedPrio(clickedTab) {
     editedPrio = [];
     const priority = clickedTab.toUpperCase();
@@ -269,6 +336,9 @@ function addEditedPrio(clickedTab) {
 }
 
 
+/**when the button is clicked changes it the background color and the textcolor
+ * @param clickedTab displays the prio
+ */
 function checkEditedPrio(clickedTab) {
     const tabs = ["urgent", "medium", "low"];
     const colors = ["#FF3D00", "#FFA800", "#7AE229"];
@@ -282,6 +352,7 @@ function checkEditedPrio(clickedTab) {
 }
 
 
+/**this function loads only the category from the server */
 async function loadCategory() {
     try {
         taskCategories = JSON.parse(await getItem("taskCategories"));
@@ -292,6 +363,7 @@ async function loadCategory() {
 }
 
 
+/**shows all the subtasks from the editedSubtasks array of the task*/
 function showEditedSubtasks() {
     let subtaskElement = document.getElementById("subtaskContent");
     subtaskElement.innerHTML = "";
@@ -302,6 +374,10 @@ function showEditedSubtasks() {
 }
 
 
+/** html for the subtaskslist
+ * @param subtaskCheckBox this is the image whether the subtask is done or not
+ * @param i gives a different id and number to the functions
+ */
 function renderShowEditedSubtasks(subtaskCheckBox, i) {
     return `<div class="detailSubtask">
     <img id="unchecked${i}" onclick="changeCheckbox(${i})" src="${subtaskCheckBox}">&nbsp
@@ -313,6 +389,7 @@ function renderShowEditedSubtasks(subtaskCheckBox, i) {
 }
 
 
+/**the user can edit more subtasks to the list */
 function editSubtask() {
     let subtaskElement = document.getElementById("subtaskContent");
     let newSubtask = document.getElementById("subtask").value;
@@ -335,6 +412,7 @@ function editSubtask() {
 }
 
 
+/**html for the new subtasks */
 function renderEditSubtaskHTML(newSubtask, i) {
     return `<div class="detailSubtask">
     <img id="unchecked${editedSubtasks.length - 1}" 
@@ -347,6 +425,9 @@ function renderEditSubtaskHTML(newSubtask, i) {
 }
 
 
+/**function to change the value of the chosen subtask
+ * @param i displays the number of the chosen subtask in the editedSubtasks Array
+ */
 function editChosenSubtask(i) {
     let input = document.getElementById('subtask');
     input.value = editedSubtasks[i]['value'];
@@ -357,6 +438,9 @@ function editChosenSubtask(i) {
 }
 
 
+/**this function overwrites the subtask in the editedSubtasksArray
+ * @param i displays the number of the chosen subtask in the editedSubtasks Array
+ */
 function overwriteSubtask(i) {
     let input = document.getElementById('subtask');
     let newValue = input.value;
@@ -369,6 +453,9 @@ function overwriteSubtask(i) {
 }
 
 
+/** this function changes the checkbox of the chosen subtask
+ * @param i displays the number of the chosen subtask in the editedSubtasks Array
+ */
 function changeCheckbox(i) {
     let checkBox = document.getElementById(`unchecked${i}`);
     if (checkBox.src.includes("checkbutton_default")) {
@@ -383,6 +470,9 @@ function changeCheckbox(i) {
 }
 
 
+/**this function gets all the values for the editedTask
+ * @param i displays the number of the task in the todos array
+ */
 async function getEditedTask(i) {
     let task = todos[i];
     let editedTitle = document.getElementById("title").value;
@@ -403,6 +493,10 @@ async function getEditedTask(i) {
     return editedTask;
 }
 
+
+/**this function overwrites and saves the editedTask in the todos array
+ * @param i displays the number of the edited task in the todos Array
+ */
 async function addEditTask(i) {
     let editedTask = await getEditedTask(i);
     todos[i] = editedTask;
@@ -412,6 +506,7 @@ async function addEditTask(i) {
 }
 
 
+/**closes the overlay and sets the body back to overflow auto */
 function closeOverlay() {
     document.getElementById("overlay-container").classList.add("d-none");
     clearAllEditTask();
@@ -419,6 +514,7 @@ function closeOverlay() {
 }
 
 
+/**this function clears all arrays for the editedtask */
 function clearAllEditTask() {
     editedContacts = [];
     editedContactColor = [];
@@ -430,6 +526,9 @@ function clearAllEditTask() {
 }
 
 
+/**this function deletes subtasks
+ * @param index displays the number of the subtask in the editedSubtasks Array
+ */
 function deleteEditedSubtask(index) {
     editedSubtasks.splice(index, 1);
     let subtaskContent = document.getElementById('subtaskContent');
@@ -438,6 +537,9 @@ function deleteEditedSubtask(index) {
 }
 
 
+/**this function opens the addTask overlay when the plus or the add task button on the board site is clicked
+ * @param chosenColumn displays the column where the task will be shown on the board site
+ */
 function newTaskColumn(chosenColumn) {
     clearAll();
     document.getElementById('overlay-container').classList.remove('d-none');

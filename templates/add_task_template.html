@@ -1,7 +1,7 @@
 <div>
   <h1>Add Task</h1>
   <form id="myForm" onsubmit="addTask();return false">
-    <div class="input-table">
+    <div id="content-add-task" onclick="hideCategoryList(event); hideContactList(event)" class="input-table">
       <div class="left-column">
         <div class="input-form">
           <span>Title</span>
@@ -15,9 +15,7 @@
           <span>Assigned to</span>
           <div class="input-with-button">
             <input class="width" disabled placeholder="Select Contacts to Assign" />
-
-            <img class="input-image" onclick="renderContactList()" src="./icons/dropdown.svg" />
-
+            <img id="addContactButton" class="input-image" onclick="renderContactList()" src="./icons/dropdown.svg" />
           </div>
           <div class="list d-none" id="contactList"></div>
         </div>

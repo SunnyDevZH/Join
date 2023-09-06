@@ -1,18 +1,18 @@
 
 function renderDetailTask(task) {
-    return `
+  return `
     <div class="todo-category width" style="background-color:${task["categoryColor"]
-        }">
+    }">
     ${task["category"]}
     </div>
     <h2>${firstCharToUpperCase(task["title"])}</h2>
     <span class="margin-top">${firstCharToUpperCase(task["description"])}</span>
     <div class="detailAlign"><p class="violett">Due Date:</p> &nbsp   ${generateDate(
-            task
-        )}</div>
+      task
+    )}</div>
     <div class="detailAlign"><p class="violett">Priority:</p> &nbsp   ${generatePrio(
-            task
-        )} &nbsp
+      task
+    )} &nbsp
     <img src="${task["prio"][1]}"></div>
     <div class="margin-top"> ${generateDetailContacts(task)}</div>
     <div class="detailSubtasks"> ${generateDetailSubtasks(task)}</div>
@@ -20,7 +20,7 @@ function renderDetailTask(task) {
     <div class="detail-buttons">
     <div id="delete-btn">
     <button class="stroke" type="button" onclick="deleteTask(${task["id"]
-        })" class="detail-btn">
+    })" class="detail-btn">
     <svg class="stroke" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
     <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -34,7 +34,7 @@ function renderDetailTask(task) {
     <div class="line height"></div>
     <div id="edit-btn">
     <button class="stroke" type ="button" onclick="editTask(${task["id"]
-        })" class="detail-btn">
+    })" class="detail-btn">
     <svg class="stroke" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
     <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -49,9 +49,9 @@ function renderDetailTask(task) {
 
 
 function renderEditTaskHTML(task) {
-    return `
+  return `
   <form onsubmit="addEditTask(${task["id"]});return false">
-            <div class="input-column">
+            <div onclick="hideContactList(event)" class="input-column">
               <div class="left-column">
                 <div class="input-form margin">
                   <span>Title</span>
@@ -65,9 +65,7 @@ function renderEditTaskHTML(task) {
                   <span>Assigned to</span>
                   <div class="input-with-button">
                     <input class="width" disabled placeholder="Select Contacts to Assign" />
-                    
-                      <img class="input-image" onclick="showContactList()" src="./icons/dropdown.svg" />
-                   
+                      <img id="addContactButton" class="input-image" onclick="showContactList()" src="./icons/dropdown.svg" />
                   </div>
                   <div class="list d-none" id="contactList"></div>
                 </div>
