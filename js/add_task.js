@@ -487,9 +487,11 @@ function keypress(event) {
 
 function keypressAddTask(event) {
   let form = document.getElementById("myForm");
-  form.addEventListener("submit", function (event) {      
+  form.addEventListener("keypress", function (event) {
+    if (event.key === 'Enter') {
       addTask();
-    });
+    }
+  });
 }
 
 

@@ -35,7 +35,6 @@ function openOverlay(index) {
     document.getElementById("showNewTask").classList.add("d-none");
     let detail = document.getElementById("showDetailTask");
     detail.classList.remove("d-none");
-    document.body.style.overflow = 'hidden';
     pushSubtasks(index);
     detail.innerHTML = "";
     detail.innerHTML += renderDetailTask(task);
@@ -523,7 +522,8 @@ function clearAllEditTask() {
     editedCol;
     editedCategory;
     editedCategoryColor;
-    checkEditedPrio(); 
+    checkEditedPrio();
+    resetEditedPrio();
 }
 
 
@@ -538,6 +538,15 @@ function deleteEditedSubtask(index) {
 }
 
 
+/**resets the textcolor of the task */
+function resetEditedPrio() {
+    const priorities = ['urgent', 'medium', 'low'];
+    priorities.forEach(priority => {
+        document.getElementById(priority).style.color = 'black';
+    });
+}
+
+
 /**this function opens the addTask overlay when the plus or the add task button on the board site is clicked
  * @param chosenColumn displays the column where the task will be shown on the board site
  */
@@ -547,6 +556,7 @@ function newTaskColumn(chosenColumn) {
     document.getElementById('showDetailTask').classList.add('d-none');
     document.getElementById('showEditTask').classList.add('d-none');
     document.getElementById('showNewTask').classList.remove('d-none');
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
     document.body.style.overflow = 'hidden';
     columns.push(chosenColumn);
     keypress();

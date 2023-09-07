@@ -88,7 +88,7 @@ button img {
     position: sticky;
     z-index: 3;
     bottom: 10px;
-    margin-left: 35%; 
+    margin-left: 35%;
 }
 
 .invert img {
@@ -273,7 +273,8 @@ input {
 }
 
 #addSubtaskButton {
-    margin: -40px -50px 42px 260px;
+    margin: -40px -30px 38px 270px;
+    width: 12px;
 }
 
 #addSubtaskButton:hover {
@@ -327,8 +328,8 @@ input {
 
 @media(max-width:400px) {
     .submit-buttons {
-        width: 100%;
         justify-content: center;
+        margin: 0;
     }
 
     .animation {
