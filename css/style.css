@@ -464,6 +464,13 @@ button {
 
     padding: 8px 8px;
   }
+  #login-logo{
+    
+    height: 80px;
+  }
+  #main-logo{
+    display: none;
+  }
 }
 
 /* RESPONSIVE END */

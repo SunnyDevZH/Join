@@ -58,10 +58,33 @@ footer{
     margin: 20px;
 }
 
+#message{
+    color: red;
+    font-size: 10px;
+    display: block;
+}
+
 
 @media (max-width: 650px) {
     .signUpContainer {
       width: 320px;
       height: 400px;
+      padding: 20px;
     } 
-  }
+    .logo{
+        height: 80px;
+        margin-bottom: 20px;
+    }
+    .signUpHeader{
+        padding: 10px;
+    }
+    .background{
+        padding: 0;
+    }
+    footer{
+        margin-top: 10px;
+    }
+    p{
+        display: block;
+    }
+}

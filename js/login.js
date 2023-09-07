@@ -20,10 +20,7 @@ function login() {
     userId = users.findIndex((u) => u.email == email.value);
     localStorage.setItem("activeID", userId);
     window.location.href = "./summary.html"; // Weiterleitung zum Summary
-    alert("Passwort korrekt");
-  } else {
-    alert("Falsches Passwort");
-  }
+  } 
 }
 
 // User laden //

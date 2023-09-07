@@ -20,7 +20,7 @@
 <body onload="init()">
   <div class="background">
     <header class="signUpHeader">
-      <img src="./img/logo.svg" alt="Logo" />
+      <img class="logo" src="./img/logo.svg" alt="Logo" />
     </header>
     <div class="alignItems">
       <div class="signUpContainer">
@@ -28,7 +28,7 @@
           <img onclick="window.location.href= './index.html';" src="./img/zurück.png" alt="back" width="60px" style="margin-left: -60px; cursor: pointer;">
           <h1>Sign up</h1>
         </div>
-        <form class="flexdirection" onsubmit="checkBox(); return false;">
+        <form class="flexdirection">
           <div class="displayflex">
             <input required type="names" id="names" placeholder="Name" />
             <img class="loginimg" src="./img/name.png" alt="name" width="30px" />
@@ -47,11 +47,12 @@
           </div>
           <div class="footergap">
             <div>
-              <input class="checkbox" type="checkbox" name="Remember" id="remember" /><label for="remember">I accept
-                the</label>
+              <input class="checkbox" type="checkbox" name="Remember" id="checkbox" /><label for="remember">I accept the</label>
               <a href="#">Privacy policy</a>
             </div>
+            
           </div>
+          <div id="message"></div>
           <div>
             <button id="anzeigenButton" onclick="checkBox();" class="signUpButton">Sign up</button>
           </div>
@@ -59,7 +60,7 @@
             document.getElementById('anzeigenButton').addEventListener('click', function() {
                 event.preventDefault();
                 var emailInput = document.getElementById('email');
-                if (emailInput.checkValidity()) {
+                if (emailInput.checkValidity() & checkbox.checked) {
                     document.getElementById('meinBild').style.display = 'block';
                     setTimeout(function() {
                         window.location.href = './login.html';
