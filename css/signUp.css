@@ -16,7 +16,7 @@ body{
 .signUpHeader{
     display: flex;
     justify-content: space-between;
-    padding: 30px; /* Welche Grösse? */
+    padding: 15px; /* Welche Grösse? */
     align-items: center;
 }
 
@@ -29,7 +29,7 @@ body{
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; /* Welchen Style? */
     border-radius: 30px;/* Welche Grösse? */
     width: 400px; /* Welche Grösse? */
-    gap: 30px; /* Welche Grösse? */
+    gap: 10px; /* Welche Grösse? */
     padding: 10px; /* Welche Grösse? */
 }
 
@@ -38,7 +38,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 20px; /* Welche Grösse? */
+    gap: 15px; /* Welche Grösse? */
 }
 
 button{
