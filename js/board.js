@@ -68,11 +68,12 @@ function generateTodo(element, col) {
   return `
   <div draggable='true' ondragstart='startDragging(${
     element["id"]
-  })' class='todo' onclick="openOverlay(${element["id"]})">
+  })' class='todo'>
   <div class="btns-change-col">
     ${btnLeft}
     ${btnRight}
   </div>
+  <div onclick="openOverlay(${element["id"]})">
     <div  class="todo-category-container">
       <div class="todo-category" style="background-color:${
         element["categoryColor"]
@@ -90,7 +91,8 @@ function generateTodo(element, col) {
       </div>
       <img src="${element["prio"][1]}">
     </div>
-  </div>
+    </div>
+    </div>
     `;
 }
 
