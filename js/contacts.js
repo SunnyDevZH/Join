@@ -24,21 +24,20 @@ function renderContacts() {
     }
 
     mycontact.innerHTML += `
-            
-            <div onclick="currentcontact(${i}); selectContact(this);" class="rendercontact">
-                <div class="circle" style="background-color: ${contact.color}">
-                    <span class="initials">${contact.name.substring(0,2)}</span>
-                </div>
-                <div class="flex-direction">
-                    <div>
-                        <b>${contact.name}</b>
-                    </div>
-                    <div>
-                        <a href="mailto:${contact.email}">${contact.email}</a>
-                    </div>
-                </div>
-            </div>`;
-  }
+    <div onclick="currentcontact(${i}); selectContact(this);" class="rendercontact">
+        <div class="circle" style="background-color: ${contact.color}">
+            <span class="initials">${getInitials(contact.name)}</span>
+        </div>
+        <div class="flex-direction">
+            <div>
+                <b>${contact.name}</b>
+            </div>
+            <div>
+                <a href="mailto:${contact.email}">${contact.email}</a>
+            </div>
+        </div>
+    </div>`;
+}
 }
 
 // aktueller Kontakt anzeigen //
@@ -125,6 +124,7 @@ function contactTemplate() {
                                 <button onclick="cancelContact('add')">Cancel</button>
                                 <button class="createButton" onclick="addNotiz()">Create contact</button>
                             </div>
+                            <div id="message1"></div>
                         </div>
                     </div>
                 </div>
@@ -205,17 +205,34 @@ async function addNotiz() {
     let email = document.getElementById("email").value;
     let phone = document.getElementById("phone").value;
 
+    var messageContainer = document.getElementById("message1");
+
     if (name.trim() === "" || email.trim() === "" || phone.trim() === "") {
-      alert("Bitte füllen Sie alle Felder aus.");
+
+        messageContainer.style.display = "block"; // Stellen Sie sicher, dass das Nachrichtencontainer sichtbar ist
+
+        var messageElement = document.createElement("p");
+        messageElement.textContent = "Bitte füllen Sie alle Felder aus.";
+        messageContainer.innerHTML = ""; // Löschen Sie den vorherigen Inhalt, falls vorhanden
+        messageContainer.appendChild(messageElement);
+    
       return;
+    }
+
+    // Überprüfen, ob der Kontakt bereits existiert
+    const contactExists = addContacts.some(contact => contact.name === name && contact.email === email && contact.phone === phone);
+
+    if (contactExists) {
+        messageContainer.style.display = "block";
+        var messageElement = document.createElement("p");
+        messageElement.textContent = "Dieser Kontakt existiert bereits.";
+        messageContainer.innerHTML = "";
+        messageContainer.appendChild(messageElement);
+        return;
     }
 
     let color = getRandomColor();
 
-    if (contactExists(name)) {
-        alert("Ein Kontakt mit diesem Namen existiert bereits.");
-        return;
-    }
 
     let contact = { name, email, phone, color };
     addContacts.push(contact);
@@ -226,12 +243,6 @@ async function addNotiz() {
     window.location.href = "contacts.html";
 }
 
-  
-
-function contactExists(name) {
-    return addContacts.some(contact => contact.name === name);
-  }
-
 // Kontakt bearbeiten //
 
 async function edit(i) {
@@ -241,11 +252,6 @@ async function edit(i) {
     const phone = document.getElementById("phone").value;
   
     const color = getRandomColor(); // Zufällige Farbe generieren
-
-    if (contactExists(name)) {
-        alert("Ein Kontakt mit diesem Namen existiert bereits.");
-        return;
-    }
   
     const editedContact = { name, email, phone, color }; // Aktualisierte Kontaktinformationen
   
@@ -265,7 +271,6 @@ async function load() {
     addContacts = JSON.parse(await getItem("addContacts")); // Items als json laden
   } catch (e) {
     console.error("Loading error:", e); // Falls Users nicht gefunden
-    alert("Kontakt nicht gefunden");
   }
   renderContacts();
 }
@@ -300,4 +305,24 @@ function selectContact(contactElement) {
 
   selectedContact = contactElement;
   selectedContact.classList.add("selected");
+}
+
+
+function getInitials(name) {
+    // Zerlegen Sie den Namen in Worte
+    const words = name.split(' ');
+
+    // Überprüfen, ob der Name mindestens zwei Wörter hat
+    if (words.length >= 2) {
+        // Extrahieren Sie den ersten Buchstaben des ersten und zweiten Worts
+        const firstInitial = words[0].charAt(0);
+        const secondInitial = words[1].charAt(0);
+        return firstInitial + secondInitial;
+    } else if (words.length === 1) {
+        // Wenn der Name nur ein Wort hat, extrahieren Sie den ersten Buchstaben davon
+        return words[0].charAt(0);
+    } else {
+        // Wenn der Name leer ist, geben Sie einen leeren String zurück
+        return '';
+    }
 }
