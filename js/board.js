@@ -17,6 +17,7 @@ function init() {
   loadTodos();
   updateHTML();
   load();
+  
 }
 
 /**

@@ -60,12 +60,20 @@ async function loadUsers() {
 // Checkbox //
 
 function checkBox() {
-  var checkbox = document.getElementById("remember");
+  var checkbox = document.getElementById("checkbox");
+  var messageContainer = document.getElementById("message");
 
   if (checkbox.checked) {
     register();
   } else {
-    alert("Bitte akzeptieren Sie die Bedingungen, um fortzufahren.");
+    messageContainer.style.display = "block"; // Stellen Sie sicher, dass das Nachrichtencontainer sichtbar ist
+
+    var messageElement = document.createElement("p");
+    messageElement.textContent = "Bitte akzeptieren Sie die Bedingungen, um fortzufahren.";
+    messageContainer.innerHTML = ""; // Löschen Sie den vorherigen Inhalt, falls vorhanden
+    messageContainer.appendChild(messageElement);
+    
+    return;
   }
 }
 

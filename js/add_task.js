@@ -17,12 +17,20 @@ let assignedSubtasks = [];
 async function initAddTask() {
   getNewDate();
   await load();
+  keypress();
+  keypressAddTask();
 }
 
 
 /**  function to get all values from all inputfields and to push it in an JSON, and then in an array */
 async function addTask() {
   let task = getTask();
+  if (!requirePrio()) {
+    return; // Stops the function when the prio was not chosen
+  }
+  if (!requireCategory()) {
+    return;
+  }
   allTasks.push(task);
   await saveTask();
   clearAll();
@@ -38,12 +46,6 @@ function getTask() {
   let title = document.getElementById("title").value;
   let description = document.getElementById("description").value;
   let date = document.getElementById("calendar").value;
-  if (!requirePrio()) {
-    return; // Stops the function when the prio was not chosen
-  }
-  if (!requireCategory()) {
-    return;
-  }
   let task = {
     step: showColumn(),
     title: title,
@@ -450,9 +452,8 @@ function resetContact() {
 function addSubtask() {
   let subtaskContent = document.getElementById("subtaskContent");
   let newSubtask = document.getElementById("subtask");
-  let newSubtaskValue = newSubtask.value;
   let addButton = document.getElementById("addSubtaskButton");
-
+  let newSubtaskValue = newSubtask.value;
   if (newSubtaskValue.length < 3) {
     addButton.disabled;
   } else if (newSubtaskValue.length >= 3) {
@@ -470,6 +471,27 @@ function addSubtask() {
   }
 
   newSubtask.value = "";
+}
+
+
+function keypress(event) {
+  let newSubtask = document.getElementById("subtask");
+  newSubtask.addEventListener("keypress", function (event) {
+    if (event.key === "Enter" && newSubtask.value.trim() !== "") {
+      event.preventDefault();
+      addSubtask();
+    }
+  });
+}
+
+
+function keypressAddTask(event) {
+  let form = document.getElementById("myForm");
+  form.addEventListener("keypress", function (event) {
+    if (event.key === 'Enter') {
+      addTask();
+    }
+  });
 }
 
 

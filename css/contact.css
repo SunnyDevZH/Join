@@ -14,7 +14,7 @@ body {
 
 .createButton {
   background-color: rgb(42, 54, 71);
-  width: 120px;
+  width: 153px;
   height: 49px;
   font-size: 16px;
   border-radius: 10px;
@@ -236,6 +236,13 @@ button {
   border: 1px solid black;
   color: rgb(9, 9, 9);
   cursor: pointer;
+}
+
+#message1{
+  margin-left: 60px;
+  padding: 20px;
+  color: red;
+  font-size: 10px;
 }
 
 @media (max-width: 1070px) {
