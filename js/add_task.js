@@ -447,12 +447,18 @@ function resetContact() {
 
 
 /** this function adds subtasks to the mainTask and pushes it in the array*/
-function addSubtask() {
+function addSubtask(event) {
+  event.preventDefault(); 
   let subtaskContent = document.getElementById("subtaskContent");
   let newSubtask = document.getElementById("subtask");
-  let newSubtaskValue = newSubtask.value;
   let addButton = document.getElementById("addSubtaskButton");
-
+  newSubtask.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      addButton.click();
+    }
+  });
+  let newSubtaskValue = newSubtask.value;
   if (newSubtaskValue.length < 3) {
     addButton.disabled;
   } else if (newSubtaskValue.length >= 3) {
