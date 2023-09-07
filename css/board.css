@@ -222,6 +222,10 @@
   z-index: 100;
 }
 
+.btns-change-col {
+  display: none;
+}
+
 .border {
   border: 1px solid lightgrey;
 }
@@ -263,7 +267,6 @@
   max-width: 800px;
   height: calc(100vh - 90px);
 
-
   padding: 24px 32px;
 
   background-color: #fff;
@@ -279,7 +282,6 @@
   width: 0.1rem;
   background-color: transparent;
 }
-
 
 .input-column {
   display: flex;
@@ -300,7 +302,6 @@
 }
 
 .detail-buttons {
-
   position: absolute;
   bottom: 20px;
   right: 50px;
@@ -361,7 +362,6 @@ form {
   bottom: 10px;
   display: flex;
   justify-content: end;
-
 }
 
 .ok-button:hover button {
@@ -389,6 +389,29 @@ form {
 
   .overlay-card {
     left: 0;
+  }
+
+  .btns-change-col {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    z-index: 1100;
+  }
+
+  .btn-col {
+    display: flex;
+    align-items: center;
+
+    height: 48px;
+
+    padding: 4px 8px;
+    margin-bottom: 12px;
+
+    border: 1px solid #000;
+    border-radius: 8px;
   }
 }
 

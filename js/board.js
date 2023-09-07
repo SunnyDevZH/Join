@@ -3,6 +3,16 @@ let todos = [];
 
 let currentDraggedElement;
 
+let colId = {
+  "col-01": "Todo",
+  "col-02": "In<br>Progress",
+  "col-03": "Await<br>Feedback",
+  "col-04": "Done",
+};
+
+let btnLeft = "<div></div>";
+let btnRight = "";
+
 function init() {
   loadTodos();
   updateHTML();
@@ -39,7 +49,10 @@ function updateHTML() {
     }
     col[i - 1].forEach((todo) => {
       const element = todo;
-      document.getElementById("col-0" + i).innerHTML += generateTodo(element);
+      document.getElementById("col-0" + i).innerHTML += generateTodo(
+        element,
+        i
+      );
     });
   }
 }
@@ -50,17 +63,22 @@ function updateHTML() {
  * @returns html code for the task
  */
 
-function generateTodo(element) {
+function generateTodo(element, col) {
+  generateMobileColChnage(element, col);
   return `
   <div draggable='true' ondragstart='startDragging(${
     element["id"]
   })' class='todo' onclick="openOverlay(${element["id"]})">
+  <div class="btns-change-col">
+    ${btnLeft}
+    ${btnRight}
+  </div>
     <div  class="todo-category-container">
       <div class="todo-category" style="background-color:${
         element["categoryColor"]
       }">${element["category"]}
-      </div>
-    </div>
+      </div>  
+    </div> 
     <div class="todo-title">${firstCharToUpperCase(element["title"])}</div>
     <div class="todo-content">${firstCharToUpperCase(
       element["description"]
@@ -77,11 +95,41 @@ function generateTodo(element) {
 }
 
 /**
+ * generate column change buttons for mobile
+ * @param element  todo element
+ * @param col actual column
+ */
+function generateMobileColChnage(element, col) {
+  colChangeId = element["id"];
+  if (col == 1) {
+    btnLeft = "<div></div>";
+    btnRight = generateChangeButton("col-02", "icons/arrow_right_default.svg");
+  } else if (col == 2) {
+    btnLeft = generateChangeButton("col-01", "icons/arrow_left_default.svg");
+    btnRight = generateChangeButton("col-03", "icons/arrow_right_default.svg");
+  } else if (col == 3) {
+    btnLeft = generateChangeButton("col-02", "icons/arrow_left_default.svg");
+    btnRight = generateChangeButton("col-04", "icons/arrow_right_default.svg");
+  } else if (col == 4) {
+    btnLeft = generateChangeButton("col-03", "icons/arrow_left_default.svg");
+    btnRight = "<div></div>";
+  }
+}
+
+function generateChangeButton(col, imgSrc) {
+  return `
+  <div class="btn-col" onclick="mobileMoveTo('${col}', ${colChangeId})">
+    ${colId[col]}
+    <img src=${imgSrc}>
+  </div>
+  `;
+}
+
+/**
  * generate contact list for the board tasks
  * @param {*} element todo data from the server
  * @returns html code with all generated contacs
  */
-
 function generateContacts(element) {
   let contactList = "";
   if (element["assignedContact"].length > 0) {
@@ -157,6 +205,18 @@ function allowDrop(ev) {
 
 function moveTo(category) {
   todos[currentDraggedElement]["step"] = category;
+  updateHTML();
+  saveBoard();
+}
+
+/**
+ * change column and category for the dragged element
+ * @param category new category for the element
+ * @param element actual element
+ */
+
+function mobileMoveTo(category, element) {
+  todos[element]["step"] = category;
   updateHTML();
   saveBoard();
 }
