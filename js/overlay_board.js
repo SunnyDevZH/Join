@@ -523,6 +523,7 @@ function clearAllEditTask() {
     editedCol;
     editedCategory;
     editedCategoryColor;
+    checkEditedPrio(); 
 }
 
 
@@ -548,6 +549,7 @@ function newTaskColumn(chosenColumn) {
     document.getElementById('showNewTask').classList.remove('d-none');
     document.body.style.overflow = 'hidden';
     columns.push(chosenColumn);
+    keypress();
 }
 /////////////////////
 // overlay logic END
