@@ -134,3 +134,29 @@ input {
     display: none;
   }
 }
+
+@media (max-width: 450px) {
+  body{
+    overflow: hidden;
+  }
+  footer{
+    margin-top: 50px;
+    width: 90%;
+  }
+  
+  .loginContainer{
+    margin-bottom: 20px;
+    margin-top: 45px;
+    gap: 0px;
+    padding: 0;
+  }
+  button{
+    width: 100px;
+  }
+
+  #signupresp{
+    position: absolute;
+    top: 550px;
+    left: 30px;
+  }
+}
