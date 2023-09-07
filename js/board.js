@@ -17,7 +17,6 @@ function init() {
   loadTodos();
   updateHTML();
   load();
-  
 }
 
 /**
@@ -106,26 +105,59 @@ function generateMobileColChnage(element, col) {
   colChangeId = element["id"];
   if (col == 1) {
     btnLeft = "<div></div>";
-    btnRight = generateChangeButton("col-02", "icons/arrow_right_default.svg");
+    btnRight = generateChangeButton(
+      "col-02",
+      "icons/arrow_right_default.svg",
+      "right"
+    );
   } else if (col == 2) {
-    btnLeft = generateChangeButton("col-01", "icons/arrow_left_default.svg");
-    btnRight = generateChangeButton("col-03", "icons/arrow_right_default.svg");
+    btnLeft = generateChangeButton(
+      "col-01",
+      "icons/arrow_left_default.svg",
+      "left"
+    );
+    btnRight = generateChangeButton(
+      "col-03",
+      "icons/arrow_right_default.svg",
+      "right"
+    );
   } else if (col == 3) {
-    btnLeft = generateChangeButton("col-02", "icons/arrow_left_default.svg");
-    btnRight = generateChangeButton("col-04", "icons/arrow_right_default.svg");
+    btnLeft = generateChangeButton(
+      "col-02",
+      "icons/arrow_left_default.svg",
+      "left"
+    );
+    btnRight = generateChangeButton(
+      "col-04",
+      "icons/arrow_right_default.svg",
+      "right"
+    );
   } else if (col == 4) {
-    btnLeft = generateChangeButton("col-03", "icons/arrow_left_default.svg");
+    btnLeft = generateChangeButton(
+      "col-03",
+      "icons/arrow_left_default.svg",
+      "left"
+    );
     btnRight = "<div></div>";
   }
 }
 
-function generateChangeButton(col, imgSrc) {
-  return `
+function generateChangeButton(col, imgSrc, dir) {
+  if (dir == "left") {
+    return `
+  <div class="btn-col" onclick="mobileMoveTo('${col}', ${colChangeId})">
+  <img src=${imgSrc}>  
+  ${colId[col]}
+  </div>
+  `;
+  } else {
+    return `
   <div class="btn-col" onclick="mobileMoveTo('${col}', ${colChangeId})">
     ${colId[col]}
     <img src=${imgSrc}>
   </div>
   `;
+  }
 }
 
 /**
