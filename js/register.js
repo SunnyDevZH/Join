@@ -7,8 +7,7 @@ async function init() {
   generateRandomColor();
 }
 
-// Registrieren //
-
+/** Register*/
 async function register() {
   let names = document.getElementById("names").value;
   let email = document.getElementById("email").value;
@@ -41,16 +40,14 @@ async function register() {
   resetForm();
 }
 
-// Form leeren //
-
+/** Reset Form*/
 function resetForm() {
   names.value = ""; // Feld leeren
   email.value = "";
   password.value = "";
 }
 
-// Farbe generieren //
-
+/** Generate Color*/
 function generateRandomColor() {
   const colorCode =
     "#" +
@@ -60,8 +57,7 @@ function generateRandomColor() {
   return colorCode;
 }
 
-// User laden //
-
+/** Load User*/
 async function loadUsers() {
   try {
     users = JSON.parse(await getItem("users"));
@@ -71,8 +67,7 @@ async function loadUsers() {
   }
 }
 
-// Checkbox //
-
+/** Checkbox*/
 function checkBox() {
   var checkbox = document.getElementById("checkbox");
   var messageContainer = document.getElementById("message");

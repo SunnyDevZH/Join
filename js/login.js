@@ -8,8 +8,7 @@ function start() {
   loadUsers();
 }
 
-// Login mit Passwortvergleich //
-
+/** Login with password comparison*/
 function login() {
   let email = document.getElementById("email"); // Eingabe von Login
   let password = document.getElementById("password"); // Eingabe von Login
@@ -33,8 +32,7 @@ function login() {
   }
 }
 
-// User laden //
-
+/** Load User*/
 async function loadUsers() {
   try {
     users = JSON.parse(await getItem("users")); // Items als json laden

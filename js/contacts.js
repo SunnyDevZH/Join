@@ -2,13 +2,12 @@ let addContacts = [];
 
 window.addEventListener("load", load);
 
-// Kontakt anzeigen //
-
+/** Render Contact*/
 function renderContacts() {
   let mycontact = document.getElementById("mycontact");
   mycontact.innerHTML = "";
 
-  // Sortiere die Kontakte alphabetisch nach dem Namen
+/** Sort Contact*/
   addContacts.sort((a, b) => a.name.localeCompare(b.name));
 
   let currentLetter = null;
@@ -40,8 +39,11 @@ function renderContacts() {
 }
 }
 
-// aktueller Kontakt anzeigen //
-
+/** Render Current Contact
+ * 
+ * @param {index} i des jeweiligen Kontakt
+ * @returns 
+ */
 function currentcontact(i) {
   let currentcontactDiv = document.getElementById("currentcontact");
   currentcontactDiv.innerHTML = "";
@@ -81,8 +83,7 @@ function currentcontact(i) {
 }
 
 
-// Kontakt Hinzufügen //
-
+/** Render Add Contact*/
 function addContact() {
   let contactContainer = document.getElementById("contactContainer");
   contactContainer.innerHTML = contactTemplate(); 
@@ -134,8 +135,11 @@ function contactTemplate() {
     </div> `;
 }
 
-// Edit //
-
+/** Edit
+ * 
+ * @param {index} i des jeweiligen Kontakt
+ * @returns 
+ */
 function editContainer(i) {
     let editContainer = document.getElementById("editContainer");
     editContainer.innerHTML = renderEdit(i);
@@ -189,8 +193,7 @@ function renderEdit(i) {
 
 }
 
-// Zurück //
-
+/** Back*/
 function cancelContact(elementId) {
     const contactElement = document.getElementById(elementId);
     if (contactElement) {
@@ -198,8 +201,8 @@ function cancelContact(elementId) {
     }
   }
 
-// Kontakt hinzufügen //
 
+/** Add Contact*/
 async function addNotiz() {
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
@@ -243,8 +246,11 @@ async function addNotiz() {
     window.location.href = "contacts.html";
 }
 
-// Kontakt bearbeiten //
-
+/** Edits
+ * 
+ * @param {index} i des jeweiligen Kontakt
+ * @returns 
+ */
 async function edit(i) {
   
     const name = document.getElementById("name").value;
@@ -264,8 +270,7 @@ async function edit(i) {
     window.location.href = "contacts.html";
 }  
 
-// Kontakt laden //
-
+/** Load Contact*/
 async function load() {
   try {
     addContacts = JSON.parse(await getItem("addContacts")); // Items als json laden
@@ -275,8 +280,11 @@ async function load() {
   renderContacts();
 }
 
-// Kontakt löschen //
-
+/** Delet Contacts
+ * 
+ * @param {index} i des jeweiligen Kontakt
+ * @returns 
+ */
 async function deletecontact(i) {
   addContacts.splice(i, 1);
   await setItem("addContacts", JSON.stringify(addContacts));
@@ -284,8 +292,7 @@ async function deletecontact(i) {
   window.location.href = "./contacts.html";
 }
 
-// Farbe generieren //
-
+/** Generate Color*/
 function getRandomColor() {
   const hue = Math.floor(Math.random() * 360); // Zufälliger Farbwert zwischen 0 und 359
   const saturation = Math.floor(Math.random() * 50) + 50; // Sättigung zwischen 50 und 100
@@ -307,7 +314,11 @@ function selectContact(contactElement) {
   selectedContact.classList.add("selected");
 }
 
-
+/** Get Initials
+ * 
+ * @param {name} name ist der Name von Contact
+ * @returns 
+ */
 function getInitials(name) {
     // Zerlegen Sie den Namen in Worte
     const words = name.split(' ');
