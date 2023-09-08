@@ -363,7 +363,13 @@ function hideContactList(event) {
  * the user will be redirected to the contactsite
  */
 function addNewContactToTask() {
-  return `<div><button class="button btn-black width-button"><a href="contacts.html">Add New Contact +</a></button></div>`;
+  return `<div><button onclick="referToContacts()" class="button btn-black width-button">
+  <a href="./contacts.html">Add New Contact +</a></button></div>`;
+}
+
+
+function referToContacts() {
+  window.location.href = "./contacts.html"; 
 }
 
 
