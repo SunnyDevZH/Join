@@ -40,7 +40,7 @@ function renderContacts() {
 }
 
 /** Render Current Contact
- * 
+ * Mehr infos unter {@link https://infos.ch}
  * @param {index} i des jeweiligen Kontakt
  * @returns 
  */
