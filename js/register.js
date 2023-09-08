@@ -14,6 +14,20 @@ async function register() {
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
 
+  var messageContainer = document.getElementById("message");
+
+  if (names.trim() === "" || email.trim() === "" || phone.trim() === "") {
+
+      messageContainer.style.display = "block"; // Stellen Sie sicher, dass das Nachrichtencontainer sichtbar ist
+
+      var messageElement = document.createElement("p");
+      messageElement.textContent = "Bitte füllen Sie alle Felder aus.";
+      messageContainer.innerHTML = ""; // Löschen Sie den vorherigen Inhalt, falls vorhanden
+      messageContainer.appendChild(messageElement);
+  
+    return;
+  }
+
   let contact = {
     names: names,
     email: email,

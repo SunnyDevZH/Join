@@ -464,6 +464,10 @@ button {
 
     padding: 8px 8px;
   }
+ 
+}
+
+@media (max-width: 450px) {
   #login-logo{
     
     height: 80px;
@@ -471,6 +475,7 @@ button {
   #main-logo{
     display: none;
   }
+
 }
 
 /* RESPONSIVE END */

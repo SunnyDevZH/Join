@@ -30,6 +30,11 @@ body {
   color: white;
 }
 
+.signUpButton:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  background-color: #29abe2;
+}
+
 button {
   background-color: rgb(255, 255, 255);
   width: 150px;
@@ -41,6 +46,10 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  border: 2px solid #29ABE2;
+  background-color: white;
+}
 .alignItems {
   display: flex;
   align-items: center;
@@ -124,15 +133,21 @@ input {
   justify-content: center;
 }
 
+#message2{
+  color: red;
+  font-size: 10px;
+  display: block;
+}
+
 @media (max-width: 650px) {
   .loginContainer {
     width: 350px;
     height: 360px;
   }
-
   p {
     display: none;
   }
+
 }
 
 @media (max-width: 450px) {
@@ -150,13 +165,34 @@ input {
     gap: 0px;
     padding: 0;
   }
-  button{
-    width: 100px;
-  }
-
-  #signupresp{
+  .signUp{
     position: absolute;
     top: 550px;
     left: 30px;
   }
+
+  .signUpButton{
+    margin-bottom: 10px;
+    width: 143px;
+  }
+
+  .loginbutton{
+    display: block;
+    
+  }
+  .flexdirection{
+    gap: 15px;
+  }
+
+  h1{
+    margin-bottom: 10px;
+  }
+
+  button {
+    width: 143px;
+  }
+  p {
+    display: block;
+  }
+
 }

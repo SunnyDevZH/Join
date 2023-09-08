@@ -12,6 +12,11 @@ body {
   margin: 30px;
 }
 
+.addButton:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  background-color: #29abe2;
+}
+
 .createButton {
   background-color: rgb(42, 54, 71);
   width: 153px;
@@ -298,5 +303,9 @@ button {
   }
   #mycontact {
     width: 370px;
+  }
+
+  .addButton{
+    margin-left: 90px;
   }
 }
