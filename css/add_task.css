@@ -95,9 +95,6 @@ button img {
     filter: invert();
 }
 
-.invert:hover img {
-    filter: unset;
-}
 
 .submit-buttons button {
     display: flex;
@@ -116,6 +113,16 @@ button img {
 .btn-lightblue:hover {
     border: 2px solid #29ABE2;
     background-color: white;
+}
+
+.buttonLigthblueFilled {
+    background-color: #2a3647;
+    color: white;
+}
+
+.buttonLigthblueFilled:hover {
+    background-color: #29ABE2;
+    border: 2px solid #29ABE2;
 }
 
 .white-text {

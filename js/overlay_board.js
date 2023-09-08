@@ -556,6 +556,7 @@ function newTaskColumn(chosenColumn) {
     document.getElementById('showDetailTask').classList.add('d-none');
     document.getElementById('showEditTask').classList.add('d-none');
     document.getElementById('showNewTask').classList.remove('d-none');
+    getNewDate(); 
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     document.body.style.overflow = 'hidden';
     columns.push(chosenColumn);
