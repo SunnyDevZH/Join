@@ -34,6 +34,7 @@ body {
 
 .maincontainer {
   display: flex;
+  height: 80vh;
 }
 
 .containerTeam {
@@ -58,7 +59,7 @@ body {
 }
 
 .add {
-  background-color: rgba(251, 251, 251, 0.500);
+  background-color: rgba(251, 251, 251, 0.5);
   z-index: 999; /* Dieser Div liegt über allen anderen */
   position: fixed;
   left: 0;
@@ -187,7 +188,7 @@ b {
 }
 
 #mycontact {
-  height: 87vh;
+  height: 94%;
   width: 450px;
   overflow-y: scroll;
 }
@@ -205,7 +206,6 @@ b {
 }
 
 .circle {
-
   width: 90px;
   height: 90px;
   border-radius: 50%;
@@ -249,11 +249,11 @@ button {
 }
 
 button:hover {
-  border: 2px solid #29ABE2;
+  border: 2px solid #29abe2;
   background-color: white;
 }
 
-#message1{
+#message1 {
   margin-left: 60px;
   padding: 20px;
   color: red;
@@ -294,7 +294,7 @@ button:hover {
 
 @media (max-width: 768px) {
   #mycontact {
-    height: 65vh;
+    height: 80%;
   }
 }
 
@@ -315,7 +315,7 @@ button:hover {
     width: 370px;
   }
 
-  .addButton{
+  .addButton {
     margin-left: 90px;
   }
 }
