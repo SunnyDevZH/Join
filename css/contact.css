@@ -1,6 +1,7 @@
 body {
   padding: 0;
-  overflow: hidden; /* Hide scrollbars */
+  overflow: hidden;
+  /* Hide scrollbars */
 }
 
 .addButton {
@@ -34,7 +35,6 @@ body {
 
 .maincontainer {
   display: flex;
-  height: 80vh;
 }
 
 .containerTeam {
@@ -43,6 +43,7 @@ body {
   align-items: center;
   margin: 40px;
 }
+
 .line {
   margin: 10px;
   width: 5px;
@@ -60,13 +61,15 @@ body {
 
 .add {
   background-color: rgba(251, 251, 251, 0.5);
-  z-index: 999; /* Dieser Div liegt über allen anderen */
+  z-index: 999;
+  /* Dieser Div liegt über allen anderen */
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
 }
+
 .container {
   display: flex;
   justify-content: center;
@@ -104,11 +107,13 @@ body {
   height: 100%;
   width: 100%;
 }
+
 .input {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .inputsytle {
   display: flex;
   flex-direction: column;
@@ -116,23 +121,27 @@ body {
   gap: 20px;
   padding-left: 60px;
 }
+
 .close {
   display: flex;
   justify-content: flex-end;
   width: 80%;
   cursor: pointer;
 }
+
 .buttonfield {
   display: flex;
   justify-content: center;
   gap: 20px;
 }
+
 input {
   height: 30px;
   width: 250px;
   border-radius: 10px;
   border: 1px solid grey;
 }
+
 .margin {
   margin: 0;
   width: 100%;
@@ -140,7 +149,10 @@ input {
 
 .scrolebar {
   background-color: rgb(255, 255, 255);
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; /* Welchen Style? */
+  height: 100vh;
+  overflow-y: scroll;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  /* Welchen Style? */
 }
 
 b {
@@ -188,16 +200,17 @@ b {
 }
 
 #mycontact {
-  height: 94%;
   width: 450px;
-  overflow-y: scroll;
+  margin-bottom: 100px;
 }
+
 .contactBox {
   display: flex;
   flex-direction: column;
   margin: 50px;
   gap: 20px;
 }
+
 .contactBoxOne {
   display: flex;
   align-items: center;
@@ -270,6 +283,7 @@ button:hover {
   h1 {
     font-size: 20px;
   }
+
   .displaynone1 {
     display: none;
   }
@@ -279,6 +293,7 @@ button:hover {
   p {
     display: none;
   }
+
   .addcontainer {
     display: flex;
     flex-direction: column;
@@ -294,7 +309,7 @@ button:hover {
 
 @media (max-width: 768px) {
   #mycontact {
-    height: 80%;
+    margin-bottom: 140px;
   }
 }
 
@@ -311,6 +326,7 @@ button:hover {
     height: 50px;
     width: 50px;
   }
+
   #mycontact {
     width: 370px;
   }
