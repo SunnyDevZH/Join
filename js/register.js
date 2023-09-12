@@ -16,14 +16,13 @@ async function register() {
   var messageContainer = document.getElementById("message");
 
   if (names.trim() === "" || email.trim() === "" || password.trim() === "") {
+    messageContainer.style.display = "block"; // Stellen Sie sicher, dass das Nachrichtencontainer sichtbar ist
 
-      messageContainer.style.display = "block"; // Stellen Sie sicher, dass das Nachrichtencontainer sichtbar ist
+    var messageElement = document.createElement("p");
+    messageElement.textContent = "Bitte füllen Sie alle Felder aus.";
+    messageContainer.innerHTML = ""; // Löschen Sie den vorherigen Inhalt, falls vorhanden
+    messageContainer.appendChild(messageElement);
 
-      var messageElement = document.createElement("p");
-      messageElement.textContent = "Bitte füllen Sie alle Felder aus.";
-      messageContainer.innerHTML = ""; // Löschen Sie den vorherigen Inhalt, falls vorhanden
-      messageContainer.appendChild(messageElement);
-  
     return;
   }
 
@@ -38,6 +37,7 @@ async function register() {
 
   await setItem("users", JSON.stringify(users)); // Daten von Users auf Server laden
   resetForm();
+  window.location.href = "./index.html";
 }
 
 /** Reset Form*/
@@ -72,29 +72,40 @@ function checkBox() {
   var checkbox = document.getElementById("checkbox");
   var messageContainer = document.getElementById("message");
 
-  if (checkbox.checked) {
-    register();
+  if (checkPasswort()) {
+    if (checkbox.checked) {
+      register();
+    } else {
+      messageContainer.style.display = "block"; // Stellen Sie sicher, dass das Nachrichtencontainer sichtbar ist
+
+      var messageElement = document.createElement("p");
+      messageElement.textContent =
+        "Bitte akzeptieren Sie die Bedingungen, um fortzufahren.";
+      messageContainer.innerHTML = ""; // Löschen Sie den vorherigen Inhalt, falls vorhanden
+      messageContainer.appendChild(messageElement);
+
+      return;
+    }
   } else {
     messageContainer.style.display = "block"; // Stellen Sie sicher, dass das Nachrichtencontainer sichtbar ist
 
     var messageElement = document.createElement("p");
-    messageElement.textContent = "Bitte akzeptieren Sie die Bedingungen, um fortzufahren.";
+    messageElement.textContent = "Passwörter stimmen nicht überein.";
     messageContainer.innerHTML = ""; // Löschen Sie den vorherigen Inhalt, falls vorhanden
     messageContainer.appendChild(messageElement);
-    
+
     return;
   }
 }
 
-function checkPasswort(){
-
-  let password = document.getElementById("password");
-  let passwordtwo = document.getElementById("passwordtwo");
+function checkPasswort() {
+  let password = document.getElementById("password").value;
+  let passwordtwo = document.getElementById("passwordtwo").value;
 
   var messageContainer = document.getElementById("message");
 
-  if(password == passwordtwo) {
-    register();
+  if (password == passwordtwo && password != "") {
+    return true;
   } else {
     messageContainer.style.display = "block"; // Stellen Sie sicher, dass das Nachrichtencontainer sichtbar ist
 
@@ -102,9 +113,7 @@ function checkPasswort(){
     messageElement.textContent = "Das Passwort stimmt nicht überein.";
     messageContainer.innerHTML = ""; // Löschen Sie den vorherigen Inhalt, falls vorhanden
     messageContainer.appendChild(messageElement);
-    
-    return;
-  }
-  
-}
 
+    return false;
+  }
+}
