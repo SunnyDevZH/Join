@@ -15,7 +15,7 @@ async function register() {
 
   var messageContainer = document.getElementById("message");
 
-  if (names.trim() === "" || email.trim() === "" || phone.trim() === "") {
+  if (names.trim() === "" || email.trim() === "" || password.trim() === "") {
 
       messageContainer.style.display = "block"; // Stellen Sie sicher, dass das Nachrichtencontainer sichtbar ist
 
@@ -86,4 +86,25 @@ function checkBox() {
   }
 }
 
+function checkPasswort(){
+
+  let password = document.getElementById("password");
+  let passwordtwo = document.getElementById("passwordtwo");
+
+  var messageContainer = document.getElementById("message");
+
+  if(password == passwordtwo) {
+    register();
+  } else {
+    messageContainer.style.display = "block"; // Stellen Sie sicher, dass das Nachrichtencontainer sichtbar ist
+
+    var messageElement = document.createElement("p");
+    messageElement.textContent = "Das Passwort stimmt nicht überein.";
+    messageContainer.innerHTML = ""; // Löschen Sie den vorherigen Inhalt, falls vorhanden
+    messageContainer.appendChild(messageElement);
+    
+    return;
+  }
+  
+}
 

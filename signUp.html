@@ -42,7 +42,7 @@
             <img class="loginimg" src="./img/login.png" alt="login" width="30px" />
           </div>
           <div class="displayflex">
-            <input required type="password" placeholder="Confirm Password" />
+            <input required type="password" id="passwordtwo" placeholder="Confirm Password" />
             <img class="loginimg" src="./img/login.png" alt="login" width="30px" />
           </div>
           <div class="footergap">
@@ -54,13 +54,13 @@
           </div>
           <div id="message"></div>
           <div>
-            <button id="anzeigenButton" onclick="checkBox();" class="signUpButton">Sign up</button>
+            <button id="anzeigenButton" onclick="checkBox(), checkPasswort();" class="signUpButton">Sign up</button>
           </div>
           <script>
             document.getElementById('anzeigenButton').addEventListener('click', function() {
                 event.preventDefault();
                 var emailInput = document.getElementById('email');
-                if (emailInput.checkValidity() & checkbox.checked) {
+                if (emailInput.checkValidity() & checkbox.checked & password == passwordtwo) {
                     document.getElementById('meinBild').style.display = 'block';
                     setTimeout(function() {
                         window.location.href = './login.html';
