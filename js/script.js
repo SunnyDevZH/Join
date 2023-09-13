@@ -37,7 +37,7 @@ function indexStart() {
  */
 
 async function loadPage() {
-  await loadUsers();
+  //await loadUsers();
   await loadTodos();
   updateHeader();
   changeAvatarColor();
@@ -78,11 +78,11 @@ async function loadTodos() {
  * load users from server to local array
  */
 
-async function loadUsers() {
+(async function loadUsers() {
   let getUsers = await getItem("users");
   users = JSON.parse(getUsers);
   getUserData();
-}
+})();
 
 /**
  * get user data from the server
@@ -230,11 +230,8 @@ function toggleAvatarMenu() {
 function closeAvatarMenuOutside(event) {
   const avatarMenu = document.getElementById("avatar-menu");
   const avatarInitials = document.getElementById("avatar-initials");
+
   if (!avatarMenu.contains(event.target) && event.target !== avatarInitials) {
     avatarMenu.classList.add("d-none");
   }
 }
-
-document.addEventListener("click", closeAvatarMenuOutside);
-
-// header end

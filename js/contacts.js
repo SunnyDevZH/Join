@@ -7,7 +7,7 @@ function renderContacts() {
   let mycontact = document.getElementById("mycontact");
   mycontact.innerHTML = "";
 
-/** Sort Contact*/
+  /** Sort Contact*/
   addContacts.sort((a, b) => a.name.localeCompare(b.name));
 
   let currentLetter = null;
@@ -36,13 +36,13 @@ function renderContacts() {
             </div>
         </div>
     </div>`;
-}
+  }
 }
 
 /** Render Current Contact
  * Mehr infos unter {@link https://infos.ch}
  * @param {index} i des jeweiligen Kontakt
- * @returns 
+ * @returns
  */
 function currentcontact(i) {
   let currentcontactDiv = document.getElementById("currentcontact");
@@ -50,8 +50,13 @@ function currentcontact(i) {
 
   currentcontactDiv.innerHTML += `
         <div class="contactBoxOne">
-            <div class="circle" style="background-color: ${addContacts[i].color}">
-                <span class="initials">${addContacts[i].name.substring(0,2)}</span>
+            <div class="circle" style="background-color: ${
+              addContacts[i].color
+            }">
+                <span class="initials">${addContacts[i].name.substring(
+                  0,
+                  2
+                )}</span>
             </div>
             <div class="flex-direction">
                 <div>
@@ -82,11 +87,10 @@ function currentcontact(i) {
         </div>`;
 }
 
-
 /** Render Add Contact*/
 function addContact() {
   let contactContainer = document.getElementById("contactContainer");
-  contactContainer.innerHTML = contactTemplate(); 
+  contactContainer.innerHTML = contactTemplate();
 }
 
 function contactTemplate() {
@@ -136,18 +140,17 @@ function contactTemplate() {
 }
 
 /** Edit
- * 
+ *
  * @param {index} i des jeweiligen Kontakt
- * @returns 
+ * @returns
  */
 function editContainer(i) {
-    let editContainer = document.getElementById("editContainer");
-    editContainer.innerHTML = renderEdit(i);
-  }
+  let editContainer = document.getElementById("editContainer");
+  editContainer.innerHTML = renderEdit(i);
+}
 
 function renderEdit(i) {
-
-  return`
+  return `
   <div id="edit${i}" class="add">
         <div class="container">
             <div class="addcontainer">
@@ -160,22 +163,32 @@ function renderEdit(i) {
                     <div class="close" onclick="cancelContact('edit${i}')">x</div>
                     <div class="input">
                         <div>
-                          <div class="circle" style="background-color: ${addContacts[i].color}">
-                            <span class="initials">${addContacts[i].name.substring(0,2)}</span>
+                          <div class="circle" style="background-color: ${
+                            addContacts[i].color
+                          }">
+                            <span class="initials">${addContacts[
+                              i
+                            ].name.substring(0, 2)}</span>
                           </div>
                         </div>
                         <div>
                             <div class="inputsytle">
                                 <div class="displayflex">
-                                    <input required type="text" id="name" value="${addContacts[i].name}">
+                                    <input required type="text" id="name" value="${
+                                      addContacts[i].name
+                                    }">
                                     <img class="loginimg" src="./img/name.png" alt="name" width="30px"> 
                                 </div>
                                 <div class="displayflex">
-                                    <input required type="email" id="email" value="${addContacts[i].email}">
+                                    <input required type="email" id="email" value="${
+                                      addContacts[i].email
+                                    }">
                                     <img class="loginimg" src="./img/mail.png" alt="mail" width="25px"> 
                                 </div>
                                 <div class="displayflex">
-                                    <input required type="number" id="phone" value="${addContacts[i].phone}">
+                                    <input required type="number" id="phone" value="${
+                                      addContacts[i].phone
+                                    }">
                                     <img class="loginimg" src="./img/tel.png" alt="mail" width="30px"> 
                                 </div>
                             </div>
@@ -190,85 +203,85 @@ function renderEdit(i) {
 
         </div>
     </div> `;
-
 }
 
 /** Back*/
 function cancelContact(elementId) {
-    const contactElement = document.getElementById(elementId);
-    if (contactElement) {
-      contactElement.style.display = "none";
-    }
+  const contactElement = document.getElementById(elementId);
+  if (contactElement) {
+    contactElement.style.display = "none";
   }
-
+}
 
 /** Add Contact*/
 async function addNotiz() {
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let phone = document.getElementById("phone").value;
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let phone = document.getElementById("phone").value;
 
-    var messageContainer = document.getElementById("message1");
+  var messageContainer = document.getElementById("message1");
 
-    if (name.trim() === "" || email.trim() === "" || phone.trim() === "") {
+  if (name.trim() === "" || email.trim() === "" || phone.trim() === "") {
+    messageContainer.style.display = "block"; // Stellen Sie sicher, dass das Nachrichtencontainer sichtbar ist
 
-        messageContainer.style.display = "block"; // Stellen Sie sicher, dass das Nachrichtencontainer sichtbar ist
+    var messageElement = document.createElement("p");
+    messageElement.textContent = "Bitte füllen Sie alle Felder aus.";
+    messageContainer.innerHTML = ""; // Löschen Sie den vorherigen Inhalt, falls vorhanden
+    messageContainer.appendChild(messageElement);
 
-        var messageElement = document.createElement("p");
-        messageElement.textContent = "Bitte füllen Sie alle Felder aus.";
-        messageContainer.innerHTML = ""; // Löschen Sie den vorherigen Inhalt, falls vorhanden
-        messageContainer.appendChild(messageElement);
-    
-      return;
-    }
+    return;
+  }
 
-    // Überprüfen, ob der Kontakt bereits existiert
-    const contactExists = addContacts.some(contact => contact.name === name && contact.email === email && contact.phone === phone);
+  // Überprüfen, ob der Kontakt bereits existiert
+  const contactExists = addContacts.some(
+    (contact) =>
+      contact.name === name &&
+      contact.email === email &&
+      contact.phone === phone
+  );
 
-    if (contactExists) {
-        messageContainer.style.display = "block";
-        var messageElement = document.createElement("p");
-        messageElement.textContent = "Dieser Kontakt existiert bereits.";
-        messageContainer.innerHTML = "";
-        messageContainer.appendChild(messageElement);
-        return;
-    }
+  if (contactExists) {
+    messageContainer.style.display = "block";
+    var messageElement = document.createElement("p");
+    messageElement.textContent = "Dieser Kontakt existiert bereits.";
+    messageContainer.innerHTML = "";
+    messageContainer.appendChild(messageElement);
+    return;
+  }
 
-    let color = getRandomColor();
+  let color = getRandomColor();
 
+  let contact = { name, email, phone, color };
+  addContacts.push(contact);
 
-    let contact = { name, email, phone, color };
-    addContacts.push(contact);
+  await setItem("addContacts", JSON.stringify(addContacts));
 
-    await setItem("addContacts", JSON.stringify(addContacts));
-
-    renderContacts();
-    window.location.href = "contacts.html";
+  renderContacts();
+  window.location.href = "contacts.html";
 }
 
 /** Edits
- * 
+ *
  * @param {index} i des jeweiligen Kontakt
- * @returns 
+ * @returns
  */
 async function edit(i) {
-  
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-  
-    const color = getRandomColor(); // Zufällige Farbe generieren
-  
-    const editedContact = { name, email, phone, color }; // Aktualisierte Kontaktinformationen
-  
-    // Überschreibe den Kontakt im Array mit den bearbeiteten Informationen
-    addContacts[i] = editedContact;
-  
-    await setItem("addContacts", JSON.stringify(addContacts)); // Speichern der aktualisierten Kontakte auf dem Server
-  
-    renderContacts();
-    window.location.href = "contacts.html";
-}  
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+
+  const color = getRandomColor(); // Zufällige Farbe generieren
+
+  const editedContact = { name, email, phone, color }; // Aktualisierte Kontaktinformationen
+
+  // Überschreibe den Kontakt im Array mit den bearbeiteten Informationen
+  addContacts[i] = editedContact;
+
+  await setItem("addContacts", JSON.stringify(addContacts)); // Speichern der aktualisierten Kontakte auf dem Server
+
+  renderContacts();
+  window.location.href = "contacts.html";
+}
 
 /** Load Contact*/
 async function load() {
@@ -281,9 +294,9 @@ async function load() {
 }
 
 /** Delet Contacts
- * 
+ *
  * @param {index} i des jeweiligen Kontakt
- * @returns 
+ * @returns
  */
 async function deletecontact(i) {
   addContacts.splice(i, 1);
@@ -315,25 +328,25 @@ function selectContact(contactElement) {
 }
 
 /** Get Initials
- * 
+ *
  * @param {name} name ist der Name von Contact
- * @returns 
+ * @returns
  */
 function getInitials(name) {
-    // Zerlegen Sie den Namen in Worte
-    const words = name.split(' ');
+  // Zerlegen Sie den Namen in Worte
+  const words = name.split(" ");
 
-    // Überprüfen, ob der Name mindestens zwei Wörter hat
-    if (words.length >= 2) {
-        // Extrahieren Sie den ersten Buchstaben des ersten und zweiten Worts
-        const firstInitial = words[0].charAt(0);
-        const secondInitial = words[1].charAt(0);
-        return firstInitial + secondInitial;
-    } else if (words.length === 1) {
-        // Wenn der Name nur ein Wort hat, extrahieren Sie den ersten Buchstaben davon
-        return words[0].charAt(0);
-    } else {
-        // Wenn der Name leer ist, geben Sie einen leeren String zurück
-        return '';
-    }
+  // Überprüfen, ob der Name mindestens zwei Wörter hat
+  if (words.length >= 2) {
+    // Extrahieren Sie den ersten Buchstaben des ersten und zweiten Worts
+    const firstInitial = words[0].charAt(0);
+    const secondInitial = words[1].charAt(0);
+    return firstInitial + secondInitial;
+  } else if (words.length === 1) {
+    // Wenn der Name nur ein Wort hat, extrahieren Sie den ersten Buchstaben davon
+    return words[0].charAt(0);
+  } else {
+    // Wenn der Name leer ist, geben Sie einen leeren String zurück
+    return "";
+  }
 }
